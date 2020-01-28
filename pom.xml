@@ -4,7 +4,7 @@
 
     <groupId>rxinvoice</groupId>
     <artifactId>rxinvoice-parent</artifactId>
-    <version>2.3.10-3-SNAPSHOT</version>
+    <version>2.3.11</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -17,7 +17,7 @@
         <connection>scm:git:git://github.com:4sh/rxinvoice.git</connection>
         <developerConnection>scm:git:git@github.com:4sh/rxinvoice.git</developerConnection>
         <url>https://github.com/4sh/rxinvoice.git</url>
-        <tag>HEAD</tag>
+        <tag>rxinvoice-parent-2.3.11</tag>
     </scm>
 
     <profiles>
