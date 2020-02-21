@@ -6,11 +6,11 @@
     <parent>
         <groupId>rxinvoice</groupId>
         <artifactId>rxinvoice-parent</artifactId>
-        <version>2.3.13</version>
+        <version>2.3.14</version>
     </parent>
 
     <artifactId>rxinvoice-ui</artifactId>
-    <version>2.3.13</version>
+    <version>2.3.14</version>
     <packaging>pom</packaging>
 
     <profiles>
