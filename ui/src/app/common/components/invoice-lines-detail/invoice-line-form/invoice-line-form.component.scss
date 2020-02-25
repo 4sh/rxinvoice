@@ -1,20 +1,28 @@
 @import '../../../../../styles/base-component';
+.invoice-line-container {
+  display: flex;
+  align-items: center;
 
-.btn-updown {
-  border: 2px solid #E3EAF3;
-  width: 2rem;
-  height: 2rem;
-  padding: 0.3rem;
+  .btn-updown {
+    border: 2px solid #E3EAF3;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.3rem;
 
-  &.disabled {
-    background-color: $app-disabled-color;
+    &.disabled {
+      background-color: $app-disabled-color;
+    }
+
+    img {
+      display: block;
+    }
+
+    &:hover {
+      background-color: #E3EAF3;
+    }
   }
 
-  img {
-    display: block;
-  }
-
-  &:hover {
-    background-color: #E3EAF3;
+  .hidden-btn {
+    visibility: hidden;
   }
 }

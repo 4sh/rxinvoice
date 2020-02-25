@@ -1,16 +1,15 @@
 <form (submit)="addLine()" novalidate #invoiceLineForm="ngForm">
-    <div class="small-24">
-        <div class="row space-bottom-8">
-            <div class="column small-1">
-                <button type="button"  *ngIf="topArrowDisplayed"
-                        class="medium columns shrink btn-updown" (click)="moveUp()">
-                    <img src="assets/images/svg/icon_arrow_up.svg">
-                </button>
-                <button type="button" *ngIf="bottomArrowDisplayed"
-                        class=" medium ripple columns shrink btn-updown" (click)="moveDown()">
-                    <img src="assets/images/svg/icon_arrow_down.svg">
-                </button>
-            </div>
+        <div class="row space-bottom-8 invoice-line-container">
+            <button type="button" class="medium columns shrink btn-updown space-right-5"
+                    (click)="moveUp()"
+                    [class.hidden-btn]="!topArrowDisplayed">
+                <img src="assets/images/svg/icon_arrow_up.svg">
+            </button>
+            <button type="button" class=" medium ripple columns shrink btn-updown"
+                    (click)="moveDown()"
+                    [class.hidden-btn]="!bottomArrowDisplayed">
+                <img src="assets/images/svg/icon_arrow_down.svg">
+            </button>
             <div class="column small-10">
                 <input type="text"
                        class="form-control"
@@ -47,7 +46,7 @@
                        min="0">
             </div>
 
-            <div class="column small-2" [hidden]="!vatEnabled">
+            <div class="column small-2" *ngIf="vatEnabled">
                 <vat-select [companyRef]="companyRef" name="vat"
                             [(ngModel)]="line.vat"
                             [required]="vatEnabled"
@@ -72,6 +71,5 @@
                 </button>
             </div>
         </div>
-    </div>
 </form>
 
