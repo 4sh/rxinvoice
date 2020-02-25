@@ -33,6 +33,7 @@ $sail :                                          #9CD8F4 !default;
 $shakespeare :                                   #3CA3D2 !default;
 $blue-bayoux :                                   #4c637b !default;
 $lima :                                          #4daf7c !default;
+$keppel :                                        #38A886 !default;
 $sushi :                                         #67BA2F !default;
 $bright-sun :                                    #efcd38 !default;
 $coral :                                         #FF9452 !default;
@@ -72,7 +73,7 @@ $body-dark-font-color :                           $regent-gray !default;
 $body-light-font-color :                          $geyser !default;
 
 // = Status color TAB
-$status-tovalidate-color :                        $sail !default;
+$status-tovalidate-color :                        $shakespeare !default;
 $status-toprepare-color :                         $bright-sun !default;
 $status-torelaunched-color :                      $cinnabar  !default;
 $status-tosend-color :                            $blue-bayoux  !default;
@@ -81,9 +82,9 @@ $status-border-light-color :                      $geyser !default;
 // = Status color LABEL
 $status-draft-color :                             $bright-sun !default;
 $status-ready-color :                             $lavender !default;
-$status-waiting-validation-color :                $sail !default;
-$status-validated-color :                         $shakespeare !default;
-$status-sent-color :                              $blue-bayoux !default;
+$status-waiting-validation-color :                $shakespeare !default;
+$status-validated-color :                         $blue-bayoux !default;
+$status-sent-color :                              $keppel !default;
 $status-paid-color :                              $sushi !default;
 $status-payment-scheduled-color :                 $coral !default;
 $status-late-color :                              $cinnabar !default;
