@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:stable-alpine
 
 LABEL maintainer="ops@4sh.fr"
 
