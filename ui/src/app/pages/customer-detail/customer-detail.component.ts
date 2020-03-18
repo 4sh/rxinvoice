@@ -50,6 +50,7 @@ export class CustomerDetailComponent implements OnInit {
     private updateForm(obj) {
         return {
             name: obj.name,
+            code: obj.code,
             emailAddress: obj.emailAddress,
             address: obj.address,
             legalNotice: obj.legalNotice,
@@ -163,6 +164,10 @@ export class CustomerDetailComponent implements OnInit {
 
     public goBack() {
         this.location.back();
+    }
+
+    public isCodeDisabled(): boolean {
+        return !this.editMode || !!this.customer._id ;
     }
 
 }

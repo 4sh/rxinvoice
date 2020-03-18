@@ -9,6 +9,7 @@ import {InvoiceMetricsModel} from "./invoice-metrics";
 export class CompanyModel {
     _id: string;
     name: string;
+    code: string;
     fullName?: string;
     detail?: string;
 

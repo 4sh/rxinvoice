@@ -24,6 +24,7 @@ public class Company implements Auditable {
     @ObjectId
     private String key;
     private String name;
+    private String code;
     private String fullName;
     private String detail;
     private KindCompany kind;
@@ -53,25 +54,33 @@ public class Company implements Auditable {
     }
 
     @Override
+    public String getBusinessKey() {
+        return getName();
+    }
+
+    @Override
     public String toString() {
         return "Company{" +
                 "key='" + key + '\'' +
                 ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", detail='" + detail + '\'' +
-                ", legalNotice='" + legalNotice + '\'' +
-                ", showLegalNoticeForeignBuyer=" + showLegalNoticeForeignBuyer +
+                ", kind=" + kind +
                 ", address=" + address +
-                ", metrics=" + metrics +
+                ", emailAddress='" + emailAddress + '\'' +
                 ", business=" + business +
                 ", vats=" + vats +
+                ", legalNotice='" + legalNotice + '\'' +
+                ", showLegalNoticeForeignBuyer=" + showLegalNoticeForeignBuyer +
+                ", metrics=" + metrics +
                 ", fiscalYear=" + fiscalYear +
                 ", creationDate=" + creationDate +
-                ", emailAddress=" + emailAddress +
                 ", lastSendDate=" + lastSendDate +
                 ", lastPaymentDate=" + lastPaymentDate +
                 ", lastSentInvoice=" + lastSentInvoice +
                 ", lastPaidInvoice=" + lastPaidInvoice +
+                ", fiscalYearMetricsMap=" + fiscalYearMetricsMap +
                 '}';
     }
 
@@ -113,11 +122,6 @@ public class Company implements Auditable {
 
     public List<VATVal> getVats() {
         return vats;
-    }
-
-    @Override
-    public String getBusinessKey() {
-        return getName();
     }
 
     public DateTime getCreationDate() {
@@ -251,4 +255,12 @@ public class Company implements Auditable {
         return this;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public Company setCode(String code) {
+        this.code = code;
+        return this;
+    }
 }

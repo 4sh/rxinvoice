@@ -44,6 +44,14 @@
                     </div>
                 </div>
 
+                 <div class="row align-middle newCustomerDetail-container-label">
+                    <h6 class="column small-8"> {{'company.code' | translate}} *</h6>
+                    <div class="column">
+                        <input type="text" class="form-control"
+                               [disabled]='isCodeDisabled()' ngModel name="code" required>
+                    </div>
+                </div>
+
                 <div class="row align-middle newCustomerDetail-container-label">
                     <h6 class="column small-8"> {{'newCustomer.label.mail' | translate}} *</h6>
                     <div class="column">

@@ -14,6 +14,7 @@ import org.jongo.Distinct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import restx.Status;
+import restx.exceptions.RestxErrors;
 import restx.factory.Component;
 import restx.jongo.JongoCollection;
 import rxinvoice.AppModule;
@@ -38,15 +39,17 @@ public class CompanyService {
     private final JongoCollection invoices;
     private final SellerCompanyMetricsService sellerCompanyMetricsService;
     private final EventBus eventBus;
+    private final RestxErrors restxErrors;
 
     public CompanyService(@Named("companies") JongoCollection companies,
                           @Named("invoices") JongoCollection invoices,
                           SellerCompanyMetricsService sellerCompanyMetricsService,
-                          EventBus eventBus) {
+                          EventBus eventBus, RestxErrors restxErrors) {
         this.companies = companies;
         this.invoices = invoices;
         this.sellerCompanyMetricsService = sellerCompanyMetricsService;
         this.eventBus = eventBus;
+        this.restxErrors = restxErrors;
     }
 
     public Iterable<Company> findCompanies(Optional<String> queryOptional) {
@@ -131,10 +134,20 @@ public class CompanyService {
     }
 
     public Company createCompany(Company company) {
+        checkCodeUniqueness(company);
         company = company.setCreationDate(DateTime.now());
         saveCompany(company);
         eventBus.post(Activity.newCreate(company, AppModule.currentUser()));
         return company;
+    }
+
+    private void checkCodeUniqueness(Company company) {
+        if (this.companies.get().count("{code: #}", company.getCode()) > 0) {
+            throw this.restxErrors.on(CompanyErrors.CompanyExitingCodeError.class)
+                    .set(CompanyErrors.CompanyExitingCodeError.CODE, company.getCode())
+                    .set(CompanyErrors.CompanyExitingCodeError.NAME, company.getName())
+                    .raise();
+        }
     }
 
     public void saveCompany(Company company) {
