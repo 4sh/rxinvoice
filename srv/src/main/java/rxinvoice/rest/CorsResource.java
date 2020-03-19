@@ -12,6 +12,7 @@ import restx.security.RolesAllowed;
 import rxinvoice.domain.ActivityValue;
 import rxinvoice.domain.company.Business;
 import rxinvoice.domain.company.Company;
+import rxinvoice.domain.company.Customer;
 import rxinvoice.domain.invoice.Invoice;
 import rxinvoice.domain.enumeration.Activity;
 import rxinvoice.domain.report.InvoiceActivity;
@@ -58,24 +59,28 @@ public class CorsResource {
         String businessName = (String) params.get("business");
         Business business = null;
         if (businessName != null) {
-            Company company = companies.get().findOne(new ObjectId(companyId)).as(Company.class);
-            if (company != null && !companyContainsBusiness(company, businessName)) {
-                business = new Business()
-                        .setName(businessName)
-                        .setReference(UUID.randomUUID().toString());
-                company.getBusiness().add(business);
-                companies.get().save(company);
+            Company customerCompany = companies.get().findOne(new ObjectId(companyId)).as(Company.class);
+        // TODO : Remove after having modified 4pm
+            Company sellerCompany = companies.get().findOne("{name: #}", "4SH").as(Company.class);
+            if (null != customerCompany && null != sellerCompany) {
+                if (!sellerCompany.getCustomers().containsKey(customerCompany.getCode())) {
+                    sellerCompany.getCustomers().put(customerCompany.getCode(), new Customer());
+                }
+                Customer customer = sellerCompany.getCustomers().get(customerCompany.getCode());
+                java.util.Optional<Business> businessOptional = customer
+                        .getBusinessList()
+                        .stream()
+                        .filter(business1 -> businessName.equals(business1.getName())).findFirst();
+                if (!businessOptional.isPresent()) {
+                    business = new Business()
+                            .setName(businessName)
+                            .setReference(UUID.randomUUID().toString());
+                       customer.getBusinessList().add(business);
+                    companies.get().save(customerCompany);
+                }
             }
         }
         return business;
-    }
-    private boolean companyContainsBusiness(Company company, String businessName) {
-        for (Business business : company.getBusiness()) {
-            if (business.getName().equals(businessName)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @RolesAllowed({ADMIN, SELLER, CORS})

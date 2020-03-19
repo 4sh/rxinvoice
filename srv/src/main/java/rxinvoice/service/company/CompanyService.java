@@ -19,11 +19,10 @@ import restx.factory.Component;
 import restx.jongo.JongoCollection;
 import rxinvoice.AppModule;
 import rxinvoice.domain.Activity;
-import rxinvoice.domain.company.Business;
-import rxinvoice.domain.company.Company;
+import rxinvoice.domain.company.*;
 import rxinvoice.domain.User;
-import rxinvoice.domain.company.SellerCompanyMetrics;
 import rxinvoice.jongo.MoreJongos;
+import rxinvoice.service.errors.CompanyErrors;
 
 import javax.inject.Named;
 
@@ -44,7 +43,8 @@ public class CompanyService {
     public CompanyService(@Named("companies") JongoCollection companies,
                           @Named("invoices") JongoCollection invoices,
                           SellerCompanyMetricsService sellerCompanyMetricsService,
-                          EventBus eventBus, RestxErrors restxErrors) {
+                          EventBus eventBus,
+                          RestxErrors restxErrors) {
         this.companies = companies;
         this.invoices = invoices;
         this.sellerCompanyMetricsService = sellerCompanyMetricsService;
@@ -151,9 +151,11 @@ public class CompanyService {
     }
 
     public void saveCompany(Company company) {
-        for (Business business : company.getBusiness()) {
-            if (Strings.isNullOrEmpty(business.getReference())) {
-                business.setReference(UUID.randomUUID().toString());
+        for (Customer customer : company.getCustomers().values()) {
+            for (Business business : customer.getBusinessList()) {
+                if (Strings.isNullOrEmpty(business.getReference())) {
+                    business.setReference(UUID.randomUUID().toString());
+                }
             }
         }
         companies.get().save(company);

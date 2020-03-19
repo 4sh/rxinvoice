@@ -35,6 +35,7 @@ import * as moment from 'moment';
 })
 export class InvoiceDetailComponent implements OnInit {
 
+    private seller: CompanyModel;
     public form: FormGroup;
     public companies: CompanyModel[];
     public kinds: InvoiceKindType[];
@@ -62,7 +63,10 @@ export class InvoiceDetailComponent implements OnInit {
         this.fetchInvoice();
         this.authService.userEvents
             .subscribe(currentUser =>
-                this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0);
+            {
+                this.companyService.fetchCompany(currentUser.companyRef).subscribe(value => this.seller = value);
+                this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0;
+            });
 
         this.kinds = this.repositoryService.fetchInvoiceKind();
         this.repositoryService.fetchInvoiceStatus()

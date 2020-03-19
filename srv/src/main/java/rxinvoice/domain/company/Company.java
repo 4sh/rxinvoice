@@ -9,12 +9,8 @@ import rxinvoice.domain.*;
 import rxinvoice.domain.print.CompanyPrint;
 import rxinvoice.domain.enumeration.KindCompany;
 import rxinvoice.domain.invoice.InvoiceInfo;
-import rxinvoice.domain.invoice.VATVal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -30,9 +26,6 @@ public class Company implements Auditable {
     private KindCompany kind;
     private Address address;
     private String emailAddress;
-
-    private List<Business> business = new ArrayList<>();
-    private List<VATVal> vats = new ArrayList<>();
 
     private String legalNotice;
     private Boolean showLegalNoticeForeignBuyer;
@@ -53,9 +46,15 @@ public class Company implements Auditable {
         return new CompanyPrint(this);
     }
 
+    private final Map<String, Customer> customers = new HashMap<>();
+
+    @Override
+    public String getKey() {
+        return key;
+    }
     @Override
     public String getBusinessKey() {
-        return getName();
+        return code;
     }
 
     @Override
@@ -63,14 +62,11 @@ public class Company implements Auditable {
         return "Company{" +
                 "key='" + key + '\'' +
                 ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", detail='" + detail + '\'' +
                 ", kind=" + kind +
                 ", address=" + address +
                 ", emailAddress='" + emailAddress + '\'' +
-                ", business=" + business +
-                ", vats=" + vats +
                 ", legalNotice='" + legalNotice + '\'' +
                 ", showLegalNoticeForeignBuyer=" + showLegalNoticeForeignBuyer +
                 ", metrics=" + metrics +
@@ -81,150 +77,49 @@ public class Company implements Auditable {
                 ", lastSentInvoice=" + lastSentInvoice +
                 ", lastPaidInvoice=" + lastPaidInvoice +
                 ", fiscalYearMetricsMap=" + fiscalYearMetricsMap +
+                ", customers=" + customers +
                 '}';
     }
 
-    public String getKey() {
-        return key;
+
+    public Company setKey(String key) {
+        this.key = key;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
+    public Company setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Company setCode(String code) {
+        this.code = code;
+        return this;
+    }
+
     public String getFullName() {
         return fullName;
+    }
+
+    public Company setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
     }
 
     public String getDetail() {
         return detail;
     }
 
-    public String getLegalNotice() {
-        return legalNotice;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public Metrics getMetrics() {
-        return metrics;
-    }
-
-    public Boolean getShowLegalNoticeForeignBuyer() {
-        return showLegalNoticeForeignBuyer;
-    }
-
-    public List<Business> getBusiness() {
-        return business;
-    }
-
-    public List<VATVal> getVats() {
-        return vats;
-    }
-
-    public DateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public DateTime getLastSendDate() {
-        return lastSendDate;
-    }
-
-    public DateTime getLastPaymentDate() {
-        return lastPaymentDate;
-    }
-
-    public InvoiceInfo getLastSentInvoice() {
-        return lastSentInvoice;
-    }
-
-    public InvoiceInfo getLastPaidInvoice() {
-        return lastPaidInvoice;
-    }
-
-    public Company setKey(final String key) {
-        this.key = key;
-        return this;
-    }
-
-    public Company setName(final String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Company setFullName(final String fullName) {
-        this.fullName = fullName;
-        return this;
-    }
-
-    public Company setDetail(final String detail) {
+    public Company setDetail(String detail) {
         this.detail = detail;
-        return this;
-    }
-
-    public Company setShowLegalNoticeForeignBuyer(Boolean showLegalNoticeForeignBuyer) {
-        this.showLegalNoticeForeignBuyer = showLegalNoticeForeignBuyer;
-        return this;
-    }
-
-    public Company setLegalNotice(String legalNotice) {
-        this.legalNotice = legalNotice;
-        return this;
-    }
-
-    public Company setAddress(final Address address) {
-        this.address = address;
-        return this;
-    }
-
-    public Company setMetrics(Metrics metrics) {
-        this.metrics = metrics;
-        return this;
-    }
-
-    public Company setBusiness(List<Business> business) {
-        this.business = business;
-        return this;
-    }
-
-    public Company setVats(List<VATVal> vats) {
-        this.vats = vats;
-        return this;
-    }
-
-    public Company setCreationDate(DateTime creationDate) {
-        this.creationDate = creationDate;
-        return this;
-    }
-
-    public Company setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-        return this;
-    }
-
-    public Company setLastSendDate(DateTime lastSendDate) {
-        this.lastSendDate = lastSendDate;
-        return this;
-    }
-
-    public Company setLastPaymentDate(DateTime lastPaymentDate) {
-        this.lastPaymentDate = lastPaymentDate;
-        return this;
-    }
-
-    public Company setLastSentInvoice(InvoiceInfo lastSentInvoice) {
-        this.lastSentInvoice = lastSentInvoice;
-        return this;
-    }
-
-    public Company setLastPaidInvoice(InvoiceInfo lastPaidInvoice) {
-        this.lastPaidInvoice = lastPaidInvoice;
         return this;
     }
 
@@ -237,12 +132,102 @@ public class Company implements Auditable {
         return this;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public Company setAddress(Address address) {
+        this.address = address;
+        return this;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public Company setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+        return this;
+    }
+
+    public String getLegalNotice() {
+        return legalNotice;
+    }
+
+    public Company setLegalNotice(String legalNotice) {
+        this.legalNotice = legalNotice;
+        return this;
+    }
+
+    public Boolean getShowLegalNoticeForeignBuyer() {
+        return showLegalNoticeForeignBuyer;
+    }
+
+    public Company setShowLegalNoticeForeignBuyer(Boolean showLegalNoticeForeignBuyer) {
+        this.showLegalNoticeForeignBuyer = showLegalNoticeForeignBuyer;
+        return this;
+    }
+
+    public Metrics getMetrics() {
+        return metrics;
+    }
+
+    public Company setMetrics(Metrics metrics) {
+        this.metrics = metrics;
+        return this;
+    }
+
     public FiscalYear getFiscalYear() {
         return fiscalYear;
     }
 
     public Company setFiscalYear(FiscalYear fiscalYear) {
         this.fiscalYear = fiscalYear;
+        return this;
+    }
+
+    public DateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public Company setCreationDate(DateTime creationDate) {
+        this.creationDate = creationDate;
+        return this;
+    }
+
+    public DateTime getLastSendDate() {
+        return lastSendDate;
+    }
+
+    public Company setLastSendDate(DateTime lastSendDate) {
+        this.lastSendDate = lastSendDate;
+        return this;
+    }
+
+    public DateTime getLastPaymentDate() {
+        return lastPaymentDate;
+    }
+
+    public Company setLastPaymentDate(DateTime lastPaymentDate) {
+        this.lastPaymentDate = lastPaymentDate;
+        return this;
+    }
+
+    public InvoiceInfo getLastSentInvoice() {
+        return lastSentInvoice;
+    }
+
+    public Company setLastSentInvoice(InvoiceInfo lastSentInvoice) {
+        this.lastSentInvoice = lastSentInvoice;
+        return this;
+    }
+
+    public InvoiceInfo getLastPaidInvoice() {
+        return lastPaidInvoice;
+    }
+
+    public Company setLastPaidInvoice(InvoiceInfo lastPaidInvoice) {
+        this.lastPaidInvoice = lastPaidInvoice;
         return this;
     }
 
@@ -255,12 +240,7 @@ public class Company implements Auditable {
         return this;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public Company setCode(String code) {
-        this.code = code;
-        return this;
+    public Map<String, Customer> getCustomers() {
+        return customers;
     }
 }
