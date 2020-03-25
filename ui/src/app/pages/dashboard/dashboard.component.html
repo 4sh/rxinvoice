@@ -1,70 +1,130 @@
-<!-- [DASHBOARD] -->
-<!--<div class="row container-charts-dashboard">-->
-    <!--<div class="small-8 column">-->
-        <!--<div class="row">-->
-            <!--<div class="small-24 column">-->
-                <!--<div class="block-container">-->
-                    <!--<h6 class="title-section">{{'dashboard.chart.division' | translate}}</h6>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="small-24 column">-->
-                <!--<div class="block-container">-->
-                    <!--<div class="row">-->
-                        <!--<div class="small-12 column">-->
-                            <!--<h6 class="title-section">{{'newCustomer.label.caInvoiced' | translate}}</h6>-->
-                            <!--<span class="nb">{{ '00000'  | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>-->
-                        <!--</div>-->
-                        <!--<div class="small-12 column">-->
-                            <!--<h6 class="title-section">{{'newCustomer.label.caFixed' | translate}}</h6>-->
-                            <!--<span class="nb">{{ '00000'  | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+<div class="invoiceListHome">
+    <div class="invoiceListHome-header">
+        <span>Accueil - Suivi des factures</span>
+    </div>
+    <div class="invoiceListHome-dashboard">
 
-    <!--</div>-->
-    <!--<div class="small-16 column full-height">-->
-        <!--<div class="block-container">-->
-            <!--<h6 class="title-section">{{'dashboard.chart.turnover' | translate}}</h6>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-<!-- [END DASHBOARD] -->
+        <!--DEBUT du composant des colonnes-->
+        <div class="row dashboard">
+            <div class="column dashboard-column admin"> <!-- class "admin" ou "pilot" en fonction de l'écran d'affichage de la column (gestion du style différent) -->
+                <div class="title">À préparer</div>
+                <div class="content">
 
+                    <!--DEBUT du composant des tickets factures-->
+                    <div class="invoice status-draft">
+                        <div class="row">
+                            <div class="column small-12">
+                                <span class="date">30/03/2020</span>
+                            </div>
+                            <div class="column small-12 text-right">
+                                <button class="action-button"><i class="ion-android-more-horizontal"></i></button>
+                                <button class="action-button"><i class="ion-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="invoice-info">
+                            <p class="client-name">COOLS Environnement et Développement</p> <!-- doute sur le nommage des classes client/project ? -->
+                            <p class="project-name">GSofT 1.1</p>
+                        </div>
 
-<!-- [INVOICE LIST] -->
+                    </div>
+                    <!--FIN du composant des tickets factures-->
 
-<div class="row invoiceListHome">
-    <div class="column small-24 no-padding">
-        <tabs>
-            <tab class="row" [tabTitle]="'invoice.status.PREPARE' | translate" tabId="DRAFT"
-                 [numberOfElements]="preparedInvoices?.length" [amount]="getAmount(preparedInvoices)">
-                <div class="column small-24 tab-content">
-                    <invoices-list [invoices]="preparedInvoices" [isPending]="isPending"></invoices-list>
                 </div>
-            </tab>
-            <tab class="row" [tabTitle]="'invoice.status.VALIDATE' | translate" tabId="WAITING_VALIDATION"
-                 [numberOfElements]="validatedInvoices?.length" [amount]="getAmount(validatedInvoices)">
-                <div class="column small-24 tab-content">
-                    <invoices-list [invoices]="validatedInvoices" [isPending]="isPending"></invoices-list>
+            </div>
+            <!--FIN du composant des colonnes-->
+
+            <!--DEBUT du composant des colonnes-->
+            <div class="column dashboard-column admin disable"> <!-- class disable lorsque la column est grisée sur le dashboard -->
+                <div class="title">En attente de validation</div>
+                <div class="content">
+
+                    <!--DEBUT du composant des tickets factures-->
+                    <div class="invoice status-waiting-validation disable">
+                        <div class="row">
+                            <div class="column small-12">
+                                <span class="date">30/03/2020</span>
+                            </div>
+                            <div class="column small-12 text-right">
+                                <button class="action-button"><i class="ion-android-more-horizontal"></i></button>
+                                <button class="action-button"><i class="ion-document"></i></button>
+                            </div>
+                        </div>
+                        <div class="invoice-info">
+                            <p class="invoice-number">N° 1662549</p>
+                            <p class="client-name">ARRG</p>
+                            <p class="project-name">ARRG WMS</p>
+                        </div>
+                    </div>
+                    <!--FIN du composant des tickets factures-->
+
                 </div>
-            </tab>
-            <tab class="row" [tabTitle]="'dashboard.to.send' | translate" tabId="VALIDATED"
-                 [numberOfElements]="toSendInvoices?.length" [amount]="getAmount(toSendInvoices)">
-                <div class="column small-24 tab-content">
-                    <invoices-list [invoices]="toSendInvoices" [isPending]="isPending"></invoices-list>
+            </div>
+            <!--FIN du composant des colonnes-->
+
+            <!--DEBUT du composant des colonnes-->
+            <div class="column dashboard-column admin">
+                <div class="title">À envoyer</div>
+                <div class="content">
+
+                    <!--DEBUT du composant des tickets factures-->
+                    <div class="invoice status-validated">
+                        <div class="row">
+                            <div class="column small-12">
+                                <span class="date">30/03/2020</span>
+                            </div>
+                            <div class="column small-12 text-right">
+                                <button class="action-button"><i class="ion-android-more-horizontal"></i></button>
+                                <button class="action-button"><i class="ion-document"></i></button>
+                            </div>
+                        </div>
+                        <div class="invoice-info">
+                            <p class="invoice-number">N° 1662552</p>
+                            <p class="client-name">Alogia</p>
+                            <p class="project-name">ALOGIA - Maintenance 2019-2020</p>
+                        </div>
+                    </div>
+                    <!--FIN du composant des tickets factures-->
+
+                    <!--DEBUT du composant des tickets factures-->
+                    <div class="invoice status-validated">
+                        <div class="row">
+                            <div class="column small-12">
+                                <span class="date">30/03/2020</span>
+                            </div>
+                            <div class="column small-12 text-right">
+                                <button class="action-button"><i class="ion-android-more-horizontal"></i></button>
+                                <button class="action-button"><i class="ion-document"></i></button>
+                            </div>
+                        </div>
+                        <div class="invoice-info">
+                            <p class="invoice-number">N° 1662553</p>
+                            <p class="client-name">CHEP USA - ORLANDO</p>
+                            <p class="project-name">CHEP v2 Yard Check & Enhancements</p>
+                        </div>
+                    </div>
+                    <!--FIN du composant des tickets factures-->
+
                 </div>
-            </tab>
-            <tab class="row" [tabTitle]="'invoice.status.REVIVE' | translate" tabId="LATE"
-                 [numberOfElements]="reviveInvoices?.length" [amount]="getAmount(reviveInvoices)">
-                <div class="column small-24 tab-content">
-                    <invoices-list [invoices]="reviveInvoices" [isPending]="isPending"></invoices-list>
+            </div>
+            <!--FIN du composant des colonnes-->
+
+            <!--DEBUT du composant des colonnes-->
+            <div class="column dashboard-column admin">
+                <div class="title">En attente de paiement</div>
+                <div class="content">
+
                 </div>
-            </tab>
-        </tabs>
+            </div>
+            <!--FIN du composant des colonnes-->
+
+            <!--DEBUT du composant des colonnes-->
+            <div class="column dashboard-column admin">
+                <div class="title">À relancer</div>
+                <div class="content">
+
+                </div>
+            </div>
+        </div>
+        <!--FIN du composant des colonnes-->
     </div>
 </div>
-
-
-<!-- [END INVOICE LIST] -->
