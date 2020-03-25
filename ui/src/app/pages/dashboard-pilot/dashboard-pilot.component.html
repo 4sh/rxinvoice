@@ -1,0 +1,38 @@
+<div class="invoiceListHome">
+  <div class="invoiceListHome-header">
+    <span>Accueil - Suivi des factures</span>
+  </div>
+  <div class="invoiceListHome-dashboard">
+
+    <!--DEBUT du composant des colonnes-->
+    <div class="row dashboard">
+      <dashboard-column
+              [title]="'dashboard.column.draft' | translate"
+              [invoiceList]="preparedInvoices">
+      </dashboard-column>
+      <dashboard-column
+              [title]="'dashboard.column.preparation.waiting' | translate"
+              [disabled]="true"
+              [invoiceList]="readyInvoices">
+      </dashboard-column>
+      <dashboard-column
+              [title]="'dashboard.column.to.validate' | translate"
+              [invoiceList]="validatedInvoices">
+      </dashboard-column>
+      <!--FIN du composant des colonnes-->
+    </div>
+  </div>
+</div>
+
+<!-- DEBUT composant modal
+<div class="revealModal">
+    <div class="reveal">
+        <div class="modal-container">
+            hjhjj
+        </div>
+        <button class="close-modal">
+            <i class="ion-close"></i>
+        </button>
+    </div>
+</div>
+FIN composant modal -->

@@ -16,6 +16,8 @@
 
   &.status-draft {
     border-left: 2px solid $status-draft-color;
+    background-image: url('../../../../../assets/images/png/bg-draft.png');
+    background-size: cover;
 
     .date {
       background-color: $status-draft-color;
@@ -24,14 +26,24 @@
 
   &.status-ready {
     border-left: 2px solid $status-ready-color;
+    background-image: url('../../../../../assets/images/png/bg-draft.png');
+    background-size: cover;
+
+    &.pilot {
+      background-color: #efefef;
+    }
 
     .date {
       background-color: $status-ready-color;
     }
   }
 
-  &.status-waiting-validation {
+  &.status-waiting_validation {
     border-left: 2px solid $status-waiting-validation-color;
+
+    &.admin {
+      background-color: #efefef;
+    }
 
     .date {
       background-color: $status-waiting-validation-color;
@@ -62,7 +74,7 @@
     }
   }
 
-  &.status-payment-scheduled {
+  &.status-payment_scheduled {
     border-left: 2px solid $status-payment-scheduled-color;
 
     .date {
@@ -114,7 +126,7 @@
 
   .invoice-info {
 
-    .client-name, .project-name {
+    .buyer-name, .business-name {
 
 
       margin: 0;
@@ -122,13 +134,13 @@
       margin-top: 4px;
     }
 
-    .client-name {
+    .buyer-name {
       color: #172b4d;
       font-weight: 500;
       font-size: 14px;
     }
 
-    .project-name {
+    .business-name {
       color: #2B364D;
       font-size: 12px;
     }

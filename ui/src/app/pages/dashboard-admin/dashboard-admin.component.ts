@@ -5,32 +5,35 @@ import {isNumber} from 'util';
 import * as moment from 'moment';
 
 @Component({
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss']
+    templateUrl: './dashboard-admin.component.html',
+    styleUrls: ['./dashboard-admin.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardAdminComponent implements OnInit {
 
-    preparedInvoices: InvoiceModel[];
+    readyInvoices: InvoiceModel[];
     validatedInvoices: InvoiceModel[];
     toSendInvoices: InvoiceModel[];
+    paymentWaitingInvoices: InvoiceModel[];
     reviveInvoices: InvoiceModel[];
-    isPending = true;
 
     constructor(private invoiceService: InvoiceService) {
     }
 
     ngOnInit() {
-        this.invoiceService.fetchToPrepareInvoices()
+        this.invoiceService.fetchInvoices({statuses: 'READY'})
             .subscribe(invoices => {
-                this.preparedInvoices = invoices;
-                this.isPending = false;
+                this.readyInvoices = invoices;
             });
         this.invoiceService.fetchInvoices({statuses: 'WAITING_VALIDATION'})
             .subscribe(invoices => {
                 this.validatedInvoices = invoices;
             });
-        this.invoiceService.fetchInvoices({statuses: ['VALIDATED', 'READY']})
+        this.invoiceService.fetchInvoices({statuses: ['VALIDATED']})
             .subscribe(invoices => this.toSendInvoices = invoices);
+        this.invoiceService.fetchInvoices({statuses: 'SENT'})
+            .subscribe(invoices => {
+                this.paymentWaitingInvoices = invoices;
+            });
         this.invoiceService.fetchInvoices({statuses: 'LATE'})
             .subscribe(invoices => this.reviveInvoices = invoices);
     }

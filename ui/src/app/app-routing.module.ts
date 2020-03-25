@@ -1,4 +1,5 @@
-import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {DashboardAdminComponent} from './pages/dashboard-admin/dashboard-admin.component';
+import {DashboardPilotComponent} from './pages/dashboard-pilot/dashboard-pilot.component';
 import {Routes, RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CustomersComponent} from './pages/customers/customers.component';
@@ -17,7 +18,8 @@ const routes: Routes = [
         canActivate: [LoggedInGuard],
         component: AppContentComponent,
         children: [
-            {path: 'dashboard', component: DashboardComponent},
+            {path: 'dashboard-admin', component: DashboardAdminComponent},
+            {path: 'dashboard-pilot', component: DashboardPilotComponent},
             {path: 'invoices', component: InvoicesComponent},
             {path: 'invoices/new', component: InvoiceDetailComponent},
             {path: 'invoices/detail/:id', component: InvoiceDetailComponent},

@@ -3,7 +3,7 @@ import {CustomerSelectComponent} from './common/components/selects/customer-sele
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgModule} from '@angular/core';
 import {DebounceDirective} from './common/directives/debounce.directive';
-import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {DashboardAdminComponent} from './pages/dashboard-admin/dashboard-admin.component';
 import {AppComponent} from './app/app.component';
 import {InvoicesListComponent} from './common/components/invoices-list/invoices-list.component';
 import {SidebarComponent} from './common/components/sidebar/sidebar.component';
@@ -53,6 +53,7 @@ import { InvoiceLineHeaderComponent } from './common/components/invoice-lines-de
 import {SpacerComponent} from './common/components/spacer/spacer.component';
 import { DashboardColumnComponent } from './common/components/dashboard/dashboard-column/dashboard-column.component';
 import { DashboardTicketComponent } from './common/components/dashboard/dashboard-ticket/dashboard-ticket.component';
+import { DashboardPilotComponent } from './pages/dashboard-pilot/dashboard-pilot.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -66,7 +67,6 @@ export function createTranslateLoader(http: HttpClient) {
         // Directives
         DebounceDirective,
         // Components
-        DashboardComponent,
         AppComponent,
         InvoicesListComponent,
         SidebarComponent,
@@ -96,6 +96,8 @@ export function createTranslateLoader(http: HttpClient) {
         InvoiceLineFormComponent,
         InvoiceLineHeaderComponent,
         SpacerComponent,
+        DashboardAdminComponent,
+        DashboardPilotComponent,
         DashboardColumnComponent,
         DashboardTicketComponent
     ],

@@ -8,12 +8,12 @@
         <div class="row dashboard">
             <dashboard-column
                     [title]="'dashboard.column.to.prepare' | translate"
-                    [invoiceList]="preparedInvoices">
+                    [invoiceList]="readyInvoices">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.validation.waiting' | translate"
                     [disabled]="true"
-                    [invoiceList]="[]">
+                    [invoiceList]="validatedInvoices">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.to.send' | translate"
@@ -21,7 +21,7 @@
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.payment.waiting' | translate"
-                    [invoiceList]="[]">
+                    [invoiceList]="paymentWaitingInvoices">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.late' | translate"

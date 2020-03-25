@@ -15,19 +15,24 @@
       font-size: rem-calc(16px);
     }
   }
-}
 
-/* DEBUT scss composant colonne */
-.dashboard {
-  padding: 8px;
-  height: calc(100vh - 138px);
+  &-dashboard {
 
-  dashboard-column {
-      width: calc(100% / 5);
+    .dashboard {
+      padding: 8px;
+      height: calc(100vh - 122px);
+      width: 100%;
+      overflow-y: scroll;
 
+      dashboard-column {
+        width: calc(100% / 5);
+      }
+    }
   }
 }
-/* FIN scss composant colonne */
+
+
+
 
 
 

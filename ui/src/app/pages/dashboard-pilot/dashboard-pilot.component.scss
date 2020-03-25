@@ -1,0 +1,88 @@
+@import '../../../styles/base-component';
+
+.invoiceListHome {
+
+  &-header {
+    background-color: $app-main-dark-color;
+    height: rem-calc(58px);
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+
+    span {
+      color: $white;
+      font-weight: bold;
+      font-size: rem-calc(16px);
+    }
+  }
+
+  &-dashboard {
+
+    .dashboard {
+      padding: 8px;
+      height: calc(100vh - 122px);
+      width: 100%;
+      overflow-y: scroll;
+
+      dashboard-column {
+        width: calc(100% / 3);
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+/* DEBUT scss composant modal
+.revealModal {
+  position: fixed;
+  background-color: rgba(76,80,83,.45);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999999;
+
+  .reveal {
+    width: 60%;
+    height: auto;
+    top: 50%!important;
+    transform: translate(0,-50%);
+    box-shadow: 0 1px 6px 0 rgba(0,0,0,.14);
+    position: relative;
+    display: block;
+    padding: 0;
+    z-index: 9999999;
+    background-color: white;
+    border-radius: 4px;
+    overflow: visible;
+
+    .modal-container {
+      position: relative;
+      display: block;
+      height: 100%;
+      padding: rem-calc(30px);
+    }
+
+
+    .close-modal {
+      position: absolute;
+      top: -13px;
+      right: -13px;
+      height: 26px;
+      width: 26px;
+      background-color: $blue-bayoux;
+      text-align: center;
+      border-radius: 100%;
+      line-height: 0.5;
+      cursor: pointer;
+      color: white;
+    }
+  }
+}
+FIN scss composant modal */

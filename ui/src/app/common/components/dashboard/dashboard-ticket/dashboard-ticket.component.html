@@ -1,16 +1,22 @@
-<div class="invoice {{statusClass}}">
+<div class="invoice {{statusClass}}"> <!-- rajouter une class admin ou pilot en fonction de la current URL -->
   <div class="row">
-    <div class="column small-12">
+    <div class="column small-15">
       <span class="date">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
     </div>
-    <div class="column small-12 text-right">
+    <div class="column small-9 text-right">
       <button class="action-button"><i class="ion-android-more-horizontal"></i></button>
-      <button class="action-button"><i class="ion-eye"></i></button>
+      <button class="action-button" *ngIf="!invoice.reference" [routerLink]="['/app/invoices/detail/' + invoice._id]"><i class="ion-eye"></i></button>
+      <button class="action-button" *ngIf="invoice.reference" [routerLink]="['/app/invoices/detail/' + invoice._id]"><i class="ion-document"></i></button>
     </div>
   </div>
   <div class="invoice-info">
-    <p class="client-name">{{invoice.buyer?.name}}</p>
-    <p class="project-name">{{invoice.business?.name}}</p>
+    <p class="invoice-number">
+      <span *ngIf="invoice.reference">
+         N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
+      </span>
+    </p>
+    <p class="buyer-name">{{invoice.buyer?.name}}</p>
+    <p class="business-name">{{invoice.business?.name}}</p>
   </div>
 
 </div>

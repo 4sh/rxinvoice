@@ -4,8 +4,11 @@
     </div>
 
     <nav class="sidebar-menu">
-        <a routerLink="/app/dashboard" [routerLinkActive]="['isActive']" class="sidebar-menu-item toto">
-          <i class="ion-home"></i>{{'nav.home' | translate}}
+        <a routerLink="/app/dashboard-admin" [routerLinkActive]="['isActive']" class="sidebar-menu-item toto">
+          <i class="ion-home"></i>{{'nav.home' | translate}} Admin
+        </a>
+        <a routerLink="/app/dashboard-pilot" [routerLinkActive]="['isActive']" class="sidebar-menu-item toto">
+          <i class="ion-home"></i>{{'nav.home' | translate}} Pilot
         </a>
         <a routerLink="/app/customers" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
             <i class="ion-person"></i>{{'nav.customers' | translate}}
