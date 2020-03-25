@@ -1,0 +1,9 @@
+<div class="column dashboard-column" [class.disable]="disabled"> <!-- class "admin" ou "pilot" en fonction de l'écran d'affichage de la column (gestion du style différent) -->
+  <div class="title">{{title}}</div>
+  <div class="content">
+    <!--DEBUT du composant des tickets factures-->
+    <dashboard-ticket *ngFor="let invoice of invoiceList"
+                      [invoice]="invoice">
+    </dashboard-ticket>
+  </div>
+</div>

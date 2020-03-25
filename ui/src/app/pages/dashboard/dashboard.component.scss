@@ -22,159 +22,62 @@
   padding: 8px;
   height: calc(100vh - 138px);
 
-  &-column {
-    height: 100%;
-    border: 6px solid white;
-    padding: 0;
+  dashboard-column {
+      width: calc(100% / 5);
 
-    &.admin {
-      width: 20%;
-    }
-    &.pilot {
-      width: 33.33333%;
-    }
-    &.disable {
-      .content {
-        background-color: #e8e8e8;
-      }
-    }
-
-    .title {
-      text-transform: uppercase;
-      color: #7B8C9C;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
-    }
-
-    .content {
-      background-color: #f4f5f7;
-      padding: 1px;
-    }
   }
 }
 /* FIN scss composant colonne */
 
 
 
-/* DEBUT scss composant TICKET FACTURE */
-.invoice {
-  cursor: move;
-  margin: 6px;
-  border-radius: 2px;
-  background-color: white;
-  box-shadow: 0 0 1px 0 rgba(9,30,66,0.31), 0 2px 4px -1px rgba(9,30,66,0.25);
-  padding: 10px;
-
-    &.disable {
-      cursor: no-drop;
-    }
-
-    &.status-draft {
-      border-left: 2px solid $status-draft-color;
-      .date {
-        background-color: $status-draft-color;
-      }
-    }
-    &.status-ready {
-      border-left: 2px solid $status-ready-color;
-      .date {
-        background-color: $status-ready-color;
-      }
-    }
-    &.status-waiting-validation {
-      border-left: 2px solid $status-waiting-validation-color;
-      .date {
-        background-color: $status-waiting-validation-color;
-      }
-    }
-    &.status-validated {
-      border-left: 2px solid $status-validated-color;
-      .date {
-        background-color: $status-validated-color;
-      }
-    }
-    &.status-sent {
-      border-left: 2px solid $status-sent-color;
-      .date {
-        background-color: $status-sent-color;
-      }
-    }
-    &.status-paid {
-      border-left: 2px solid $status-paid-color;
-      .date {
-        background-color: $status-paid-color;
-      }
-    }
-    &.status-payment-scheduled {
-      border-left: 2px solid $status-payment-scheduled-color;
-      .date {
-        background-color: $status-payment-scheduled-color;
-      }
-    }
-    &.status-late {
-      border-left: 2px solid $status-late-color;
-      .date {
-        background-color: $status-late-color;
-      }
-    }
-    &.status-unpaid {
-      border-left: 2px solid $status-unpaid-color;
-      .date {
-        background-color: $status-unpaid-color;
-      }
-    }
-    &.status-cancelled {
-      border-left: 2px solid $status-cancelled-color;
-      .date {
-        background-color: $status-cancelled-color;
-      }
-    }
-
-    .date {
-      font-size: 11px;
-      letter-spacing: 2px;
-      padding: 4px 6px;
-      border-radius: 2px;
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .action-button {
-      margin-left: 10px;
-
-      i {
-        font-size: 23px;
-        color: #a7a7a7;
-      }
-    }
-
-  .invoice-info {
-
-    .client-name, .project-name {
 
 
-      margin: 0;
-      line-height: 18px;
-      margin-top: 4px;
-    }
-    .client-name {
-      color: #172b4d;
-      font-weight: 500;
-      font-size: 14px;
-    }
-    .project-name {
-      color: #2B364D;
-      font-size: 12px;
+/* DEBUT scss composant modal
+.revealModal {
+  position: fixed;
+  background-color: rgba(76,80,83,.45);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999999;
+
+  .reveal {
+    width: 60%;
+    height: auto;
+    top: 50%!important;
+    transform: translate(0,-50%);
+    box-shadow: 0 1px 6px 0 rgba(0,0,0,.14);
+    position: relative;
+    display: block;
+    padding: 0;
+    z-index: 9999999;
+    background-color: white;
+    border-radius: 4px;
+    overflow: visible;
+
+    .modal-container {
+      position: relative;
+      display: block;
+      height: 100%;
+      padding: rem-calc(30px);
     }
 
-    .invoice-number {
-      color: #5e6c84;
-      font-size: 12px;
-      font-weight: 600;
-      margin: 0;
+
+    .close-modal {
+      position: absolute;
+      top: -13px;
+      right: -13px;
+      height: 26px;
+      width: 26px;
+      background-color: $blue-bayoux;
+      text-align: center;
+      border-radius: 100%;
+      line-height: 0.5;
+      cursor: pointer;
+      color: white;
     }
   }
 }
-/* FIN scss composant TICKET FACTURE */
+FIN scss composant modal */

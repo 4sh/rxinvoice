@@ -1,0 +1,16 @@
+<div class="invoice {{statusClass}}">
+  <div class="row">
+    <div class="column small-12">
+      <span class="date">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
+    </div>
+    <div class="column small-12 text-right">
+      <button class="action-button"><i class="ion-android-more-horizontal"></i></button>
+      <button class="action-button"><i class="ion-eye"></i></button>
+    </div>
+  </div>
+  <div class="invoice-info">
+    <p class="client-name">{{invoice.buyer?.name}}</p>
+    <p class="project-name">{{invoice.business?.name}}</p>
+  </div>
+
+</div>
