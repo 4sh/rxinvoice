@@ -1,9 +1,10 @@
-<div class="column dashboard-column" [class.disable]="disabled"> <!-- class "admin" ou "pilot" en fonction de l'écran d'affichage de la column (gestion du style différent) -->
-  <div class="title">{{title}}</div>
+<div class="column dashboard-column" [class.disable]="disabled">
+  <div class="title">{{title}} ({{invoiceList?.length}})</div>
+  <div class="title-amount">{{getAmount() | currency: 'EUR':'symbol':'1.2-2':'fr'}}</div>
   <div class="content">
-    <!--DEBUT du composant des tickets factures-->
     <dashboard-ticket *ngFor="let invoice of invoiceList"
-                      [invoice]="invoice">
+                      [invoice]="invoice"
+                      (invoiceStatusUpdateEvent)="invoiceUpdated($event)">
     </dashboard-ticket>
   </div>
 </div>

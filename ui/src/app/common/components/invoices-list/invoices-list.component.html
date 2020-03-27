@@ -65,11 +65,7 @@
         <td rowspan="2">
             <div class="invoiceList-value text-click status {{invoice.status}}" (click)="quickUpdate.emit(invoice)">{{ 'invoice.status.' + invoice.status | translate}}</div>
         </td>
-        <td rowspan="2">
-            <button class="button btn small primary force-inner-space-left-2 force-inner-space-right-2">
-                {{'invoices.label.4pm' | translate}}
-            </button>
-        </td>
+        <td rowspan="2"></td>
     </tr>
     </tbody>
 </table>

@@ -3,44 +3,33 @@
         <span>Accueil - Suivi des factures</span>
     </div>
     <div class="invoiceListHome-dashboard">
-
-        <!--DEBUT du composant des colonnes-->
         <div class="row dashboard">
             <dashboard-column
                     [title]="'dashboard.column.to.prepare' | translate"
-                    [invoiceList]="readyInvoices">
+                    [invoiceList]="toPrepareInvoices"
+                    (columnUpdated)="toPrepareColumnUpdated($event)">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.validation.waiting' | translate"
                     [disabled]="true"
-                    [invoiceList]="validatedInvoices">
+                    [invoiceList]="waitingValidationInvoices"
+                    (columnUpdated)="waitingValidationColumnUpdated($event)">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.to.send' | translate"
-                    [invoiceList]="toSendInvoices">
+                    [invoiceList]="toSendInvoices"
+                    (columnUpdated)="toSendColumnUpdated($event)">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.payment.waiting' | translate"
-                    [invoiceList]="paymentWaitingInvoices">
+                    [invoiceList]="paymentWaitingInvoices"
+                    (columnUpdated)="paymentWaitingColumnUpdated($event)">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.late' | translate"
-                    [invoiceList]="reviveInvoices">
+                    [invoiceList]="lateInvoices"
+                    (columnUpdated)="lateColumnUpdated($event)">
             </dashboard-column>
-            <!--FIN du composant des colonnes-->
         </div>
     </div>
 </div>
-
-<!-- DEBUT composant modal
-<div class="revealModal">
-    <div class="reveal">
-        <div class="modal-container">
-            hjhjj
-        </div>
-        <button class="close-modal">
-            <i class="ion-close"></i>
-        </button>
-    </div>
-</div>
-FIN composant modal -->

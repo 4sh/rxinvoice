@@ -1,46 +1,52 @@
 import {Component, OnInit} from '@angular/core';
 import {InvoiceModel} from '../../models/invoice.model';
 import {InvoiceService} from '../../common/services/invoice.service';
-import {isNumber} from 'util';
-import * as moment from 'moment';
+import {DashboardCommons} from '../../common/components/dashboard/dashboard-commons';
+import {InvoiceStatusEnum} from '../../models/invoice-status.type';
 
 @Component({
-  templateUrl: './dashboard-pilot.component.html',
-  styleUrls: ['./dashboard-pilot.component.scss']
+    templateUrl: './dashboard-pilot.component.html',
+    styleUrls: ['./dashboard-pilot.component.scss']
 })
-export class DashboardPilotComponent implements OnInit {
+export class DashboardPilotComponent extends DashboardCommons implements OnInit {
 
-  preparedInvoices: InvoiceModel[];
-  readyInvoices: InvoiceModel[];
-  validatedInvoices: InvoiceModel[];
-  isPending = true;
+    public draftInvoices: Array<InvoiceModel> = [];
+    public toPrepareInvoices: Array<InvoiceModel> = [];
+    public waitingValidationInvoices: Array<InvoiceModel> = [];
 
-  constructor(private invoiceService: InvoiceService) {
-  }
-
-  ngOnInit() {
-    this.invoiceService.fetchToPrepareInvoices()
-        .subscribe(invoices => {
-          this.preparedInvoices = invoices;
-          this.isPending = false;
-        });
-    this.invoiceService.fetchInvoices({statuses: 'READY'})
-        .subscribe(invoices => {
-          this.readyInvoices = invoices;
-        });
-    this.invoiceService.fetchInvoices({statuses: 'WAITING_VALIDATION'})
-        .subscribe(invoices => {
-          this.validatedInvoices = invoices;
-        });
-  }
-
-  getAmount(invoices: InvoiceModel[]) {
-    if (invoices) {
-      const number = invoices
-          .filter(invoice => isNumber(invoice.grossAmount))
-          .map(invoice => invoice.grossAmount)
-          .reduce((a, b) => a + b, 0);
-      return number;
+    constructor(invoiceService: InvoiceService) {
+        super(invoiceService);
     }
-  }
+
+    ngOnInit() {
+        this.statusColumnMap
+            .set(InvoiceStatusEnum.DRAFT, this.draftInvoices)
+            .set(InvoiceStatusEnum.READY, this.toPrepareInvoices)
+            .set(InvoiceStatusEnum.WAITING_VALIDATION, this.waitingValidationInvoices);
+        this.fetchColumn(InvoiceStatusEnum.DRAFT);
+        this.fetchColumn(InvoiceStatusEnum.READY);
+        this.fetchColumn(InvoiceStatusEnum.WAITING_VALIDATION);
+    }
+
+    public draftColumnUpdated(invoice: InvoiceModel): void {
+        this.fetchColumn(InvoiceStatusEnum.DRAFT);
+        if (invoice.status !== InvoiceStatusEnum.DRAFT) {
+            this.fetchColumn(invoice.status);
+        }
+    }
+
+    public toPrepareColumnUpdated(invoice: InvoiceModel): void {
+        this.fetchColumn(InvoiceStatusEnum.READY);
+        if (invoice.status !== InvoiceStatusEnum.READY) {
+            this.fetchColumn(invoice.status);
+        }
+    }
+
+    public waitingValidationColumnUpdated(invoice: InvoiceModel): void {
+        this.fetchColumn(InvoiceStatusEnum.WAITING_VALIDATION);
+        if (invoice.status !== InvoiceStatusEnum.WAITING_VALIDATION) {
+            this.fetchColumn(invoice.status);
+        }
+    }
+
 }

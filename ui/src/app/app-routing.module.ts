@@ -30,7 +30,7 @@ const routes: Routes = [
 
         ]
     },
-    {path: '', redirectTo: '/app/dashboard', pathMatch: 'full'},
+    {path: '', redirectTo: '/app/dashboard-admin', pathMatch: 'full'},
     {path: 'style', children: GuideRoutes},
 ];
 

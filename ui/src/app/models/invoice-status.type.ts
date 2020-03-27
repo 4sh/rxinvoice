@@ -1,5 +1,5 @@
 export type InvoiceStatusType =
-      'DRAFT'
+    'DRAFT'
     | 'READY'
     | 'WAITING_VALIDATION'
     | 'VALIDATED'
@@ -9,3 +9,16 @@ export type InvoiceStatusType =
     | 'LATE'
     | 'UNPAID'
     | 'CANCELLED';
+
+export enum InvoiceStatusEnum {
+    DRAFT = 'DRAFT',
+    READY = 'READY',
+    WAITING_VALIDATION = 'WAITING_VALIDATION',
+    VALIDATED = 'VALIDATED',
+    SENT = 'SENT',
+    PAID = 'PAID',
+    PAYMENT_SCHEDULED = 'PAYMENT_SCHEDULED',
+    LATE = 'LATE',
+    UNPAID = 'UNPAID',
+    CANCELLED = 'CANCELLED'
+}
