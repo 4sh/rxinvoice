@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InvoiceModel} from "../../../../models/invoice.model";
 import {isNumber} from "util";
+import {InvoiceStatusType} from '../../../../models/invoice-status.type';
+import {InvoiceChangeEvent} from '../Invoice-change-event';
 
 @Component({
     selector: 'dashboard-column',
@@ -16,7 +18,7 @@ export class DashboardColumnComponent implements OnInit {
     @Input()
     public invoiceList: Array<InvoiceModel>;
     @Output()
-    public columnUpdated: EventEmitter<InvoiceModel> = new EventEmitter<InvoiceModel>();
+    public columnUpdated: EventEmitter<InvoiceChangeEvent> = new EventEmitter<InvoiceChangeEvent>();
 
     constructor() {
     }
@@ -33,7 +35,7 @@ export class DashboardColumnComponent implements OnInit {
         }
     }
 
-    public invoiceUpdated(invoice: InvoiceModel): void {
-        this.columnUpdated.emit(invoice);
+    public invoiceUpdated(invoiceChangeEvent: InvoiceChangeEvent): void {
+        this.columnUpdated.emit(invoiceChangeEvent);
     }
 }

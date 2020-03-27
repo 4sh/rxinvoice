@@ -7,28 +7,28 @@
             <dashboard-column
                     [title]="'dashboard.column.to.prepare' | translate"
                     [invoiceList]="toPrepareInvoices"
-                    (columnUpdated)="toPrepareColumnUpdated($event)">
+                    (columnUpdated)="columnUpdated($event)">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.validation.waiting' | translate"
                     [disabled]="true"
                     [invoiceList]="waitingValidationInvoices"
-                    (columnUpdated)="waitingValidationColumnUpdated($event)">
+                    (columnUpdated)="columnUpdated($event)">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.to.send' | translate"
                     [invoiceList]="toSendInvoices"
-                    (columnUpdated)="toSendColumnUpdated($event)">
+                    (columnUpdated)="columnUpdated($event)">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.payment.waiting' | translate"
                     [invoiceList]="paymentWaitingInvoices"
-                    (columnUpdated)="paymentWaitingColumnUpdated($event)">
+                    (columnUpdated)="columnUpdated($event)">
             </dashboard-column>
             <dashboard-column
                     [title]="'dashboard.column.late' | translate"
                     [invoiceList]="lateInvoices"
-                    (columnUpdated)="lateColumnUpdated($event)">
+                    (columnUpdated)="columnUpdated($event)">
             </dashboard-column>
         </div>
     </div>

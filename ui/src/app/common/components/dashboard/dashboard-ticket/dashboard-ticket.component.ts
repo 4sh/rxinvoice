@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {InvoiceModel} from "../../../../models/invoice.model";
 import {DownloadInvoiceService} from '../../../services/download-invoice.service';
 import {InvoiceService} from '../../../services/invoice.service';
+import {InvoiceChangeEvent} from '../Invoice-change-event';
+import {InvoiceStatusType} from '../../../../models/invoice-status.type';
 
 @Component({
     selector: 'dashboard-ticket',
@@ -13,11 +15,11 @@ export class DashboardTicketComponent implements OnInit {
     @Input()
     public invoice: InvoiceModel;
     @Output()
-    public invoiceStatusUpdateEvent: EventEmitter<InvoiceModel> = new EventEmitter<InvoiceModel>();
+    public invoiceStatusUpdateEvent: EventEmitter<InvoiceChangeEvent> = new EventEmitter<InvoiceChangeEvent>();
 
     public popupOpened: boolean;
     public statusClass: string;
-
+    private originalStatus: InvoiceStatusType;
 
     constructor(private downloadService: DownloadInvoiceService,
                 private invoiceService: InvoiceService) {
@@ -25,6 +27,7 @@ export class DashboardTicketComponent implements OnInit {
 
     ngOnInit() {
         this.statusClass = this.getClassFromStatus();
+        this.originalStatus = this.invoice.status;
     }
 
     public downloadInvoice(invoice) {
@@ -43,7 +46,7 @@ export class DashboardTicketComponent implements OnInit {
         this.invoiceService.saveInvoice(this.invoice)
             .subscribe(() => {
                 this.closeQuickUpdate();
-                this.invoiceStatusUpdateEvent.emit(this.invoice)
+                this.invoiceStatusUpdateEvent.emit(new InvoiceChangeEvent(this.originalStatus, this.invoice.status, this.invoice));
             });
     }
 

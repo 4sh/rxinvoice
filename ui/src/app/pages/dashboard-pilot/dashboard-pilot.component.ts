@@ -27,26 +27,4 @@ export class DashboardPilotComponent extends DashboardCommons implements OnInit 
         this.fetchColumn(InvoiceStatusEnum.READY);
         this.fetchColumn(InvoiceStatusEnum.WAITING_VALIDATION);
     }
-
-    public draftColumnUpdated(invoice: InvoiceModel): void {
-        this.fetchColumn(InvoiceStatusEnum.DRAFT);
-        if (invoice.status !== InvoiceStatusEnum.DRAFT) {
-            this.fetchColumn(invoice.status);
-        }
-    }
-
-    public toPrepareColumnUpdated(invoice: InvoiceModel): void {
-        this.fetchColumn(InvoiceStatusEnum.READY);
-        if (invoice.status !== InvoiceStatusEnum.READY) {
-            this.fetchColumn(invoice.status);
-        }
-    }
-
-    public waitingValidationColumnUpdated(invoice: InvoiceModel): void {
-        this.fetchColumn(InvoiceStatusEnum.WAITING_VALIDATION);
-        if (invoice.status !== InvoiceStatusEnum.WAITING_VALIDATION) {
-            this.fetchColumn(invoice.status);
-        }
-    }
-
 }

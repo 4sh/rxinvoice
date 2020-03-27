@@ -33,39 +33,4 @@ export class DashboardAdminComponent extends DashboardCommons implements OnInit 
         this.fetchColumn(InvoiceStatusEnum.SENT);
         this.fetchColumn(InvoiceStatusEnum.LATE);
     }
-
-    public lateColumnUpdated(invoice: InvoiceModel): void {
-        this.fetchColumn(InvoiceStatusEnum.LATE);
-        if (invoice.status !== InvoiceStatusEnum.LATE) {
-            this.fetchColumn(invoice.status);
-        }
-    }
-
-    public paymentWaitingColumnUpdated(invoice: InvoiceModel): void {
-        this.fetchColumn(InvoiceStatusEnum.SENT);
-        if (invoice.status !== InvoiceStatusEnum.SENT) {
-            this.fetchColumn(invoice.status);
-        }
-    }
-
-    public toSendColumnUpdated(invoice: InvoiceModel): void {
-        this.fetchColumn(InvoiceStatusEnum.VALIDATED);
-        if (invoice.status !== InvoiceStatusEnum.VALIDATED) {
-            this.fetchColumn(invoice.status);
-        }
-    }
-
-    public waitingValidationColumnUpdated(invoice: InvoiceModel): void {
-        this.fetchColumn(InvoiceStatusEnum.WAITING_VALIDATION);
-        if (invoice.status !== InvoiceStatusEnum.WAITING_VALIDATION) {
-            this.fetchColumn(invoice.status);
-        }
-    }
-
-    public toPrepareColumnUpdated(invoice: InvoiceModel): void {
-        this.fetchColumn(InvoiceStatusEnum.READY);
-        if (invoice.status !== InvoiceStatusEnum.READY) {
-            this.fetchColumn(invoice.status);
-        }
-    }
 }

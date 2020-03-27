@@ -7,18 +7,18 @@
       <dashboard-column
               [title]="'dashboard.column.draft' | translate"
               [invoiceList]="draftInvoices"
-              (columnUpdated)="draftColumnUpdated($event)">>
+              (columnUpdated)="columnUpdated($event)">>
       </dashboard-column>
       <dashboard-column
               [title]="'dashboard.column.preparation.waiting' | translate"
               [disabled]="true"
               [invoiceList]="toPrepareInvoices"
-              (columnUpdated)="toPrepareColumnUpdated($event)">
+              (columnUpdated)="columnUpdated($event)">
       </dashboard-column>
       <dashboard-column
               [title]="'dashboard.column.to.validate' | translate"
               [invoiceList]="waitingValidationInvoices"
-              (columnUpdated)="waitingValidationColumnUpdated($event)">
+              (columnUpdated)="columnUpdated($event)">
       </dashboard-column>
     </div>
   </div>
