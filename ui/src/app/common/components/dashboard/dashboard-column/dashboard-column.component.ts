@@ -1,8 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InvoiceModel} from "../../../../models/invoice.model";
 import {isNumber} from "util";
-import {InvoiceStatusType} from '../../../../models/invoice-status.type';
 import {InvoiceChangeEvent} from '../Invoice-change-event';
+import {DndDropEvent} from 'ngx-drag-drop';
+import {InvoiceService} from '../../../services/invoice.service';
+import {DashboardColumnConfiguration} from '../dashboard-column-configuration';
 
 @Component({
     selector: 'dashboard-column',
@@ -12,18 +14,22 @@ import {InvoiceChangeEvent} from '../Invoice-change-event';
 export class DashboardColumnComponent implements OnInit {
 
     @Input()
-    public disabled: boolean;
-    @Input()
-    public title: string;
-    @Input()
-    public invoiceList: Array<InvoiceModel>;
+    public columnConfiguration: DashboardColumnConfiguration;
     @Output()
     public columnUpdated: EventEmitter<InvoiceChangeEvent> = new EventEmitter<InvoiceChangeEvent>();
 
-    constructor() {
+    public invoiceList: Array<InvoiceModel> = [];
+
+    constructor(private invoiceService: InvoiceService) {
     }
 
     ngOnInit() {
+        this.loadInvoices();
+    }
+
+    private loadInvoices() {
+        this.invoiceService.fetchInvoiceList(this.columnConfiguration.invoiceSearchFilter)
+            .subscribe(invoices => this.invoiceList = invoices);
     }
 
     public getAmount(): number {
@@ -35,7 +41,14 @@ export class DashboardColumnComponent implements OnInit {
         }
     }
 
-    public invoiceUpdated(invoiceChangeEvent: InvoiceChangeEvent): void {
-        this.columnUpdated.emit(invoiceChangeEvent);
+    public onDrop($event: DndDropEvent): void {
+        this.invoiceService.updateInvoiceStatus($event.data, this.columnConfiguration.invoiceStatus)
+            .subscribe(() => this.loadInvoices());
+    }
+
+    public onDragEnded($event: InvoiceChangeEvent): void {
+        if ($event.fromStatus === this.columnConfiguration.invoiceStatus) {
+            this.loadInvoices();
+        }
     }
 }

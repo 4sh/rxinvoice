@@ -1,30 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {InvoiceModel} from '../../models/invoice.model';
-import {InvoiceService} from '../../common/services/invoice.service';
-import {DashboardCommons} from '../../common/components/dashboard/dashboard-commons';
-import {InvoiceStatusEnum} from '../../models/invoice-status.type';
+import {Component, OnInit, Optional} from '@angular/core';
+import {InvoiceStatusEnum, InvoiceStatusType} from '../../models/invoice-status.type';
+import {DashboardColumnConfiguration} from '../../common/components/dashboard/dashboard-column-configuration';
+import {InvoiceChangeEvent} from '../../common/components/dashboard/Invoice-change-event';
 
 @Component({
     templateUrl: './dashboard-pilot.component.html',
     styleUrls: ['./dashboard-pilot.component.scss']
 })
-export class DashboardPilotComponent extends DashboardCommons implements OnInit {
+export class DashboardPilotComponent implements OnInit {
 
-    public draftInvoices: Array<InvoiceModel> = [];
-    public toPrepareInvoices: Array<InvoiceModel> = [];
-    public waitingValidationInvoices: Array<InvoiceModel> = [];
-
-    constructor(invoiceService: InvoiceService) {
-        super(invoiceService);
-    }
+    public columns: Array<DashboardColumnConfiguration> = [];
 
     ngOnInit() {
-        this.statusColumnMap
-            .set(InvoiceStatusEnum.DRAFT, this.draftInvoices)
-            .set(InvoiceStatusEnum.READY, this.toPrepareInvoices)
-            .set(InvoiceStatusEnum.WAITING_VALIDATION, this.waitingValidationInvoices);
-        this.fetchColumn(InvoiceStatusEnum.DRAFT);
-        this.fetchColumn(InvoiceStatusEnum.READY);
-        this.fetchColumn(InvoiceStatusEnum.WAITING_VALIDATION);
+        this.columns.push(
+            new DashboardColumnConfiguration('dashboard.column.draft', InvoiceStatusEnum.DRAFT),
+            new DashboardColumnConfiguration('dashboard.column.validation.waiting', InvoiceStatusEnum.WAITING_VALIDATION),
+            new DashboardColumnConfiguration('dashboard.column.to.send', InvoiceStatusEnum.VALIDATED))  ;
     }
 }

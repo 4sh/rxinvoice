@@ -54,6 +54,7 @@ import {SpacerComponent} from './common/components/spacer/spacer.component';
 import { DashboardColumnComponent } from './common/components/dashboard/dashboard-column/dashboard-column.component';
 import { DashboardTicketComponent } from './common/components/dashboard/dashboard-ticket/dashboard-ticket.component';
 import { DashboardPilotComponent } from './pages/dashboard-pilot/dashboard-pilot.component';
+import {DndModule} from 'ngx-drag-drop';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -112,6 +113,7 @@ export function createTranslateLoader(http: HttpClient) {
         DpDatePickerModule,
         StyleGuideModule,
         FileUploadModule,
+        DndModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

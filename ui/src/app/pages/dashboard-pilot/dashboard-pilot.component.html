@@ -4,21 +4,8 @@
   </div>
   <div class="invoiceListHome-dashboard">
     <div class="row dashboard">
-      <dashboard-column
-              [title]="'dashboard.column.draft' | translate"
-              [invoiceList]="draftInvoices"
-              (columnUpdated)="columnUpdated($event)">>
-      </dashboard-column>
-      <dashboard-column
-              [title]="'dashboard.column.preparation.waiting' | translate"
-              [disabled]="true"
-              [invoiceList]="toPrepareInvoices"
-              (columnUpdated)="columnUpdated($event)">
-      </dashboard-column>
-      <dashboard-column
-              [title]="'dashboard.column.to.validate' | translate"
-              [invoiceList]="waitingValidationInvoices"
-              (columnUpdated)="columnUpdated($event)">
+      <dashboard-column *ngFor="let columnConfiguration of columns"
+                        [columnConfiguration]="columnConfiguration">
       </dashboard-column>
     </div>
   </div>

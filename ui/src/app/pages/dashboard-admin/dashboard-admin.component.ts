@@ -1,36 +1,21 @@
 import {Component, OnInit} from '@angular/core';
-import {InvoiceModel} from '../../models/invoice.model';
-import {InvoiceService} from '../../common/services/invoice.service';
 import {InvoiceStatusEnum} from '../../models/invoice-status.type';
-import {DashboardCommons} from '../../common/components/dashboard/dashboard-commons';
+import {DashboardColumnConfiguration} from '../../common/components/dashboard/dashboard-column-configuration';
 
 @Component({
     templateUrl: './dashboard-admin.component.html',
     styleUrls: ['./dashboard-admin.component.scss']
 })
-export class DashboardAdminComponent extends DashboardCommons implements OnInit {
+export class DashboardAdminComponent implements OnInit {
 
-    public toPrepareInvoices: Array<InvoiceModel> = [];
-    public waitingValidationInvoices: Array<InvoiceModel> = [];
-    public toSendInvoices: Array<InvoiceModel> = [];
-    public paymentWaitingInvoices: Array<InvoiceModel> = [];
-    public lateInvoices: Array<InvoiceModel> = [];
-
-    constructor(invoiceService: InvoiceService) {
-        super(invoiceService);
-    }
+    public columns: Array<DashboardColumnConfiguration> = [];
 
     ngOnInit() {
-        this.statusColumnMap
-            .set(InvoiceStatusEnum.READY, this.toPrepareInvoices)
-            .set(InvoiceStatusEnum.WAITING_VALIDATION, this.waitingValidationInvoices)
-            .set(InvoiceStatusEnum.VALIDATED, this.toSendInvoices)
-            .set(InvoiceStatusEnum.SENT, this.paymentWaitingInvoices)
-            .set(InvoiceStatusEnum.LATE, this.lateInvoices);
-        this.fetchColumn(InvoiceStatusEnum.READY);
-        this.fetchColumn(InvoiceStatusEnum.WAITING_VALIDATION);
-        this.fetchColumn(InvoiceStatusEnum.VALIDATED);
-        this.fetchColumn(InvoiceStatusEnum.SENT);
-        this.fetchColumn(InvoiceStatusEnum.LATE);
+        this.columns.push(
+            new DashboardColumnConfiguration('dashboard.column.to.prepare', InvoiceStatusEnum.READY),
+            new DashboardColumnConfiguration('dashboard.column.validation.waiting', InvoiceStatusEnum.WAITING_VALIDATION),
+            new DashboardColumnConfiguration('dashboard.column.to.send', InvoiceStatusEnum.VALIDATED),
+            new DashboardColumnConfiguration('dashboard.column.payment.waiting', InvoiceStatusEnum.SENT),
+            new DashboardColumnConfiguration('dashboard.column.late', InvoiceStatusEnum.LATE));
     }
 }

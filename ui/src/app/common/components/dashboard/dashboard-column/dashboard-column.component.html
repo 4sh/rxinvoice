@@ -1,10 +1,12 @@
-<div class="column dashboard-column" [class.disable]="disabled">
-  <div class="title">{{title}} ({{invoiceList?.length}})</div>
-  <div class="title-amount">{{getAmount() | currency: 'EUR':'symbol':'1.2-2':'fr'}}</div>
-  <div class="content">
-    <dashboard-ticket *ngFor="let invoice of invoiceList"
-                      [invoice]="invoice"
-                      (invoiceStatusUpdateEvent)="invoiceUpdated($event)">
-    </dashboard-ticket>
-  </div>
+<div class="column dashboard-column" [class.disable]="columnConfiguration.disabled"
+     dndDropzone
+     (dndDrop)="onDrop($event)">
+    <div class="title">{{columnConfiguration.title | translate}} ({{invoiceList?.length}})</div>
+    <div class="title-amount">{{getAmount() | currency: 'EUR':'symbol':'1.2-2':'fr'}}</div>
+    <div class="content">
+        <dashboard-ticket *ngFor="let invoice of invoiceList"
+                          [invoice]="invoice"
+                          (invoiceUpdated)="onDragEnded($event)">
+        </dashboard-ticket>
+    </div>
 </div>

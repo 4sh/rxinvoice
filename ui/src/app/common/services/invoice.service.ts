@@ -17,6 +17,14 @@ export class InvoiceService {
     constructor(private http: HttpClient) {
     }
 
+    public fetchInvoiceList(invoiceSearchModel: InvoiceSearchFilterModel): Observable<InvoiceModel[]> {
+        return this.http
+            .get(this.baseUrl, {params: SearchParams.toHttpParams(invoiceSearchModel)})
+            .map((result: any) => plainToClass(InvoiceModel, result as Object[]))
+            .catch((response: Response) => Observable.throw({message: 'Unable to fetch invoices', response: response}));
+    }
+
+
     public fetchInvoices(params: any, save?: boolean): Observable<InvoiceModel[]> {
         if (save) {
             this.invoiceSearchFilter = new InvoiceSearchFilterModel();
@@ -85,5 +93,10 @@ export class InvoiceService {
         return invoiceStatus &&
             (invoiceStatus === InvoiceStatusEnum.DRAFT
                 || invoiceStatus === InvoiceStatusEnum.READY);
+    }
+
+    public updateInvoiceStatus(invoice: InvoiceModel, newStatus: InvoiceStatusType): Observable<InvoiceModel> {
+        invoice.status = newStatus;
+        return this.saveInvoice(invoice);
     }
 }

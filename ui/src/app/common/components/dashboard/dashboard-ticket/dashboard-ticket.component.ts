@@ -15,7 +15,7 @@ export class DashboardTicketComponent implements OnInit {
     @Input()
     public invoice: InvoiceModel;
     @Output()
-    public invoiceStatusUpdateEvent: EventEmitter<InvoiceChangeEvent> = new EventEmitter<InvoiceChangeEvent>();
+    public invoiceUpdated: EventEmitter<InvoiceChangeEvent> = new EventEmitter<InvoiceChangeEvent>();
 
     public popupOpened: boolean;
     public statusClass: string;
@@ -46,7 +46,7 @@ export class DashboardTicketComponent implements OnInit {
         this.invoiceService.saveInvoice(this.invoice)
             .subscribe(() => {
                 this.closeQuickUpdate();
-                this.invoiceStatusUpdateEvent.emit(new InvoiceChangeEvent(this.originalStatus, this.invoice.status, this.invoice));
+                this.invoiceUpdated.emit(new InvoiceChangeEvent(this.originalStatus, this.invoice.status, this.invoice));
             });
     }
 
@@ -56,5 +56,13 @@ export class DashboardTicketComponent implements OnInit {
 
     public isDraftInvoice(): boolean {
         return this.invoiceService.isDraftInvoice(this.invoice.status);
+    }
+
+    public buildInvoiceChangeEvent(): InvoiceChangeEvent {
+        return new InvoiceChangeEvent(this.originalStatus, this.invoice.status, this.invoice);
+    }
+
+    public onDragEnd($event: DragEvent): void {
+        this.invoiceUpdated.emit(this.buildInvoiceChangeEvent());
     }
 }
