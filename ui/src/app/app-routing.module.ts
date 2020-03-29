@@ -10,6 +10,7 @@ import {CustomerDetailComponent} from './pages/customer-detail/customer-detail.c
 import {InvoiceDetailComponent} from './pages/invoice-detail/invoice-detail.component';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 import {GuideRoutes} from './style-guide-module/guide.routes';
+import {DraftsComponent} from './pages/drafts/drafts.component';
 
 const routes: Routes = [
     {path: 'login', pathMatch: 'full', component: LoginComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
             {path: 'customers', component: CustomersComponent},
             {path: 'customers/new', component: CustomerDetailComponent},
             {path: 'customers/detail/:id', component: CustomerDetailComponent},
+            {path: 'drafts', component: DraftsComponent},
             {path: '**', redirectTo: '/app/dashboard'}
 
         ]

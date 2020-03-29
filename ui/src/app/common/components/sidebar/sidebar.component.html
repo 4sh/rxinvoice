@@ -18,6 +18,9 @@
             <!--<div class="sidebar-menu-item-notif">3</div>-->
             <!-- TODO add notif-->
         </a>
+        <a routerLink="/app/drafts" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
+            <i class="ion-document-text"></i>{{'nav.drafts' | translate}}
+        </a>
     </nav>
 
     <a  class="sidebar-logout" (click)="logout()">

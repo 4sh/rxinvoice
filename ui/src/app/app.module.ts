@@ -55,6 +55,7 @@ import { DashboardColumnComponent } from './common/components/dashboard/dashboar
 import { DashboardTicketComponent } from './common/components/dashboard/dashboard-ticket/dashboard-ticket.component';
 import { DashboardPilotComponent } from './pages/dashboard-pilot/dashboard-pilot.component';
 import {DndModule} from 'ngx-drag-drop';
+import { DraftsComponent } from './pages/drafts/drafts.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -100,7 +101,8 @@ export function createTranslateLoader(http: HttpClient) {
         DashboardAdminComponent,
         DashboardPilotComponent,
         DashboardColumnComponent,
-        DashboardTicketComponent
+        DashboardTicketComponent,
+        DraftsComponent
     ],
     imports: [
         AppRoutingModule,
