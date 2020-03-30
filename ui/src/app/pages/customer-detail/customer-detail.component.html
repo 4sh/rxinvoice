@@ -106,7 +106,7 @@
         <div class="column shrink space-left-24"></div>
 
         <div class="column auto" *ngIf="customer">
-            <business-detail class="newCustomerDetail-container" [(business)]="seller?.customers[customer.code].businessList"
+            <business-detail class="newCustomerDetail-container" [(business)]="seller?.customers[customer.siren].businessList"
                              [editMode]="editMode"></business-detail>
             <vat-detail class="newCustomerDetail-container" [(vats)]="customer.vats" [editMode]="editMode"></vat-detail>
         </div>

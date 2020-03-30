@@ -134,18 +134,18 @@ public class CompanyService {
     }
 
     public Company createCompany(Company company) {
-        checkCodeUniqueness(company);
+        checkCompanyUniqueness(company);
         company = company.setCreationDate(DateTime.now());
         saveCompany(company);
         eventBus.post(Activity.newCreate(company, AppModule.currentUser()));
         return company;
     }
 
-    private void checkCodeUniqueness(Company company) {
-        if (this.companies.get().count("{code: #}", company.getCode()) > 0) {
-            throw this.restxErrors.on(CompanyErrors.CompanyExitingCodeError.class)
-                    .set(CompanyErrors.CompanyExitingCodeError.CODE, company.getCode())
-                    .set(CompanyErrors.CompanyExitingCodeError.NAME, company.getName())
+    private void checkCompanyUniqueness(Company company) {
+        if (this.companies.get().count("{siren: #}", company.getSiren()) > 0) {
+            throw this.restxErrors.on(CompanyErrors.CompanyExistingSirenError.class)
+                    .set(CompanyErrors.CompanyExistingSirenError.SIREN, company.getSiren())
+                    .set(CompanyErrors.CompanyExistingSirenError.NAME, company.getName())
                     .raise();
         }
     }

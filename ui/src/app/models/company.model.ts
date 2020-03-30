@@ -9,7 +9,7 @@ import {Customer} from './customer.model';
 export class CompanyModel {
     _id: string;
     name: string;
-    code: string;
+    siren: string;
     detail?: string;
 
     legalNotice?: string;

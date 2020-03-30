@@ -20,13 +20,13 @@ public class Company implements Auditable {
     @ObjectId
     private String key;
     private String name;
-    private String code;
+    private String siren;
     private String fullName;
-    private String detail;
     private KindCompany kind;
     private Address address;
     private String emailAddress;
 
+    private String detail;
     private String legalNotice;
     private Boolean showLegalNoticeForeignBuyer;
 
@@ -54,7 +54,7 @@ public class Company implements Auditable {
     }
     @Override
     public String getBusinessKey() {
-        return code;
+        return siren;
     }
 
     @Override
@@ -62,6 +62,7 @@ public class Company implements Auditable {
         return "Company{" +
                 "key='" + key + '\'' +
                 ", name='" + name + '\'' +
+                ", siren='" + siren + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", detail='" + detail + '\'' +
                 ", kind=" + kind +
@@ -96,12 +97,12 @@ public class Company implements Auditable {
         return this;
     }
 
-    public String getCode() {
-        return code;
+    public String getSiren() {
+        return siren;
     }
 
-    public Company setCode(String code) {
-        this.code = code;
+    public Company setSiren(String siren) {
+        this.siren = siren;
         return this;
     }
 

@@ -63,10 +63,10 @@ public class CorsResource {
         // TODO : Remove after having modified 4pm
             Company sellerCompany = companies.get().findOne("{name: #}", "4SH").as(Company.class);
             if (null != customerCompany && null != sellerCompany) {
-                if (!sellerCompany.getCustomers().containsKey(customerCompany.getCode())) {
-                    sellerCompany.getCustomers().put(customerCompany.getCode(), new Customer());
+                if (!sellerCompany.getCustomers().containsKey(customerCompany.getSiren())) {
+                    sellerCompany.getCustomers().put(customerCompany.getSiren(), new Customer());
                 }
-                Customer customer = sellerCompany.getCustomers().get(customerCompany.getCode());
+                Customer customer = sellerCompany.getCustomers().get(customerCompany.getSiren());
                 java.util.Optional<Business> businessOptional = customer
                         .getBusinessList()
                         .stream()
