@@ -55,11 +55,11 @@ export class CustomerDetailComponent implements OnInit {
     private updateForm(obj) {
         return {
             name: obj.name,
-            code: obj.code,
+            siren: obj.siren,
             emailAddress: obj.emailAddress,
             address: obj.address,
-            legalNotice: obj.legalNotice,
-            detail: obj.detail,
+            legalNotice: obj.commercialRelationship.legalNotice,
+            detail: obj.commercialRelationship.detail,
         };
     }
 
@@ -73,16 +73,22 @@ export class CustomerDetailComponent implements OnInit {
                     .subscribe((company: CompanyModel) => {
                         this.form.setValue(this.updateForm(company));
                         this.customer = company;
-                        if (company && company.fiscalYearMetricsMap && company.fiscalYearMetricsMap["currentYear"]) {
-                            this.currentYearTurnover = company.fiscalYearMetricsMap["currentYear"].invoiced +
-                                company.fiscalYearMetricsMap["currentYear"].paid +
-                                company.fiscalYearMetricsMap["currentYear"].expired;
-                            this.currentYearTurnoverExpected = this.currentYearTurnover + company.fiscalYearMetricsMap["currentYear"].expected;
-                        }
-                        if (company && company.metrics) {
-                            this.totalTurnover = company.metrics.invoiced +
-                                company.metrics.paid +
-                                company.metrics.expired;
+                        if (company && company.commercialRelationship && company.commercialRelationship.companyMetrics.currentYear) {
+                            const companyMetrics = company.commercialRelationship.companyMetrics;
+
+                            this.currentYearTurnover =
+                                companyMetrics.currentYear.invoiced +
+                                companyMetrics.currentYear.paid +
+                                companyMetrics.currentYear.expired;
+
+                            this.currentYearTurnoverExpected =
+                                this.currentYearTurnover +
+                                companyMetrics.currentYear.expected;
+
+                            this.totalTurnover =
+                                companyMetrics.global.invoiced +
+                                companyMetrics.global.paid +
+                                companyMetrics.global.expired;
                         }
                     });
             } else {
@@ -171,7 +177,7 @@ export class CustomerDetailComponent implements OnInit {
         this.location.back();
     }
 
-    public isCodeDisabled(): boolean {
+    public isSirenDisabled(): boolean {
         return !this.editMode || !!this.customer._id ;
     }
 

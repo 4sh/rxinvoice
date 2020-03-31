@@ -6,15 +6,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import restx.factory.Component;
 import restx.factory.Factory;
+import rxinvoice.dao.CommercialRelationshipDao;
+import rxinvoice.dao.CompanyDao;
 import rxinvoice.domain.company.Company;
 import rxinvoice.domain.company.FiscalYear;
-import rxinvoice.domain.company.SellerCompanyMetrics;
 import rxinvoice.domain.invoice.Invoice;
 import rxinvoice.domain.Metrics;
-import rxinvoice.service.company.CompanyService;
-import rxinvoice.service.company.SellerCompanyMetricsService;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,20 +28,20 @@ public class InvoiceMetricsService {
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    private final SellerCompanyMetricsService sellerCompanyMetricsService;
-    private final CompanyService companyService;
+    private final CompanyDao companyDao;
+    private final CommercialRelationshipDao commercialRelationshipDao;
     private final InvoiceService invoiceService;
 
-    public InvoiceMetricsService(SellerCompanyMetricsService sellerCompanyMetricsService,
-                                 CompanyService companyService,
+    public InvoiceMetricsService(CompanyDao companyDao,
+                                 CommercialRelationshipDao commercialRelationshipDao,
                                  InvoiceService invoiceService) {
-        this.sellerCompanyMetricsService = sellerCompanyMetricsService;
-        this.companyService = companyService;
+        this.companyDao = companyDao;
+        this.commercialRelationshipDao = commercialRelationshipDao;
         this.invoiceService = invoiceService;
     }
 
     private Company getCompany(String key) {
-        return checkPresent(companyService.findCompanyByKey(key), String.format("Company not found for key %s", key));
+        return checkPresent(this.companyDao.findByKey(key), String.format("Company not found for key %s", key));
     }
 
     private void computeCompanyMetricsAsync(String sellerCompanyKey, final Company company) {
@@ -64,7 +64,7 @@ public class InvoiceMetricsService {
     }
 
     public void computeAllCompanyMetricsAsync(String sellerCompanyKey) {
-        final Iterable<Company> companyList = companyService.findCompanies(Optional.empty());
+        final Iterable<Company> companyList = this.companyDao.findCompanies(Optional.empty());
 
         for (Company company : companyList) {
             computeCompanyMetricsAsync(sellerCompanyKey, company);
@@ -78,42 +78,24 @@ public class InvoiceMetricsService {
         Company seller = getCompany(sellerCompanyKey);
 
         List<Invoice> invoiceList = Lists.newArrayList(invoiceService.findInvoicesByBuyer(company.getKey()));
-        Metrics metrics = computeFiscalYearMetrics(invoiceList, Optional.empty());
-        company.setMetrics(metrics);
-        companyService.saveCompany(company);
-
-
-        Optional<SellerCompanyMetrics> sellerCompanyMetricsOptional =
-                sellerCompanyMetricsService.findBySellerRef(sellerCompanyKey);
-
-        SellerCompanyMetrics sellerCompanyMetrics = sellerCompanyMetricsOptional
-                .orElse(new SellerCompanyMetrics());
-
         FiscalYear current = seller.getFiscalYear().current();
         FiscalYear previous = current.previous();
         FiscalYear next = current.next();
 
-        Map<String, Metrics> fiscalYearMetricsMap =
-                sellerCompanyMetrics.getBuyerCompaniesMetrics().getOrDefault(buyerCompanyKey, new HashMap<>());
+        Metrics globalMetrics = computeCompanyMetrics(invoiceList, Optional.empty());
+        Metrics previousYearMetrics = computeCompanyMetrics(invoiceList, Optional.of(previous));
+        Metrics currentYearMetrics = computeCompanyMetrics(invoiceList, Optional.of(current));
+        Metrics nextYearMetrics = computeCompanyMetrics(invoiceList, Optional.of(next));
 
-        fiscalYearMetricsMap.put(SellerCompanyMetrics.PREVIOUS_YEAR,
-                computeFiscalYearMetrics(invoiceList, Optional.of(previous)));
-        fiscalYearMetricsMap.put(SellerCompanyMetrics.CURRENT_YEAR,
-                computeFiscalYearMetrics(invoiceList, Optional.of(current)));
-        fiscalYearMetricsMap.put(SellerCompanyMetrics.NEXT_YEAR,
-                computeFiscalYearMetrics(invoiceList, Optional.of(next)));
+        this.commercialRelationshipDao.updateCompanyGlobalMetrics(sellerCompanyKey, buyerCompanyKey, globalMetrics);
+        this.commercialRelationshipDao.updateCompanyGlobalMetrics(sellerCompanyKey, buyerCompanyKey, previousYearMetrics);
+        this.commercialRelationshipDao.updateCompanyGlobalMetrics(sellerCompanyKey, buyerCompanyKey, currentYearMetrics);
+        this.commercialRelationshipDao.updateCompanyGlobalMetrics(sellerCompanyKey, buyerCompanyKey, nextYearMetrics);
 
-        if (sellerCompanyMetrics.getKey() == null) {
-            sellerCompanyMetrics.getBuyerCompaniesMetrics().put(buyerCompanyKey, fiscalYearMetricsMap);
-            sellerCompanyMetricsService.saveCompanyMetrics(sellerCompanyMetrics
-                    .setSellerRef(sellerCompanyKey));
-        } else {
-            sellerCompanyMetricsService.updateBuyerCompanyMetrics(sellerCompanyKey, buyerCompanyKey, fiscalYearMetricsMap);
-        }
         logger.debug("End to compute company metrics for company {}", company.getKey());
     }
 
-    private Metrics computeFiscalYearMetrics(List<Invoice> invoices,  Optional<FiscalYear> fiscalYearOptional) {
+    private Metrics computeCompanyMetrics(List<Invoice> invoices, Optional<FiscalYear> fiscalYearOptional) {
         Metrics metrics = new Metrics();
         if (fiscalYearOptional.isPresent()) {
             invoices = invoices.stream()

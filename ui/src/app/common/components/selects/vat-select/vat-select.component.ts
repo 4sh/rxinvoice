@@ -2,6 +2,7 @@ import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, S
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {VATModel} from "../../../../models/VAT.model";
 import {CompanyService} from "../../../services/company.service";
+import {VatRateModel} from '../../../../models/vat-rate.model';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -25,10 +26,10 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
     private companyRef: string;
 
     @Output()
-    private vatChanged:EventEmitter<VATModel> = new EventEmitter<VATModel>();
+    private vatChanged:EventEmitter<VatRateModel> = new EventEmitter<VatRateModel>();
 
-    private vatModelList: Array<VATModel> = [];
-    private selectedVat: VATModel;
+    private vatModelList: Array<VatRateModel> = [];
+    private selectedVat: VatRateModel;
     private companyService: CompanyService;
 
     constructor(companyService: CompanyService) {
@@ -44,15 +45,15 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
     }
 
     private initializeVatList() {
-        const defaultVAT: VATModel = new VATModel();
-        defaultVAT.vat = "Taux normal - 20 %";
-        defaultVAT.amount = 20;
+        const defaultVAT: VatRateModel = new VatRateModel();
+        defaultVAT.label = "Taux normal - 20 %";
+        defaultVAT.rate = 20;
 
         if (this.companyRef) {
             this.companyService.fetchCompany(this.companyRef)
                 .subscribe(company => {
-                    this.vatModelList = company.vats;
-                    if (!this.findByVATRate(defaultVAT.amount)) {
+                    this.vatModelList = company.commercialRelationship.vatRates;
+                    if (!this.findByVATRate(defaultVAT.rate)) {
                         this.vatModelList.push(defaultVAT);
                     }
                 });
@@ -77,25 +78,25 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
         this.disabled = isDisabled;
     }
 
-    writeValue(vat: VATModel): void {
+    writeValue(vat: VatRateModel): void {
         // Add invoice line vat value in selection list in case it has been removed from customer available vat list.
         if (vat && !this.vatModelList
-            .map(vatModel => vatModel.amount)
-            .find(amount => amount === vat.amount)) {
+            .map(vatModel => vatModel.rate)
+            .find(rate => rate === vat.rate)) {
             this.vatModelList.push(vat);
         }
         if (vat) {
-            this.selectedVat = this.findByVATRate(vat.amount);
+            this.selectedVat = this.findByVATRate(vat.rate);
         }
     }
 
-    onChange(vatModel: VATModel): void {
+    onChange(vatModel: VatRateModel): void {
         this.selectedVat = vatModel;
         this.vatChanged.emit(vatModel);
     }
 
-    private findByVATRate(rate: number): VATModel {
-        return this.vatModelList.find(vatModel => rate === vatModel.amount);
+    private findByVATRate(rate: number): VatRateModel {
+        return this.vatModelList.find(vatModel => rate === vatModel.rate);
     }
 
 

@@ -11,17 +11,17 @@ public class CompanyPrint {
     private Address address;
     private String emailAddress;
     private String legalNotice;
-    private Boolean showLegalNoticeForeignBuyer;
+    private boolean showLegalNoticeForeignBuyer;
 
     public CompanyPrint(Company company) {
         this.key = company.getKey();
         this.name = company.getName();
         this.fullName = company.getFullName();
-        this.detail = company.getDetail();
         this.address = company.getAddress();
         this.emailAddress = company.getEmailAddress();
-        this.legalNotice = company.getLegalNotice();
-        this.showLegalNoticeForeignBuyer = company.getShowLegalNoticeForeignBuyer();
+        this.legalNotice = company.getCommercialRelationship() == null ? "" : company.getCommercialRelationship().getLegalNotice();
+        this.detail = company.getCommercialRelationship() == null ? "" : company.getCommercialRelationship().getLegalNotice();
+        this.showLegalNoticeForeignBuyer = company.getCommercialRelationship() != null && company.getCommercialRelationship().isShowLegalNoticeForeignBuyer();
     }
 
     @Override
@@ -101,11 +101,11 @@ public class CompanyPrint {
         return this;
     }
 
-    public Boolean getShowLegalNoticeForeignBuyer() {
+    public boolean isShowLegalNoticeForeignBuyer() {
         return showLegalNoticeForeignBuyer;
     }
 
-    public CompanyPrint setShowLegalNoticeForeignBuyer(Boolean showLegalNoticeForeignBuyer) {
+    public CompanyPrint setShowLegalNoticeForeignBuyer(boolean showLegalNoticeForeignBuyer) {
         this.showLegalNoticeForeignBuyer = showLegalNoticeForeignBuyer;
         return this;
     }

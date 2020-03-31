@@ -40,17 +40,6 @@ public class CompanyResource {
         return companyService.findCompanies(query);
     }
 
-    @RolesAllowed({ADMIN, SELLER})
-    @GET("/companies/buyers")
-    public Iterable<Company> findBuyerCompanies() {
-        return companyService.findBuyerCompanies();
-    }
-
-    @RolesAllowed({ADMIN, SELLER})
-    @GET("/companies/sellers")
-    public Iterable<Company> findSellerCompanies() {
-        return companyService.findSellerCompanies();
-    }
 
     @GET("/companies/{key}")
     public Optional<Company> findCompanyByKey(String key) {
@@ -61,14 +50,9 @@ public class CompanyResource {
                 && !user.getPrincipalRoles().contains(SELLER)) {
             throw new WebException(HttpStatus.FORBIDDEN);
         }
-        return companyService.findCompanyByKeyWithMetrics(key, user.getCompanyRef());
+        return companyService.findCompanyByKeyWithCommercialRelation(key);
     }
 
-    @RolesAllowed({ADMIN, SELLER})
-    @GET("/companies/buyer")
-    public Iterable<Company> findBuyers() {
-        return companyService.findBuyers();
-    }
 
     @RolesAllowed({ADMIN, SELLER})
     @POST("/companies")

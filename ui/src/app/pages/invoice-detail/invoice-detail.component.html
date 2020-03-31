@@ -48,7 +48,7 @@
                     <div class="column">
                         <select formControlName="business" [compareWith]="comparRef" >
                             <option [ngValue]="null">{{'invoice.no.business' | translate}}</option>
-                            <option *ngFor="let business of seller?.customers[selectedCompany?.siren].businessList" [ngValue]="business">
+                            <option *ngFor="let business of selectedCompany.commercialRelationship.businessList" [ngValue]="business">
                                 {{business.name}}
                             </option>
                         </select>

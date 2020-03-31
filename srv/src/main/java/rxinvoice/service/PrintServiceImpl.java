@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import restx.factory.Component;
 import restx.i18n.Messages;
 import rxinvoice.domain.invoice.Invoice;
+import rxinvoice.service.company.CommercialRelationshipService;
 import rxinvoice.service.invoice.InvoiceService;
 
 import javax.inject.Named;
@@ -26,11 +27,14 @@ public class PrintServiceImpl implements PrintService {
 
     private final InvoiceService invoiceService;
     private final Messages messages;
+    private final CommercialRelationshipService commercialRelationshipService;
 
     public PrintServiceImpl(InvoiceService invoiceService,
-                            @Named("Messages") Messages messages) {
+                            @Named("Messages") Messages messages,
+                            CommercialRelationshipService commercialRelationshipService) {
         this.invoiceService = invoiceService;
         this.messages = messages;
+        this.commercialRelationshipService = commercialRelationshipService;
     }
 
     private void createPdfFromHtml(String html, OutputStream outputStream) {
@@ -62,6 +66,7 @@ public class PrintServiceImpl implements PrintService {
         Invoice invoice = checkPresent(invoiceService.findInvoiceByKey(invoiceId),
                 String.format("Invoice not found for id %s", invoiceId));
 
+        invoice.getBuyer().setCommercialRelationship(commercialRelationshipService.findByCustomer(invoice.getBuyer().getKey()));
         Map<String, Object> params = new HashMap<>();
         params.put("invoice", invoice.toInvoiceView(messages, Locale.FRANCE));
 

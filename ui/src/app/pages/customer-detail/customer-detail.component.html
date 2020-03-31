@@ -45,10 +45,10 @@
                 </div>
 
                  <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'company.code' | translate}} *</h6>
+                    <h6 class="column small-8"> {{'company.siren' | translate}} *</h6>
                     <div class="column">
                         <input type="text" class="form-control"
-                               [disabled]='isCodeDisabled()' ngModel name="code" required>
+                               [disabled]='isSirenDisabled()' ngModel name="siren" required>
                     </div>
                 </div>
 
@@ -70,14 +70,14 @@
                 <div class="row align-middle newCustomerDetail-container-label">
                     <h6 class="column small-8"> {{'newCustomer.label.lastSent' | translate}}</h6>
                     <div class="column">
-                        {{customer.lastSendDate | date: 'dd MMM. yyyy'}}
+                        {{customer?.commercialRelationship?.lastSendDate | date: 'dd MMM. yyyy'}}
                     </div>
                 </div>
 
                 <div class="row align-middle newCustomerDetail-container-label">
                     <h6 class="column small-8"> {{'newCustomer.label.lastPayment' | translate}}</h6>
                     <div class="column">
-                        {{customer.lastPaymentDate | date: 'dd MMM. yyyy'}}
+                        {{customer?.commercialRelationship?.lastPaymentDate | date: 'dd MMM. yyyy'}}
                     </div>
                 </div>
                 <div class="row align-middle newCustomerDetail-container-label">
@@ -105,10 +105,13 @@
 
         <div class="column shrink space-left-24"></div>
 
-        <div class="column auto" *ngIf="customer">
-            <business-detail class="newCustomerDetail-container" [(business)]="seller?.customers[customer.siren].businessList"
+        <div class="column auto" *ngIf="customer && customer.commercialRelationship">
+            <business-detail class="newCustomerDetail-container" [(business)]="customer.commercialRelationship.businessList"
                              [editMode]="editMode"></business-detail>
-            <vat-detail class="newCustomerDetail-container" [(vats)]="customer.vats" [editMode]="editMode"></vat-detail>
+            <vat-detail class="newCustomerDetail-container"
+                        [(vats)]="customer.commercialRelationship.vatRates"
+                        [editMode]="editMode">
+            </vat-detail>
         </div>
     </div>
 
@@ -164,12 +167,14 @@
                             <div class="row align-right newCustomerAction-container-number-label total-value">
                                 <h6 class="column auto"><i class="ion-android-checkmark-circle"></i>{{'newCustomer.label.totalInvoiced'
                                     | translate}} :</h6>
-                                <span class="total-nb">{{(customer?.metrics?.invoiced + customer?.metrics?.paid + customer?.metrics?.expired)| currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                                <span class="total-nb">{{(customer?.commercialRelationship?.companyMetrics?.global?.invoiced
+                                    + customer?.commercialRelationship?.companyMetrics?.global?.paid
+                                    + customer?.commercialRelationship?.companyMetrics?.global?.expired)| currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
 
                             </div>
                             <div class="row align-middle newCustomerAction-container-number-label total-value">
                                 <h6 class="column auto"><i class="ion-arrow-graph-down-right"></i>{{'newCustomer.label.totalDebt' | translate}} :</h6>
-                                <span class="total-nb">{{customer?.metrics?.expired | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                                <span class="total-nb">{{customer?.commercialRelationship?.companyMetrics?.global?.expired | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
                             </div>
                         </div>
                     </div>

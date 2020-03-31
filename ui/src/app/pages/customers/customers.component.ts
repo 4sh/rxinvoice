@@ -50,9 +50,9 @@ export class CustomersComponent implements OnInit {
     }
 
     public getNumberOfBusiness(): number {
-        if (this.companies) {
-            return this.companies.filter(company => company.business)
-                .map(company => company.business.length)
+        if (this.companies && this.companies.length) {
+            return this.companies.filter(company => company.commercialRelationship.businessList)
+                .map(company => company.commercialRelationship.businessList.length)
                 .reduce((a, b) => a + b, 0);
         } else {
             return 0;

@@ -19,7 +19,9 @@ import restx.factory.Component;
 import restx.http.HttpStatus;
 import restx.jongo.JongoCollection;
 import rxinvoice.AppModule;
+import rxinvoice.dao.CompanyDao;
 import rxinvoice.domain.Blob;
+import rxinvoice.domain.company.CommercialRelationship;
 import rxinvoice.domain.invoice.*;
 import rxinvoice.domain.company.Company;
 import rxinvoice.domain.User;
@@ -27,7 +29,7 @@ import rxinvoice.jongo.MoreJongos;
 import rxinvoice.rest.BlobService;
 import rxinvoice.rest.InvoiceSearchFilter;
 import rxinvoice.rest.events.InvoiceUpdatedEvent;
-import rxinvoice.service.company.CompanyService;
+import rxinvoice.service.company.CommercialRelationshipService;
 import rxinvoice.utils.SortCriteriaUtil;
 
 import javax.inject.Named;
@@ -50,7 +52,8 @@ public class InvoiceService {
     private final JongoCollection invoices;
 
     private final BlobService blobService;
-    private final CompanyService companyService;
+    private final CompanyDao companyDao;
+    private final CommercialRelationshipService commercialRelationshipService;
 
     private final EventBus eventBus;
     private final Clock clock;
@@ -59,12 +62,14 @@ public class InvoiceService {
     public InvoiceService(@Named("invoices") JongoCollection invoices,
                           Clock clock,
                           BlobService blobService,
-                          CompanyService companyService,
+                          CompanyDao companyDao,
+                          CommercialRelationshipService commercialRelationshipService,
                           EventBus eventBus) {
         this.invoices = invoices;
         this.clock = clock;
         this.blobService = blobService;
-        this.companyService = companyService;
+        this.companyDao = companyDao;
+        this.commercialRelationshipService = commercialRelationshipService;
         this.eventBus = eventBus;
     }
 
@@ -72,7 +77,7 @@ public class InvoiceService {
         if (invoice.getSeller() == null) {
             User user = AppModule.currentUser();
             if (user.getPrincipalRoles().contains(SELLER)) {
-                invoice.setSeller(companyService.findCompanyByKey(user.getCompanyRef()).get());
+                invoice.setSeller(this.companyDao.findByKey(user.getCompanyRef()).get());
             }
         }
         // Check that invoice reference is not already used by another invoice.
@@ -141,7 +146,7 @@ public class InvoiceService {
             return;
         }
 
-        Optional<Company> buyerOpt = companyService.findCompanyByKey(invoice.getBuyer().getKey());
+        Optional<Company> buyerOpt = this.companyDao.findByKey(invoice.getBuyer().getKey());
         if (!buyerOpt.isPresent()) {
             logger.warn("unable to find buyer for invoice {}", invoice);
             return;
@@ -155,16 +160,18 @@ public class InvoiceService {
         }
     }
 
-    private void payInvoice(Invoice invoice, Company buyer) {
-        buyer.setLastPaymentDate(DateTime.now());
-        buyer.setLastPaidInvoice(new InvoiceInfo(invoice));
-        companyService.updateCompany(buyer);
+    private void payInvoice(Invoice invoice, Company customer) {
+        CommercialRelationship commercialRelationship = this.commercialRelationshipService.findByCustomer(customer.getKey())
+                .setLastPaymentDate(LocalDate.now())
+                .setLastPaidInvoice(new InvoiceInfo(invoice));
+        this.commercialRelationshipService.updateLastInvoicePayment(commercialRelationship);
     }
 
-    private void sendInvoice(Invoice invoice, Company buyer) {
-        buyer.setLastSendDate(DateTime.now());
-        buyer.setLastSentInvoice(new InvoiceInfo(invoice));
-        companyService.updateCompany(buyer);
+    private void sendInvoice(Invoice invoice, Company customer) {
+        CommercialRelationship commercialRelationship = this.commercialRelationshipService.findByCustomer(customer.getKey())
+                .setLastSendDate(LocalDate.now())
+                .setLastSentInvoice(new InvoiceInfo(invoice));
+        this.commercialRelationshipService.updateLastInvoiceSend(commercialRelationship);
         this.invoices.get().update(new ObjectId(invoice.getKey())).with("{$set: {sentDate: #}}", DateTime.now().toDate());
     }
 

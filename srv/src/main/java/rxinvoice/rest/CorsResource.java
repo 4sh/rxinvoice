@@ -11,11 +11,12 @@ import restx.jongo.JongoCollection;
 import restx.security.RolesAllowed;
 import rxinvoice.domain.ActivityValue;
 import rxinvoice.domain.company.Business;
+import rxinvoice.domain.company.CommercialRelationship;
 import rxinvoice.domain.company.Company;
-import rxinvoice.domain.company.Customer;
 import rxinvoice.domain.invoice.Invoice;
 import rxinvoice.domain.enumeration.Activity;
 import rxinvoice.domain.report.InvoiceActivity;
+import rxinvoice.service.company.CommercialRelationshipService;
 
 import javax.inject.Named;
 import java.math.BigDecimal;
@@ -34,10 +35,14 @@ public class CorsResource {
 
     private final JongoCollection companies;
     private final JongoCollection invoices;
+    private final CommercialRelationshipService commercialRelationService;
 
-    public CorsResource(@Named("companies") JongoCollection companies, @Named("invoices") JongoCollection invoices) {
+    public CorsResource(@Named("companies") JongoCollection companies,
+                        @Named("invoices") JongoCollection invoices,
+                        CommercialRelationshipService commercialRelationService) {
         this.companies = companies;
         this.invoices = invoices;
+        this.commercialRelationService = commercialRelationService;
     }
 
     @RolesAllowed({CORS})
@@ -60,14 +65,11 @@ public class CorsResource {
         Business business = null;
         if (businessName != null) {
             Company customerCompany = companies.get().findOne(new ObjectId(companyId)).as(Company.class);
-        // TODO : Remove after having modified 4pm
+            // TODO : Remove after having modified 4pm
             Company sellerCompany = companies.get().findOne("{name: #}", "4SH").as(Company.class);
             if (null != customerCompany && null != sellerCompany) {
-                if (!sellerCompany.getCustomers().containsKey(customerCompany.getSiren())) {
-                    sellerCompany.getCustomers().put(customerCompany.getSiren(), new Customer());
-                }
-                Customer customer = sellerCompany.getCustomers().get(customerCompany.getSiren());
-                java.util.Optional<Business> businessOptional = customer
+                CommercialRelationship commercialRelationship = this.commercialRelationService.findByCustomer(companyId);
+                java.util.Optional<Business> businessOptional = commercialRelationship
                         .getBusinessList()
                         .stream()
                         .filter(business1 -> businessName.equals(business1.getName())).findFirst();
@@ -75,7 +77,7 @@ public class CorsResource {
                     business = new Business()
                             .setName(businessName)
                             .setReference(UUID.randomUUID().toString());
-                       customer.getBusinessList().add(business);
+                    commercialRelationship.getBusinessList().add(business);
                     companies.get().save(customerCompany);
                 }
             }
