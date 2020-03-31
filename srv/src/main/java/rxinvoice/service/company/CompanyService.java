@@ -7,7 +7,7 @@ import java.util.stream.StreamSupport;
 
 import com.google.common.base.Strings;
 import com.google.common.eventbus.EventBus;
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import restx.Status;
@@ -69,7 +69,7 @@ public class CompanyService {
 
     public Company createCompany(Company company) {
         this.checkCompanyUniqueness(company);
-        this.saveCompany(company.setCreationDate(LocalDate.now()));
+        this.saveCompany(company.setCreationDate(DateTime.now()));
         this.commercialRelationshipService.create(company);
         eventBus.post(Activity.newCreate(company, AppModule.currentUser()));
         return company;
@@ -77,6 +77,7 @@ public class CompanyService {
 
     public Company updateCompany(Company company) {
         saveCompany(company);
+        this.commercialRelationshipService.update(company.getCommercialRelationship());
         eventBus.post(Activity.newUpdate(company, AppModule.currentUser()));
         return company;
     }

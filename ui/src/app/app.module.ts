@@ -51,6 +51,8 @@ import { VatSelectComponent } from './common/components/selects/vat-select/vat-s
 import { InvoiceLineFormComponent } from './common/components/invoice-lines-detail/invoice-line-form/invoice-line-form.component';
 import { InvoiceLineHeaderComponent } from './common/components/invoice-lines-detail/invoice-line-header/invoice-line-header.component';
 import {SpacerComponent} from './common/components/spacer/spacer.component';
+import {UserSelectComponent} from './common/components/selects/user-select/user-select.component';
+import {UserService} from './common/services/user.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -93,7 +95,8 @@ export function createTranslateLoader(http: HttpClient) {
         VatSelectComponent,
         InvoiceLineFormComponent,
         InvoiceLineHeaderComponent,
-        SpacerComponent
+        SpacerComponent,
+        UserSelectComponent
     ],
     imports: [
         AppRoutingModule,
@@ -124,6 +127,7 @@ export function createTranslateLoader(http: HttpClient) {
         ActivityService,
         SweetAlertService,
         DownloadInvoiceService,
+        UserService,
         DatePipe,
         CurrencyPipe,
         {

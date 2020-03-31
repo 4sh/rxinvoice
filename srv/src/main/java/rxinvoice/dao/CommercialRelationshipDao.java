@@ -1,16 +1,18 @@
 package rxinvoice.dao;
 
-import org.bson.types.ObjectId;
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import restx.factory.Component;
 import restx.jongo.JongoCollection;
 import rxinvoice.domain.Metrics;
+import rxinvoice.domain.company.Business;
 import rxinvoice.domain.company.CommercialRelationship;
+import rxinvoice.domain.company.VATRate;
 import rxinvoice.domain.invoice.InvoiceInfo;
 
 import javax.inject.Named;
-import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 import static rxinvoice.utils.MoreJ8Preconditions.checkPresent;
@@ -80,7 +82,7 @@ public class CommercialRelationshipDao {
 
     public void updateLastInvoiceSend(String sellerRef,
                                          String customerRef,
-                                         Instant lastSendDate,
+                                         LocalDate lastSendDate,
                                          InvoiceInfo lastSentInvoice) {
         logger.debug("Update last invoice movements seller {} and customer {} to set last invoice payment date {} and last payment info {}",
                 sellerRef, customerRef, lastSendDate, lastSentInvoice);
@@ -94,7 +96,7 @@ public class CommercialRelationshipDao {
 
     public void updateLastInvoicePayment(String sellerRef,
                                          String customerRef,
-                                         Instant lastPaymentDate,
+                                         LocalDate lastPaymentDate,
                                          InvoiceInfo lastPaidInvoice) {
         logger.debug("Update last invoice movements seller {} and customer {} to set last invoice payment date {} and last payment info {}",
                 sellerRef, customerRef, lastPaymentDate, lastPaidInvoice);
@@ -105,4 +107,32 @@ public class CommercialRelationshipDao {
                         "lastPaymentDate: #," +
                         "lastPaidInvoice: #}}", lastPaymentDate, lastPaidInvoice);
     }
+
+    public void updateGeneralData(String sellerRef,
+                                  String customerRef,
+                                  List<Business> businessList,
+                                  List<VATRate> vatRates,
+                                  String legalNotice,
+                                  String detail,
+                                  String customerManagerRef) {
+        logger.debug("Update commercial relationship between seller {} and customer {} to set vat Rates {}," +
+                        " businessList {}, legal notice {}, detail {} and customer relationship manager {}",
+                sellerRef, customerRef, vatRates, businessList, legalNotice, detail, customerManagerRef);
+
+        this.commercialRelationships.get()
+                .update("{sellerRef: #, customerRef: #}", sellerRef, customerRef)
+                .with("{$set: {" +
+                                "vatRates: #," +
+                                "businessList: #," +
+                                "legalNotice: #," +
+                                "detail: #," +
+                                "customerManagerRef: #}}",
+                        vatRates,
+                        businessList,
+                        legalNotice,
+                        detail,
+                        customerManagerRef);
+
+    }
+
 }

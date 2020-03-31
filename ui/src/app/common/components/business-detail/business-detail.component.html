@@ -14,10 +14,16 @@
                     <div class="column auto">
                         <input type="text"
                                class="form-control"
-                               ngModel required name="name"
+                               [(ngModel)]="newBusiness.name" required name="name"
                                maxlength="30">
                     </div>
-
+                    <h6 class="column shrink">{{'newCustomer.label.manager' | translate}} *</h6>
+                    <div class="column auto">
+                        <user-select [disabled]="!editMode"
+                                     name="businessManagerRef"
+                                     [(ngModel)]="newBusiness.businessManagerRef">
+                        </user-select>
+                    </div>
                     <!--
                     <h6 class="column shrink">{{'newCustomer.label.caInvoiced' | translate}}</h6>
                     <div class="column auto">
@@ -44,9 +50,9 @@
             </div>
         </form>
 
-        <ng-container *ngIf="business">
+        <ng-container *ngIf="businessList">
             <div class="row newCustomerDetail-container"
-                 *ngFor="let bsn of business; let i = index">
+                 *ngFor="let bsn of businessList; let i = index">
                 <div class="column">
                     <!--FIXME is the business should have caInvoiced and caFixed info ?-->
                     <!--Not sure about what is displayed info customer detail-->
@@ -60,8 +66,13 @@
                             <input type="text" required
                                    name="name"
                                    class="form-control"
-                                   [(ngModel)]="business[i].name"
+                                   [(ngModel)]="businessList[i].name"
                                    [disabled]="!editMode">
+                        </div>
+                        <h6 class="column shrink">{{'newCustomer.label.manager' | translate}}</h6>
+                        <div class="column auto">
+                            <user-select [disabled]="!editMode" name="businessManagerRef"
+                                         [(ngModel)]="businessList[i].businessManagerRef"></user-select>
                         </div>
 
                         <!--
@@ -84,7 +95,7 @@
 
                         <button *ngIf="editMode"
                                 type="button"
-                                (click)="deletedBusiness(business[i])"
+                                (click)="deletedBusiness(businessList[i])"
                                 class="round medium red ripple columns shrink">
                             <i class="ion-close-round"></i>
                         </button>

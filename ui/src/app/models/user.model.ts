@@ -1,7 +1,7 @@
 import {userRole} from './user-role.type';
 
 export class User {
-    key: string;
+    _id: string;
     name: string;
     email: string;
     roles: userRole[];

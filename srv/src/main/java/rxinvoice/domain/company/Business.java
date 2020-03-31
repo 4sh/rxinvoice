@@ -4,12 +4,14 @@ public class Business {
 
     private String reference;
     private String name;
+    private String businessManagerRef;
 
     @Override
     public String toString() {
         return "Business{" +
                 "reference='" + reference + '\'' +
                 ", name='" + name + '\'' +
+                ", businessManagerRef='" + businessManagerRef + '\'' +
                 '}';
     }
 
@@ -28,6 +30,15 @@ public class Business {
 
     public Business setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getBusinessManagerRef() {
+        return businessManagerRef;
+    }
+
+    public Business setBusinessManagerRef(String businessManagerRef) {
+        this.businessManagerRef = businessManagerRef;
         return this;
     }
 }

@@ -6,7 +6,7 @@ import {BusinessModel} from './business.model';
 
 export class CommercialRelationshipModel {
     _id: string;
-    customerRelationshipManager?: User;
+    customerManagerRef?: string;
     detail?: string;
     legalNotice?: string;
     showLegalNoticeForeignBuyer?: boolean;

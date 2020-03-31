@@ -1,0 +1,9 @@
+<ng-select
+        [items]="users"
+        [bindLabel]="'name'"
+        [clearable]="false"
+        [disabled]="disabled"
+        [ngModel]="user"
+        placeholder="{{'user.select.placeholder'|translate}}"
+        (ngModelChange)="onChange($event)">
+</ng-select>

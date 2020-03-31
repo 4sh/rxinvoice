@@ -21,7 +21,7 @@ public class CommercialRelationship implements Auditable {
     private String sellerRef;
     private String customerRef;
 
-    private String customerRelationshipManagerRef;
+    private String customerManagerRef;
     private String detail;
     private String legalNotice;
     private boolean showLegalNoticeForeignBuyer;
@@ -42,7 +42,7 @@ public class CommercialRelationship implements Auditable {
                 "key='" + key + '\'' +
                 ", sellerRef='" + sellerRef + '\'' +
                 ", customerRef='" + customerRef + '\'' +
-                ", customerRelationShipManagerRef='" + customerRelationshipManagerRef + '\'' +
+                ", customerRelationShipManagerRef='" + customerManagerRef + '\'' +
                 ", detail='" + detail + '\'' +
                 ", legalNotice='" + legalNotice + '\'' +
                 ", showLegalNoticeForeignBuyer=" + showLegalNoticeForeignBuyer +
@@ -97,12 +97,12 @@ public class CommercialRelationship implements Auditable {
         return this;
     }
 
-    public String getCustomerRelationshipManagerRef() {
-        return customerRelationshipManagerRef;
+    public String getCustomerManagerRef() {
+        return customerManagerRef;
     }
 
-    public CommercialRelationship setCustomerRelationshipManagerRef(String customerRelationshipManagerRef) {
-        this.customerRelationshipManagerRef = customerRelationshipManagerRef;
+    public CommercialRelationship setCustomerManagerRef(String customerManagerRef) {
+        this.customerManagerRef = customerManagerRef;
         return this;
     }
 

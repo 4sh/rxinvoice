@@ -29,6 +29,19 @@ public class CommercialRelationshipService {
         return this.commercialRelationshipDao.create(commercialRelationship);
     }
 
+    public CommercialRelationship update(CommercialRelationship commercialRelationship) {
+        logger.info("Update company relationship between seller {} and customer {}",
+                AppModule.currentUser().getCompanyRef(), commercialRelationship.getCustomerRef());
+        this.commercialRelationshipDao.updateGeneralData(commercialRelationship.getSellerRef(),
+                commercialRelationship.getCustomerRef(),
+                commercialRelationship.getBusinessList(),
+                commercialRelationship.getVatRates(),
+                commercialRelationship.getLegalNotice(),
+                commercialRelationship.getDetail(),
+                commercialRelationship.getCustomerManagerRef());
+        return commercialRelationship;
+    }
+
     public CommercialRelationship updateLastInvoiceSend(CommercialRelationship commercialRelationship) {
         logger.info("Update commercial relationship company relationship between seller {} and customer {}",
                 commercialRelationship.getSellerRef(), commercialRelationship.getCustomerRef());
@@ -58,4 +71,5 @@ public class CommercialRelationshipService {
         String sellerRef = AppModule.currentUser().getCompanyRef();
         return this.commercialRelationshipDao.findBySellerRefAndCustomerRef(sellerRef, customerRef);
     }
+
 }

@@ -3,7 +3,6 @@ import {CompanyModel} from '../../models/company.model';
 import {FormGroup} from '@angular/forms';
 import {CompanyService} from '../../common/services/company.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as _ from 'lodash';
 import * as Moment from 'moment';
 import {SweetAlertService} from '../../common/services/sweetAlert.service';
 import {AuthenticationService} from '../../common/services/authentication.service';
@@ -23,7 +22,7 @@ export class CustomerDetailComponent implements OnInit {
     public editMode = false;
     public companyId: string;
     public canDelete: boolean;
-    @ViewChild('f') form: FormGroup;
+    @ViewChild('customerForm') form: FormGroup;
     private currentYearTurnover: number = 0;
     private currentYearTurnoverExpected: number = 0;
     private totalTurnover: number = 0;
@@ -42,8 +41,7 @@ export class CustomerDetailComponent implements OnInit {
         this.fetchCustomer();
         const currentUser = this.authService.current();
         this.companyService.fetchCompany(currentUser.companyRef)
-            .subscribe(company =>
-            {
+            .subscribe(company => {
                 this.seller = company;
                 this.buildCompanyFiscalYearBounds(company)
             });
@@ -52,16 +50,6 @@ export class CustomerDetailComponent implements OnInit {
         this.canDelete = currentUser.roles.filter(role => role === 'admin').length > 0;
     }
 
-    private updateForm(obj) {
-        return {
-            name: obj.name,
-            siren: obj.siren,
-            emailAddress: obj.emailAddress,
-            address: obj.address,
-            legalNotice: obj.commercialRelationship.legalNotice,
-            detail: obj.commercialRelationship.detail,
-        };
-    }
 
     public fetchCustomer() {
         this.route.params.subscribe(params => {
@@ -71,7 +59,6 @@ export class CustomerDetailComponent implements OnInit {
             if (this.companyId) {
                 this.companyService.fetchCompany(this.companyId)
                     .subscribe((company: CompanyModel) => {
-                        this.form.setValue(this.updateForm(company));
                         this.customer = company;
                         if (company && company.commercialRelationship && company.commercialRelationship.companyMetrics.currentYear) {
                             const companyMetrics = company.commercialRelationship.companyMetrics;
@@ -127,10 +114,8 @@ export class CustomerDetailComponent implements OnInit {
         if (!this.customer) {
             this.customer = new CompanyModel();
         }
-        _.merge(this.customer, this.customer, this.form.value);
         this.companyService.updateCompany(this.customer).subscribe((company) => {
                 this.customer = company;
-                this.form.setValue(this.updateForm(company));
                 this.editMode = false;
                 this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
             },
@@ -143,10 +128,8 @@ export class CustomerDetailComponent implements OnInit {
         if (!this.customer) {
             this.customer = new CompanyModel();
         }
-        _.merge(this.customer, this.customer, this.form.value);
         this.companyService.createCompany(this.customer).subscribe((company) => {
                 this.customer = company;
-                this.form.setValue(this.updateForm(company));
                 this.editMode = false;
                 this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
             },
@@ -156,7 +139,6 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     public reset() {
-        this.form.setValue(this.updateForm(this.customer));
         this.editMode = false;
     }
 
@@ -178,7 +160,7 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     public isSirenDisabled(): boolean {
-        return !this.editMode || !!this.customer._id ;
+        return !this.editMode || !!this.customer._id;
     }
 
 }
