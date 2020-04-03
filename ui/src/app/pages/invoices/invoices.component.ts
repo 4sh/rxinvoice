@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {InvoiceStatusType} from '../../models/invoice-status.type';
-import {InvoiceKindType} from '../../models/invoice-kind.type';
+import {ServiceKind} from '../../models/service.kind';
 import {InvoiceModel} from '../../models/invoice.model';
 import {InvoiceService} from '../../common/services/invoice.service';
 import {RepositoryService} from '../../common/services/repository.service';
@@ -23,7 +23,7 @@ export class InvoicesComponent implements OnInit {
 
     public invoices: InvoiceModel[];
     public statusTypes: InvoiceStatusType[];
-    public kinds: InvoiceKindType[];
+    public kinds: ServiceKind[];
     public filterString = 'reference';
     public isPending = true;
     public showQuickPanelStatusEdit = false;

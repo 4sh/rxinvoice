@@ -2,6 +2,7 @@ import {CompanyKindType} from './company-kind.type';
 import {FiscalYearModel} from './fiscal-year.model';
 import {AddressModel} from "./address.model";
 import {CommercialRelationshipModel} from './commercial-relationship.model';
+import {SellerSettingsModel} from './seller-settings.model';
 
 export class CompanyModel {
 
@@ -14,6 +15,7 @@ export class CompanyModel {
     fiscalYear?: FiscalYearModel;
     creationDate?: Date;
     emailAddress: string;
+    sellerSettings: SellerSettingsModel;
     commercialRelationship?: CommercialRelationshipModel;
 
     constructor() {

@@ -1,0 +1,25 @@
+<div *ngIf="sellerSettingsModel">
+    <form novalidate
+          class="row newCustomerDetail-container">
+
+        <div class="column">
+            <div class="row align-middle newCustomerDetail-container-content"  *ngFor="let serviceReference of sellerSettingsModel.serviceReferenceList;index as i">
+                <h6 class="column shrink">{{'service.kind.' + serviceReference.kind | translate}} {{serviceReference.vatRate?.label}}
+                    - {{serviceReference.vatRate?.rate}} %</h6>
+                <div class="column auto">
+                    <input [(ngModel)]="serviceReference.accountNumber" type="text" [name]="'accountNumber' + i"/>
+                </div>
+            </div>
+        </div>
+        <div class="columns shrink">
+            <button class="button medium grey ripple"
+                    type="button">
+                <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}
+            </button>
+            <button class="button medium green ripple">
+                <i class="ion-edit"></i>
+                {{'button.label.update'|translate}}
+            </button>
+        </div>
+    </form>
+</div>

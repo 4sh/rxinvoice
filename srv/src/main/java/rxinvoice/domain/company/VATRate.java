@@ -1,5 +1,7 @@
 package rxinvoice.domain.company;
 
+import restx.jackson.FixedPrecision;
+
 import java.math.BigDecimal;
 
 /**
@@ -15,6 +17,7 @@ public class VATRate {
     /**
      * The VAT rate to be applied.
      */
+    @FixedPrecision(2)
     private BigDecimal rate;
     /**
      * VAT account number used to aggregate VAT amounts into specific accounts for VAT declaration.

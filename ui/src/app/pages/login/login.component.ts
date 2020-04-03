@@ -16,22 +16,22 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        const user = this.authService.current();
-        if (user !== undefined && user !== null) {
+        const user = this.authService.getCurrentUser();
+        if (user) {
             this.router.navigate(['/app/dashboard']);
         } else {
-        this.authService.fetchCurrent()
-            .subscribe((fetchUser) => {
-                if (fetchUser !== undefined && fetchUser !== null) {
-                    this.router.navigate(['/app/dashboard']);
-                }
-            });
+            this.authService.fetchCurrent()
+                .subscribe((fetchUser) => {
+                    if (fetchUser !== undefined && fetchUser !== null) {
+                        this.router.navigate(['/app/dashboard']);
+                    }
+                });
         }
     }
 
     public login(value) {
         this.authService.authenticate(value)
-            .subscribe((user) =>  {
+            .subscribe((user) => {
                 if (user) {
                     this.router.navigate(['/app/dashboard']);
                 } else {

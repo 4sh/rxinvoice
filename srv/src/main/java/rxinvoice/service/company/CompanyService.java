@@ -2,7 +2,6 @@ package rxinvoice.service.company;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import com.google.common.base.Strings;
@@ -80,6 +79,12 @@ public class CompanyService {
         this.commercialRelationshipService.update(company.getCommercialRelationship());
         eventBus.post(Activity.newUpdate(company, AppModule.currentUser()));
         return company;
+    }
+
+    public SellerSettings updateSellerSettings(String companyKey, SellerSettings sellerSettings) {
+        logger.info("Update seller settings for company {}", companyKey);
+        this.companyDao.updateSellerSettings(companyKey, sellerSettings);
+        return sellerSettings;
     }
 
     public Status deleteCompany(String key) {

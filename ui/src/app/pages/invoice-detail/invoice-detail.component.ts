@@ -12,7 +12,7 @@ import {
 import {CompanyService} from '../../common/services/company.service';
 import {InvoiceModel} from '../../models/invoice.model';
 import {InvoiceService} from '../../common/services/invoice.service';
-import {InvoiceKindType} from '../../models/invoice-kind.type';
+import {ServiceKind} from '../../models/service.kind';
 import {RepositoryService} from '../../common/services/repository.service';
 import {InvoiceStatusType} from '../../models/invoice-status.type';
 import * as _ from 'lodash';
@@ -38,7 +38,7 @@ export class InvoiceDetailComponent implements OnInit {
     private seller: CompanyModel;
     public form: FormGroup;
     public companies: CompanyModel[];
-    public kinds: InvoiceKindType[];
+    public kinds: ServiceKind[];
     public invoice = new InvoiceModel();
     public invoiceId: string;
     public statuses: InvoiceStatusType[];

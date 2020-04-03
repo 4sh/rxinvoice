@@ -39,13 +39,11 @@ export class CustomerDetailComponent implements OnInit {
 
     ngOnInit() {
         this.fetchCustomer();
-        const currentUser = this.authService.current();
-        this.companyService.fetchCompany(currentUser.companyRef)
-            .subscribe(company => {
-                this.seller = company;
-                this.buildCompanyFiscalYearBounds(company)
-            });
-
+        const currentUser = this.authService.getCurrentUser();
+        this.authService.companyEvents.filter(company => !!company).subscribe(company => {
+            this.seller = company;
+            this.buildCompanyFiscalYearBounds(this.seller);
+        });
 
         this.canDelete = currentUser.roles.filter(role => role === 'admin').length > 0;
     }

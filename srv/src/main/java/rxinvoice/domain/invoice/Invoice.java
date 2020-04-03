@@ -9,7 +9,7 @@ import restx.jackson.FixedPrecision;
 import rxinvoice.domain.*;
 import rxinvoice.domain.company.Business;
 import rxinvoice.domain.company.Company;
-import rxinvoice.domain.enumeration.Kind;
+import rxinvoice.domain.enumeration.ServiceKind;
 import rxinvoice.domain.print.InvoicePrint;
 
 import java.math.BigDecimal;
@@ -42,7 +42,7 @@ public class Invoice implements Auditable {
     private String object;
     private String comment;
     private String customerInvoiceRef;
-    private Kind kind;
+    private ServiceKind kind;
     private Business business;
 
     private Company seller;
@@ -254,11 +254,11 @@ public class Invoice implements Auditable {
         return this;
     }
 
-    public Kind getKind() {
+    public ServiceKind getKind() {
         return kind;
     }
 
-    public Invoice setKind(Kind kind) {
+    public Invoice setKind(ServiceKind kind) {
         this.kind = kind;
         return this;
     }

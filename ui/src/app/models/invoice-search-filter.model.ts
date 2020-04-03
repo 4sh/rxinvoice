@@ -1,5 +1,5 @@
 import {InvoiceStatusType} from './invoice-status.type';
-import {InvoiceKindType} from './invoice-kind.type';
+import {ServiceKind} from './service.kind';
 
 export class InvoiceSearchFilterModel {
 
@@ -8,6 +8,6 @@ export class InvoiceSearchFilterModel {
     endDate: Date;
     buyerRef: string;
     statuses: InvoiceStatusType[];
-    kind: InvoiceKindType;
+    kind: ServiceKind;
 
 }

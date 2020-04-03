@@ -27,6 +27,8 @@ public class Company implements Auditable {
     private FiscalYear fiscalYear = FiscalYear.DEFAULT;
     private DateTime creationDate;
 
+    private SellerSettings sellerSettings;
+
     @JsonView(Views.Transient.class)
     private CommercialRelationship commercialRelationship;
 
@@ -141,6 +143,15 @@ public class Company implements Auditable {
 
     public Company setCommercialRelationship(CommercialRelationship commercialRelationship) {
         this.commercialRelationship = commercialRelationship;
+        return this;
+    }
+
+    public SellerSettings getSellerSettings() {
+        return sellerSettings;
+    }
+
+    public Company setSellerSettings(SellerSettings sellerSettings) {
+        this.sellerSettings = sellerSettings;
         return this;
     }
 }

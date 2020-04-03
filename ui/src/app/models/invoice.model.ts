@@ -3,7 +3,7 @@ import {VATModel} from './VAT.model';
 import {BusinessModel} from './business.model';
 import {InvoiceStatusType} from './invoice-status.type';
 import {ActivityModel} from './activity.model';
-import {InvoiceKindType} from './invoice-kind.type';
+import {ServiceKind} from './service.kind';
 import {InvoiceLineModel} from './invoice-line.model';
 import {StatusChangeModel} from './status-change.model';
 import {BlobModel} from './blob.model';
@@ -22,7 +22,7 @@ export class InvoiceModel {
     object: string;
     comment: string;
     customerInvoiceRef: string;
-    kind: InvoiceKindType;
+    kind: ServiceKind;
     seller: CompanyModel;
     buyer: CompanyModel;
     grossAmount: number;

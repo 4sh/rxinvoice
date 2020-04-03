@@ -118,7 +118,7 @@
 
         <div class="column auto" *ngIf="customer && customer.commercialRelationship">
             <business-detail class="newCustomerDetail-container"
-                             [(businessList)]="customer.commercialRelationship.businessList"
+                             [businessList]="customer.commercialRelationship.businessList"
                              [editMode]="editMode"></business-detail>
             <vat-detail class="newCustomerDetail-container"
                         [(vats)]="customer.commercialRelationship.vatRates"

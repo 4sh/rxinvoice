@@ -1,5 +1,6 @@
 package rxinvoice.rest;
 
+import com.google.common.base.Strings;
 import restx.Status;
 import restx.WebException;
 import restx.annotations.*;
@@ -7,6 +8,7 @@ import restx.factory.Component;
 import restx.http.HttpStatus;
 import restx.security.RolesAllowed;
 import rxinvoice.AppModule;
+import rxinvoice.domain.company.SellerSettings;
 import rxinvoice.domain.company.Company;
 import rxinvoice.domain.User;
 import rxinvoice.service.company.CompanyService;
@@ -77,5 +79,16 @@ public class CompanyResource {
     @POST("/admin/companies/metrics/seller/:sellerCompanyKey")
     public void computeCompaniesMetrics(String sellerCompanyKey) {
         invoiceMetricsService.computeAllCompanyMetricsAsync(sellerCompanyKey);
+    }
+
+    @RolesAllowed({ADMIN, SELLER})
+    @PUT("/companies/{sellerRef}/accountantConfiguration")
+    public SellerSettings updateSellerSettings(String sellerRef, SellerSettings sellerSettings) {
+        User user = AppModule.currentUser();
+        if (user.isSeller() && !user.getCompanyRef().equals(sellerRef)) {
+            throw new WebException(HttpStatus.FORBIDDEN,
+                    String.format("Seller user %s is not part of company %s", user.getName(), sellerRef));
+        }
+        return companyService.updateSellerSettings(sellerRef, sellerSettings);
     }
 }

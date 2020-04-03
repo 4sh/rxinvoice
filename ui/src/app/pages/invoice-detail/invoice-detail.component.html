@@ -46,7 +46,7 @@
                 <div class="row align-middle invoiceDetail-container-label">
                     <h6 class="column small-8"> {{'invoice.business' | translate}}</h6>
                     <div class="column">
-                        <select formControlName="business" [compareWith]="comparRef" >
+                        <select formControlName="business" [compareWith]="comparRef" *ngIf="selectedCompany && selectedCompany.commercialRelationship">
                             <option [ngValue]="null">{{'invoice.no.business' | translate}}</option>
                             <option *ngFor="let business of selectedCompany.commercialRelationship.businessList" [ngValue]="business">
                                 {{business.name}}
@@ -68,7 +68,7 @@
                     <h6 class="column small-8"> {{'invoice.kind' | translate}} *</h6>
                     <div class="column">
                         <select formControlName="kind">
-                            <option value="">{{'invoice.kind.all' | translate}}</option>
+                            <option value="">{{'service.kind.all' | translate}}</option>
                             <option *ngFor="let kind of kinds" [ngValue]="kind">
                                 {{'invoice.kind.' + kind | translate}}
                             </option>

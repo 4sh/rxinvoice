@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import restx.factory.Component;
 import restx.jongo.JongoCollection;
 import rxinvoice.domain.company.Company;
+import rxinvoice.domain.company.SellerSettings;
 import rxinvoice.jongo.MoreJongos;
 import rxinvoice.service.company.CompanyService;
 
@@ -42,6 +43,15 @@ public class CompanyDao {
         logger.debug("Update company: {}", company);
         this.companies.get().save(company);
         return company;
+    }
+
+    public SellerSettings updateSellerSettings(String companyKey,
+                                               SellerSettings sellerSettings) {
+        logger.debug("Update seller settings for company {} with {}", companyKey, sellerSettings);
+        this.companies.get()
+                .update("{_id: #}", companyKey)
+                .with("{$set: {sellerSettings : #}}", sellerSettings);
+        return sellerSettings;
     }
 
     public Optional<Company> findByKey(String key) {

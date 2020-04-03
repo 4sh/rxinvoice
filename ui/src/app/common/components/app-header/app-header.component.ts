@@ -21,7 +21,7 @@ export class AppHeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user = this.authenticationService.current();
+        this.user = this.authenticationService.getCurrentUser();
         this.activityService.fetchActivities()
             .subscribe(activities =>  {
                 this.activities = activities;
