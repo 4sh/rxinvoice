@@ -2,15 +2,27 @@
     <form novalidate
           class="row newCustomerDetail-container">
 
-        <div class="column">
-            <div class="row align-middle newCustomerDetail-container-content"  *ngFor="let serviceReference of sellerSettingsModel.serviceReferenceList;index as i">
-                <h6 class="column shrink">{{'service.kind.' + serviceReference.kind | translate}} {{serviceReference.vatRate?.label}}
-                    - {{serviceReference.vatRate?.rate}} %</h6>
+
+        <div *ngFor="let serviceKind of serviceKinds;index as i">
+            <h6>{{'service.kind.' + serviceKind|translate}}</h6>
+            <ng-container *ngFor="let serviceReference of getServiceReferences(serviceKind);index as j">
+                <h6> {{serviceReference.vatRate?.rate}} %</h6>
                 <div class="column auto">
-                    <input [(ngModel)]="serviceReference.accountNumber" type="text" [name]="'accountNumber' + i"/>
+                    <input [(ngModel)]="serviceReference.accountNumber" type="text" [name]="'accountNumber' + i+j"/>
                 </div>
-            </div>
+            </ng-container>
         </div>
+
+
+<!--        <div class="column">-->
+<!--            <div class="row align-middle newCustomerDetail-container-content"  *ngFor="let serviceReference of sellerSettingsModel.serviceReferenceList;index as i">-->
+<!--                <h6 class="column shrink">{{'service.kind.' + serviceReference.kind | translate}} {{serviceReference.vatRate?.label}}-->
+<!--                    - {{serviceReference.vatRate?.rate}} %</h6>-->
+<!--                <div class="column auto">-->
+<!--                    <input [(ngModel)]="serviceReference.accountNumber" type="text" [name]="'accountNumber' + i"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="columns shrink">
             <button class="button medium grey ripple"
                     type="button">
