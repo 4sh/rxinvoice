@@ -1,4 +1,4 @@
-package rxinvoice.web;
+package rxinvoice.web.rest;
 
 import com.google.common.base.Optional;
 import org.apache.commons.lang3.StringUtils;

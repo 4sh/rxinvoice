@@ -1,4 +1,4 @@
-package rxinvoice.web;
+package rxinvoice.web.rest;
 
 /**
  * User: xavierhanin

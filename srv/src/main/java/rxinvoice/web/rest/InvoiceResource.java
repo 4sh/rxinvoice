@@ -1,4 +1,4 @@
-package rxinvoice.web;
+package rxinvoice.web.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import rxinvoice.domain.enumeration.Activity;
 import rxinvoice.service.invoice.InvoiceService;
 import rxinvoice.utils.SortCriteriaUtil;
 import rxinvoice.utils.SortProperty;
+import rxinvoice.service.invoice.InvoiceSearchFilter;
 
 import java.util.*;
 import java.util.Optional;

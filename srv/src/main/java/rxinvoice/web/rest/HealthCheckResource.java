@@ -1,4 +1,4 @@
-package rxinvoice.web;
+package rxinvoice.web.rest;
 
 import restx.annotations.GET;
 import restx.annotations.RestxResource;

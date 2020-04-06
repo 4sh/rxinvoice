@@ -7,7 +7,7 @@ import restx.*;
 import restx.factory.Component;
 import restx.http.HttpStatus;
 import rxinvoice.domain.invoice.Invoice;
-import rxinvoice.web.InvoiceSearchFilter;
+import rxinvoice.service.invoice.InvoiceSearchFilter;
 import rxinvoice.service.invoice.InvoiceExportService;
 import rxinvoice.service.invoice.InvoiceService;
 import rxinvoice.utils.OptionalUtils;

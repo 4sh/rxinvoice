@@ -1,4 +1,4 @@
-package rxinvoice.web;
+package rxinvoice.service.invoice;
 
 
 import rxinvoice.utils.SortProperty;

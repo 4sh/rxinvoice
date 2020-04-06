@@ -1,4 +1,4 @@
-package rxinvoice.web;
+package rxinvoice.web.rest;
 
 import com.google.common.base.Optional;
 import restx.exceptions.RestxErrors;
@@ -10,6 +10,7 @@ import restx.factory.Component;
 import restx.security.RolesAllowed;
 import rxinvoice.AppModule;
 import rxinvoice.domain.User;
+import rxinvoice.service.AppUserRepository;
 
 import java.util.Map;
 

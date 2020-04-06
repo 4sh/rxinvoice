@@ -10,7 +10,7 @@ import restx.*;
 import restx.factory.Component;
 import restx.http.HttpStatus;
 import rxinvoice.domain.Blob;
-import rxinvoice.web.BlobService;
+import rxinvoice.web.rest.BlobService;
 
 import java.io.IOException;
 import java.io.InputStream;

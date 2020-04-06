@@ -1,4 +1,4 @@
-package rxinvoice.web;
+package rxinvoice.service;
 
 import org.bson.types.ObjectId;
 import restx.admin.AdminModule;
