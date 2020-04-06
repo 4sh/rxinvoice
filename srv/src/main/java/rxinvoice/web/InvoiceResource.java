@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

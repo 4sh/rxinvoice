@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web.routes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -8,7 +8,8 @@ import restx.factory.Component;
 import restx.http.HttpStatus;
 import rxinvoice.AppModule;
 import rxinvoice.domain.Blob;
-import rxinvoice.rest.common.PartsReader;
+import rxinvoice.web.BlobService;
+import rxinvoice.web.common.PartsReader;
 import rxinvoice.service.invoice.InvoiceService;
 
 import javax.inject.Named;

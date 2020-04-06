@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web.routes;
 
 import com.google.common.base.Optional;
 import org.apache.commons.lang3.StringUtils;

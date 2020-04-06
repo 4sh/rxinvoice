@@ -18,7 +18,7 @@ import restx.jongo.JongoCollection;
 import restx.mongo.MongoModule;
 import restx.security.*;
 import rxinvoice.domain.User;
-import rxinvoice.rest.AppUserRepository;
+import rxinvoice.web.AppUserRepository;
 
 import javax.inject.Named;
 import java.util.Locale;

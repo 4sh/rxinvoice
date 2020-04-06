@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web;
 
 import org.joda.time.LocalDate;
 import restx.annotations.GET;

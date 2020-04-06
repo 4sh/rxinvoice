@@ -1,4 +1,4 @@
-package rxinvoice.rest.events;
+package rxinvoice.web.events;
 
 import rxinvoice.domain.invoice.Invoice;
 

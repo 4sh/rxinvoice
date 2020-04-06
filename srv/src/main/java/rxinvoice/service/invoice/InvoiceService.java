@@ -26,9 +26,9 @@ import rxinvoice.domain.invoice.*;
 import rxinvoice.domain.company.Company;
 import rxinvoice.domain.User;
 import rxinvoice.jongo.MoreJongos;
-import rxinvoice.rest.BlobService;
-import rxinvoice.rest.InvoiceSearchFilter;
-import rxinvoice.rest.events.InvoiceUpdatedEvent;
+import rxinvoice.web.BlobService;
+import rxinvoice.web.InvoiceSearchFilter;
+import rxinvoice.web.events.InvoiceUpdatedEvent;
 import rxinvoice.service.company.CommercialRelationshipService;
 import rxinvoice.utils.SortCriteriaUtil;
 

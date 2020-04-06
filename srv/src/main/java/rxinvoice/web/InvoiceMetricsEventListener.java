@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -9,7 +9,7 @@ import restx.exceptions.ErrorCode;
 import restx.exceptions.RestxErrors;
 import restx.factory.Component;
 import restx.http.HttpStatus;
-import rxinvoice.rest.events.InvoiceUpdatedEvent;
+import rxinvoice.web.events.InvoiceUpdatedEvent;
 import rxinvoice.service.invoice.InvoiceMetricsService;
 
 @RestxResource

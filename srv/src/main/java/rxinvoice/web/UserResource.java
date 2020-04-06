@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web;
 
 import com.google.common.base.Optional;
 import restx.exceptions.RestxErrors;

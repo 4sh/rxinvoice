@@ -1,4 +1,4 @@
-package rxinvoice.rest.common;
+package rxinvoice.web.common;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Optional;

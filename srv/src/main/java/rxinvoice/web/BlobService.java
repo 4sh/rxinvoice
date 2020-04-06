@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web;
 
 import com.google.common.base.Optional;
 import com.google.common.io.CountingInputStream;

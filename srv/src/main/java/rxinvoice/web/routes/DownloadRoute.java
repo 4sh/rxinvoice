@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web.routes;
 
 import com.google.common.base.Optional;
 import com.google.common.io.ByteStreams;
@@ -10,6 +10,7 @@ import restx.*;
 import restx.factory.Component;
 import restx.http.HttpStatus;
 import rxinvoice.domain.Blob;
+import rxinvoice.web.BlobService;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,6 +1,5 @@
-package rxinvoice.rest;
+package rxinvoice.web;
 
-import com.google.common.base.Strings;
 import restx.Status;
 import restx.WebException;
 import restx.annotations.*;

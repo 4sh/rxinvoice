@@ -1,4 +1,4 @@
-package rxinvoice.rest;
+package rxinvoice.web;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
