@@ -36,13 +36,15 @@ public class CommercialRelationship implements Auditable {
     private List<VATRate> vatRates = new ArrayList<>();
     private List<Business> businessList = new ArrayList<>();
 
+    private String accountantReference;
+
     @Override
     public String toString() {
-        return "CustomerRelationShip{" +
+        return "CommercialRelationship{" +
                 "key='" + key + '\'' +
                 ", sellerRef='" + sellerRef + '\'' +
                 ", customerRef='" + customerRef + '\'' +
-                ", customerRelationShipManagerRef='" + customerManagerRef + '\'' +
+                ", customerManagerRef='" + customerManagerRef + '\'' +
                 ", detail='" + detail + '\'' +
                 ", legalNotice='" + legalNotice + '\'' +
                 ", showLegalNoticeForeignBuyer=" + showLegalNoticeForeignBuyer +
@@ -50,9 +52,10 @@ public class CommercialRelationship implements Auditable {
                 ", lastPaymentDate=" + lastPaymentDate +
                 ", lastSentInvoice=" + lastSentInvoice +
                 ", lastPaidInvoice=" + lastPaidInvoice +
-                ", fiscalYearMetrics=" + companyMetrics +
+                ", companyMetrics=" + companyMetrics +
                 ", vatRates=" + vatRates +
                 ", businessList=" + businessList +
+                ", accountantReference='" + accountantReference + '\'' +
                 '}';
     }
 
@@ -185,6 +188,15 @@ public class CommercialRelationship implements Auditable {
 
     public CommercialRelationship setBusinessList(List<Business> businessList) {
         this.businessList = businessList;
+        return this;
+    }
+
+    public String getAccountantReference() {
+        return accountantReference;
+    }
+
+    public CommercialRelationship setAccountantReference(String accountantReference) {
+        this.accountantReference = accountantReference;
         return this;
     }
 }
