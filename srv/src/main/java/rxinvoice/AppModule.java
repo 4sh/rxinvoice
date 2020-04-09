@@ -15,7 +15,6 @@ import restx.i18n.SupportedLocale;
 import restx.jackson.BsonJodaTimeModule;
 import restx.jackson.Views;
 import restx.jongo.JongoCollection;
-import restx.mongo.MongoModule;
 import restx.security.*;
 import rxinvoice.domain.User;
 import rxinvoice.service.AppUserRepository;
@@ -43,11 +42,6 @@ public class AppModule {
          return new SignatureKey(
                  "rxinvoice -6496014073139514714 rxinvoice 2beab8fc-4422-46fc-8b80-4453071c3ff9"
                          .getBytes(Charsets.UTF_8));
-    }
-
-    @Provides @Named(MongoModule.MONGO_DB_NAME)
-    public String dbName() {
-        return "rxinvoice";
     }
 
     @Provides @Named("restx.app.package")
