@@ -58,6 +58,10 @@ public class CompanyService {
                 .collect(Collectors.toList());
     }
 
+    public Optional<Company> findByKey(String key) {
+        return  this.companyDao.findByKey(key);
+    }
+
     public Optional<Company> findCompanyByKeyWithCommercialRelation(String key) {
         Optional<Company> companyOptional = this.companyDao.findByKey(key);
         companyOptional.ifPresent(company -> {

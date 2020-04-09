@@ -1,0 +1,99 @@
+{
+  "_id": "5c94c7dbc2dcc6a18e78f51b",
+  "date": "2020-01-30T23:00:00.000Z",
+  "dueDate": "2020-03-01T23:00:00.000Z",
+  "status": "SENT",
+  "withVAT": true,
+  "vats": [
+    {
+      "vat": "Taux normal - 20%",
+      "amount": 20
+    },
+    {
+      "vat": "Taux normal 20 %",
+      "amount": 20
+    }
+  ],
+  "vatsAmount": [
+    {
+      "vat": "Taux normal - 20%",
+      "amount": 120
+    }
+  ],
+  "lines": [
+    {
+      "description": "Hébergement des mois de janvier, février, mars 2020"
+    },
+    {
+      "description": "3 mois x 200 € HT",
+      "vat": {
+        "vat": "Taux normal - 20%",
+        "amount": 20
+      },
+      "quantity": 3,
+      "unitCost": 200,
+      "grossAmount": 600
+    }
+  ],
+  "activities": [
+    {
+      "value": 100
+    }
+  ],
+  "attachments": [],
+  "statusChanges": [
+    {
+      "from": "DRAFT",
+      "to": "READY",
+      "by": {
+        "userRef": "53c66756c8d11a14c7269439",
+        "name": "4SH",
+        "email": "admin@4sh.fr"
+      },
+      "timestamp": "2020-01-29T10:26:48.241Z"
+    },
+    {
+      "from": "READY",
+      "to": "WAITING_VALIDATION",
+      "by": {
+        "userRef": "53c66756c8d11a14c7269439",
+        "name": "4SH",
+        "email": "admin@4sh.fr"
+      },
+      "timestamp": "2020-01-30T13:39:59.514Z"
+    },
+    {
+      "from": "WAITING_VALIDATION",
+      "to": "READY",
+      "by": {
+        "userRef": "53c66756c8d11a14c7269439",
+        "name": "4SH",
+        "email": "admin@4sh.fr"
+      },
+      "timestamp": "2020-01-30T16:47:00.990Z"
+    },
+    {
+      "from": "READY",
+      "to": "SENT",
+      "by": {
+        "userRef": "53c66756c8d11a14c7269439",
+        "name": "4SH",
+        "email": "admin@4sh.fr"
+      },
+      "comment": "mail le 06/02/20 crt",
+      "timestamp": "2020-02-06T14:46:22.779Z"
+    }
+  ],
+  "reference": "190385",
+  "object": "DAM'S\nDAMS4ME- ENV - 2019\n1er trimestre 2020",
+  "comment": "mail le 06/02/20 crt",
+  "kind": "HOSTING",
+  "business": {
+    "reference": "26e25ed1-61dc-4a4a-9069-ea1791f94c76",
+    "name": "DAMS4ME - ENV - 2019",
+    "accountantReference" : "CDAM"
+  },
+  "grossAmount": 600,
+  "netAmount": 720,
+  "sentDate": "2020-02-06T14:46:22.809Z"
+}

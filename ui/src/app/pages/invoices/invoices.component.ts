@@ -106,4 +106,8 @@ export class InvoicesComponent implements OnInit {
     public buildUri(): string {
         return "/api/exports/invoices?" + SearchParams.toHttpParams(this.searchForm.value).toString();
     }
+
+    public buildInvoicesSalesExportUri(): string {
+        return "/api/exports/sales?" + SearchParams.toHttpParams({year: "2020", month: "03"}).toString();
+    }
 }

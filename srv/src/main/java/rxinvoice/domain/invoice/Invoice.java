@@ -53,6 +53,9 @@ public class Invoice implements Auditable {
     @FixedPrecision(2)
     private BigDecimal netAmount;
 
+    public boolean isCredit() {
+        return grossAmount.signum() < 0;
+    }
 
     public Invoice addStatusChange(Status previous, User user, String comment) {
         UserInfo userInfo = new UserInfo()
