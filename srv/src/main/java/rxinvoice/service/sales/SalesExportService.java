@@ -1,5 +1,9 @@
 package rxinvoice.service.sales;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -53,18 +57,26 @@ public class SalesExportService {
     }
 
     private void writeHeaderRow(Workbook wb, XSSFRow row) {
-        createHeaderCell(wb, row, DATE, messages.getMessage("sale.line.date", Locale.FRENCH));
-        createHeaderCell(wb, row, INVOICE_REFERENCE, messages.getMessage("sale.line.invoice.reference", Locale.FRENCH));
-        createHeaderCell(wb, row, ACCOUNT, messages.getMessage("sale.line.account", Locale.FRENCH));
-        createHeaderCell(wb, row, LABEL, messages.getMessage("sale.line.label", Locale.FRENCH));
-        createHeaderCell(wb, row, CREDIT, messages.getMessage("sale.line.credit", Locale.FRENCH));
-        createHeaderCell(wb, row, DEBIT, messages.getMessage("sale.line.debit", Locale.FRENCH));
+        CellStyle headerCellStyle = wb.createCellStyle();
+        headerCellStyle.setAlignment(HorizontalAlignment.CENTER);
+        Font font = wb.createFont();
+        font.setBold(true);
+        headerCellStyle.setFont(font);
+
+        createCell(row, DATE, messages.getMessage("sale.line.date", Locale.FRENCH), headerCellStyle);
+        createCell(row, INVOICE_REFERENCE, messages.getMessage("sale.line.invoice.reference", Locale.FRENCH), headerCellStyle);
+        createCell(row, ACCOUNT, messages.getMessage("sale.line.account", Locale.FRENCH), headerCellStyle);
+        createCell(row, LABEL, messages.getMessage("sale.line.label", Locale.FRENCH), headerCellStyle);
+        createCell(row, CREDIT, messages.getMessage("sale.line.credit", Locale.FRENCH), headerCellStyle);
+        createCell(row, DEBIT, messages.getMessage("sale.line.debit", Locale.FRENCH), headerCellStyle);
     }
 
     private void writeRow(Workbook wb, XSSFRow row, SaleLine saleLine) {
-        createCell(row, DATE, saleLine.getInvoiceDate());
-        createCell(row, INVOICE_REFERENCE, saleLine.getReference());
-        createCell(row, ACCOUNT, saleLine.getAccount());
+        CellStyle rightAlignCellStyle = wb.createCellStyle();
+        rightAlignCellStyle.setAlignment(HorizontalAlignment.RIGHT);
+        createCell(row, DATE, saleLine.getInvoiceDate(), rightAlignCellStyle);
+        createCell(row, INVOICE_REFERENCE, saleLine.getReference(), rightAlignCellStyle);
+        createCell(row, ACCOUNT, saleLine.getAccount(), StringUtils.isNumeric(saleLine.getAccount()) ? rightAlignCellStyle : null);
         createCell(row, LABEL, saleLine.getLabel());
         createMoneyCell(wb, row, CREDIT, saleLine.getCredit());
         createMoneyCell(wb, row, DEBIT, saleLine.getDebit());

@@ -17,23 +17,16 @@ public class ExcelExportUtils {
 
     public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
-    public static void createHeaderCell(Workbook wb, XSSFRow row, int cellIndex, String value) {
-        CellStyle cellStyle = wb.createCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.CENTER);
-        Font font = wb.createFont();
-        font.setBold(true);
-        cellStyle.setFont(font);
+
+    public static void createCell(XSSFRow row, int cellIndex, String value) {
+        createCell(row, cellIndex, value, null);
+    }
+
+    public static void createCell(XSSFRow row, int cellIndex, String value, CellStyle cellStyle) {
         if (value != null) {
             XSSFCell cell = row.createCell(cellIndex);
             cell.setCellValue(value);
             cell.setCellStyle(cellStyle);
-        }
-    }
-
-    public static void createCell(XSSFRow row, int cellIndex, String value) {
-        if (value != null) {
-            XSSFCell cell = row.createCell(cellIndex);
-            cell.setCellValue(value);
         }
     }
 
@@ -49,12 +42,17 @@ public class ExcelExportUtils {
         }
     }
 
-    public static void createCell(XSSFRow row, int cellIndex, BigDecimal value) {
+    public static void createCell(XSSFRow row, int cellIndex, BigDecimal value, CellStyle cellStyle) {
         if (value != null) {
             XSSFCell cell = row.createCell(cellIndex);
             cell.setCellType(CellType.NUMERIC);
             cell.setCellValue(value.doubleValue());
+            cell.setCellStyle(cellStyle);
         }
+    }
+
+    public static void createCell(XSSFRow row, int cellIndex, BigDecimal value) {
+        createCell(row, cellIndex, value, null);
     }
 
     public static void createCell(XSSFRow row, int cellIndex, LocalDateTime value) {
@@ -63,10 +61,15 @@ public class ExcelExportUtils {
         }
     }
 
-    public static void createCell(XSSFRow row, int cellIndex, DateTime value) {
+    public static void createCell(XSSFRow row, int cellIndex, DateTime value, CellStyle cellStyle) {
         if (value != null) {
-            row.createCell(cellIndex).setCellValue(SIMPLE_DATE_FORMAT.format(value.toDate()));
+            XSSFCell cell = row.createCell(cellIndex);
+            cell.setCellValue(SIMPLE_DATE_FORMAT.format(value.toDate()));
+            cell.setCellStyle(cellStyle);
         }
+    }
+    public static void createCell(XSSFRow row, int cellIndex, DateTime value) {
+        createCell(row, cellIndex, value, null);
     }
 
 }
