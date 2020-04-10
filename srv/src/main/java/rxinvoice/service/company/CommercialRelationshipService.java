@@ -38,6 +38,7 @@ public class CommercialRelationshipService {
                 commercialRelationship.getVatRates(),
                 commercialRelationship.getLegalNotice(),
                 commercialRelationship.getDetail(),
+                commercialRelationship.getAccountantReference(),
                 commercialRelationship.getCustomerManagerRef());
         return commercialRelationship;
     }

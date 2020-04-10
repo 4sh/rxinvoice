@@ -19,4 +19,5 @@ export class CommercialRelationshipModel {
     lastSentInvoice?: InvoiceInfoModel;
     lastPaidInvoice?: InvoiceInfoModel;
 
+    accountantReference: string;
 }

@@ -114,6 +114,7 @@ public class CommercialRelationshipDao {
                                   List<VATRate> vatRates,
                                   String legalNotice,
                                   String detail,
+                                  String accountantReference,
                                   String customerManagerRef) {
         logger.debug("Update commercial relationship between seller {} and customer {} to set vat Rates {}," +
                         " businessList {}, legal notice {}, detail {} and customer relationship manager {}",
@@ -126,11 +127,13 @@ public class CommercialRelationshipDao {
                                 "businessList: #," +
                                 "legalNotice: #," +
                                 "detail: #," +
+                                "accountantReference: #," +
                                 "customerManagerRef: #}}",
                         vatRates,
                         businessList,
                         legalNotice,
                         detail,
+                        accountantReference,
                         customerManagerRef);
 
     }
