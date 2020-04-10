@@ -1,0 +1,43 @@
+<h1>Graphs</h1>
+
+<div class="row container-charts-dashboard">
+  <div class="small-8 column">
+    <div class="row">
+      <div class="small-24 column">
+        <div class="block-container">
+          <h6 class="title-section">{{'dashboard.chart.division' | translate}}</h6>
+        </div>
+      </div>
+      <div class="small-24 column">
+        <div class="block-container">
+          <div class="row">
+            <div class="small-12 column">
+              <h6 class="title-section">{{'newCustomer.label.caInvoiced' | translate}}</h6>
+              <span class="nb">{{ '00000'  | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+            </div>
+            <div class="small-12 column">
+              <h6 class="title-section">{{'newCustomer.label.caFixed' | translate}}</h6>
+              <span class="nb">{{ '00000'  | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="small-16 column full-height">
+    <div class="block-container">
+      <h6 class="title-section">{{'dashboard.chart.turnover' | translate}}</h6>
+    </div>
+  </div>
+</div>
+
+
+<h1>Extracxtions</h1>
+<h2>Ventes mensuelles</h2>
+  <month-select [(ngModel)]="salesExportParameters.month" name="month"></month-select>
+  <year-select [(ngModel)]="salesExportParameters.year" name="year"></year-select>
+<!--<input [(ngModel)]="salesExportParameters.month" name="month">-->
+<a class="button medium primary ripple has-img" [href]="exportSales()">
+  <img class="icon" src="assets/images/png/icon_excel_white.png">{{'analyze.sales.export' | translate}}
+</a>

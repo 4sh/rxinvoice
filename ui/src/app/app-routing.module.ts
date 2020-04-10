@@ -10,6 +10,7 @@ import {InvoiceDetailComponent} from './pages/invoice-detail/invoice-detail.comp
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 import {GuideRoutes} from './style-guide-module/guide.routes';
 import {SellerSettingsComponent} from './pages/seller-settings/seller-settings.component';
+import {AnalyzeComponent} from './pages/analyze/analyze.component';
 
 const routes: Routes = [
     {path: 'login', pathMatch: 'full', component: LoginComponent},
@@ -25,13 +26,14 @@ const routes: Routes = [
             {path: 'customers', component: CustomersComponent},
             {path: 'customers/new', component: CustomerDetailComponent},
             {path: 'customers/detail/:id', component: CustomerDetailComponent},
+            {path: 'analyze', component: AnalyzeComponent},
             {path: 'sellerSettings', component: SellerSettingsComponent},
             {path: '**', redirectTo: '/app/dashboard'}
 
         ]
     },
     {path: '', redirectTo: '/app/dashboard', pathMatch: 'full'},
-    {path: 'style', children: GuideRoutes},
+    {path: 'style', children: GuideRoutes}
 ];
 
 @NgModule({

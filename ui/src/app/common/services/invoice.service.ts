@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {plainToClass} from 'class-transformer';
 import {HttpClient} from '@angular/common/http';
 import {InvoiceModel} from '../../models/invoice.model';
 import {SearchParams} from '../../models/search-params.model';
 import {InvoiceSearchFilterModel} from '../../models/invoice-search-filter.model';
+import {SalesExportParameters} from '../../pages/analyze/sales-export-parameters';
 
 @Injectable()
 export class InvoiceService {
@@ -13,7 +14,8 @@ export class InvoiceService {
 
     private baseUrl = '/api/invoices';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
     public fetchInvoices(params: any, save?: boolean): Observable<InvoiceModel[]> {
         if (save) {
@@ -28,48 +30,62 @@ export class InvoiceService {
         return this.http
             .get(this.baseUrl, {params: SearchParams.toHttpParams(params)})
             .map((result: any) => plainToClass(InvoiceModel, result as Object[]))
-            .catch((response: Response) => Observable.throw({ message: 'Unable to fetch invoices', response: response }));
+            .catch((response: Response) => Observable.throw({message: 'Unable to fetch invoices', response: response}));
     }
 
     public fetchToPrepareInvoices(): Observable<InvoiceModel[]> {
         return this.http
             .get(this.baseUrl + '/toPrepare')
             .map((result: any) => plainToClass(InvoiceModel, result as Object[]))
-            .catch((response: Response) => Observable.throw({ message: 'Unable to fetch to prepare invoices', response: response }));
+            .catch((response: Response) => Observable.throw({
+                message: 'Unable to fetch to prepare invoices',
+                response: response
+            }));
     }
 
     public fetchInvoice(id): Observable<InvoiceModel> {
         return this.http
             .get(this.baseUrl + '/' + id)
             .map((result: any) => plainToClass(InvoiceModel, result as Object))
-            .catch((response: Response) => Observable.throw({ message: 'Unable to fetch invoice', response: response }));
+            .catch((response: Response) => Observable.throw({message: 'Unable to fetch invoice', response: response}));
     }
 
     public saveInvoice(invoice): Observable<InvoiceModel> {
         return this.http
             .put(`${this.baseUrl}/${invoice._id}`, invoice)
             .map((result: any) => plainToClass(InvoiceModel, result as Object))
-            .catch((response: Response) => Observable.throw({ message: 'Unable to save invoice', response: response }));
+            .catch((response: Response) => Observable.throw({message: 'Unable to save invoice', response: response}));
     }
 
     public createInvoice(invoice): Observable<InvoiceModel> {
         return this.http
             .post(this.baseUrl, invoice)
             .map((result: any) => plainToClass(InvoiceModel, result as Object))
-            .catch((response: Response) => Observable.throw({ message: 'Unable to create invoice', response: response }));
+            .catch((response: Response) => Observable.throw({message: 'Unable to create invoice', response: response}));
     }
 
     public deleteInvoice(invoice): Observable<InvoiceModel> {
         return this.http
             .delete(this.baseUrl + '/' + invoice._id)
             .map((result: any) => plainToClass(InvoiceModel, result as Object))
-            .catch((response: Response) => Observable.throw({ message: 'Unable to delete invoice', response: response }));
+            .catch((response: Response) => Observable.throw({message: 'Unable to delete invoice', response: response}));
     }
 
-    public deleteAttachment(invoiceId, attachmentId ): Observable<InvoiceModel> {
+    public deleteAttachment(invoiceId, attachmentId): Observable<InvoiceModel> {
         return this.http
             .delete(this.baseUrl + '/' + invoiceId + '/attachments/' + attachmentId)
             .map((result: any) => plainToClass(InvoiceModel, result as Object))
-            .catch((response: Response) => Observable.throw({ message: 'Unable to delete attachment from invoice', response: response }));
+            .catch((response: Response) => Observable.throw({
+                message: 'Unable to delete attachment from invoice',
+                response: response
+            }));
+    }
+
+    public exportSales(salesExportParameters: SalesExportParameters) {
+        return `/api/exports/sales?${SearchParams.toHttpParams(
+            {
+                year: salesExportParameters.year,
+                month: salesExportParameters.month
+            }).toString()}`;
     }
 }

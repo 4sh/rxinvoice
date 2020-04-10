@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <div class="sidebar-logo" routerLink="/app//dashboard">
+    <div class="sidebar-logo" routerLink="/app/dashboard">
         <img src="assets/images/svg/4sh_logo_white.svg">
     </div>
 
@@ -14,6 +14,9 @@
             <i class="ion-document-text"></i>{{'nav.invoices' | translate}}
             <!--<div class="sidebar-menu-item-notif">3</div>-->
             <!-- TODO add notif-->
+        </a>
+        <a routerLink="/app/analyze" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
+            <i class="ion-document-text"></i>{{'nav.analyze' | translate}}
         </a>
         <a routerLink="/app/sellerSettings" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
             <i class="ion-document-text"></i>{{'nav.seller.settings' | translate}}
