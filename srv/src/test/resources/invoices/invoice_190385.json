@@ -93,6 +93,9 @@
     "name": "DAMS4ME - ENV - 2019",
     "accountantReference" : "CDAM"
   },
+  "buyer": {
+    "key": "buyerKey"
+  },
   "grossAmount": 600,
   "netAmount": 720,
   "sentDate": "2020-02-06T14:46:22.809Z"

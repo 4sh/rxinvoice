@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import restx.factory.Factory;
 import restx.factory.Name;
 import rxinvoice.domain.accountant.AccountantServiceReference;
+import rxinvoice.domain.company.CommercialRelationship;
 import rxinvoice.domain.company.SellerSettings;
 import rxinvoice.domain.company.VATRate;
 import rxinvoice.domain.enumeration.ServiceKind;
@@ -14,6 +15,8 @@ import rxinvoice.domain.invoice.Invoice;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -94,14 +97,17 @@ class SalesServiceTest {
     void should_extract_customer_account_line() throws IOException {
         Invoice invoice = mapper.readValue(new File("src/test/resources/invoices/invoice_190385.json"), Invoice.class);
 
-//        SaleLine saleLine = this.salesService.extractCustomerAccountLine(commercialRelationshipMap, invoice);
-//
-//        assertThat(saleLine.getInvoiceDate(), is(equalTo(invoice.getDate())));
-//        assertThat(saleLine.getReference(), is(equalTo(invoice.getReference())));
-//        assertThat(saleLine.getAccount(), is(equalTo(invoice.getBusiness().getAccountantReference())));
-//        assertThat(saleLine.getLabel(), is(equalTo("DAM'S DAMS4ME- ENV - 2019 1er trimestre 2020")));
-//        assertThat(saleLine.getDebit(), is(equalTo(BigDecimal.valueOf(720))));
-//        assertThat(saleLine.getCredit(), is(equalTo(BigDecimal.ZERO)));
+        Map<String, CommercialRelationship> commercialRelationshipMap = new HashMap<>();
+        commercialRelationshipMap.put(invoice.getBuyer().getKey(), new CommercialRelationship().setAccountantReference("CTEST"));
+
+        SaleLine saleLine = this.salesService.extractCustomerAccountLine(commercialRelationshipMap, invoice);
+
+        assertThat(saleLine.getInvoiceDate(), is(equalTo(invoice.getDate())));
+        assertThat(saleLine.getReference(), is(equalTo(invoice.getReference())));
+        assertThat(saleLine.getAccount(), is(equalTo("CTEST")));
+        assertThat(saleLine.getLabel(), is(equalTo("DAM'S DAMS4ME- ENV - 2019 1er trimestre 2020")));
+        assertThat(saleLine.getDebit(), is(equalTo(BigDecimal.valueOf(720))));
+        assertThat(saleLine.getCredit(), is(equalTo(BigDecimal.ZERO)));
 
     }
 }
