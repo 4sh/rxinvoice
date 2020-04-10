@@ -46,7 +46,8 @@ public class SalesService {
         Map<String, CommercialRelationship> commercialRelationshipMap =
                 StreamSupport.stream(this.commercialRelationshipService.findAll().spliterator(), false)
                         .collect(Collectors.toMap(CommercialRelationship::getCustomerRef,
-                                commercialRelationship -> commercialRelationship));
+                                commercialRelationship -> commercialRelationship,
+                                (commercialRelationship1, commercialRelationship2) -> commercialRelationship1));
 
 
         List<SaleLine> saleLines = Lists.newArrayList();
@@ -100,7 +101,7 @@ public class SalesService {
                 && null != invoice.getVats().get(0).getAmount()) {
             vatRate = invoice.getVats().get(0).getAmount();
         }
-
+        logger.debug("{}",invoice.getReference());
         Optional<AccountantServiceReference> serviceReferenceOptional = sellerSettings.findServiceReference(invoice.getKind(), vatRate);
         SaleLine saleLine = SaleLine.build(invoice);
         serviceReferenceOptional.ifPresent(serviceReference ->
