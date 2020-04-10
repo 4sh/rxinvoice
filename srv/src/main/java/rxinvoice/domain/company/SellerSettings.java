@@ -25,9 +25,11 @@ public class SellerSettings {
 
     public Optional<AccountantServiceReference> findServiceReference(ServiceKind serviceKind, BigDecimal vatRate) {
         return serviceReferenceList.stream()
-                .filter(accountantServiceReference -> serviceKind.equals(accountantServiceReference.getKind())
-                        && ((vatRate == null && accountantServiceReference.getVatRate() == null)
-                        || (vatRate != null && vatRate.equals(accountantServiceReference.getVatRate().getRate()))))
+                .filter(accountantServiceReference -> serviceKind.equals(accountantServiceReference.getKind()) &&
+                        ((vatRate == null && accountantServiceReference.getVatRate() == null) ||
+                                (vatRate != null &&
+                                        accountantServiceReference.getVatRate() != null &&
+                                        vatRate.equals(accountantServiceReference.getVatRate().getRate()))))
                 .findFirst();
     }
 }
