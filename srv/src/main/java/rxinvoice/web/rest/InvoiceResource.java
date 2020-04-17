@@ -124,7 +124,7 @@ public class InvoiceResource {
 
     @RolesAllowed({ADMIN, SELLER})
     @DELETE("/invoices/{invoiceId}/attachments/{attachmentId}")
-    public void deleteInvoice(String invoiceId, String attachmentId) {
-        invoiceService.deleteInvoice(invoiceId, attachmentId);
+    public void deleteInvoiceAttachment(String invoiceId, String attachmentId) {
+        invoiceService.deleteInvoiceAttachment(invoiceId, attachmentId);
     }
 }

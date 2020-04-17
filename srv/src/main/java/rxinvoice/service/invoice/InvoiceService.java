@@ -17,9 +17,9 @@ import restx.Status;
 import restx.WebException;
 import restx.factory.Component;
 import restx.http.HttpStatus;
-import restx.jongo.JongoCollection;
 import rxinvoice.AppModule;
 import rxinvoice.dao.CompanyDao;
+import rxinvoice.dao.InvoiceDao;
 import rxinvoice.domain.Blob;
 import rxinvoice.domain.company.CommercialRelationship;
 import rxinvoice.domain.invoice.*;
@@ -31,7 +31,6 @@ import rxinvoice.web.events.InvoiceUpdatedEvent;
 import rxinvoice.service.company.CommercialRelationshipService;
 import rxinvoice.utils.SortCriteriaUtil;
 
-import javax.inject.Named;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Clock;
@@ -48,25 +47,23 @@ public class InvoiceService {
 
     private static final Logger logger = LoggerFactory.getLogger(InvoiceService.class);
 
-    private final JongoCollection invoices;
-
     private final BlobService blobService;
+    private final InvoiceDao invoiceDao;
     private final CompanyDao companyDao;
     private final CommercialRelationshipService commercialRelationshipService;
 
     private final EventBus eventBus;
     private final Clock clock;
 
-
-    public InvoiceService(@Named("invoices") JongoCollection invoices,
-                          Clock clock,
+    public InvoiceService(Clock clock,
                           BlobService blobService,
+                          InvoiceDao invoiceDao,
                           CompanyDao companyDao,
                           CommercialRelationshipService commercialRelationshipService,
                           EventBus eventBus) {
-        this.invoices = invoices;
         this.clock = clock;
         this.blobService = blobService;
+        this.invoiceDao = invoiceDao;
         this.companyDao = companyDao;
         this.commercialRelationshipService = commercialRelationshipService;
         this.eventBus = eventBus;
@@ -76,7 +73,7 @@ public class InvoiceService {
         if (invoice.getSeller() == null) {
             User user = AppModule.currentUser();
             if (user.getPrincipalRoles().contains(SELLER)) {
-                invoice.setSeller(this.companyDao.findByKey(user.getCompanyRef()).get());
+                invoice.setSeller(this.companyDao.getByKey(user.getCompanyRef()));
             }
         }
         // Check that invoice reference is not already used by another invoice.
@@ -89,8 +86,7 @@ public class InvoiceService {
         }
 
         updateAmounts(invoice);
-
-        invoices.get().save(invoice);
+        this.invoiceDao.create(invoice);
         if (null != eventBus) {
             eventBus.post(new InvoiceUpdatedEvent(invoice));
             eventBus.post(rxinvoice.domain.Activity.newCreate(invoice, AppModule.currentUser()));
@@ -128,7 +124,7 @@ public class InvoiceService {
             invoice.addStatusChange(invoiceFromDB.getStatus(), user, invoice.getComment());
         }
 
-        invoices.get().save(invoice);
+        this.invoiceDao.update(invoice);
         if (null != eventBus) {
             eventBus.post(new InvoiceUpdatedEvent(invoice));
             eventBus.post(rxinvoice.domain.Activity.newUpdate(invoiceByKey.get(), AppModule.currentUser()));
@@ -171,7 +167,7 @@ public class InvoiceService {
                 .setLastSendDate(LocalDate.now())
                 .setLastSentInvoice(new InvoiceInfo(invoice));
         this.commercialRelationshipService.updateLastInvoiceSend(commercialRelationship);
-        this.invoices.get().update(new ObjectId(invoice.getKey())).with("{$set: {sentDate: #}}", DateTime.now().toDate());
+        this.invoiceDao.updateSendDate(invoice, DateTime.now().toDate());
     }
 
     public Iterable<Invoice> findInvoices(InvoiceSearchFilter invoiceSearchFilter) {
@@ -227,10 +223,8 @@ public class InvoiceService {
             builder.and("reference").is(MoreJongos.containsIgnoreCase(invoiceSearchFilter.getReference().get()));
         }
 
-        return invoices.get()
-                .find(builder.get().toString())
-                .sort(SortCriteriaUtil.buildMongoSortQuery(invoiceSearchFilter.getSortProperties()))
-                .as(Invoice.class);
+        return this.invoiceDao.find(builder.get().toString(),
+                Optional.of(SortCriteriaUtil.buildMongoSortQuery(invoiceSearchFilter.getSortProperties())));
     }
 
     public Optional<Invoice> findInvoiceByKey(String key) {
@@ -238,10 +232,9 @@ public class InvoiceService {
         Optional<Invoice> invoice;
 
         if (key.startsWith(referencePrefix)) {
-            invoice = Optional.ofNullable(invoices.get()
-                    .findOne("{ reference : # }", key.substring(referencePrefix.length())).as(Invoice.class));
+            invoice = this.invoiceDao.findByReference(key.substring(referencePrefix.length()));
         } else {
-            invoice = Optional.ofNullable(invoices.get().findOne(new ObjectId(key)).as(Invoice.class));
+            invoice = this.invoiceDao.findByKey(key);
         }
 
         if (invoice.isPresent()) {
@@ -257,7 +250,7 @@ public class InvoiceService {
     }
 
     public Iterable<Invoice> findInvoicesByBuyer(String buyerKey) {
-        return this.invoices.get().find("{ buyer._id: #}", new ObjectId(buyerKey)).as(Invoice.class);
+        return this.invoiceDao.findInvoicesByBuyer(buyerKey);
     }
 
     public Iterable<Invoice> findToPrepareInvoices() {
@@ -275,7 +268,7 @@ public class InvoiceService {
         builder.and("status").is("DRAFT");
         builder.and("date").lessThan(LocalDateTime.now().plusDays(8).toDate());
 
-        return invoices.get().find(builder.get().toString()).as(Invoice.class);
+        return invoiceDao.find(builder.get().toString(), Optional.empty());
     }
 
     public List<Invoice> findTasks(String maxDate) {
@@ -299,16 +292,16 @@ public class InvoiceService {
     }
 
     public void computeMetrics() {
-        for (Invoice invoice : invoices.get().find().as(Invoice.class)) {
+        for (Invoice invoice : this.invoiceDao.findAll()) {
             updateAmounts(invoice);
-            invoices.get().save(invoice);
+            this.invoiceDao.updateAmounts(invoice);
         }
     }
 
     public Status deleteInvoice(String key) {
         Optional<Invoice> invoice = findInvoiceByKey(key);
         if (invoice.isPresent()) {
-            invoices.get().remove(new ObjectId(key));
+            this.invoiceDao.delete(invoice.get().getKey());
             if (null != eventBus) {
                 eventBus.post(new InvoiceUpdatedEvent(invoice.get()));
                 eventBus.post(rxinvoice.domain.Activity.newDelete(invoice.get(), AppModule.currentUser()));
@@ -319,11 +312,11 @@ public class InvoiceService {
         }
     }
 
-    public void deleteInvoice(String invoiceId, String attachmentId) {
+    public void deleteInvoiceAttachment(String invoiceId, String attachmentId) {
         Invoice invoice = checkPresent(findInvoiceByKey(invoiceId), "Invoice %s not found", invoiceId);
         checkCanEditInvoice(invoice, AppModule.currentUser());
 
-        invoices.get().update(new ObjectId(invoiceId)).with("{$pull: {attachments: {_id: #}}}", new ObjectId(attachmentId));
+        this.invoiceDao.deleteAttachment(invoice.getKey(), attachmentId);
 
         if (null != eventBus) {
             eventBus.post(new InvoiceUpdatedEvent(invoice));
@@ -375,7 +368,7 @@ public class InvoiceService {
         Invoice invoice = checkPresent(findInvoiceByKey(invoiceId), "Invoice %s not found", invoiceId);
         checkCanEditInvoice(invoice, AppModule.currentUser());
 
-        invoices.get().update(new ObjectId(invoiceId)).with("{$push: {attachments: {$each: #}}}", blobs);
+        this.invoiceDao.updateAttachments(invoiceId, blobs);
 
         if (null != eventBus) {
             eventBus.post(new InvoiceUpdatedEvent(invoice));
@@ -398,13 +391,6 @@ public class InvoiceService {
     }
 
     public int updateLateInvoicesStatus() {
-
-        int count = this.invoices.get()
-                .update("{status: #, dueDate: {$lt: #}}", SENT, new Date(clock.instant().toEpochMilli()))
-                .multi()
-                .with("{$set: {status: #}}", LATE).getN();
-        logger.debug("Updated {} to status LATE", count);
-        return count;
-
+        return this.invoiceDao.updateLateInvoices(new Date(clock.instant().toEpochMilli()));
     }
 }
