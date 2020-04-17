@@ -14,6 +14,8 @@ import rxinvoice.service.company.CompanyService;
 import javax.inject.Named;
 import java.util.Optional;
 
+import static rxinvoice.utils.MoreJ8Preconditions.checkPresent;
+
 @Component
 public class CompanyDao {
 
@@ -52,6 +54,10 @@ public class CompanyDao {
                 .update("{_id: #}", companyKey)
                 .with("{$set: {sellerSettings : #}}", sellerSettings);
         return sellerSettings;
+    }
+
+    public Company getByKey(String key) {
+        return checkPresent(this.findByKey(key), String.format("Company not found for key %s", key));
     }
 
     public Optional<Company> findByKey(String key) {
