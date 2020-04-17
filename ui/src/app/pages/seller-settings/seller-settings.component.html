@@ -1,37 +1,84 @@
 <div *ngIf="sellerSettingsModel">
-    <form novalidate
-          class="row newCustomerDetail-container">
+    <div class="headerContainer">
+        <h4 class="title">Configuration du vendeur</h4>
 
-
-        <div *ngFor="let serviceKind of serviceKinds;index as i">
-            <h6>{{'service.kind.' + serviceKind|translate}}</h6>
-            <ng-container *ngFor="let serviceReference of getServiceReferences(serviceKind);index as j">
-                <h6> {{serviceReference.vatRate?.rate}} %</h6>
-                <div class="column auto">
-                    <input [(ngModel)]="serviceReference.accountNumber" type="text" [name]="'accountNumber' + i+j"/>
-                </div>
-            </ng-container>
+        <div class="headerContainer-menu">
+            <div *ngFor="let serviceKind of serviceKinds"
+                 (click)="selectServiceKind(serviceKind)"
+                 [class.selected]="selectedServiceKind == serviceKind"
+            class="headerContainer-menu-wrapper">
+                <h6 class="headerContainer-menu-text">{{'service.kind.' + serviceKind|translate}}</h6>
+            </div>
         </div>
 
+        <div class="row">
+            <div class="column small-12">
+                <ng-container *ngFor="let serviceReference of getServiceReferences(selectedServiceKind);index as j">
+                    <div class="listTab leftTab">
+                        <h5>Référentiel comptable</h5>
+                        <table>
+                            <thead>
+                            <td>Taux TVA</td>
+                            <td>N° de compte</td>
+                            <td>Action</td>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{serviceReference.vatRate?.rate}} %</td>
+                                <td><input [(ngModel)]="serviceReference.accountNumber" type="text"
+                                           [name]="'accountNumber' + j"/></td>
+                                <td>
+                                    <button class="round medium primary ripple">
+                                        <i class="ion-ios-color-wand"></i>
+                                    </button>
+                                    <button class="round medium green1 ripple">
+                                        <i class="ion-android-add"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="column small-12">
+                <form novalidate
+                      class="row newCustomerDetail-container">
+                    <div  class="listTab rightTab">
+                        <h5>Liste des TVA</h5>
+                        <div *ngFor="let vatRate of sellerSettingsModel.vatRates">
+                            <table>
+                                <thead>
+                                <td>Libellé</td>
+                                <td>Taux TVA</td>
+                                <td>N° de compte</td>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{vatRate.label}}</td>
+                                    <td>{{vatRate.rate}}</td>
+                                    <td>{{vatRate.accountNumber}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<!--        <div class="column">-->
-<!--            <div class="row align-middle newCustomerDetail-container-content"  *ngFor="let serviceReference of sellerSettingsModel.serviceReferenceList;index as i">-->
-<!--                <h6 class="column shrink">{{'service.kind.' + serviceReference.kind | translate}} {{serviceReference.vatRate?.label}}-->
-<!--                    - {{serviceReference.vatRate?.rate}} %</h6>-->
-<!--                <div class="column auto">-->
-<!--                    <input [(ngModel)]="serviceReference.accountNumber" type="text" [name]="'accountNumber' + i"/>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div class="columns shrink">
+
+    <footer>
+        <div class="column buttonContainer">
             <button class="button medium grey ripple"
                     type="button">
                 <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}
             </button>
             <button class="button medium green ripple">
                 <i class="ion-edit"></i>
-                {{'button.label.update'|translate}}
+                {{'button.label.save'|translate}}
             </button>
         </div>
-    </form>
+    </footer>
 </div>

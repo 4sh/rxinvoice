@@ -14,6 +14,7 @@ export class SellerSettingsComponent implements OnInit {
 
 
     serviceKinds: Array<ServiceKind> = ['SUBCONTRACTING', 'FEE', 'SERVICE', 'BUY_SELL', 'TRAINING', 'HOSTING'];
+    selectedServiceKind: ServiceKind;
 
     constructor(private authService: AuthenticationService) {
     }
@@ -23,10 +24,24 @@ export class SellerSettingsComponent implements OnInit {
             .filter(company => !!company)
             .subscribe(company => {
                 this.sellerSettingsModel = company.sellerSettings;
+                this.sellerSettingsModel.vatRates =  [{
+                    "label" : "Taux normal 20 %",
+                    "rate" : 20,
+                    "accountNumber":"445711"
+                },{
+                    "label" : "Taux normal 8,5 %",
+                    "rate" : 8.5,
+                    "accountNumber":"445712"
+                }]
             });
     }
 
+
     getServiceReferences(serviceKind: ServiceKind) {
         return this.sellerSettingsModel.serviceReferenceList.filter(value => value.kind === serviceKind);
+    }
+
+    selectServiceKind(serviceKind: ServiceKind) {
+        this.selectedServiceKind = serviceKind;
     }
 }
