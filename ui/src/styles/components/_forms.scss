@@ -106,6 +106,9 @@ select, .ng-control {
   }
 }
 
+.ng-select .ng-control {
+  min-height: rem-calc(41px) !important;
+}
 
 // ==== Textaera
 

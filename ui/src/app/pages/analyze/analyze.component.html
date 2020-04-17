@@ -1,43 +1,69 @@
-<h1>Graphs</h1>
+<div>
+    <div class="graphContainer">
+        <h4 class="title">Graphs</h4>
+        <div class="row graphContainer-wrapper">
+            <div class="small-24 column">
+                <div class="row">
+                    <div class="small-8 column">
+                        <div class="block-container graphContainer-wrapper">
+                            <div class="graphContainer-wrapper-title">
+                                <i class="ion-ios-pie orange"></i>
+                                <h6 class="title-section">{{'dashboard.chart.division' | translate}}</h6>
+                            </div>
+                        </div>
+                    </div>
 
-<div class="row container-charts-dashboard">
-  <div class="small-8 column">
-    <div class="row">
-      <div class="small-24 column">
-        <div class="block-container">
-          <h6 class="title-section">{{'dashboard.chart.division' | translate}}</h6>
-        </div>
-      </div>
-      <div class="small-24 column">
-        <div class="block-container">
-          <div class="row">
-            <div class="small-12 column">
-              <h6 class="title-section">{{'newCustomer.label.caInvoiced' | translate}}</h6>
-              <span class="nb">{{ '00000'  | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                    <div class="small-8 column">
+                        <div class="block-container graphContainer-wrapper">
+                            <div class="graphContainer-wrapper-title">
+                                <i class="ion-social-euro green"></i>
+                                <h6 class="title-section">{{'dashboard.chart.chiffreA' | translate}}</h6>
+                            </div>
+                            <div class="row graphContainer-wrapper-content">
+                                <div class="small-24 column">
+                                    <span class="nb">{{ '00000'  | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                                    <h6 class="title-section">{{'newCustomer.label.caInvoiced' | translate}}</h6>
+                                </div>
+                                <div class="small-24 column">
+                                    <span class="nb">{{ '00000'  | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                                    <h6 class="title-section">{{'newCustomer.label.caFixed' | translate}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="small-8 column">
+                        <div class="block-container graphContainer-wrapper">
+                            <div class="graphContainer-wrapper-title">
+                                <i class="ion-stats-bars pink"></i>
+                                <h6 class="title-section">{{'dashboard.chart.turnover' | translate}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="small-12 column">
-              <h6 class="title-section">{{'newCustomer.label.caFixed' | translate}}</h6>
-              <span class="nb">{{ '00000'  | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
 
-  </div>
-  <div class="small-16 column full-height">
-    <div class="block-container">
-      <h6 class="title-section">{{'dashboard.chart.turnover' | translate}}</h6>
+    <div class="wrapper">
+        <h4 class="title">Extractions</h4>
+        <h5>Ventes mensuelles</h5>
+        <div class="row">
+            <div class="column">
+                <month-select [(ngModel)]="salesExportParameters.month" name="month"></month-select>
+            </div>
+
+            <div class="column">
+                <year-select [(ngModel)]="salesExportParameters.year" name="year"></year-select>
+            </div>
+
+            <div class="column">
+                <!--<input [(ngModel)]="salesExportParameters.month" name="month">-->
+                <a class="button medium primary ripple has-img" [href]="exportSales()">
+                    <img class="icon"
+                         src="assets/images/png/icon_excel_white.png">{{'analyze.sales.export' | translate}}
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
-
-<h1>Extracxtions</h1>
-<h2>Ventes mensuelles</h2>
-  <month-select [(ngModel)]="salesExportParameters.month" name="month"></month-select>
-  <year-select [(ngModel)]="salesExportParameters.year" name="year"></year-select>
-<!--<input [(ngModel)]="salesExportParameters.month" name="month">-->
-<a class="button medium primary ripple has-img" [href]="exportSales()">
-  <img class="icon" src="assets/images/png/icon_excel_white.png">{{'analyze.sales.export' | translate}}
-</a>
