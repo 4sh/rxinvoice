@@ -1,5 +1,5 @@
 export class VATModel {
-    vat: string;
+    label: string;
     amount: number;
 
   constructor() {

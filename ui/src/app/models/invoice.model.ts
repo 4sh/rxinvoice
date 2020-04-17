@@ -9,6 +9,7 @@ import {StatusChangeModel} from './status-change.model';
 import {BlobModel} from './blob.model';
 import {DatePipe} from '@angular/common';
 import * as _ from 'lodash';
+import {VatRateModel} from './vat-rate.model';
 
 export class InvoiceModel {
     key: string;
@@ -27,7 +28,7 @@ export class InvoiceModel {
     buyer: CompanyModel;
     grossAmount: number;
     netAmount: number;
-    vats: VATModel[];
+    vats: VatRateModel[];
     vatsAmount: VATModel[];
     business: BusinessModel;
     lines: InvoiceLineModel[];

@@ -6,12 +6,12 @@
   "withVAT": true,
   "vats": [
     {
-      "vat": "Taux normal - 20%",
-      "amount": 20
+      "label": "Taux normal - 20%",
+      "rate": 20
     },
     {
-      "vat": "Taux normal 20 %",
-      "amount": 20
+      "label": "Taux normal 20 %",
+      "rate": 20
     }
   ],
   "vatsAmount": [
@@ -27,8 +27,8 @@
     {
       "description": "3 mois x 200 € HT",
       "vat": {
-        "vat": "Taux normal - 20%",
-        "amount": 20
+        "label": "Taux normal - 20%",
+        "rate": 20
       },
       "quantity": 3,
       "unitCost": 200,

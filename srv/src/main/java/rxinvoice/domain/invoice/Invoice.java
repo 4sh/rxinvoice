@@ -9,10 +9,12 @@ import restx.jackson.FixedPrecision;
 import rxinvoice.domain.*;
 import rxinvoice.domain.company.Business;
 import rxinvoice.domain.company.Company;
+import rxinvoice.domain.company.VATRate;
 import rxinvoice.domain.enumeration.ServiceKind;
 import rxinvoice.domain.print.InvoicePrint;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -31,7 +33,7 @@ public class Invoice implements Auditable {
 
     private Status status;
     private boolean withVAT;
-    private List<VATVal> vats = new ArrayList<>();
+    private List<VATRate> vatRates = new ArrayList<>();
     private List<VATAmount> vatsAmount = new ArrayList<>();
     private List<Line> lines = new ArrayList<>();
     private List<ActivityValue> activities = new ArrayList<>();
@@ -55,6 +57,19 @@ public class Invoice implements Auditable {
 
     public boolean isCredit() {
         return grossAmount.signum() < 0;
+    }
+
+    /**
+     * Compute invoice gross amount from its lines gross amounts;
+     *
+     * @return invoice gross amount
+     */
+    public BigDecimal computeGrossAmount() {
+        return lines.stream()
+                .filter(line -> null != line.getGrossAmount())
+                .map(Line::getGrossAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, RoundingMode.HALF_UP);
     }
 
     public Invoice addStatusChange(Status previous, User user, String comment) {
@@ -96,7 +111,7 @@ public class Invoice implements Auditable {
                 ", seller=" + seller +
                 ", buyer=" + buyer +
                 ", grossAmount=" + grossAmount +
-                ", vats=" + vats +
+                ", vats=" + vatRates +
                 ", netAmount=" + netAmount +
                 ", vatsAmount=" + vatsAmount +
                 ", business=" + business +
@@ -167,12 +182,12 @@ public class Invoice implements Auditable {
         return this;
     }
 
-    public List<VATVal> getVats() {
-        return vats;
+    public List<VATRate> getVatRates() {
+        return vatRates;
     }
 
-    public Invoice setVats(List<VATVal> vats) {
-        this.vats = vats;
+    public Invoice setVatRates(List<VATRate> vatRates) {
+        this.vatRates = vatRates;
         return this;
     }
 

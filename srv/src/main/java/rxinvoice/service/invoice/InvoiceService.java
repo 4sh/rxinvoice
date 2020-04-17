@@ -326,41 +326,36 @@ public class InvoiceService {
         blobService.definitiveDelete(attachmentId);
     }
 
-    private void updateAmounts(Invoice invoice) {
-        BigDecimal grossAmount = BigDecimal.ZERO;
-        BigDecimal netAmount = BigDecimal.ZERO;
-        Map<String, VATAmount> vatAmounts = new TreeMap<>();
+    void updateAmounts(Invoice invoice) {
+        BigDecimal invoiceGrossAmount = BigDecimal.ZERO;
+        BigDecimal invoiceNetAmount = BigDecimal.ZERO;
+        Map<BigDecimal, VATAmount> invoiceVATAmounts = new TreeMap<>();
+
         for (Line line : invoice.getLines()) {
-            if (line.getQuantity() != null && line.getUnitCost() != null) {
-                line.setGrossAmount(line.getQuantity().multiply(line.getUnitCost()));
-                grossAmount = grossAmount.add(line.getGrossAmount());
-                BigDecimal vatAmountLine = BigDecimal.ZERO;
-                if (null != line.getVat()
-                        && null != line.getVat().getVat()
-                        && null != line.getVat().getAmount()) {
-                    vatAmountLine = line.getGrossAmount()
-                            .multiply(line.getVat().getAmount()
-                                    .divide(new BigDecimal(100))).setScale(2, RoundingMode.HALF_UP);
-                    String vatName = line.getVat().getVat();
-                    VATAmount vatAmount = vatAmounts.get(vatName);
+            // Update gross amount
+            BigDecimal lineGrossAmount = line.computeGrossAmount();
+            line.setGrossAmount(lineGrossAmount);
+            invoiceGrossAmount = invoiceGrossAmount.add(lineGrossAmount);
 
-                    if (vatAmount == null) {
-                        vatAmount = new VATAmount().setVat(vatName).setAmount(BigDecimal.ZERO);
-                    }
-                    vatAmounts.put(vatName, vatAmount.setAmount(vatAmount.getAmount().add(vatAmountLine)));
+            // Update VAT amounts
+            BigDecimal lineVATAmount = line.computeVatAmount();
+            if (null != line.getVat() && null != line.getVat().getRate()) {
+                VATAmount vatAmount = invoiceVATAmounts.get(line.getVat().getRate());
+                if (null == vatAmount) {
+                    vatAmount = new VATAmount().setLabel(line.getVat().getLabel());
                 }
-                netAmount = netAmount.add(vatAmountLine).add(line.getGrossAmount());
+                invoiceVATAmounts.put(line.getVat().getRate(), vatAmount.setAmount(vatAmount.getAmount().add(lineVATAmount)));
             }
+
+            // Update net amount
+            invoiceNetAmount = invoiceNetAmount.add(invoiceGrossAmount).add(lineVATAmount);
         }
-
-        grossAmount = grossAmount.setScale(2, RoundingMode.HALF_UP);
-
-        invoice.setVatsAmount(new ArrayList<>(vatAmounts.values()));
-        invoice.setGrossAmount(grossAmount);
+        invoice.setGrossAmount(invoiceGrossAmount.setScale(2, RoundingMode.HALF_UP));
+        invoice.setVatsAmount(new ArrayList<>(invoiceVATAmounts.values()));
         if (invoice.isWithVAT()) {
-            invoice.setNetAmount(netAmount.setScale(2, RoundingMode.HALF_UP));
+            invoice.setNetAmount(invoiceNetAmount.setScale(2, RoundingMode.HALF_UP));
         } else {
-            invoice.setNetAmount(grossAmount);
+            invoice.setNetAmount(invoiceGrossAmount);
         }
     }
 

@@ -7,7 +7,7 @@ import java.math.RoundingMode;
 
 public class InvoiceLinePrint {
     private String description;
-    private VATValPrint vat;
+    private VATRatePrint vat;
 
     private String quantity;
     private String unitCost;
@@ -46,11 +46,11 @@ public class InvoiceLinePrint {
         return this;
     }
 
-    public VATValPrint getVat() {
+    public VATRatePrint getVat() {
         return vat;
     }
 
-    public InvoiceLinePrint setVat(VATValPrint vat) {
+    public InvoiceLinePrint setVat(VATRatePrint vat) {
         this.vat = vat;
         return this;
     }

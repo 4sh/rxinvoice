@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 
 public class VATAmount {
 
-    private String vat;
+    private String label;
     @FixedPrecision(2)
-    private BigDecimal amount;
+    private BigDecimal amount = BigDecimal.ZERO;
 
     public VATAmountPrint toVatAmountView() {
         return new VATAmountPrint(this);
@@ -18,21 +18,21 @@ public class VATAmount {
     @Override
     public String toString() {
         return "VATAmount{" +
-                "vat='" + vat + '\'' +
+                "vat='" + label + '\'' +
                 ", amount=" + amount +
                 '}';
     }
 
-    public String getVat() {
-        return vat;
+    public String getLabel() {
+        return label;
     }
 
     public BigDecimal getAmount() {
         return amount;
     }
 
-    public VATAmount setVat(String vat) {
-        this.vat = vat;
+    public VATAmount setLabel(String label) {
+        this.label = label;
         return this;
     }
 

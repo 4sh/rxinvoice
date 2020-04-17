@@ -1,8 +1,8 @@
 package rxinvoice.domain.print;
 
 import restx.i18n.Messages;
+import rxinvoice.domain.company.VATRate;
 import rxinvoice.domain.invoice.VATAmount;
-import rxinvoice.domain.invoice.VATVal;
 import rxinvoice.domain.company.Business;
 import rxinvoice.domain.invoice.Invoice;
 import rxinvoice.domain.invoice.Line;
@@ -21,7 +21,7 @@ public class InvoicePrint {
     private String dueDate;
 
     private boolean withVAT;
-    private List<VATValPrint> vats = new ArrayList<>();
+    private List<VATRatePrint> vats = new ArrayList<>();
     private List<VATAmountPrint> vatsAmount = new ArrayList<>();
     private List<InvoiceLinePrint> lines = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class InvoicePrint {
         this.date = (invoice.getDate() == null) ? "" : PrintUtils.DATE_FORMAT.format(invoice.getDate().toDate());
         this.dueDate = (invoice.getDueDate() == null) ? "" : PrintUtils.DATE_FORMAT.format(invoice.getDueDate().toDate());
         this.withVAT = invoice.isWithVAT();
-        for (VATVal vat : invoice.getVats()) {
+        for (VATRate vat : invoice.getVatRates()) {
             this.vats.add(vat.toVatView());
         }
         for (VATAmount vat : invoice.getVatsAmount()) {
@@ -124,11 +124,11 @@ public class InvoicePrint {
         return this;
     }
 
-    public List<VATValPrint> getVats() {
+    public List<VATRatePrint> getVats() {
         return vats;
     }
 
-    public InvoicePrint setVats(List<VATValPrint> vats) {
+    public InvoicePrint setVats(List<VATRatePrint> vats) {
         this.vats = vats;
         return this;
     }

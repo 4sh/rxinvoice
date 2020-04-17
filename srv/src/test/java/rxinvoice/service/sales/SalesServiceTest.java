@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import restx.factory.Factory;
 import restx.factory.Name;
 import rxinvoice.domain.accountant.AccountantServiceReference;
+import rxinvoice.domain.accountant.AccountantVATRate;
 import rxinvoice.domain.company.CommercialRelationship;
 import rxinvoice.domain.company.SellerSettings;
 import rxinvoice.domain.company.VATRate;
@@ -29,21 +30,23 @@ class SalesServiceTest {
 
     private final ObjectMapper mapper = Factory.getInstance().getComponent(Name.of(ObjectMapper.class, "FrontObjectMapper"));
     private final SalesService salesService = Factory.getInstance().getComponent(SalesService.class);
-    private static VATRate vatRate1;
-    private static VATRate vatRate2;
+    private static AccountantVATRate vatRate1;
+    private static AccountantVATRate vatRate2;
     private static SellerSettings sellerSettings;
 
     @BeforeAll
     public static void buildSellerSettings() {
         sellerSettings = new SellerSettings();
-        vatRate1 = new VATRate()
-                .setRate(BigDecimal.valueOf(20))
+        vatRate1 = new AccountantVATRate();
+        vatRate1
                 .setAccountNumber("445711")
+                .setRate(BigDecimal.valueOf(20))
                 .setLabel("VAT 20 %");
 
-        vatRate2 = new VATRate()
-                .setRate(BigDecimal.valueOf(8.5))
+        vatRate2 = new AccountantVATRate();
+        vatRate2
                 .setAccountNumber("445712")
+                .setRate(BigDecimal.valueOf(8.5))
                 .setLabel("VAT 8.5 %");
 
         AccountantServiceReference accountantServiceReference1 = new AccountantServiceReference()
@@ -57,10 +60,6 @@ class SalesServiceTest {
 
         sellerSettings.getServiceReferenceList().add(accountantServiceReference1);
         sellerSettings.getServiceReferenceList().add(accountantServiceReference2);
-    }
-
-    @Test
-    void exportSales() {
     }
 
     @Test

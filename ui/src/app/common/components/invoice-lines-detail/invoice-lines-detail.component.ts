@@ -3,6 +3,7 @@ import {ControlContainer, NgForm} from '@angular/forms';
 import {InvoiceLineModel} from '../../../models/invoice-line.model';
 import {VATModel} from '../../../models/VAT.model';
 import {LineMoveEvent} from './line-move-event';
+import {VatRateModel} from '../../../models/vat-rate.model';
 
 @Component({
     selector: 'invoice-lines-detail',
@@ -41,7 +42,7 @@ export class InvoiceLinesDetailComponent implements OnInit {
 
     private createNewLine(): InvoiceLineModel {
         let line = new InvoiceLineModel();
-        line.vat = new VATModel();
+        line.vat = new VatRateModel();
         return line;
     }
 

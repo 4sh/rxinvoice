@@ -10,7 +10,7 @@ public class VATAmountPrint {
     private String amount;
 
     public VATAmountPrint(VATAmount vatAmount) {
-        this.vat = vatAmount.getVat();
+        this.vat = vatAmount.getLabel();
         this.amount = PrintUtils.NUMBER_FORMAT.format((vatAmount.getAmount() == null)
                 ? BigDecimal.ZERO
                 : vatAmount.getAmount().setScale(2, RoundingMode.HALF_EVEN));

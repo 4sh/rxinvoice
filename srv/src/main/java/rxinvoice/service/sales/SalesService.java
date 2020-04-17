@@ -70,11 +70,11 @@ public class SalesService {
             return Optional.empty();
         }
         BigDecimal vatRate = null;
-        if (invoice.getVats() != null
-                && !invoice.getVats().isEmpty()
-                && invoice.getVats().get(0) != null
-                && invoice.getVats().get(0).getAmount() != null) {
-            vatRate = invoice.getVats().get(0).getAmount();
+        if (invoice.getVatRates() != null
+                && !invoice.getVatRates().isEmpty()
+                && invoice.getVatRates().get(0) != null
+                && invoice.getVatRates().get(0).getRate() != null) {
+            vatRate = invoice.getVatRates().get(0).getRate();
         }
         SaleLine saleLine = SaleLine.build(invoice);
         Optional<AccountantServiceReference> serviceReferenceOptional =
@@ -95,11 +95,11 @@ public class SalesService {
     public SaleLine extractServiceAccountLine(SellerSettings sellerSettings, Invoice invoice) {
         BigDecimal vatRate = null;
         if (invoice.isWithVAT()
-                && null != invoice.getVats()
-                && !invoice.getVats().isEmpty()
-                && null != invoice.getVats().get(0)
-                && null != invoice.getVats().get(0).getAmount()) {
-            vatRate = invoice.getVats().get(0).getAmount();
+                && null != invoice.getVatRates()
+                && !invoice.getVatRates().isEmpty()
+                && null != invoice.getVatRates().get(0)
+                && null != invoice.getVatRates().get(0).getRate()) {
+            vatRate = invoice.getVatRates().get(0).getRate();
         }
         logger.debug("{}",invoice.getReference());
         Optional<AccountantServiceReference> serviceReferenceOptional = sellerSettings.findServiceReference(invoice.getKind(), vatRate);

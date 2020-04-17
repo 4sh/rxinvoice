@@ -6,7 +6,7 @@ import rxinvoice.domain.enumeration.ServiceKind;
 public class AccountantServiceReference {
 
     private ServiceKind kind;
-    private VATRate vatRate;
+    private AccountantVATRate vatRate;
     private String accountNumber;
 
     @Override
@@ -27,11 +27,11 @@ public class AccountantServiceReference {
         return this;
     }
 
-    public VATRate getVatRate() {
+    public AccountantVATRate getVatRate() {
         return vatRate;
     }
 
-    public AccountantServiceReference setVatRate(VATRate vatRate) {
+    public AccountantServiceReference setVatRate(AccountantVATRate vatRate) {
         this.vatRate = vatRate;
         return this;
     }

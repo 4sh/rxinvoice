@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {InvoiceLineModel} from "../../../../models/invoice-line.model";
-import {VATModel} from "../../../../models/VAT.model";
 import {ControlContainer, NgForm} from "@angular/forms";
 import {LineMoveEvent} from '../line-move-event';
+import {VatRateModel} from '../../../../models/vat-rate.model';
 
 @Component({
     selector: 'invoice-line-form',
@@ -38,7 +38,7 @@ export class InvoiceLineFormComponent implements OnInit {
         }
     }
 
-    public updateVat(vatModel: VATModel) {
+    public updateVat(vatModel: VatRateModel) {
         this.line.vat = vatModel;
     }
 

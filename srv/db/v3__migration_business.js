@@ -41,8 +41,23 @@ if (script) {
            );
         });
         db.getCollection('commercialRelationships').save(commercialRelationship);
-
     });
+
+    db.getCollection('companies').update({}, {
+        $unset: {
+            business: "",
+            vats: "",
+            metrics: "",
+            lastSendDate: "",
+            lastPaymentDate: "",
+            lastSentInvoice: "",
+            lastPaidInvoice: "",
+            detail: "",
+            legalNotice: "",
+            showLegalNoticeForeignBuyer: ""
+
+        }
+    }, {multi: true});
     db.getCollection('scripts').save(
         {
             _id: "v3__migration_business.js",

@@ -1,6 +1,8 @@
 package rxinvoice.domain.company;
 
 import restx.jackson.FixedPrecision;
+import rxinvoice.domain.print.VATRatePrint;
+import rxinvoice.domain.print.VATValPrint;
 
 import java.math.BigDecimal;
 
@@ -19,17 +21,12 @@ public class VATRate {
      */
     @FixedPrecision(2)
     private BigDecimal rate;
-    /**
-     * VAT account number used to aggregate VAT amounts into specific accounts for VAT declaration.
-     */
-    private String accountNumber;
 
     @Override
     public String toString() {
         return "VATRate{" +
                 "label='" + label + '\'' +
                 ", rate=" + rate +
-                ", accountNumber='" + accountNumber + '\'' +
                 '}';
     }
 
@@ -51,12 +48,7 @@ public class VATRate {
         return this;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public VATRate setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-        return this;
+    public VATRatePrint toVatView() {
+        return new VATRatePrint(this);
     }
 }
