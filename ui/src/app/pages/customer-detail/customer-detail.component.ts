@@ -4,7 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {CompanyService} from '../../common/services/company.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as Moment from 'moment';
-import {SweetAlertService} from '../../common/services/sweetAlert.service';
+import {SweetAlertService} from '../../modules/shared/services/sweetAlert.service';
 import {AuthenticationService} from '../../common/services/authentication.service';
 import 'rxjs/add/operator/filter';
 import {Location} from '@angular/common';

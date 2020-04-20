@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../common/services/authentication.service';
-import {SweetAlertService} from '../../common/services/sweetAlert.service';
+import {SweetAlertService} from '../../modules/shared/services/sweetAlert.service';
 
 @Component({
     selector: 'login',

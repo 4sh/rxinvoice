@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BlobModel} from '../../../models/blob.model';
 import { FileUploader} from 'ng2-file-upload';
 import 'rxjs/add/observable/of';
-import {SweetAlertService} from '../../services/sweetAlert.service';
+import {SweetAlertService} from '../../../modules/shared/services/sweetAlert.service';
 
 @Component({
     selector: 'attachments-detail',

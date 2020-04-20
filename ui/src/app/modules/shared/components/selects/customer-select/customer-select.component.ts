@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CompanyModel} from '../../../../models/company.model';
-import {CompanyService} from '../../../services/company.service';
+import {CompanyModel} from '../../../../../models/company.model';
+import {CompanyService} from '../../../../../common/services/company.service';
 import {FormControl} from '@angular/forms';
 
 @Component({

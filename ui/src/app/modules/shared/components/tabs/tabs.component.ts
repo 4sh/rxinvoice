@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
 import {TabComponent} from './tab.component';
 import {Router} from '@angular/router';
-import {AbstractComponent} from '../abstract-component';
+import {AbstractComponent} from '../../../../common/components/abstract-component';
 
 @Component({
     selector: 'tabs',

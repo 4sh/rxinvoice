@@ -1,7 +1,7 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {User} from '../../../../models/user.model';
-import {UserService} from '../../../services/user.service';
+import {User} from '../../../../../models/user.model';
+import {UserService} from '../../../../../common/services/user.service';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

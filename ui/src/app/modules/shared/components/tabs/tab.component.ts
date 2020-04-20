@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Inject, Input, Output } from '@angular/core';
 import { TabsComponent } from './tabs.component';
-import {AbstractComponent} from '../abstract-component';
+import {AbstractComponent} from '../../../../common/components/abstract-component';
 
 @Component({
     selector: 'tab',

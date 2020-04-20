@@ -1,7 +1,7 @@
 import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {CompanyService} from "../../../services/company.service";
-import {VatRateModel} from '../../../../models/vat-rate.model';
+import {CompanyService} from "../../../../../common/services/company.service";
+import {VatRateModel} from '../../../../../models/vat-rate.model';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
