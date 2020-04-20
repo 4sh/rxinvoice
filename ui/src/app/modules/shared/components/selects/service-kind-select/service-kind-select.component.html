@@ -1,0 +1,8 @@
+<ng-select
+        [items]="items"
+        [bindLabel]="'label'"
+        [clearable]="false"
+        [ngModel]="selectedItem"
+        placeholder="{{'service.kind'|translate}}"
+        (ngModelChange)="onChange($event)">
+</ng-select>
