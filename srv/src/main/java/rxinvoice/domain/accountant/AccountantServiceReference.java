@@ -1,6 +1,5 @@
 package rxinvoice.domain.accountant;
 
-import rxinvoice.domain.company.VATRate;
 import rxinvoice.domain.enumeration.ServiceKind;
 
 public class AccountantServiceReference {
