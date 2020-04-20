@@ -1,0 +1,109 @@
+@import '../../../styles/base-component';
+
+@include new('title') {
+    padding: rem-calc(0px 32px 24px 32px);
+    font-weight: bold;
+    color: white;
+    font-size: rem-calc(30px);
+}
+
+@include new('headerContainer') {
+    height: 17vh;
+    background: linear-gradient(96deg, $app-main-color 0%, $app-main-light-color 100%);
+    padding: rem-calc(24px 0);
+    background: white;
+}
+
+@include new('graphContainer') {
+    margin: rem-calc(52px 32px);
+    padding: rem-calc(0 24px 64px 24px);
+    border-radius: 4px;
+    box-shadow: 0px 1px 16px 0px rgba(230, 230, 230, 0.75);
+
+    @include has('wrapper') {
+        height: rem-calc(250px);
+
+        @include has('title') {
+            display: flex;
+            align-items: center;
+
+            i {
+                position: relative;
+                font-size: rem-calc(20px);
+                z-index: 1;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    left: -9px;
+                    top: -2px;
+                    height: rem-calc(32px);
+                    width: rem-calc(32px);
+                    border-radius: rem-calc(2px);
+                    z-index: -1;
+                }
+
+                &.green {
+                    color: $sushi;
+
+                    &:after {
+                        background: rgba($sushi, 0.2);
+                    }
+                }
+
+                &.orange {
+                    color: $coral;
+
+                    &:after {
+                        background: rgba($coral, 0.2);
+                    }
+                }
+
+                &.pink {
+                    color: $lavender;
+
+                    &:after {
+                        background: rgba($lavender, 0.2);
+                    }
+                }
+            }
+
+            h6 {
+                margin-left: rem-calc(16px);
+            }
+        }
+
+        @include has('content') {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+
+            .nb {
+                font-size: rem-calc(30px);
+                color: black;
+            }
+
+            .title-section {
+                font-size: rem-calc(14px);
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+
+.wrapper {
+    margin: rem-calc(0 32px);
+}
+
+.title {
+    color: inherit;
+    padding: rem-calc(32px 0 0 0);
+
+}
+
+h5 {
+    font-weight: bold;
+    margin: rem-calc(16px 0);
+}

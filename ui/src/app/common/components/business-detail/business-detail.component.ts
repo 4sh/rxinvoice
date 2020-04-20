@@ -1,37 +1,37 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {BusinessModel} from '../../../models/business.model';
-import {plainToClass} from 'class-transformer';
+import {Business} from '../../../domain/commercial-relationship/business';
+import * as _ from 'lodash';
 
 @Component({
-  selector: 'business-detail',
-  templateUrl: './business-detail.component.html',
-  styleUrls: ['./business-detail.component.scss']
+    selector: 'business-detail',
+    templateUrl: './business-detail.component.html',
+    styleUrls: ['./business-detail.component.scss']
 })
 export class BusinessDetailComponent implements OnInit {
 
-    @Input() business: BusinessModel[];
+    @Input() businessList: Business[];
     @Input() editMode: boolean;
-    @Output() businessChange: EventEmitter<BusinessModel[]> = new EventEmitter();
-    @ViewChild('bsnForm') bsnForm: FormGroup;
+    @Output() businessChange: EventEmitter<Business[]> = new EventEmitter();
 
-  constructor() { }
+    public newBusiness: Business = new Business();
 
-  ngOnInit() {
-      if (!this.business) { this.business = []; }
-  }
+    constructor() {
+    }
+
+    ngOnInit() {
+        if (!this.businessList) {
+            this.businessList = [];
+        }
+    }
 
     public addBusiness() {
-        const newBusiness = plainToClass(BusinessModel, this.bsnForm.value as Object);
-        this.business.push(newBusiness);
-        this.businessChange.emit(this.business);
-        this.bsnForm.reset();
+        this.businessList.push(_.cloneDeep(this.newBusiness));
+        this.newBusiness = new Business();
+        this.businessChange.emit(this.businessList);
     }
 
     public deletedBusiness(bsnToRemove) {
-        this.business = this.business.filter(bsn => bsn !== bsnToRemove);
-        this.businessChange.emit(this.business);
-        this.bsnForm.reset();
+        this.businessList = this.businessList.filter(bsn => bsn !== bsnToRemove);
+        this.businessChange.emit(this.businessList);
     }
-
 }

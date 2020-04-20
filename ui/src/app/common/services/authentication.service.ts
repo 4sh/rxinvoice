@@ -1,63 +1,78 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
 import {Md5} from 'ts-md5/dist/md5';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
-import {User} from '../../models/user.model';
+import {User} from '../../domain/user/user';
+import {Company} from '../../domain/company/company';
+import {CompanyService} from './company.service';
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticationService {
 
-  public userEvents: BehaviorSubject<User> = new BehaviorSubject<User>(undefined);
-  private onAuth: Subject<User> = new Subject<User>();
-  private baseUrl = '/api/sessions';
+    private baseUrl = '/api/sessions';
 
-  constructor(private router: Router,
-              private http: HttpClient) {
-  }
+    public userEvents: BehaviorSubject<User> = new BehaviorSubject<User>(undefined);
+    public companyEvents: BehaviorSubject<Company> = new BehaviorSubject<Company>(undefined);
 
-  public authenticate(login: { name: string, password: string }): Observable<User> {
-    const md5 = new Md5().appendStr(login.password).end();
-    const authPayload = {principal: {name: login.name, passwordHash: md5}};
-    this.http.post(this.baseUrl, authPayload, {withCredentials: true})
-      .map((result: any) => result.principal)
-      .subscribe(
-        (user: User) => {
-          this.userEvents.next(user);
-          this.onAuth.next(user);
-        }, (error) => {
-          this.onAuth.next(null);
-        }
-      );
-    return this.onAuthentication();
-  }
+    constructor(private router: Router,
+                private companyService: CompanyService,
+                private http: HttpClient) {
+    }
 
-  public fetchCurrent() {
-      this.http.get(this.baseUrl + '/current', { withCredentials: true })
-      .map((result: any) => result.principal)
-      .subscribe(
-        (user: User) => this.userEvents.next(user),
-        () => this.userEvents.next(null)
-      );
-      return this.userEvents;
-  }
+    public authenticate(login: { name: string, password: string }): Observable<User> {
+        const md5 = new Md5().appendStr(login.password).end();
 
-  public current(): User {
-    return this.userEvents.getValue();
-  }
+        const authPayload = {principal: {name: login.name, passwordHash: md5}};
 
-  public onAuthentication(): Observable<User> {
-    return this.onAuth.asObservable();
-  }
+        this.http.post(this.baseUrl, authPayload, {withCredentials: true}).pipe(
+            map((result: any) => result.principal),
+            tap((user: User) => this.userEvents.next(user)),
+            switchMap(user => this.companyService.fetchCompany(user.companyRef)))
+            .subscribe(company =>
+                    this.companyEvents.next(company),
+                () => {
+                        this.userEvents.next(undefined),
+                        this.companyEvents.next(undefined)
+                });
+        return this.userEvents;
+    }
 
-  public logout(): void {
-    this.http.delete(this.baseUrl + '/current').subscribe(() => {
-      console.log('session destroyed');
-      this.userEvents.next(null);
-        this.router.navigate(['/login']);
-    });
-  }
+    public fetchCurrent(): Observable<User> {
+        this.http.get(this.baseUrl + '/current', {withCredentials: true}).pipe(
+            map((result: any) => result.principal))
+            .subscribe((user: User) => {
+                this.userEvents.next(user);
+                this.companyService.fetchCompany(user.companyRef)
+                    .subscribe(company => this.companyEvents.next(company))
+            });
+            // tap((user: User) => this.userEvents.next(user)),
+            // switchMap(user => this.companyService.fetchCompany(user.companyRef)))
+            // .subscribe(company =>
+            //         c
+            //     () => {
+            //         this.userEvents.next(undefined),
+            //             this.companyEvents.next(undefined)
+            //     });
+        return this.userEvents;
+    }
+
+    public getCurrentUser(): User {
+        return this.userEvents.getValue();
+    }
+
+    public getCurrentCompany(): Company {
+        return this.companyEvents.getValue();
+    }
+
+    public logout(): void {
+        this.http.delete(this.baseUrl + '/current').subscribe(() => {
+            this.userEvents.next(undefined);
+            this.companyEvents.next(undefined);
+            this.router.navigate(['/login']);
+        });
+    }
 }

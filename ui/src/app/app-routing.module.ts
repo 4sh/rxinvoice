@@ -9,6 +9,7 @@ import {CustomerDetailComponent} from './pages/customer-detail/customer-detail.c
 import {InvoiceDetailComponent} from './pages/invoice-detail/invoice-detail.component';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 import {GuideRoutes} from './style-guide-module/guide.routes';
+import {AnalyzeComponent} from './pages/analyze/analyze.component';
 
 const routes: Routes = [
     {path: 'login', pathMatch: 'full', component: LoginComponent},
@@ -24,12 +25,16 @@ const routes: Routes = [
             {path: 'customers', component: CustomersComponent},
             {path: 'customers/new', component: CustomerDetailComponent},
             {path: 'customers/detail/:id', component: CustomerDetailComponent},
+            {path: 'analyze', component: AnalyzeComponent},
+            {
+                path: 'seller-settings', loadChildren: './modules/referential/referential-routing.module#ReferentialRoutingModule'
+            },
             {path: '**', redirectTo: '/app/dashboard'}
 
         ]
     },
     {path: '', redirectTo: '/app/dashboard', pathMatch: 'full'},
-    {path: 'style', children: GuideRoutes},
+    {path: 'style', children: GuideRoutes}
 ];
 
 @NgModule({

@@ -28,8 +28,6 @@
             <span class="invoiceList-value">{{invoice.grossAmount | currency:'EUR':'symbol':'1.2-2':'fr'}}</span>
         </td>
         <td (click)="goToDetail(invoice)" class="text-click">
-            <span class="invoiceList-label">{{'invoices.label.tva' | translate}}: </span>
-            <span class="invoiceList-value">{{invoice.vats[0]?.amount ? invoice.vats[0]?.amount : '0.00'}} %</span>
         </td>
         <td>
             <span class="invoiceList-label">{{'invoices.label.status' | translate}}</span>
@@ -66,9 +64,6 @@
             <div class="invoiceList-value text-click status {{invoice.status}}" (click)="quickUpdate.emit(invoice)">{{ 'invoice.status.' + invoice.status | translate}}</div>
         </td>
         <td rowspan="2">
-            <button class="button btn small primary force-inner-space-left-2 force-inner-space-right-2">
-                {{'invoices.label.4pm' | translate}}
-            </button>
         </td>
     </tr>
     </tbody>

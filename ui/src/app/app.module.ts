@@ -1,5 +1,5 @@
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {CustomerSelectComponent} from './common/components/selects/customer-select/customer-select.component';
+import {CustomerSelectComponent} from './modules/shared/components/selects/customer-select/customer-select.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgModule} from '@angular/core';
 import {DebounceDirective} from './common/directives/debounce.directive';
@@ -30,28 +30,27 @@ import {CompanyService} from './common/services/company.service';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 import {AuthenticationService} from './common/services/authentication.service';
 import {HttpInterceptorService} from './common/services/http-interceptor.service';
-import {InDatePickerComponent} from './common/components/date-picker/date-picker.component';
-import { InvoiceLinesDetailComponent } from './common/components/invoice-lines-detail/invoice-lines-detail.component';
-import { SpinnerComponent } from './common/components/spinner/spinner.component';
-import { AttachmentsDetailComponent } from './common/components/attachments-detail/attachments-detail.component';
-import { ActivityPanelComponent } from './common/components/activity-panel/activity-panel.component';
-import {TabComponent} from './common/components/tabs/tab.component';
-import {TabsComponent} from './common/components/tabs/tabs.component';
+import {InvoiceLinesDetailComponent} from './common/components/invoice-lines-detail/invoice-lines-detail.component';
+import {AttachmentsDetailComponent} from './common/components/attachments-detail/attachments-detail.component';
+import {ActivityPanelComponent} from './common/components/activity-panel/activity-panel.component';
 import {ActivityService} from './common/services/activity.service';
-import {SweetAlertService} from './common/services/sweetAlert.service';
 import {FileUploadModule} from 'ng2-file-upload';
-import {ToggleComponent} from './common/components/toggle-boolean/toggle.component';
 import {OrderByPipe} from './common/pipes/orderBy.pipe';
 import {DownloadInvoiceService} from './common/services/download-invoice.service';
-import {QuickStatusEditPanelComponent
+import {
+    QuickStatusEditPanelComponent
 } from './common/components/quick-status-edit-panel/quick-status-edit-panel.component';
 import {StyleGuideModule} from './style-guide-module/style-guide.module';
-import {DpDatePickerModule} from "ng2-date-picker";
-import { VatSelectComponent } from './common/components/selects/vat-select/vat-select.component';
-import { InvoiceLineFormComponent } from './common/components/invoice-lines-detail/invoice-line-form/invoice-line-form.component';
-import { InvoiceLineHeaderComponent } from './common/components/invoice-lines-detail/invoice-line-header/invoice-line-header.component';
-import {SpacerComponent} from './common/components/spacer/spacer.component';
-
+import {VatSelectComponent} from './modules/shared/components/selects/vat-select/vat-select.component';
+import {InvoiceLineFormComponent} from './common/components/invoice-lines-detail/invoice-line-form/invoice-line-form.component';
+import {InvoiceLineHeaderComponent} from './common/components/invoice-lines-detail/invoice-line-header/invoice-line-header.component';
+import {UserSelectComponent} from './modules/shared/components/selects/user-select/user-select.component';
+import {UserService} from './common/services/user.service';
+import {AnalyzeComponent} from './pages/analyze/analyze.component';
+import {YearSelectComponent} from './modules/shared/components/selects/year-select/year-select.component';
+import {MonthSelectComponent} from './modules/shared/components/selects/month-select/month-select.component';
+import {ReferentialModule} from './modules/referential/referential.module';
+import {SharedModule} from './modules/shared/shared.module';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/i18n/', 'labels.json');
@@ -81,19 +80,17 @@ export function createTranslateLoader(http: HttpClient) {
         CustomerDetailComponent,
         InvoiceDetailComponent,
         CustomerSelectComponent,
-        InDatePickerComponent,
         InvoiceLinesDetailComponent,
-        SpinnerComponent,
         AttachmentsDetailComponent,
         ActivityPanelComponent,
-        TabComponent,
-        TabsComponent,
-        ToggleComponent,
         QuickStatusEditPanelComponent,
         VatSelectComponent,
         InvoiceLineFormComponent,
         InvoiceLineHeaderComponent,
-        SpacerComponent
+        UserSelectComponent,
+        AnalyzeComponent,
+        YearSelectComponent,
+        MonthSelectComponent
     ],
     imports: [
         AppRoutingModule,
@@ -102,10 +99,11 @@ export function createTranslateLoader(http: HttpClient) {
         ReactiveFormsModule,
         CommonModule,
         HttpClientModule,
-        NgSelectModule,
-        DpDatePickerModule,
         StyleGuideModule,
         FileUploadModule,
+        ReferentialModule,
+        SharedModule,
+        NgSelectModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -122,8 +120,8 @@ export function createTranslateLoader(http: HttpClient) {
         LoggedInGuard,
         AuthenticationService,
         ActivityService,
-        SweetAlertService,
         DownloadInvoiceService,
+        UserService,
         DatePipe,
         CurrencyPipe,
         {
@@ -134,4 +132,5 @@ export function createTranslateLoader(http: HttpClient) {
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {plainToClass} from 'class-transformer';
-import {VATModel} from '../../../models/VAT.model';
+import {VatRate} from '../../../domain/common/vat-rate';
 
 @Component({
     selector: 'vat-detail',
@@ -10,9 +10,9 @@ import {VATModel} from '../../../models/VAT.model';
 })
 export class VatDetailComponent implements OnInit {
 
-    @Input() vats: VATModel[];
+    @Input() vats: VatRate[];
     @Input() editMode: boolean;
-    @Output() vatsChange: EventEmitter<VATModel[]> = new EventEmitter();
+    @Output() vatsChange: EventEmitter<VatRate[]> = new EventEmitter();
     @ViewChild('vatForm') vatForm: FormGroup;
 
   constructor() { }
@@ -22,7 +22,7 @@ export class VatDetailComponent implements OnInit {
     }
 
     public addVat() {
-        const newVat = plainToClass(VATModel, this.vatForm.value as Object);
+        const newVat = plainToClass(VatRate, this.vatForm.value as Object);
         this.vats.push(newVat);
         this.vatsChange.emit(this.vats);
         this.vatForm.reset();

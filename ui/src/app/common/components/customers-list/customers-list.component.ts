@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CompanyModel} from '../../../models/company.model';
+import {Company} from '../../../domain/company/company';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class CustomersListComponent implements OnInit {
 
-  @Input() companies: CompanyModel[];
+  @Input() companies: Company[];
   @Input() isPending: boolean;
 
   constructor(private router: Router) { }

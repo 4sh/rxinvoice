@@ -11,12 +11,11 @@
     </div>
 
     <div class="row newCustomerDetail" [ngClass]="{'mode-edit': editMode}">
-        <form #f="ngForm" (submit)="save()" novalidate class="column small-10">
+        <form #customerForm="ngForm" (submit)="save()" novalidate class="column small-10">
 
             <div class="column row newCustomerDetail-container dark caInfos">
                 <span class="caInfos-period">{{'ca.fiscal.year' | translate}} {{companyFiscalYearBounds}}</span>
                 <div class="column small-24">
-                    <!-- TODO add vats management / legalNotice / kind / fiscalYearModel ?-->
                     <div class="row align-middle newCustomerDetail-container-labelNumber">
                         <h6 class="column small-12 no-border">{{'newCustomer.label.caInvoiced' | translate}}</h6>
                         <h6 class="column small-12 no-border">{{'newCustomer.label.caFixed' | translate}}</h6>
@@ -40,7 +39,25 @@
                     <h6 class="column small-8"> {{'company.name' | translate}} *</h6>
                     <div class="column">
                         <input type="text" class="form-control"
-                               [disabled]='!editMode' ngModel name="name" required>
+                               [disabled]='!editMode' [(ngModel)]="customer.name" name="name" required>
+                    </div>
+                </div>
+
+                <div class="row align-middle newCustomerDetail-container-label">
+                    <h6 class="column small-8"> {{'company.accountant.reference' | translate}} *</h6>
+                    <div class="column">
+                        <input type="text" class="form-control"
+                               [disabled]='!editMode' *ngIf="customer.commercialRelationship"
+                               [(ngModel)]="customer.commercialRelationship.accountantReference"
+                               name="accountantReference" required>
+                    </div>
+                </div>
+
+                 <div class="row align-middle newCustomerDetail-container-label">
+                    <h6 class="column small-8"> {{'newCustomer.label.siren' | translate}} *</h6>
+                    <div class="column">
+                        <input type="text" class="form-control"
+                               [disabled]='isSirenDisabled()' [(ngModel)]="customer.siren" name="siren" required>
                     </div>
                 </div>
 
@@ -48,47 +65,59 @@
                     <h6 class="column small-8"> {{'newCustomer.label.mail' | translate}} *</h6>
                     <div class="column">
                         <input type="email" pattern="[^ @]*@[^ @]*" class="form-control"
-                               [disabled]='!editMode' ngModel name="emailAddress" required>
+                               [disabled]='!editMode' [(ngModel)]="customer.emailAddress" name="emailAddress" required>
                     </div>
                 </div>
 
                 <div class="row align-middle newCustomerDetail-container-label">
                     <h6 class="column small-8"> {{'newCustomer.label.address' | translate}}</h6>
                     <div class="column">
-                        <address-input [editMode]="editMode"></address-input>
+                        <address-input name="address"
+                                       [(ngModel)]="customer.address"
+                                       [editMode]="editMode">
+                        </address-input>
+                    </div>
+                </div>
+
+                <div class="row align-middle newCustomerDetail-container-label">
+                    <h6 class="column small-8"> {{'newCustomer.manager' | translate}}</h6>
+                    <div class="column">
+                        <user-select name="customerManager" *ngIf="customer && customer.commercialRelationship"
+                                [(ngModel)]="customer.commercialRelationship.customerManagerRef"></user-select>
                     </div>
                 </div>
 
                 <div class="row align-middle newCustomerDetail-container-label">
                     <h6 class="column small-8"> {{'newCustomer.label.lastSent' | translate}}</h6>
                     <div class="column">
-                        {{customer.lastSendDate | date: 'dd MMM. yyyy'}}
+                        {{customer?.commercialRelationship?.lastSendDate | date: 'dd MMM. yyyy'}}
                     </div>
                 </div>
 
                 <div class="row align-middle newCustomerDetail-container-label">
                     <h6 class="column small-8"> {{'newCustomer.label.lastPayment' | translate}}</h6>
                     <div class="column">
-                        {{customer.lastPaymentDate | date: 'dd MMM. yyyy'}}
+                        {{customer?.commercialRelationship?.lastPaymentDate | date: 'dd MMM. yyyy'}}
                     </div>
                 </div>
                 <div class="row align-middle newCustomerDetail-container-label">
                     <h6 class="column small-8"> {{'newCustomer.label.legalNotice' | translate}}</h6>
                     <div class="column small-16">
-                        <textarea type="text" class="form-control"
+                        <textarea type="text" class="form-control" *ngIf="customer.commercialRelationship"
                                   rows="10" cols="50"
-                                  [disabled]='!editMode' ngModel name="legalNotice">
-
+                                  [(ngModel)]="customer.commercialRelationship.legalNotice"
+                                  [disabled]='!editMode' name="legalNotice">
                         </textarea>
                     </div>
                 </div>
                 <div class="row align-middle newCustomerDetail-container-label">
                     <h6 class="column small-8"> {{'newCustomer.label.detail' | translate}}</h6>
                     <div class="column small-16">
-                        <textarea type="text" class="form-control"
+                        <textarea type="text" class="form-control" *ngIf="customer.commercialRelationship"
                                   rows="10" cols="50"
-                                  [disabled]='!editMode' ngModel name="detail">
-
+                                  [disabled]='!editMode'
+                                  [(ngModel)]="customer.commercialRelationship.detail"
+                                  name="detail">
                         </textarea>
                     </div>
                 </div>
@@ -97,10 +126,14 @@
 
         <div class="column shrink space-left-24"></div>
 
-        <div class="column auto" *ngIf="customer">
-            <business-detail class="newCustomerDetail-container" [(business)]="customer.business"
+        <div class="column auto" *ngIf="customer && customer.commercialRelationship">
+            <business-detail class="newCustomerDetail-container"
+                             [businessList]="customer.commercialRelationship.businessList"
                              [editMode]="editMode"></business-detail>
-            <vat-detail class="newCustomerDetail-container" [(vats)]="customer.vats" [editMode]="editMode"></vat-detail>
+            <vat-detail class="newCustomerDetail-container"
+                        [(vats)]="customer.commercialRelationship.vatRates"
+                        [editMode]="editMode">
+            </vat-detail>
         </div>
     </div>
 
@@ -117,7 +150,7 @@
                                     class="button medium green ripple"
                                     type="submit"
                                     (click)="customer && customer._id  ? save() : create()"
-                                    [disabled]="f.invalid || f.pending">
+                                    [disabled]="customerForm.invalid || customerForm.pending">
                                 <i class="ion-checkmark-round"></i>
                                 {{( !customer ? 'button.label.create' : 'button.label.save') |
                                 translate}}
@@ -126,7 +159,7 @@
                                     (click)="editMode = true"
                                     class="button medium green ripple">
                                 <i class="ion-edit"></i>
-                                Modifier
+                                {{'button.label.update'|translate}}
                             </button>
                         </div>
 
@@ -156,12 +189,14 @@
                             <div class="row align-right newCustomerAction-container-number-label total-value">
                                 <h6 class="column auto"><i class="ion-android-checkmark-circle"></i>{{'newCustomer.label.totalInvoiced'
                                     | translate}} :</h6>
-                                <span class="total-nb">{{(customer?.metrics?.invoiced + customer?.metrics?.paid + customer?.metrics?.expired)| currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                                <span class="total-nb">{{(customer?.commercialRelationship?.companyMetrics?.global?.invoiced
+                                    + customer?.commercialRelationship?.companyMetrics?.global?.paid
+                                    + customer?.commercialRelationship?.companyMetrics?.global?.expired)| currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
 
                             </div>
                             <div class="row align-middle newCustomerAction-container-number-label total-value">
                                 <h6 class="column auto"><i class="ion-arrow-graph-down-right"></i>{{'newCustomer.label.totalDebt' | translate}} :</h6>
-                                <span class="total-nb">{{customer?.metrics?.expired | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                                <span class="total-nb">{{customer?.commercialRelationship?.companyMetrics?.global?.expired | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,9 @@
 package rxinvoice.service.invoice;
 
 import com.google.common.collect.Lists;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.joda.time.DateTime;
 import restx.factory.Component;
 import restx.i18n.Messages;
 import rxinvoice.domain.invoice.VATAmount;
@@ -15,10 +12,11 @@ import rxinvoice.domain.invoice.Invoice;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.stream.Collectors;
+
+import static rxinvoice.service.utils.ExcelExportUtils.createCell;
 
 @Component
 public class InvoiceExportService {
@@ -101,25 +99,5 @@ public class InvoiceExportService {
         createCell(row, GROSS_AMOUNT, messages.getMessage("invoice.lines.grossAmount", Locale.FRENCH));
         createCell(row, NET_AMOUNT, messages.getMessage("invoice.lines.netAmount", Locale.FRENCH));
         createCell(row, VAT, messages.getMessage("invoice.vats", Locale.FRENCH));
-    }
-
-    private void createCell(XSSFRow row , int cellIndex, String value) {
-        if (value != null) {
-            row.createCell(cellIndex).setCellValue(value);
-        }
-    }
-
-    private void createCell(XSSFRow row , int cellIndex, BigDecimal value) {
-        if (value != null) {
-            XSSFCell cell = row.createCell(cellIndex);
-            cell.setCellType(CellType.NUMERIC);
-            cell.setCellValue(value.doubleValue());
-        }
-    }
-
-    private void createCell(XSSFRow row , int cellIndex, DateTime value) {
-        if (value != null) {
-            row.createCell(cellIndex).setCellValue(new SimpleDateFormat("dd/MM/yyyy").format(value.toDate()));
-        }
     }
 }

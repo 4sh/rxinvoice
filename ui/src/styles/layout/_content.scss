@@ -26,7 +26,8 @@
 .block-container {
   margin-top: rem-calc(12px);
   padding: rem-calc(16px);
-  box-shadow: 0 1px 5px $silver-rust;
   background-color: white;
+  border: rem-calc(1px) solid #ececec;
   border-radius: $global-radius;
+  z-index: -1;
 }

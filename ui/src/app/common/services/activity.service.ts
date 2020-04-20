@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {plainToClass} from 'class-transformer';
 import {HttpClient} from '@angular/common/http';
-import {ActivityModel} from '../../models/activity.model';
+import {Activity} from '../../domain/common/activity';
 
 @Injectable()
 export class ActivityService {
@@ -12,10 +12,10 @@ export class ActivityService {
     constructor(private http: HttpClient) {
     }
 
-    public fetchActivities(): Observable<ActivityModel[]> {
+    public fetchActivities(): Observable<Activity[]> {
         return this.http
             .get(`${this.baseUrl}/latest`)
-            .map((result: any) => plainToClass(ActivityModel, result as Object[]))
+            .map((result: any) => plainToClass(Activity, result as Object[]))
             .catch((response: Response) => Observable.throw({ message: 'Unable to fetch activities', response: response }));
     }
 

@@ -7,6 +7,7 @@ import org.jongo.marshall.jackson.oid.ObjectId;
 import restx.exceptions.ErrorCode;
 import restx.exceptions.ErrorField;
 import restx.security.RestxPrincipal;
+import rxinvoice.AppModule;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -82,6 +83,10 @@ public class User implements RestxPrincipal {
                 ", roles=" + roles +
                 ", companyRef='" + companyRef + '\'' +
                 '}';
+    }
+
+    public boolean isSeller() {
+        return this.roles != null && this.roles.contains(AppModule.Roles.SELLER);
     }
 
     public static class Rules {

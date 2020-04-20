@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {InvoiceStatusType} from '../../models/invoice-status.type';
-import {InvoiceKindType} from '../../models/invoice-kind.type';
-import {InvoiceModel} from '../../models/invoice.model';
+import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
+import {ServiceKind} from '../../domain/common/service.kind';
+import {Invoice} from '../../domain/invoice/invoice';
 import {InvoiceService} from '../../common/services/invoice.service';
 import {RepositoryService} from '../../common/services/repository.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/debounce';
 import 'rxjs/add/operator/debounceTime';
 import {CurrencyPipe} from '@angular/common';
 import * as moment from 'moment';
-import {SearchParams} from "../../models/search-params.model";
+import {SearchParams} from "../../domain/search-params";
 
 @Component({
     selector: 'invoices',
@@ -21,13 +21,13 @@ export class InvoicesComponent implements OnInit {
 
     public searchForm: FormGroup;
 
-    public invoices: InvoiceModel[];
+    public invoices: Invoice[];
     public statusTypes: InvoiceStatusType[];
-    public kinds: InvoiceKindType[];
+    public kinds: ServiceKind[];
     public filterString = 'reference';
     public isPending = true;
     public showQuickPanelStatusEdit = false;
-    public selectedForQuickUpdate: InvoiceModel;
+    public selectedForQuickUpdate: Invoice;
 
     constructor(private fb: FormBuilder,
                 private invoiceService: InvoiceService,
@@ -95,7 +95,7 @@ export class InvoicesComponent implements OnInit {
         this.research();
     }
 
-    public updatedInvoice(invoice: InvoiceModel) {
+    public updatedInvoice(invoice: Invoice) {
         this.invoiceService.saveInvoice(invoice)
             .subscribe(value => {
                 this.selectedForQuickUpdate = value;

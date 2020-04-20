@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CompanyService} from '../../common/services/company.service';
-import {CompanyModel} from '../../models/company.model';
+import {Company} from '../../domain/company/company';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class CustomersComponent implements OnInit {
 
-   public companies: CompanyModel[];
+   public companies: Company[];
    public filterString: string;
    public isPending = true;
    public query: string;
@@ -50,9 +50,9 @@ export class CustomersComponent implements OnInit {
     }
 
     public getNumberOfBusiness(): number {
-        if (this.companies) {
-            return this.companies.filter(company => company.business)
-                .map(company => company.business.length)
+        if (this.companies && this.companies.length) {
+            return this.companies.filter(company => company.commercialRelationship.businessList)
+                .map(company => company.commercialRelationship.businessList.length)
                 .reduce((a, b) => a + b, 0);
         } else {
             return 0;

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BlobModel} from '../../../models/blob.model';
+import {Blob} from '../../../domain/blob';
 import { FileUploader} from 'ng2-file-upload';
 import 'rxjs/add/observable/of';
-import {SweetAlertService} from '../../services/sweetAlert.service';
+import {SweetAlertService} from '../../../modules/shared/services/sweetAlert.service';
 
 @Component({
     selector: 'attachments-detail',
@@ -12,7 +12,7 @@ import {SweetAlertService} from '../../services/sweetAlert.service';
 export class AttachmentsDetailComponent implements OnInit {
 
     @Input() invoiceId: string;
-    @Input() attachments: BlobModel[];
+    @Input() attachments: Blob[];
     @Input() editMode = false;
     @Output() attachmentsChange: EventEmitter<null> = new EventEmitter();
     @Output() deleteFile: EventEmitter<string> = new EventEmitter();

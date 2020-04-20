@@ -1,0 +1,7 @@
+<ng-select
+        [items]="yearsList"
+        [clearable]="false"
+        [ngModel]="year"
+        placeholder="{{'month.select.placeholder'|translate}}"
+        (ngModelChange)="onChange($event)">
+</ng-select>

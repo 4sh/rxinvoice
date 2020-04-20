@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {InvoiceLineModel} from '../../../models/invoice-line.model';
-import {VATModel} from '../../../models/VAT.model';
+import {InvoiceLine} from '../../../domain/invoice/invoice-line';
 import {LineMoveEvent} from './line-move-event';
+import {VatRate} from '../../../domain/common/vat-rate';
 
 @Component({
     selector: 'invoice-lines-detail',
@@ -12,14 +12,14 @@ import {LineMoveEvent} from './line-move-event';
 })
 export class InvoiceLinesDetailComponent implements OnInit {
 
-    @Input() lines: InvoiceLineModel[];
+    @Input() lines: InvoiceLine[];
     @Input() companyRef: string;
     @Input() editMode: boolean;
     @Input() vatEnabled: boolean;
 
-    @Output() linesChange: EventEmitter<InvoiceLineModel[]> = new EventEmitter();
+    @Output() linesChange: EventEmitter<InvoiceLine[]> = new EventEmitter();
 
-    private newLine: InvoiceLineModel;
+    private newLine: InvoiceLine;
 
     ngOnInit() {
         if (!this.lines) {
@@ -28,20 +28,20 @@ export class InvoiceLinesDetailComponent implements OnInit {
         this.newLine = this.createNewLine();
     }
 
-    public addLine(line: InvoiceLineModel) {
+    public addLine(line: InvoiceLine) {
         this.lines.push(line);
         this.newLine = this.createNewLine();
         this.linesChange.emit(this.lines);
     }
 
-    public deleteLine(lineToRemove: InvoiceLineModel) {
+    public deleteLine(lineToRemove: InvoiceLine) {
         this.lines = this.lines.filter(line => line !== lineToRemove);
         this.linesChange.emit(this.lines);
     }
 
-    private createNewLine(): InvoiceLineModel {
-        let line = new InvoiceLineModel();
-        line.vat = new VATModel();
+    private createNewLine(): InvoiceLine {
+        let line = new InvoiceLine();
+        line.vat = new VatRate();
         return line;
     }
 

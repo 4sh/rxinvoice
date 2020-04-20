@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
-import {User} from '../../../models/user.model';
-import {ActivityModel} from '../../../models/activity.model';
+import {User} from '../../../domain/user/user';
+import {Activity} from '../../../domain/common/activity';
 import {ActivityService} from '../../services/activity.service';
 import * as moment from 'moment';
 
@@ -14,14 +14,14 @@ export class AppHeaderComponent implements OnInit {
 
     activityMenuOpen = false;
     user: User;
-    activities: ActivityModel[];
+    activities: Activity[];
 
     constructor(private authenticationService: AuthenticationService,
                 private activityService: ActivityService) {
     }
 
     ngOnInit() {
-        this.user = this.authenticationService.current();
+        this.user = this.authenticationService.getCurrentUser();
         this.activityService.fetchActivities()
             .subscribe(activities =>  {
                 this.activities = activities;
@@ -32,7 +32,7 @@ export class AppHeaderComponent implements OnInit {
         return moment(date).locale('fr').fromNow();
     }
 
-    generateUrl(activity: ActivityModel) {
+    generateUrl(activity: Activity) {
         switch (activity.objectType) {
             case 'Invoice': {
                 if (activity.type !== 'DELETE') {

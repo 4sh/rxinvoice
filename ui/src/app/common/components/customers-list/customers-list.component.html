@@ -11,7 +11,7 @@
         </td>
         <td>
             <span class="customerList-item-label">{{'customers.label.lastSent' | translate}}:<br></span>
-            <span class="customerList-item-value inner-space-left-40"> {{customer.lastSendDate | date: 'dd MMM. yyyy'}}</span>
+            <span class="customerList-item-value inner-space-left-40"> {{customer.commercialRelationship.lastSendDate | date: 'dd MMM. yyyy'}}</span>
         </td>
         <td>
             <span class="customerList-item-label">{{'customers.label.contact' | translate}}:</span>
@@ -19,14 +19,14 @@
         <td>
             <div class="customerList-item-label text-right">{{'customers.label.number' | translate}}</div>
             <span class="customerList-item-label">{{'customers.label.lastFinancialYear' | translate}}: </span>
-            <span class="customerList-item-value float-right">{{customer.fiscalYearMetricsMap["previousYear"]?.nbInvoices}}</span>
+            <span class="customerList-item-value float-right">{{customer.commercialRelationship.companyMetrics.previousYear?.nbInvoices}}</span>
         </td>
         <td>
             <div class="customerList-item-label text-right">{{'customers.label.ca' | translate}}</div>
-            <span class="customerList-item-value float-right">{{(customer.fiscalYearMetricsMap["previousYear"]?.paid +
-                customer.fiscalYearMetricsMap["previousYear"]?.invoiced +
-                customer.fiscalYearMetricsMap["previousYear"]?.expected +
-                customer.fiscalYearMetricsMap["previousYear"]?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+            <span class="customerList-item-value float-right">{{(customer.commercialRelationship.companyMetrics.previousYear?.paid +
+                customer.commercialRelationship.companyMetrics.previousYear?.invoiced +
+                customer.commercialRelationship.companyMetrics.previousYear?.expected +
+                customer.commercialRelationship.companyMetrics.previousYear?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
         </td>
     </tr>
 
@@ -39,7 +39,7 @@
         </td>
         <td rowspan="2">
             <span class="customerList-item-label">{{'customers.label.lastPayment' | translate}}: <br></span>
-            <span class="customerList-item-value inner-space-left-40">{{customer.lastPaymentDate | date: 'dd MMM. yyyy' }}</span>
+            <span class="customerList-item-value inner-space-left-40">{{customer.commercialRelationship.lastPaymentDate | date: 'dd MMM. yyyy' }}</span>
 
         </td>
         <td rowspan="2">
@@ -47,13 +47,13 @@
         </td>
         <td class="force-inner-space-bottom-0">
             <span class="customerList-item-label">{{'customers.label.financialYear' | translate}}:</span>
-            <span class="customerList-item-value float-right">{{customer.fiscalYearMetricsMap["currentYear"]?.nbInvoices}}</span>
+            <span class="customerList-item-value float-right">{{customer.commercialRelationship.companyMetrics.currentYear?.nbInvoices}}</span>
         </td>
         <td class="force-inner-space-bottom-0 float-right">
-            <span class="customerList-item-value">{{(customer.fiscalYearMetricsMap["currentYear"]?.paid +
-                customer.fiscalYearMetricsMap["currentYear"]?.invoiced +
-                customer.fiscalYearMetricsMap["currentYear"]?.expected +
-                customer.fiscalYearMetricsMap["currentYear"]?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}
+            <span class="customerList-item-value">{{(customer.commercialRelationship.companyMetrics.currentYear?.paid +
+                customer.commercialRelationship.companyMetrics.currentYear?.invoiced +
+                customer.commercialRelationship.companyMetrics.currentYear?.expected +
+                customer.commercialRelationship.companyMetrics.currentYear?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}
             </span>
         </td>
     </tr>
@@ -62,13 +62,13 @@
     <tr>
         <td>
             <span class="customerList-item-label">{{'customers.label.nextFinancialYear' | translate}}:</span>
-            <span class="customerList-item-value float-right">{{customer.fiscalYearMetricsMap["nextYear"]?.nbInvoices}}</span>
+            <span class="customerList-item-value float-right">{{customer.commercialRelationship.companyMetrics.nextYear?.nbInvoices}}</span>
         </td>
         <td>
-            <span class="customerList-item-value float-right">{{(customer.fiscalYearMetricsMap["nextYear"]?.paid +
-                customer.fiscalYearMetricsMap["nextYear"]?.invoiced +
-                customer.fiscalYearMetricsMap["nextYear"]?.expected +
-                customer.fiscalYearMetricsMap["nextYear"]?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+            <span class="customerList-item-value float-right">{{(customer.commercialRelationship.companyMetrics.nextYear?.paid +
+                customer.commercialRelationship.companyMetrics.nextYear?.invoiced +
+                customer.commercialRelationship.companyMetrics.nextYear?.expected +
+                customer.commercialRelationship.companyMetrics.nextYear?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
         </td>
     </tr>
 </tbody>

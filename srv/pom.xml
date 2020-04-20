@@ -19,6 +19,7 @@
         <restx.version>0.35.1</restx.version>
         <project.war.overlay.groupId>rxinvoice</project.war.overlay.groupId>
         <project.war.overlay.artifactId>rxinvoice</project.war.overlay.artifactId>
+        <junit.version>5.6.1</junit.version>
     </properties>
 
     <dependencies>
@@ -111,20 +112,8 @@
         </dependency>
         <dependency>
             <groupId>io.restx</groupId>
-            <artifactId>restx-specs-tests</artifactId>
-            <version>${restx.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.restx</groupId>
             <artifactId>restx-jongo-specs-tests</artifactId>
             <version>${restx.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
             <scope>test</scope>
         </dependency>
 
@@ -169,6 +158,34 @@
             <groupId>com.github.spullara.mustache.java</groupId>
             <artifactId>compiler</artifactId>
             <version>0.9.6</version>
+        </dependency>
+
+
+
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.6.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.6.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.6.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.6.1</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

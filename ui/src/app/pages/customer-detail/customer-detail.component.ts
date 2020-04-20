@@ -1,11 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CompanyModel} from '../../models/company.model';
+import {Company} from '../../domain/company/company';
 import {FormGroup} from '@angular/forms';
 import {CompanyService} from '../../common/services/company.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as _ from 'lodash';
 import * as Moment from 'moment';
-import {SweetAlertService} from '../../common/services/sweetAlert.service';
+import {SweetAlertService} from '../../modules/shared/services/sweetAlert.service';
 import {AuthenticationService} from '../../common/services/authentication.service';
 import 'rxjs/add/operator/filter';
 import {Location} from '@angular/common';
@@ -18,11 +17,12 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class CustomerDetailComponent implements OnInit {
 
-    public customer = new CompanyModel();
+    public seller: Company;
+    public customer = new Company();
     public editMode = false;
     public companyId: string;
     public canDelete: boolean;
-    @ViewChild('f') form: FormGroup;
+    @ViewChild('customerForm') form: FormGroup;
     private currentYearTurnover: number = 0;
     private currentYearTurnoverExpected: number = 0;
     private totalTurnover: number = 0;
@@ -39,23 +39,15 @@ export class CustomerDetailComponent implements OnInit {
 
     ngOnInit() {
         this.fetchCustomer();
-        const currentUser = this.authService.current();
-        this.companyService.fetchCompany(currentUser.companyRef)
-            .subscribe(company => this.buildCompanyFiscalYearBounds(company));
-
+        const currentUser = this.authService.getCurrentUser();
+        this.authService.companyEvents.filter(company => !!company).subscribe(company => {
+            this.seller = company;
+            this.buildCompanyFiscalYearBounds(this.seller);
+        });
 
         this.canDelete = currentUser.roles.filter(role => role === 'admin').length > 0;
     }
 
-    private updateForm(obj) {
-        return {
-            name: obj.name,
-            emailAddress: obj.emailAddress,
-            address: obj.address,
-            legalNotice: obj.legalNotice,
-            detail: obj.detail,
-        };
-    }
 
     public fetchCustomer() {
         this.route.params.subscribe(params => {
@@ -64,19 +56,24 @@ export class CustomerDetailComponent implements OnInit {
             }
             if (this.companyId) {
                 this.companyService.fetchCompany(this.companyId)
-                    .subscribe((company: CompanyModel) => {
-                        this.form.setValue(this.updateForm(company));
+                    .subscribe((company: Company) => {
                         this.customer = company;
-                        if (company && company.fiscalYearMetricsMap && company.fiscalYearMetricsMap["currentYear"]) {
-                            this.currentYearTurnover = company.fiscalYearMetricsMap["currentYear"].invoiced +
-                                company.fiscalYearMetricsMap["currentYear"].paid +
-                                company.fiscalYearMetricsMap["currentYear"].expired;
-                            this.currentYearTurnoverExpected = this.currentYearTurnover + company.fiscalYearMetricsMap["currentYear"].expected;
-                        }
-                        if (company && company.metrics) {
-                            this.totalTurnover = company.metrics.invoiced +
-                                company.metrics.paid +
-                                company.metrics.expired;
+                        if (company && company.commercialRelationship && company.commercialRelationship.companyMetrics.currentYear) {
+                            const companyMetrics = company.commercialRelationship.companyMetrics;
+
+                            this.currentYearTurnover =
+                                companyMetrics.currentYear.invoiced +
+                                companyMetrics.currentYear.paid +
+                                companyMetrics.currentYear.expired;
+
+                            this.currentYearTurnoverExpected =
+                                this.currentYearTurnover +
+                                companyMetrics.currentYear.expected;
+
+                            this.totalTurnover =
+                                companyMetrics.global.invoiced +
+                                companyMetrics.global.paid +
+                                companyMetrics.global.expired;
                         }
                     });
             } else {
@@ -85,7 +82,7 @@ export class CustomerDetailComponent implements OnInit {
         });
     }
 
-    private buildCompanyFiscalYearBounds(company: CompanyModel) {
+    private buildCompanyFiscalYearBounds(company: Company) {
         let fiscalYear = company.fiscalYear;
         let now = Moment();
 
@@ -113,12 +110,10 @@ export class CustomerDetailComponent implements OnInit {
 
     public save() {
         if (!this.customer) {
-            this.customer = new CompanyModel();
+            this.customer = new Company();
         }
-        _.merge(this.customer, this.customer, this.form.value);
         this.companyService.updateCompany(this.customer).subscribe((company) => {
                 this.customer = company;
-                this.form.setValue(this.updateForm(company));
                 this.editMode = false;
                 this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
             },
@@ -129,12 +124,10 @@ export class CustomerDetailComponent implements OnInit {
 
     public create() {
         if (!this.customer) {
-            this.customer = new CompanyModel();
+            this.customer = new Company();
         }
-        _.merge(this.customer, this.customer, this.form.value);
         this.companyService.createCompany(this.customer).subscribe((company) => {
                 this.customer = company;
-                this.form.setValue(this.updateForm(company));
                 this.editMode = false;
                 this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
             },
@@ -144,7 +137,6 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     public reset() {
-        this.form.setValue(this.updateForm(this.customer));
         this.editMode = false;
     }
 
@@ -163,6 +155,10 @@ export class CustomerDetailComponent implements OnInit {
 
     public goBack() {
         this.location.back();
+    }
+
+    public isSirenDisabled(): boolean {
+        return !this.editMode || !!this.customer._id;
     }
 
 }

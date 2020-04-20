@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {InvoiceStatusType} from '../../models/invoice-status.type';
-import {InvoiceKindType} from '../../models/invoice-kind.type';
+import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
+import {ServiceKind} from '../../domain/common/service.kind';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 
@@ -14,7 +14,7 @@ export class RepositoryService {
         'WAITING_VALIDATION', 'VALIDATED'
     ];
 
-    kinds: InvoiceKindType[] = [
+    kinds: ServiceKind[] = [
         'SUBCONTRACTING', 'FEE', 'SERVICE', 'BUY_SELL', 'TRAINING', 'HOSTING'
     ];
 
@@ -27,7 +27,7 @@ export class RepositoryService {
             .catch((response: Response) => Observable.throw({ message: 'Unable to fetch statuses', response: response }));
     }
 
-    public fetchInvoiceKind(): InvoiceKindType[] {
+    public fetchInvoiceKind(): ServiceKind[] {
         return this.kinds;
     }
 
