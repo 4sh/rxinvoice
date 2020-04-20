@@ -9,7 +9,6 @@ import {CustomerDetailComponent} from './pages/customer-detail/customer-detail.c
 import {InvoiceDetailComponent} from './pages/invoice-detail/invoice-detail.component';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 import {GuideRoutes} from './style-guide-module/guide.routes';
-import {SellerSettingsComponent} from './pages/seller-settings/seller-settings.component';
 import {AnalyzeComponent} from './pages/analyze/analyze.component';
 
 const routes: Routes = [
@@ -27,7 +26,9 @@ const routes: Routes = [
             {path: 'customers/new', component: CustomerDetailComponent},
             {path: 'customers/detail/:id', component: CustomerDetailComponent},
             {path: 'analyze', component: AnalyzeComponent},
-            {path: 'sellerSettings', component: SellerSettingsComponent},
+            {
+                path: 'seller-settings', loadChildren: './modules/referential/referential-routing.module#ReferentialRoutingModule'
+            },
             {path: '**', redirectTo: '/app/dashboard'}
 
         ]

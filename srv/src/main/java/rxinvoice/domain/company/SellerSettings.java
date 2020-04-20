@@ -11,8 +11,8 @@ import java.util.Optional;
 
 public class SellerSettings {
 
-    private final List<AccountantVATRate> vatRates = new ArrayList<>();
-    private final List<AccountantServiceReference> serviceReferenceList = new ArrayList<>();
+    private List<AccountantVATRate> vatRates = new ArrayList<>();
+    private List<AccountantServiceReference> serviceReferenceList = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -26,8 +26,18 @@ public class SellerSettings {
         return vatRates;
     }
 
+    public SellerSettings setVatRates(List<AccountantVATRate> vatRates) {
+        this.vatRates = vatRates;
+        return this;
+    }
+
     public List<AccountantServiceReference> getServiceReferenceList() {
         return serviceReferenceList;
+    }
+
+    public SellerSettings setServiceReferenceList(List<AccountantServiceReference> serviceReferenceList) {
+        this.serviceReferenceList = serviceReferenceList;
+        return this;
     }
 
     public Optional<AccountantVATRate> findVATRate(BigDecimal rate) {

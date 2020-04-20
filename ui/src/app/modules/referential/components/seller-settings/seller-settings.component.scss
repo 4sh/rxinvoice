@@ -1,4 +1,4 @@
-@import '../../../styles/base-component';
+@import 'src/styles/base-component';
 
 @include new('title') {
     padding: rem-calc(0px 32px 24px 32px);
