@@ -1,4 +1,4 @@
-export class BusinessModel {
+export class Business {
 
     name: string;
     reference: string;

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ActivityModel} from '../../../models/activity.model';
+import {Activity} from '../../../domain/common/activity';
 import * as moment from 'moment';
 
 @Component({
@@ -9,9 +9,9 @@ import * as moment from 'moment';
 })
 export class ActivityPanelComponent implements OnInit {
 
-    @Input() activities: ActivityModel[];
+    @Input() activities: Activity[];
     @Input() editMode: boolean;
-    @Output() activitiesChange: EventEmitter<ActivityModel[]> = new EventEmitter();
+    @Output() activitiesChange: EventEmitter<Activity[]> = new EventEmitter();
 
     constructor() {
     }

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {ActivityType} from './activity-type.type';
-import {UserInfoModel} from './user-info.model';
+import {UserInfo} from '../user/user-info';
 
 @Injectable()
-export class ActivityModel {
+export class Activity {
     key: string;
     objectType: string;
     objectKey: string;
     objectBusinessKey: string;
     type: ActivityType;
-    userInfo: UserInfoModel;
+    userInfo: UserInfo;
     timestamp: Date;
 
   constructor() { }

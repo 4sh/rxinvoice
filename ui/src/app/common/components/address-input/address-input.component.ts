@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator} from '@angular/forms';
-import {AddressModel} from '../../../models/address.model';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, Validator} from '@angular/forms';
+import {Address} from '../../../domain/company/address';
 
 @Component({
     selector: 'address-input',
@@ -19,10 +19,10 @@ export class AddressInputComponent implements ControlValueAccessor {
 
     @Input() editMode: boolean;
 
-    public address: AddressModel = new AddressModel();
+    public address: Address = new Address();
     public disabled: boolean;
 
-    private onNgChange: (address: AddressModel) => void;
+    private onNgChange: (address: Address) => void;
     private onNgTouched: () => void;
 
     constructor() {
@@ -36,9 +36,9 @@ export class AddressInputComponent implements ControlValueAccessor {
         this.onNgTouched = fn;
     }
 
-    writeValue(address: AddressModel): void {
+    writeValue(address: Address): void {
         if (!address) {
-            this.address = new AddressModel()
+            this.address = new Address()
         } else {
             this.address = address;
         }

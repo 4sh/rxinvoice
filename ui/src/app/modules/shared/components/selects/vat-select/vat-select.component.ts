@@ -1,7 +1,7 @@
 import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CompanyService} from "../../../../../common/services/company.service";
-import {VatRateModel} from '../../../../../models/vat-rate.model';
+import {VatRate} from '../../../../../domain/common/vat-rate';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -25,10 +25,10 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
     private companyRef: string;
 
     @Output()
-    private vatChanged:EventEmitter<VatRateModel> = new EventEmitter<VatRateModel>();
+    private vatChanged:EventEmitter<VatRate> = new EventEmitter<VatRate>();
 
-    private vatModelList: Array<VatRateModel> = [];
-    private selectedVat: VatRateModel;
+    private vatModelList: Array<VatRate> = [];
+    private selectedVat: VatRate;
     private companyService: CompanyService;
 
     constructor(companyService: CompanyService) {
@@ -44,7 +44,7 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
     }
 
     private initializeVatList() {
-        const defaultVAT: VatRateModel = new VatRateModel();
+        const defaultVAT: VatRate = new VatRate();
         defaultVAT.label = "Taux normal - 20 %";
         defaultVAT.rate = 20;
 
@@ -77,7 +77,7 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
         this.disabled = isDisabled;
     }
 
-    writeValue(vat: VatRateModel): void {
+    writeValue(vat: VatRate): void {
         // Add invoice line vat value in selection list in case it has been removed from customer available vat list.
         if (vat && !this.vatModelList
             .map(vatModel => vatModel.rate)
@@ -89,12 +89,12 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
         }
     }
 
-    onChange(vatModel: VatRateModel): void {
+    onChange(vatModel: VatRate): void {
         this.selectedVat = vatModel;
         this.vatChanged.emit(vatModel);
     }
 
-    private findByVATRate(rate: number): VatRateModel {
+    private findByVATRate(rate: number): VatRate {
         return this.vatModelList.find(vatModel => rate === vatModel.rate);
     }
 

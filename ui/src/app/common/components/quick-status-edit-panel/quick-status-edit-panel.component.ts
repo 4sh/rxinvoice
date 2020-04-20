@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {InvoiceModel} from '../../../models/invoice.model';
-import {InvoiceStatusType} from '../../../models/invoice-status.type';
+import {Invoice} from '../../../domain/invoice/invoice';
+import {InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 import {RepositoryService} from '../../services/repository.service';
 
 @Component({
@@ -11,9 +11,9 @@ import {RepositoryService} from '../../services/repository.service';
 export class QuickStatusEditPanelComponent implements OnInit {
 
     public statuses: InvoiceStatusType[];
-    @Input() invoice: InvoiceModel;
+    @Input() invoice: Invoice;
     @Input() showQuickPanelStatusEdit = false;
-    @Output() invoiceUpdate: EventEmitter<InvoiceModel> = new EventEmitter();
+    @Output() invoiceUpdate: EventEmitter<Invoice> = new EventEmitter();
     @Output() closeQuickUpdate: EventEmitter<void> = new EventEmitter();
 
     constructor(private repositoryService: RepositoryService) {

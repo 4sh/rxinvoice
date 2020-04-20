@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {InvoiceLineModel} from "../../../../models/invoice-line.model";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {InvoiceLine} from "../../../../domain/invoice/invoice-line";
 import {ControlContainer, NgForm} from "@angular/forms";
 import {LineMoveEvent} from '../line-move-event';
-import {VatRateModel} from '../../../../models/vat-rate.model';
+import {VatRate} from '../../../../domain/common/vat-rate';
 
 @Component({
     selector: 'invoice-line-form',
@@ -16,15 +16,15 @@ export class InvoiceLineFormComponent implements OnInit {
     }
 
     @Input() companyRef: string;
-    @Input() line: InvoiceLineModel;
+    @Input() line: InvoiceLine;
     @Input() editionMode: InvoiceLineEditionMode;
     @Input() editable: boolean;
     @Input() vatEnabled: boolean;
     @Input() topArrowDisplayed: boolean;
     @Input() bottomArrowDisplayed: boolean;
 
-    @Output() lineAdded: EventEmitter<InvoiceLineModel> = new EventEmitter();
-    @Output() lineDeleted: EventEmitter<InvoiceLineModel> = new EventEmitter();
+    @Output() lineAdded: EventEmitter<InvoiceLine> = new EventEmitter();
+    @Output() lineDeleted: EventEmitter<InvoiceLine> = new EventEmitter();
     @Output() lineMoved: EventEmitter<LineMoveEvent> = new EventEmitter();
 
     ngOnInit() {
@@ -38,7 +38,7 @@ export class InvoiceLineFormComponent implements OnInit {
         }
     }
 
-    public updateVat(vatModel: VatRateModel) {
+    public updateVat(vatModel: VatRate) {
         this.line.vat = vatModel;
     }
 

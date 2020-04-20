@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CompanyModel} from '../../models/company.model';
+import {Company} from '../../domain/company/company';
 import {ActivatedRoute, Router} from '@angular/router';
 import {
     ControlContainer,
@@ -10,11 +10,11 @@ import {
     Validators
 } from '@angular/forms';
 import {CompanyService} from '../../common/services/company.service';
-import {InvoiceModel} from '../../models/invoice.model';
+import {Invoice} from '../../domain/invoice/invoice';
 import {InvoiceService} from '../../common/services/invoice.service';
-import {ServiceKind} from '../../models/service.kind';
+import {ServiceKind} from '../../domain/common/service.kind';
 import {RepositoryService} from '../../common/services/repository.service';
-import {InvoiceStatusType} from '../../models/invoice-status.type';
+import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
 import * as _ from 'lodash';
 import {SweetAlertService} from '../../modules/shared/services/sweetAlert.service';
 import {AttachmentsDetailComponent} from '../../common/components/attachments-detail/attachments-detail.component';
@@ -35,14 +35,14 @@ import * as moment from 'moment';
 })
 export class InvoiceDetailComponent implements OnInit {
 
-    private seller: CompanyModel;
+    private seller: Company;
     public form: FormGroup;
-    public companies: CompanyModel[];
+    public companies: Company[];
     public kinds: ServiceKind[];
-    public invoice = new InvoiceModel();
+    public invoice = new Invoice();
     public invoiceId: string;
     public statuses: InvoiceStatusType[];
-    public selectedCompany: CompanyModel;
+    public selectedCompany: Company;
     public canDelete: boolean;
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
@@ -134,7 +134,7 @@ export class InvoiceDetailComponent implements OnInit {
             }
             if (this.invoiceId) {
                 this.invoiceService.fetchInvoice(this.invoiceId)
-                    .subscribe((invoice: InvoiceModel) => {
+                    .subscribe((invoice: Invoice) => {
                         this.invoice = invoice;
                         if (invoice.buyer) {
                             this.fetchBuyer(invoice.buyer);
@@ -148,7 +148,7 @@ export class InvoiceDetailComponent implements OnInit {
     public create(): void {
         this.form.disable();
         if (!this.invoice) {
-            this.invoice = new InvoiceModel();
+            this.invoice = new Invoice();
         }
         _.merge(this.invoice, this.invoice, this.form.value);
         this.invoiceService.createInvoice(this.invoice).subscribe((invoice) => {
@@ -165,7 +165,7 @@ export class InvoiceDetailComponent implements OnInit {
     public save(): void {
         this.form.disable();
         if (!this.invoice) {
-            this.invoice = new InvoiceModel();
+            this.invoice = new Invoice();
         }
         _.merge(this.invoice, this.invoice, this.form.value);
         this.invoiceService.saveInvoice(this.invoice)

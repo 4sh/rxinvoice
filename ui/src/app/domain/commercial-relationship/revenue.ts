@@ -1,5 +1,5 @@
 
-export class RevenueModel {
+export class Revenue {
     from: Date;
     to: Date;
     periodType: string;

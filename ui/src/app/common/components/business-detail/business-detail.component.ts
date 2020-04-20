@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {BusinessModel} from '../../../models/business.model';
+import {Business} from '../../../domain/commercial-relationship/business';
 import * as _ from 'lodash';
 
 @Component({
@@ -9,11 +9,11 @@ import * as _ from 'lodash';
 })
 export class BusinessDetailComponent implements OnInit {
 
-    @Input() businessList: BusinessModel[];
+    @Input() businessList: Business[];
     @Input() editMode: boolean;
-    @Output() businessChange: EventEmitter<BusinessModel[]> = new EventEmitter();
+    @Output() businessChange: EventEmitter<Business[]> = new EventEmitter();
 
-    public newBusiness: BusinessModel = new BusinessModel();
+    public newBusiness: Business = new Business();
 
     constructor() {
     }
@@ -26,7 +26,7 @@ export class BusinessDetailComponent implements OnInit {
 
     public addBusiness() {
         this.businessList.push(_.cloneDeep(this.newBusiness));
-        this.newBusiness = new BusinessModel();
+        this.newBusiness = new Business();
         this.businessChange.emit(this.businessList);
     }
 

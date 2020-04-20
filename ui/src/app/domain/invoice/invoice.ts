@@ -1,17 +1,17 @@
-import {CompanyModel} from './company.model';
-import {VATModel} from './VAT.model';
-import {BusinessModel} from './business.model';
+import {Company} from '../company/company';
+import {VAT} from '../common/VAT';
+import {Business} from '../commercial-relationship/business';
 import {InvoiceStatusType} from './invoice-status.type';
-import {ActivityModel} from './activity.model';
-import {ServiceKind} from './service.kind';
-import {InvoiceLineModel} from './invoice-line.model';
-import {StatusChangeModel} from './status-change.model';
-import {BlobModel} from './blob.model';
+import {Activity} from '../common/activity';
+import {ServiceKind} from '../common/service.kind';
+import {InvoiceLine} from './invoice-line';
+import {StatusChange} from './status-change';
+import {Blob} from '../blob';
 import {DatePipe} from '@angular/common';
 import * as _ from 'lodash';
-import {VatRateModel} from './vat-rate.model';
+import {VatRate} from '../common/vat-rate';
 
-export class InvoiceModel {
+export class Invoice {
     key: string;
     _id: string;
     reference: string;
@@ -24,22 +24,22 @@ export class InvoiceModel {
     comment: string;
     customerInvoiceRef: string;
     kind: ServiceKind;
-    seller: CompanyModel;
-    buyer: CompanyModel;
+    seller: Company;
+    buyer: Company;
     grossAmount: number;
     netAmount: number;
-    vats: VatRateModel[];
-    vatsAmount: VATModel[];
-    business: BusinessModel;
-    lines: InvoiceLineModel[];
-    activities: ActivityModel[];
-    attachments: BlobModel[];
-    statusChanges: StatusChangeModel[];
+    vats: VatRate[];
+    vatsAmount: VAT[];
+    business: Business;
+    lines: InvoiceLine[];
+    activities: Activity[];
+    attachments: Blob[];
+    statusChanges: StatusChange[];
 
     constructor() {
     }
 
-    public copy(): InvoiceModel {
+    public copy(): Invoice {
         var copy = _.cloneDeep(this);
         copy.status = "DRAFT";
         copy._id = null;

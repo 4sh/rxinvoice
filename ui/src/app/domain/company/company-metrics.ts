@@ -1,6 +1,6 @@
-import {InvoiceMetricsModel} from './invoice-metrics';
+import {InvoiceMetricsModel} from '../invoice/invoice-metrics';
 
-export class CompanyMetricsModel {
+export class CompanyMetrics {
 
     global: InvoiceMetricsModel;
     previousYear: InvoiceMetricsModel;

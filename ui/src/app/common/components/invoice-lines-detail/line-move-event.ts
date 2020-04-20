@@ -1,12 +1,12 @@
-import {InvoiceLineModel} from '../../../models/invoice-line.model';
+import {InvoiceLine} from '../../../domain/invoice/invoice-line';
 
 export class LineMoveEvent {
 
-    line: InvoiceLineModel;
+    line: InvoiceLine;
     direction: number;
 
 
-    constructor(line: InvoiceLineModel, direction: number) {
+    constructor(line: InvoiceLine, direction: number) {
         this.line = line;
         this.direction = direction;
     }

@@ -1,5 +1,5 @@
 
-export class BlobModel {
+export class Blob {
     _id: string;
     fileName: string;
     comments: string;

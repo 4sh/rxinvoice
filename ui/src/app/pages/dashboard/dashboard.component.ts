@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {InvoiceModel} from '../../models/invoice.model';
+import {Invoice} from '../../domain/invoice/invoice';
 import {InvoiceService} from '../../common/services/invoice.service';
 import {isNumber} from 'util';
 import * as moment from 'moment';
@@ -10,10 +10,10 @@ import * as moment from 'moment';
 })
 export class DashboardComponent implements OnInit {
 
-    preparedInvoices: InvoiceModel[];
-    validatedInvoices: InvoiceModel[];
-    toSendInvoices: InvoiceModel[];
-    reviveInvoices: InvoiceModel[];
+    preparedInvoices: Invoice[];
+    validatedInvoices: Invoice[];
+    toSendInvoices: Invoice[];
+    reviveInvoices: Invoice[];
     isPending = true;
 
     constructor(private invoiceService: InvoiceService) {
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
             .subscribe(invoices => this.reviveInvoices = invoices);
     }
 
-    getAmount(invoices: InvoiceModel[]) {
+    getAmount(invoices: Invoice[]) {
         if (invoices) {
             const number = invoices
                 .filter(invoice => isNumber(invoice.grossAmount))

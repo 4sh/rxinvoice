@@ -1,4 +1,4 @@
-export class UserInfoModel {
+export class UserInfo {
     ref: string;
     name: string;
 

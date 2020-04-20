@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CompanyModel} from '../../models/company.model';
+import {Company} from '../../domain/company/company';
 import {FormGroup} from '@angular/forms';
 import {CompanyService} from '../../common/services/company.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -17,8 +17,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class CustomerDetailComponent implements OnInit {
 
-    public seller: CompanyModel;
-    public customer = new CompanyModel();
+    public seller: Company;
+    public customer = new Company();
     public editMode = false;
     public companyId: string;
     public canDelete: boolean;
@@ -56,7 +56,7 @@ export class CustomerDetailComponent implements OnInit {
             }
             if (this.companyId) {
                 this.companyService.fetchCompany(this.companyId)
-                    .subscribe((company: CompanyModel) => {
+                    .subscribe((company: Company) => {
                         this.customer = company;
                         if (company && company.commercialRelationship && company.commercialRelationship.companyMetrics.currentYear) {
                             const companyMetrics = company.commercialRelationship.companyMetrics;
@@ -82,7 +82,7 @@ export class CustomerDetailComponent implements OnInit {
         });
     }
 
-    private buildCompanyFiscalYearBounds(company: CompanyModel) {
+    private buildCompanyFiscalYearBounds(company: Company) {
         let fiscalYear = company.fiscalYear;
         let now = Moment();
 
@@ -110,7 +110,7 @@ export class CustomerDetailComponent implements OnInit {
 
     public save() {
         if (!this.customer) {
-            this.customer = new CompanyModel();
+            this.customer = new Company();
         }
         this.companyService.updateCompany(this.customer).subscribe((company) => {
                 this.customer = company;
@@ -124,7 +124,7 @@ export class CustomerDetailComponent implements OnInit {
 
     public create() {
         if (!this.customer) {
-            this.customer = new CompanyModel();
+            this.customer = new Company();
         }
         this.companyService.createCompany(this.customer).subscribe((company) => {
                 this.customer = company;

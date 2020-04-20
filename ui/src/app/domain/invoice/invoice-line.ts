@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
-import {VATModel} from './VAT.model';
-import {VatRateModel} from './vat-rate.model';
+import {VatRate} from '../common/vat-rate';
 
 @Injectable()
-export class InvoiceLineModel {
+export class InvoiceLine {
     description: string;
     quantity?: number;
     unitCost?: number;
     grossAmount?: number;
-    vat?: VatRateModel;
+    vat?: VatRate;
 
   constructor() { }
 

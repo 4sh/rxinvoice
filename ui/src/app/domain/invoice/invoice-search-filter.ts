@@ -1,7 +1,7 @@
 import {InvoiceStatusType} from './invoice-status.type';
-import {ServiceKind} from './service.kind';
+import {ServiceKind} from '../common/service.kind';
 
-export class InvoiceSearchFilterModel {
+export class InvoiceSearchFilter {
 
     query: string;
     startDate: Date;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {plainToClass} from 'class-transformer';
 import {Observable} from 'rxjs/Observable';
-import {User} from '../../models/user.model';
+import {User} from '../../domain/user/user';
 
 @Injectable()
 export class UserService {

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CompanyModel} from '../../../../../models/company.model';
+import {Company} from '../../../../../domain/company/company';
 import {CompanyService} from '../../../../../common/services/company.service';
 import {FormControl} from '@angular/forms';
 
@@ -17,8 +17,8 @@ export class CustomerSelectComponent implements OnInit {
     @Input() isBindingId = false;
     @Input() label = 'company';
     @Input() control: FormControl;
-    @Output() valueChange: EventEmitter<CompanyModel> = new EventEmitter();
-    companies: CompanyModel[];
+    @Output() valueChange: EventEmitter<Company> = new EventEmitter();
+    companies: Company[];
 
     constructor(private companyService: CompanyService) {
     }

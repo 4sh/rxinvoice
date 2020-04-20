@@ -1,4 +1,4 @@
-export class VATModel {
+export class VAT {
     label: string;
     amount: number;
 

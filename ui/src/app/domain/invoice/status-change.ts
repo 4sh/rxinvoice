@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {VATModel} from './VAT.model';
-import {UserInfoModel} from './user-info.model';
+import {UserInfo} from '../user/user-info';
 import {InvoiceStatusType} from './invoice-status.type';
 
 @Injectable()
-export class StatusChangeModel {
+export class StatusChange {
     from: InvoiceStatusType;
     to: InvoiceStatusType;
-    by: UserInfoModel;
+    by: UserInfo;
     comment: string;
     timestamp: Date;
 

@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {SellerSettingsModel} from '../../../../models/seller-settings.model';
+import {SellerSettings} from '../../../../domain/company/seller-settings';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
-import {ServiceKind, ServiceKindEnum} from '../../../../models/service.kind';
-import {AccountantVatRateModel} from '../../../../models/vat-rate.model';
-import {ServiceReferenceModel} from '../../../../models/service-reference.model';
-import {CompanyService} from '../../../../common/services/company.service';
+import {ServiceKind, ServiceKindEnum} from '../../../../domain/common/service.kind';
+import {AccountantVatRate} from '../../../../domain/common/vat-rate';
+import {ServiceReference} from '../../../../domain/company/service-reference';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
 import {SellerSettingsService} from '../../services/seller-settings.service';
 
@@ -15,7 +14,7 @@ import {SellerSettingsService} from '../../services/seller-settings.service';
 })
 export class SellerSettingsComponent implements OnInit {
 
-    public sellerSettingsModel: SellerSettingsModel;
+    public sellerSettingsModel: SellerSettings;
 
     public selectedServiceKind: ServiceKind;
 
@@ -33,7 +32,7 @@ export class SellerSettingsComponent implements OnInit {
         this.selectServiceKind(ServiceKindEnum.SUBCONTRACTING);
     }
 
-    public getServiceReferences(serviceKind: ServiceKind): Array<ServiceReferenceModel> {
+    public getServiceReferences(serviceKind: ServiceKind): Array<ServiceReference> {
         return this.sellerSettingsModel.serviceReferenceList.filter(value => value.kind === serviceKind);
     }
 
@@ -42,25 +41,25 @@ export class SellerSettingsComponent implements OnInit {
     }
 
     public addVatRate(): void {
-        this.sellerSettingsModel.vatRates.push(new AccountantVatRateModel());
+        this.sellerSettingsModel.vatRates.push(new AccountantVatRate());
     }
 
     public deleteVatRate(index: number): void {
         this.sellerSettingsModel.vatRates.splice(index, 1);
     }
 
-    public vatRateChanged(rate: AccountantVatRateModel, service: ServiceReferenceModel): void {
+    public vatRateChanged(rate: AccountantVatRate, service: ServiceReference): void {
         service.vatRate = rate;
     }
 
     public addServiceReference(serviceKind: ServiceKind): void {
-        let serviceReferenceModel = new ServiceReferenceModel();
+        let serviceReferenceModel = new ServiceReference();
         serviceReferenceModel.kind = serviceKind;
-        serviceReferenceModel.vatRate = new AccountantVatRateModel();
+        serviceReferenceModel.vatRate = new AccountantVatRate();
         this.sellerSettingsModel.serviceReferenceList.push(serviceReferenceModel);
     }
 
-    public deleteServiceReference(serviceReference: ServiceReferenceModel): void {
+    public deleteServiceReference(serviceReference: ServiceReference): void {
         this.sellerSettingsModel.serviceReferenceList.splice(this.sellerSettingsModel.serviceReferenceList.indexOf(serviceReference), 1);
     }
 

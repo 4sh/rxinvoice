@@ -1,5 +1,5 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {AccountantVatRateModel, VatRateModel} from '../../../../models/vat-rate.model';
+import {Component, forwardRef, Input} from '@angular/core';
+import {AccountantVatRate} from '../../../../domain/common/vat-rate';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 const VALUE_ACCESSOR = {
@@ -17,12 +17,12 @@ const VALUE_ACCESSOR = {
 export class AccountantVatRateSelectComponent implements ControlValueAccessor {
 
     @Input()
-    public accountantVatRateList: Array<AccountantVatRateModel>;
+    public accountantVatRateList: Array<AccountantVatRate>;
     @Input()
     public disabled: boolean;
 
-    private selectedVat: AccountantVatRateModel;
-    private onNgChange: (vatRate: AccountantVatRateModel) => void;
+    private selectedVat: AccountantVatRate;
+    private onNgChange: (vatRate: AccountantVatRate) => void;
     private onNgTouched: () => void;
 
     constructor() {
@@ -36,7 +36,7 @@ export class AccountantVatRateSelectComponent implements ControlValueAccessor {
         this.onNgTouched = fn;
     }
 
-    writeValue(vatRate: AccountantVatRateModel): void {
+    writeValue(vatRate: AccountantVatRate): void {
         if (vatRate && this.accountantVatRateList) {
             const accountantVatRateModel = this.findByRate(vatRate.rate);
             if (accountantVatRateModel) {
@@ -47,7 +47,7 @@ export class AccountantVatRateSelectComponent implements ControlValueAccessor {
         }
     }
 
-    onChange(vatRate: AccountantVatRateModel) {
+    onChange(vatRate: AccountantVatRate) {
         if (vatRate && this.accountantVatRateList) {
             const accountantVatRateModel = this.findByRate(vatRate.rate);
             if (accountantVatRateModel) {
@@ -63,7 +63,7 @@ export class AccountantVatRateSelectComponent implements ControlValueAccessor {
         this.disabled = isDisabled;
     }
 
-    private findByRate(rate: number): AccountantVatRateModel {
+    private findByRate(rate: number): AccountantVatRate {
         return this.accountantVatRateList.find(vatModel => rate === vatModel.rate);
     }
 }

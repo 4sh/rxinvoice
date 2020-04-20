@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {InvoiceStatusType} from '../../models/invoice-status.type';
-import {ServiceKind} from '../../models/service.kind';
+import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
+import {ServiceKind} from '../../domain/common/service.kind';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 

@@ -1,4 +1,4 @@
-export class FiscalYearModel {
+export class FiscalYear {
     start: Date;
     end: Date;
 

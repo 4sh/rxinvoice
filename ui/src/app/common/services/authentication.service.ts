@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
 import {Md5} from 'ts-md5/dist/md5';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
-import {User} from '../../models/user.model';
-import {CompanyModel} from '../../models/company.model';
+import {User} from '../../domain/user/user';
+import {Company} from '../../domain/company/company';
 import {CompanyService} from './company.service';
 import {map, switchMap, tap} from 'rxjs/operators';
 
@@ -17,7 +16,7 @@ export class AuthenticationService {
     private baseUrl = '/api/sessions';
 
     public userEvents: BehaviorSubject<User> = new BehaviorSubject<User>(undefined);
-    public companyEvents: BehaviorSubject<CompanyModel> = new BehaviorSubject<CompanyModel>(undefined);
+    public companyEvents: BehaviorSubject<Company> = new BehaviorSubject<Company>(undefined);
 
     constructor(private router: Router,
                 private companyService: CompanyService,
@@ -65,7 +64,7 @@ export class AuthenticationService {
         return this.userEvents.getValue();
     }
 
-    public getCurrentCompany(): CompanyModel {
+    public getCurrentCompany(): Company {
         return this.companyEvents.getValue();
     }
 

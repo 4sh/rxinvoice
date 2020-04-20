@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CompanyService} from '../../common/services/company.service';
-import {CompanyModel} from '../../models/company.model';
+import {Company} from '../../domain/company/company';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class CustomersComponent implements OnInit {
 
-   public companies: CompanyModel[];
+   public companies: Company[];
    public filterString: string;
    public isPending = true;
    public query: string;
