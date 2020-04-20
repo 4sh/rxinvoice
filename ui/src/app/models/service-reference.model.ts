@@ -1,9 +1,9 @@
 import {ServiceKind} from './service.kind';
-import {VatRateModel} from './vat-rate.model';
+import {AccountantVatRateModel, VatRateModel} from './vat-rate.model';
 
 export class ServiceReferenceModel {
 
     kind: ServiceKind;
-    vatRate?: VatRateModel;
+    vatRate?: AccountantVatRateModel;
     accountNumber: string;
 }       
