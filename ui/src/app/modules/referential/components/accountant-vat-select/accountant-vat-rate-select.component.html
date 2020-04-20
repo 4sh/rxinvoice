@@ -1,0 +1,9 @@
+<ng-select
+        [items]="accountantVatRateList"
+        [bindLabel]="'label'"
+        [clearable]="true"
+        [disabled]="disabled"
+        [ngModel]="selectedVat"
+        placeholder="{{'accountant.vat.rate.list.placeholder' | translate}}"
+        (ngModelChange)="onChange($event)">
+</ng-select>
