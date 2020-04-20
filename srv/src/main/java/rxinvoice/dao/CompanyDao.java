@@ -51,7 +51,7 @@ public class CompanyDao {
                                                SellerSettings sellerSettings) {
         logger.debug("Update seller settings for company {} with {}", companyKey, sellerSettings);
         this.companies.get()
-                .update("{_id: #}", companyKey)
+                .update("{_id: #}", new ObjectId(companyKey))
                 .with("{$set: {sellerSettings : #}}", sellerSettings);
         return sellerSettings;
     }
