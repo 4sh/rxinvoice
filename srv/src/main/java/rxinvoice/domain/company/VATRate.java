@@ -2,7 +2,6 @@ package rxinvoice.domain.company;
 
 import restx.jackson.FixedPrecision;
 import rxinvoice.domain.print.VATRatePrint;
-import rxinvoice.domain.print.VATValPrint;
 
 import java.math.BigDecimal;
 
