@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -22,6 +23,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 class InvoiceServiceTest {
 
     private final InvoiceService invoiceService = Factory.getInstance().getComponent(InvoiceService.class);
+    private final VATRate rate_8_5 = new VATRate().setLabel("Taux à 8,5%").setRate(BigDecimal.valueOf(8.5));
+    private final VATRate rate_20 = new VATRate().setLabel("Taux à 20%").setRate(BigDecimal.valueOf(20));
 
     @Test
     void should_update_gross_amount() throws IOException {
@@ -59,9 +62,7 @@ class InvoiceServiceTest {
     }
 
     @Test
-    void should_update_vat_amount_multiple_rates() throws IOException {
-        VATRate rate_8_5 = new VATRate().setLabel("Taux à 8,5%").setRate(BigDecimal.valueOf(8.5));
-        VATRate rate_20 = new VATRate().setLabel("Taux à 20%").setRate(BigDecimal.valueOf(20));
+    void should_update_vat_amount_multiple_rates() {
         List<Line> lines = Lists.newArrayList(
                 new Line().setQuantity(null).setUnitCost(BigDecimal.valueOf(1000)).setVat(rate_8_5),
                 new Line().setQuantity(BigDecimal.valueOf(45)).setUnitCost(null).setVat(rate_20),
@@ -84,4 +85,27 @@ class InvoiceServiceTest {
         assertThat(invoice.getVatsAmount().get(1).getLabel(), is(invoice.getVatRates().get(1).getLabel()));
     }
 
+
+    @Test
+    void should_update_vat_rates_no_rate() {
+        Invoice invoice = new Invoice().setLines(Lists.newArrayList(new Line().setVat(rate_20)));
+        this.invoiceService.updateVatRates(invoice);
+        assertThat(invoice.getVatRates().size(), is(equalTo(1)));
+        assertThat(invoice.getVatRates().get(0).getRate(), is(equalTo(rate_20.getRate())));
+        assertThat(invoice.getVatRates().get(0).getLabel(), is(equalTo(rate_20.getLabel())));
+    }
+
+    @Test
+    void should_update_vat_rates_multiple_lines_with_no_rate() {
+        Invoice invoice = new Invoice().setLines(Lists.newArrayList(
+                new Line().setVat(rate_20),
+                new Line().setVat(null),
+                new Line().setVat(rate_8_5)));
+        this.invoiceService.updateVatRates(invoice);
+        assertThat(invoice.getVatRates().size(), is(equalTo(2)));
+        assertThat(invoice.getVatRates().get(0).getRate(), is(equalTo(rate_20.getRate())));
+        assertThat(invoice.getVatRates().get(0).getLabel(), is(equalTo(rate_20.getLabel())));
+        assertThat(invoice.getVatRates().get(1).getRate(), is(equalTo(rate_8_5.getRate())));
+        assertThat(invoice.getVatRates().get(1).getLabel(), is(equalTo(rate_8_5.getLabel())));
+    }
 }

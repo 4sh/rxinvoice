@@ -35,6 +35,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Clock;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static rxinvoice.AppModule.Roles.ADMIN;
 import static rxinvoice.AppModule.Roles.SELLER;
@@ -84,7 +85,9 @@ public class InvoiceService {
                 throw new WebException(String.format("Invoice reference %s is already used.", invoice.getReference()));
             }
         }
-
+        if (invoice.isWithVAT()) {
+            updateVatRates(invoice);
+        }
         updateAmounts(invoice);
         this.invoiceDao.create(invoice);
         if (null != eventBus) {
@@ -116,6 +119,9 @@ public class InvoiceService {
             }
         }
 
+        if (invoice.isWithVAT()) {
+            updateVatRates(invoice);
+        }
         updateAmounts(invoice);
 
         if (invoice.getStatus() != invoiceFromDB.getStatus()) {
@@ -134,6 +140,13 @@ public class InvoiceService {
             handleStatusChange(invoice);
         }
         return invoice;
+    }
+
+    void updateVatRates(Invoice invoice) {
+        invoice.setVatRates(invoice.getLines().stream()
+                .filter(line -> line.getVat() != null)
+                .map(Line::getVat)
+                .collect(Collectors.toList()));
     }
 
     private void handleStatusChange(Invoice invoice) {
