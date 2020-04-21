@@ -1,4 +1,8 @@
-<div class="invoice {{statusClass}}" [dndDraggable]="invoice" (dndEnd)="onDragEnd($event)">
+<div class="invoice {{statusClass}}"
+     [dndDraggable]="invoice"
+     [dndEffectAllowed]="'move'"
+     (dndMoved)="onDragEnd($event)"
+     [dndType]="invoice.status">
     <div class="row">
         <div class="column small-15">
             <span class="date">{{invoice.date | date: 'dd MMM. yyyy'}}</span>

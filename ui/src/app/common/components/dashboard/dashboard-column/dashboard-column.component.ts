@@ -5,6 +5,7 @@ import {InvoiceChangeEvent} from '../Invoice-change-event';
 import {DndDropEvent} from 'ngx-drag-drop';
 import {InvoiceService} from '../../../services/invoice.service';
 import {DashboardColumnConfiguration} from '../dashboard-column-configuration';
+import {InvoiceStatusesWorkflow, InvoiceStatusType} from '../../../../models/invoice-status.type';
 
 @Component({
     selector: 'dashboard-column',
@@ -50,5 +51,10 @@ export class DashboardColumnComponent implements OnInit {
         if ($event.fromStatus === this.columnConfiguration.invoiceStatus) {
             this.loadInvoices();
         }
+    }
+
+    public getDropAllowedTypes(): Array<InvoiceStatusType> {
+         return [this.columnConfiguration.invoiceStatus]
+             .concat(InvoiceStatusesWorkflow[this.columnConfiguration.invoiceStatus].authorizedSources);
     }
 }
