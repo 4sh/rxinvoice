@@ -2,6 +2,7 @@
      [dndDraggable]="invoice"
      [dndEffectAllowed]="'move'"
      (dndMoved)="onDragEnd($event)"
+     [class.disable]="disabled"
      [dndType]="invoice.status">
     <div class="row">
         <div class="column small-15">
