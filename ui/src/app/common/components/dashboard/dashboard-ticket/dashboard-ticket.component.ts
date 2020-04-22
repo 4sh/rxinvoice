@@ -14,6 +14,8 @@ export class DashboardTicketComponent implements OnInit {
 
     @Input()
     public invoice: InvoiceModel;
+    @Input()
+    public disabled: boolean;
     @Output()
     public invoiceUpdated: EventEmitter<InvoiceChangeEvent> = new EventEmitter<InvoiceChangeEvent>();
 

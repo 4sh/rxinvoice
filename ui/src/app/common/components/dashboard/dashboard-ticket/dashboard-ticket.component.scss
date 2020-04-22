@@ -18,8 +18,6 @@
 
   &.status-draft {
     border-left: 2px solid $status-draft-color;
-    background-image: url('../../../../../assets/images/png/bg-draft.png');
-    background-size: cover;
 
     .date {
       background-color: $status-draft-color;
@@ -28,12 +26,6 @@
 
   &.status-ready {
     border-left: 2px solid $status-ready-color;
-    background-image: url('../../../../../assets/images/png/bg-draft.png');
-    background-size: cover;
-
-    &.pilot {
-      background-color: #efefef;
-    }
 
     .date {
       background-color: $status-ready-color;

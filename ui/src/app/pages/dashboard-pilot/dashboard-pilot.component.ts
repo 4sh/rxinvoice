@@ -14,7 +14,7 @@ export class DashboardPilotComponent implements OnInit {
     ngOnInit() {
         this.columns.push(
             new DashboardColumnConfiguration('dashboard.column.draft', InvoiceStatusEnum.DRAFT),
-            new DashboardColumnConfiguration('dashboard.column.validation.waiting', InvoiceStatusEnum.WAITING_VALIDATION),
-            new DashboardColumnConfiguration('dashboard.column.to.send', InvoiceStatusEnum.VALIDATED))  ;
+            new DashboardColumnConfiguration('dashboard.column.preparation.waiting', InvoiceStatusEnum.READY, true),
+            new DashboardColumnConfiguration('dashboard.column.to.validate', InvoiceStatusEnum.WAITING_VALIDATION))  ;
     }
 }
