@@ -1,21 +1,5 @@
 @import '../../../../styles/base-component';
 
-
-:host {
-  z-index: 999999;
-  position: absolute;
-  display: block;
-  width: 100vw;
-  height: 100vh;
-  top: rem-calc(-$appHeader-height);
-  left: rem-calc(-$sidebar-width-md);
-  background-color: rgba($black, 0.8);
-
-  @include breakpoint(large only) {
-    left: rem-calc(-$sidebar-width-lg);
-  }
-}
-
 .quick-status-panel {
   position: absolute;
   top: 50%;

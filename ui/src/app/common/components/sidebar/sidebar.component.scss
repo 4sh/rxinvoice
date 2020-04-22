@@ -5,13 +5,10 @@
   left: 0;
   display: flex;
   flex-direction: column;
-  width: rem-calc($sidebar-width-md);
+  width: rem-calc($sidebar-width-sm);
   min-height: 100vh;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.4);
-
-  @include breakpoint(large only) {
-    width: rem-calc($sidebar-width-lg);
-  }
+  z-index: 1000000;
 
   @include has('logo') {
     display: flex;
@@ -37,10 +34,13 @@
       position: relative;
       text-transform: uppercase;
       color: white;
-      padding: rem-calc(8px 24px 8px 16px);
       cursor: pointer;
       @extend %transition;
       @extend %rippleEffect;
+
+      span {
+        display: none!important;
+      }
 
       &:hover,
       &:focus {
@@ -51,10 +51,11 @@
       i {
         display: inline-block;
         vertical-align: middle;
-        width: rem-calc(28px);
-        margin-right: rem-calc(12px);
         font-size: rem-calc(28px);
         text-align: center;
+        width: rem-calc(40px);
+        height: rem-calc(40px);
+        margin: rem-calc(10px) rem-calc(12px);
       }
 
       @include when('isActive') {
@@ -102,8 +103,12 @@
     @extend %transition;
     @extend %rippleEffect;
 
-    button {
+    .logout-button {
       color: white;
+
+      span {
+        display: none!important;
+      }
     }
 
     &:hover,
@@ -128,5 +133,37 @@
       font-size: rem-calc(20px);
       text-align: center;
     }
+  }
+
+  &:hover {
+    width: rem-calc($sidebar-width-md);
+
+    @include breakpoint(large only) {
+      width: rem-calc($sidebar-width-lg);
+    }
+
+    .sidebar-logo {
+
+    }
+
+    .sidebar-menu {
+
+      .sidebar-menu-item {
+        span {
+          display: inline-block!important;
+        }
+      }
+
+    }
+
+    .sidebar-logout {
+
+      .logout-button {
+        span {
+          display: inline-block!important;
+        }
+      }
+    }
+
   }
 }

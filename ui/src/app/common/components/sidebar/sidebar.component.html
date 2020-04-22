@@ -4,14 +4,17 @@
     </div>
 
     <nav class="sidebar-menu">
-        <a routerLink="/app/dashboard" [routerLinkActive]="['isActive']" class="sidebar-menu-item toto">
-          <i class="ion-home"></i>{{'nav.home' | translate}}
+        <a routerLink="/app/dashboard-admin" [routerLinkActive]="['isActive']" class="sidebar-menu-item toto">
+          <i class="ion-home"></i><span>{{'nav.home' | translate}} Admin</span>
+        </a>
+        <a routerLink="/app/dashboard-pilot" [routerLinkActive]="['isActive']" class="sidebar-menu-item toto">
+          <i class="ion-home"></i><span>{{'nav.home' | translate}} Pilot</span>
         </a>
         <a routerLink="/app/customers" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-person"></i>{{'nav.customers' | translate}}
+            <i class="ion-person"></i><span>{{'nav.customers' | translate}}</span>
         </a>
         <a routerLink="/app/invoices" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-document-text"></i>{{'nav.invoices' | translate}}
+            <i class="ion-document-text"></i><span>{{'nav.invoices' | translate}}</span>
             <!--<div class="sidebar-menu-item-notif">3</div>-->
             <!-- TODO add notif-->
         </a>
@@ -21,12 +24,15 @@
         <a routerLink="/app/seller-settings" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
             <i class="ion-document-text"></i>{{'nav.seller.settings' | translate}}
         </a>
+        <a routerLink="/app/drafts" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
+            <i class="ion-document"></i><span>{{'nav.drafts' | translate}}</span>
+        </a>
     </nav>
 
     <a  class="sidebar-logout" (click)="logout()">
-    <button type="button">
+    <button type="button" class="logout-button">
         <i class="ion-power"></i>
-        {{'user.logout' | translate}}
+        <span>{{'user.logout' | translate}}</span>
     </button>
     </a>
 </div>

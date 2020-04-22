@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {plainToClass} from 'class-transformer';
 import {HttpClient} from '@angular/common/http';
+import {InvoiceStatusEnum, InvoiceStatusType} from '../../models/invoice-status.type';
 import {Invoice} from '../../domain/invoice/invoice';
 import {SearchParams} from '../../domain/search-params';
 import {InvoiceSearchFilter} from '../../domain/invoice/invoice-search-filter';
@@ -16,6 +17,14 @@ export class InvoiceService {
 
     constructor(private http: HttpClient) {
     }
+
+    public fetchInvoiceList(invoiceSearchModel: InvoiceSearchFilter): Observable<InvoiceModel[]> {
+        return this.http
+            .get(this.baseUrl, {params: SearchParams.toHttpParams(invoiceSearchModel)})
+            .map((result: any) => plainToClass(Invoice, result as Object[]))
+            .catch((response: Response) => Observable.throw({message: 'Unable to fetch invoices', response: response}));
+    }
+
 
     public fetchInvoices(params: any, save?: boolean): Observable<Invoice[]> {
         if (save) {
@@ -79,6 +88,17 @@ export class InvoiceService {
                 message: 'Unable to delete attachment from invoice',
                 response: response
             }));
+    }
+
+    public isDraftInvoice(invoiceStatus: InvoiceStatusType) {
+        return invoiceStatus &&
+            (invoiceStatus === InvoiceStatusEnum.DRAFT
+                || invoiceStatus === InvoiceStatusEnum.READY);
+    }
+
+    public updateInvoiceStatus(invoice: Invoice, newStatus: InvoiceStatusType): Observable<Invoice> {
+        invoice.status = newStatus;
+        return this.saveInvoice(invoice);
     }
 
     public exportSales(salesExportParameters: SalesExportParameters) {

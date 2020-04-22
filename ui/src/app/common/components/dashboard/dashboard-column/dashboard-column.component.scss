@@ -1,0 +1,33 @@
+@import '../../../../../styles/base-component';
+
+.dashboard-column {
+  height: 100%;
+  border: 6px solid white;
+  padding: 0;
+  width: 100%;
+
+  &.disable {
+    .content {
+      background-color: #e8e8e8;
+    }
+  }
+
+  .title {
+    text-transform: uppercase;
+    color: #7B8C9C;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    &-amount {
+      color: #7B8C9C;
+      font-size: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .content {
+    background-color: #f4f5f7;
+    padding: 1px;
+  }
+}

@@ -3,7 +3,7 @@ import {CustomerSelectComponent} from './modules/shared/components/selects/custo
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgModule} from '@angular/core';
 import {DebounceDirective} from './common/directives/debounce.directive';
-import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {DashboardAdminComponent} from './pages/dashboard-admin/dashboard-admin.component';
 import {AppComponent} from './app/app.component';
 import {InvoicesListComponent} from './common/components/invoices-list/invoices-list.component';
 import {SidebarComponent} from './common/components/sidebar/sidebar.component';
@@ -37,9 +37,6 @@ import {ActivityService} from './common/services/activity.service';
 import {FileUploadModule} from 'ng2-file-upload';
 import {OrderByPipe} from './common/pipes/orderBy.pipe';
 import {DownloadInvoiceService} from './common/services/download-invoice.service';
-import {
-    QuickStatusEditPanelComponent
-} from './common/components/quick-status-edit-panel/quick-status-edit-panel.component';
 import {StyleGuideModule} from './style-guide-module/style-guide.module';
 import {VatSelectComponent} from './modules/shared/components/selects/vat-select/vat-select.component';
 import {InvoiceLineFormComponent} from './common/components/invoice-lines-detail/invoice-line-form/invoice-line-form.component';
@@ -51,6 +48,15 @@ import {YearSelectComponent} from './modules/shared/components/selects/year-sele
 import {MonthSelectComponent} from './modules/shared/components/selects/month-select/month-select.component';
 import {ReferentialModule} from './modules/referential/referential.module';
 import {SharedModule} from './modules/shared/shared.module';
+import { DashboardColumnComponent } from './common/components/dashboard/dashboard-column/dashboard-column.component';
+import { DashboardTicketComponent } from './common/components/dashboard/dashboard-ticket/dashboard-ticket.component';
+import { DashboardPilotComponent } from './pages/dashboard-pilot/dashboard-pilot.component';
+import {DndModule} from 'ngx-drag-drop';
+import { DraftsComponent } from './pages/drafts/drafts.component';
+import {DashboardEventBusService} from './common/services/dashboard-event-bus.service';
+import {ModalService} from './common/components/modal/modal-service.service';
+import {ModalContainerComponent} from './common/components/modal/components/modal-container/modal-container.component';
+import { InvoiceEditionPopupComponent } from './common/components/invoice-edition-popup/invoice-edition-popup.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/i18n/', 'labels.json');
@@ -63,7 +69,6 @@ export function createTranslateLoader(http: HttpClient) {
         // Directives
         DebounceDirective,
         // Components
-        DashboardComponent,
         AppComponent,
         InvoicesListComponent,
         SidebarComponent,
@@ -83,14 +88,20 @@ export function createTranslateLoader(http: HttpClient) {
         InvoiceLinesDetailComponent,
         AttachmentsDetailComponent,
         ActivityPanelComponent,
-        QuickStatusEditPanelComponent,
         VatSelectComponent,
         InvoiceLineFormComponent,
         InvoiceLineHeaderComponent,
         UserSelectComponent,
         AnalyzeComponent,
         YearSelectComponent,
-        MonthSelectComponent
+        MonthSelectComponent,
+        DashboardAdminComponent,
+        DashboardPilotComponent,
+        DashboardColumnComponent,
+        DashboardTicketComponent,
+        DraftsComponent,
+        ModalContainerComponent,
+        InvoiceEditionPopupComponent
     ],
     imports: [
         AppRoutingModule,
@@ -101,6 +112,7 @@ export function createTranslateLoader(http: HttpClient) {
         HttpClientModule,
         StyleGuideModule,
         FileUploadModule,
+        DndModule,
         ReferentialModule,
         SharedModule,
         NgSelectModule,
@@ -128,8 +140,11 @@ export function createTranslateLoader(http: HttpClient) {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpInterceptorService,
             multi: true
-        }
+        },
+        DashboardEventBusService,
+        ModalService,
     ],
+    entryComponents: [ModalContainerComponent, InvoiceEditionPopupComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule {

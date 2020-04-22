@@ -1,0 +1,38 @@
+<div class="invoice {{statusClass}}" [ngClass]="{'draft-invoice': isDraftInvoice()}"
+     [class.disable]="disabled"
+     [dndDraggable]="invoice"
+     [dndType]="invoice.status">
+    <div class="row">
+        <div class="column small-15" *ngIf="!isDraftInvoice()">
+            <span class="date">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
+        </div>
+        <div class="column small-9 text-right invoice-actions">
+            <button class="action-button" (click)="openPopup()">
+              <i class="ion-android-more-horizontal"></i>
+            </button>
+            <button class="action-button" *ngIf="isDraftInvoice()"
+                    [routerLink]="['/app/invoices/detail/' + invoice._id]">
+                <i class="ion-edit"></i>
+            </button>
+            <button class="action-button" *ngIf="!isDraftInvoice()" (click)="downloadInvoice(invoice)">
+              <i class="ion-document"></i>
+            </button>
+        </div>
+        <div class="invoice-info column small-15">
+            <p class="invoice-number">
+              <span *ngIf="invoice.reference">
+                 N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
+              </span>
+            </p>
+            <p class="buyer-name">{{invoice.buyer?.name}}</p>
+            <p class="business-name">{{invoice.business?.name}}</p>
+        </div>
+        <div class="column small-9 invoice-button">
+            <button class="button" (click)="quickAction()" *ngIf="quickActionVisible">{{quickActionLabel | translate}}</button>
+        </div>
+    </div>
+    <div class="label-draft" *ngIf="isDraftInvoice()">
+        {{ 'dashboard.ticket.draft' | translate }}
+    </div>
+</div>
+
