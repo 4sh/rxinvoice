@@ -6,6 +6,7 @@ import {DashboardEventBusService} from '../../../services/dashboard-event-bus.se
 import {ModalService} from '../../modal/modal-service.service';
 import {InvoiceEditionPopupComponent} from '../../invoice-edition-popup/invoice-edition-popup.component';
 import {switchMap} from 'rxjs/operators';
+import {InvoiceStatusesWorkflow} from '../../../../models/invoice-status.type';
 
 @Component({
     selector: 'dashboard-ticket',
@@ -20,6 +21,8 @@ export class DashboardTicketComponent implements OnInit {
     public disabled: boolean;
 
     public statusClass: string;
+    public quickActionLabel: string;
+    public quickActionVisible: boolean;
 
     constructor(private downloadService: DownloadInvoiceService,
                 private modalService: ModalService,
@@ -28,19 +31,31 @@ export class DashboardTicketComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.statusClass = this.getClassFromStatus();
+        this.statusClass = this.buildClassFromStatus();
+        this.quickActionLabel = this.buildQuickActionLabel();
+        this.quickActionVisible = this.setQuickActionVisibility();
     }
 
-    private getClassFromStatus() {
+    private buildClassFromStatus(): string {
         return 'status-' + this.invoice.status.toLowerCase();
     }
 
-    public downloadInvoice(invoice) {
-        this.downloadService.downloadInvoice(invoice);
+    private buildQuickActionLabel(): string {
+        return 'dashboard.ticket.quick.action.' + this.invoice.status;
     }
 
-    public isDraftInvoice(): boolean {
-        return this.invoiceService.isDraftInvoice(this.invoice.status);
+    private setQuickActionVisibility(): boolean  {
+        return InvoiceStatusesWorkflow[this.invoice.status].quickActionEnabled;
+    }
+
+    public quickAction(): void {
+        let fromStatus = this.invoice.status;
+        this.invoice.status = InvoiceStatusesWorkflow[this.invoice.status].authorizedTargets[0];
+        this.invoiceService.updateInvoiceStatus(this.invoice, this.invoice.status)
+            .subscribe((invoice: InvoiceModel) => {
+                this.dashboardEventBusService.publish(fromStatus);
+                this.dashboardEventBusService.publish(invoice.status);
+            });
     }
 
     public openPopup(): void {
@@ -54,4 +69,13 @@ export class DashboardTicketComponent implements OnInit {
                 this.dashboardEventBusService.publish(invoice.status);
             });
     }
+
+    public downloadInvoice(invoice) {
+        this.downloadService.downloadInvoice(invoice);
+    }
+
+    public isDraftInvoice(): boolean {
+        return this.invoiceService.isDraftInvoice(this.invoice.status);
+    }
+
 }

@@ -1,51 +1,52 @@
 <div class="row quick-status-panel">
-  <div class="columns shrink">
-    <div class="row align-middle text-center">
-      <div class="columns small-24 quick-status-panel-header">
-        {{'dashboard.quickEdition.title' | translate}}
-        <h5>{{invoice.object}}</h5>
-        <span class="quick-status-panel-header-close" (click)="close()">
+    <div class="columns shrink">
+        <div class="row align-middle text-center">
+            <div class="columns small-24 quick-status-panel-header">
+                {{'dashboard.quickEdition.title' | translate}}
+                <h5>{{invoice.object}}</h5>
+                <span class="quick-status-panel-header-close" (click)="close()">
                     <i class="ion-close"></i>
                 </span>
-      </div>
-    </div>
-
-    <div class="row quick-status-panel-content">
-      <div class="columns small-24">
-        <select [(ngModel)]="invoice.status">
-          <option value="">{{'invoice.status.all' | translate}}</option>
-          <option *ngFor="let status of statuses" [ngValue]="status">
-            {{'invoice.status.' + status | translate}}
-          </option>
-        </select>
-      </div>
-      <div class="columns small-24">
-        <h6 class="column small-8"> {{'invoice.reference' | translate}}</h6>
-        <div class="column">
-          <input type="text" [(ngModel)]="invoice.reference">
+            </div>
         </div>
-      </div>
 
-      <div class="columns small-24">
-        <h6 class="column small-8"> {{'invoice.date' | translate}}</h6>
-        <div class="column">
-          <date-picker [(ngModel)]="invoice.date"></date-picker>
-          <input type="text" [(ngModel)]="invoice.date">
-        </div>
-      </div>
+        <div class="row quick-status-panel-content">
+            <div class="columns small-24">
+                <select [(ngModel)]="invoice.status">
+                    <option value="">{{'invoice.status.all' | translate}}</option>
+                    <option *ngFor="let status of statuses" [ngValue]="status">
+                        {{'invoice.status.' + status | translate}}
+                    </option>
+                </select>
+            </div>
 
-      <div class="columns small-24">
-        {{'dashboard.quickEdition.comment'|translate}}
-        <textarea [(ngModel)]="invoice.comment"
-                  rows="10" cols="50">
+            <div class="columns small-24">
+                <h6 class="column small-8"> {{'invoice.date' | translate}}</h6>
+                <div class="column">
+                    <date-picker [(ngModel)]="invoice.date"></date-picker>
+                </div>
+                <h6 class="column small-8"> {{'invoice.reference' | translate}}</h6>
+                <div class="column">
+                    <input type="text" [(ngModel)]="invoice.reference">
+                </div>
+            </div>
+
+            <div class="columns small-24">
+                {{'dashboard.quickEdition.comment'|translate}}
+                <textarea [(ngModel)]="invoice.comment"
+                          rows="10" cols="50">
                 </textarea>
-      </div>
-      <div class="columns small-24 text-right">
-        <button class="button medium green ripple"
-                (click)="save()">
-          <i class="ion-checkmark"></i>{{ 'dashboard.quickEdition.save' | translate}}
-        </button>
-      </div>
+            </div>
+            <div class="columns small-24 text-right">
+                <button class="button medium ripple grey"
+                        (click)="cancel()">
+                    <i class="ion-arrow-return-left"></i>{{ 'dashboard.quickEdition.cancel' | translate}}
+                </button>
+                <button class="button medium green ripple"
+                        (click)="save()">
+                    <i class="ion-checkmark"></i>{{ 'dashboard.quickEdition.save' | translate}}
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

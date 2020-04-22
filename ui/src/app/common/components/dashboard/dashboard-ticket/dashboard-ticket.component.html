@@ -28,7 +28,7 @@
             <p class="business-name">{{invoice.business?.name}}</p>
         </div>
         <div class="column small-9 invoice-button">
-            <button class="button">PAYÉE</button>
+            <button class="button" (click)="quickAction()" *ngIf="quickActionVisible">{{quickActionLabel | translate}}</button>
         </div>
     </div>
     <div class="label-draft" *ngIf="isDraftInvoice()">
