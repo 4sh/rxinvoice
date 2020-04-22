@@ -1,5 +1,7 @@
+import {throwError as observableThrowError, Observable} from 'rxjs';
+
+import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {plainToClass} from 'class-transformer';
 import {HttpClient} from '@angular/common/http';
 import {Activity} from '../../domain/common/activity';
@@ -14,9 +16,12 @@ export class ActivityService {
 
     public fetchActivities(): Observable<Activity[]> {
         return this.http
-            .get(`${this.baseUrl}/latest`)
-            .map((result: any) => plainToClass(Activity, result as Object[]))
-            .catch((response: Response) => Observable.throw({ message: 'Unable to fetch activities', response: response }));
+            .get(`${this.baseUrl}/latest`).pipe(
+                map((result: any) => plainToClass(Activity, result as Object[])),
+                catchError((response: Response) => observableThrowError({
+                    message: 'Unable to fetch activities',
+                    response: response
+                })));
     }
 
 }

@@ -23,8 +23,7 @@ import {AuthenticationService} from '../../common/services/authentication.servic
 import {DateUtils} from "../../modules/shared/utils/date-utils";
 import {DownloadInvoiceService} from "../../common/services/download-invoice.service";
 import {map, switchMap} from "rxjs/operators";
-import {timer} from "rxjs/observable/timer";
-import {Observable} from "rxjs";
+import {timer, of} from "rxjs";
 import * as moment from 'moment';
 
 @Component({
@@ -100,7 +99,7 @@ export class InvoiceDetailComponent implements OnInit {
     private invoiceReferenceAsyncValidator() {
         return (input: FormControl) => {
             if (this.invoiceId || !input.value) {
-                return Observable.of(null);
+                return of(null);
             }
             return timer(200).pipe(
                 switchMap(() => this.invoiceService.fetchInvoices({reference: input.value})),

@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Blob} from '../../../domain/blob';
 import { FileUploader} from 'ng2-file-upload';
-import 'rxjs/add/observable/of';
 import {SweetAlertService} from '../../../modules/shared/services/sweetAlert.service';
 
 @Component({

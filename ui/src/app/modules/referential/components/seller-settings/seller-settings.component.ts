@@ -6,6 +6,7 @@ import {AccountantVatRate} from '../../../../domain/common/vat-rate';
 import {ServiceReference} from '../../../../domain/company/service-reference';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
 import {SellerSettingsService} from '../../services/seller-settings.service';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'seller-settings',
@@ -24,8 +25,8 @@ export class SellerSettingsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.authService.companyEvents
-            .filter(company => !!company)
+        this.authService.companyEvents.pipe(
+            filter(company => !!company))
             .subscribe(company => {
                 this.sellerSettingsModel = company.sellerSettings;
             });

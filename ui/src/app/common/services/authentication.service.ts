@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable, BehaviorSubject} from 'rxjs';
 import {Md5} from 'ts-md5/dist/md5';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/map';
 import {User} from '../../domain/user/user';
 import {Company} from '../../domain/company/company';
 import {CompanyService} from './company.service';

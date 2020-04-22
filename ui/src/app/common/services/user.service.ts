@@ -1,19 +1,25 @@
-import { Injectable } from '@angular/core';
+import {throwError as observableThrowError} from 'rxjs';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {plainToClass} from 'class-transformer';
-import {Observable} from 'rxjs/Observable';
 import {User} from '../../domain/user/user';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
 
-  private baseUrl = '/api/users';
+    private baseUrl = '/api/users';
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-  public fetchUsers() {
-  return this.http.get(this.baseUrl)
-        .map((result: any) => plainToClass(User, result as Object[]))
-        .catch((response: Response) => Observable.throw({ message: 'Unable to fetch users', response: response }));
-  }
+    public fetchUsers() {
+        return this.http.get(this.baseUrl).pipe(
+            map((result: any) => plainToClass(User, result as Object[])),
+            catchError((response: Response) => observableThrowError({
+                message: 'Unable to fetch users',
+                response: response
+            }))
+        );
+    }
 }

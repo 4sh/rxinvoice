@@ -1,10 +1,9 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import {SERVICE_KINDS, ServiceKind} from '../../../../../domain/common/service.kind';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, forkJoin} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {map} from 'rxjs/operators';
-import {forkJoin} from 'rxjs/observable/forkJoin';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

@@ -1,8 +1,9 @@
+import {throwError as observableThrowError, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
 import {ServiceKind} from '../../domain/common/service.kind';
-import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
 
 @Injectable()
 export class RepositoryService {
@@ -23,8 +24,8 @@ export class RepositoryService {
 
     public fetchInvoiceStatus(): Observable<InvoiceStatusType[]> {
         return this.http
-            .get(this.baseUrlStatus)
-            .catch((response: Response) => Observable.throw({ message: 'Unable to fetch statuses', response: response }));
+            .get<InvoiceStatusType[]>(this.baseUrlStatus)
+            .pipe(catchError((response: Response) => observableThrowError({ message: 'Unable to fetch statuses', response: response })));
     }
 
     public fetchInvoiceKind(): ServiceKind[] {

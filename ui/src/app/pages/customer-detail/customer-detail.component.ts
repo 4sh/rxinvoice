@@ -1,3 +1,4 @@
+import {filter} from 'rxjs/operators';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Company} from '../../domain/company/company';
 import {FormGroup} from '@angular/forms';
@@ -6,7 +7,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import * as Moment from 'moment';
 import {SweetAlertService} from '../../modules/shared/services/sweetAlert.service';
 import {AuthenticationService} from '../../common/services/authentication.service';
-import 'rxjs/add/operator/filter';
 import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -40,7 +40,7 @@ export class CustomerDetailComponent implements OnInit {
     ngOnInit() {
         this.fetchCustomer();
         const currentUser = this.authService.getCurrentUser();
-        this.authService.companyEvents.filter(company => !!company).subscribe(company => {
+        this.authService.companyEvents.pipe(filter(company => !!company)).subscribe(company => {
             this.seller = company;
             this.buildCompanyFiscalYearBounds(this.seller);
         });

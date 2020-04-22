@@ -1,3 +1,4 @@
+import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
 import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
 import {ServiceKind} from '../../domain/common/service.kind';
@@ -5,9 +6,6 @@ import {Invoice} from '../../domain/invoice/invoice';
 import {InvoiceService} from '../../common/services/invoice.service';
 import {RepositoryService} from '../../common/services/repository.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/debounce';
-import 'rxjs/add/operator/debounceTime';
 import {CurrencyPipe} from '@angular/common';
 import * as moment from 'moment';
 import {SearchParams} from "../../domain/search-params";
@@ -49,9 +47,9 @@ export class InvoicesComponent implements OnInit {
         this.repositoryService.fetchInvoiceStatus()
             .subscribe(statuses => this.statusTypes = statuses);
         this.kinds = this.repositoryService.fetchInvoiceKind();
-        this.searchForm.valueChanges
-            .debounceTime(250)
-            .distinctUntilChanged()
+        this.searchForm.valueChanges.pipe(
+            debounceTime(250),
+            distinctUntilChanged(),)
             .subscribe(() => {
                 this.research();
             });
