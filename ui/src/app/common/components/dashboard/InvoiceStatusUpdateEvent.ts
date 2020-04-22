@@ -1,12 +1,12 @@
-import {InvoiceStatusType} from '../../../models/invoice-status.type';
-import {InvoiceModel} from '../../../models/invoice.model';
+import {Invoice} from '../../../domain/invoice/invoice';
+import {InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 
 export class InvoiceStatusUpdateEvent {
 
     public fromStatus: InvoiceStatusType;
-    public invoice: InvoiceModel;
+    public invoice: Invoice;
 
-    constructor(fromStatus: InvoiceStatusType, invoice: InvoiceModel) {
+    constructor(fromStatus: InvoiceStatusType, invoice: Invoice) {
         this.fromStatus = fromStatus;
         this.invoice = invoice;
     }

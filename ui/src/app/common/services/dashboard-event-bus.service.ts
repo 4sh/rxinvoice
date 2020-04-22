@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {InvoiceStatusType} from '../../models/invoice-status.type';
 import {DashboardColumnObserver} from '../components/dashboard/dashboard-column-observer';
+import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
 
 @Injectable()
 export class DashboardEventBusService {

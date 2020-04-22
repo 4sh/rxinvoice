@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InvoiceModel} from "../../../../models/invoice.model";
 import {DownloadInvoiceService} from '../../../services/download-invoice.service';
 import {InvoiceService} from '../../../services/invoice.service';
 import {DashboardEventBusService} from '../../../services/dashboard-event-bus.service';
 import {ModalService} from '../../modal/modal-service.service';
 import {InvoiceEditionPopupComponent} from '../../invoice-edition-popup/invoice-edition-popup.component';
 import {switchMap} from 'rxjs/operators';
-import {InvoiceStatusesWorkflow} from '../../../../models/invoice-status.type';
+import {Invoice} from '../../../../domain/invoice/invoice';
+import {InvoiceStatusesWorkflow} from '../../../../domain/invoice/invoice-status.type';
 
 @Component({
     selector: 'dashboard-ticket',
@@ -16,7 +16,7 @@ import {InvoiceStatusesWorkflow} from '../../../../models/invoice-status.type';
 export class DashboardTicketComponent implements OnInit {
 
     @Input()
-    public invoice: InvoiceModel;
+    public invoice: Invoice;
     @Input()
     public disabled: boolean;
 
@@ -52,7 +52,7 @@ export class DashboardTicketComponent implements OnInit {
         let fromStatus = this.invoice.status;
         this.invoice.status = InvoiceStatusesWorkflow[this.invoice.status].authorizedTargets[0];
         this.invoiceService.updateInvoiceStatus(this.invoice, this.invoice.status)
-            .subscribe((invoice: InvoiceModel) => {
+            .subscribe((invoice: Invoice) => {
                 this.dashboardEventBusService.publish(fromStatus);
                 this.dashboardEventBusService.publish(invoice.status);
             });
@@ -64,7 +64,7 @@ export class DashboardTicketComponent implements OnInit {
             .open(InvoiceEditionPopupComponent, this.invoice)
             .onResult()
             .pipe(switchMap(() => this.invoiceService.updateInvoiceStatus(this.invoice, this.invoice.status)))
-            .subscribe((invoice: InvoiceModel) => {
+            .subscribe((invoice: Invoice) => {
                 this.dashboardEventBusService.publish(fromStatus);
                 this.dashboardEventBusService.publish(invoice.status);
             });

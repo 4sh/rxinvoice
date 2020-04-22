@@ -1,5 +1,5 @@
-import {InvoiceStatusType} from '../../../models/invoice-status.type';
-import {InvoiceSearchFilterModel} from '../../../models/invoice-search-filter.model';
+import {InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
+import {InvoiceSearchFilter} from '../../../domain/invoice/invoice-search-filter';
 
 export class DashboardColumnConfiguration {
 
@@ -8,7 +8,7 @@ export class DashboardColumnConfiguration {
     public title: string;
     /** Status linked to the column, it will be applied to any invoice dropped onto this column. */
     public invoiceStatus: InvoiceStatusType;
-    public invoiceSearchFilter: InvoiceSearchFilterModel = new InvoiceSearchFilterModel();
+    public invoiceSearchFilter: InvoiceSearchFilter = new InvoiceSearchFilter();
 
     constructor(title: string, invoiceStatus: InvoiceStatusType, disabled?: boolean, actionRequired?: boolean) {
         this.title = title;

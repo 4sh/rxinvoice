@@ -1,16 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {InvoiceModel} from "../../../../models/invoice.model";
+import {Component, Input, OnInit} from '@angular/core';
 import {isNumber} from "util";
-import {InvoiceStatusUpdateEvent} from '../InvoiceStatusUpdateEvent';
 import {DndDropEvent} from 'ngx-drag-drop';
 import {InvoiceService} from '../../../services/invoice.service';
 import {DashboardColumnConfiguration} from '../dashboard-column-configuration';
-import {InvoiceStatusesWorkflow, InvoiceStatusType} from '../../../../models/invoice-status.type';
 import {DashboardEventBusService} from '../../../services/dashboard-event-bus.service';
 import {DashboardColumnObserver} from '../dashboard-column-observer';
 import {ModalService} from '../../modal/modal-service.service';
 import {InvoiceEditionPopupComponent} from '../../invoice-edition-popup/invoice-edition-popup.component';
-import {Observable} from 'rxjs';
+import {Invoice} from '../../../../domain/invoice/invoice';
+import {InvoiceStatusesWorkflow, InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
 
 @Component({
     selector: 'dashboard-column',
@@ -21,10 +19,8 @@ export class DashboardColumnComponent implements OnInit, DashboardColumnObserver
 
     @Input()
     public columnConfiguration: DashboardColumnConfiguration;
-    @Output()
-    public columnUpdated: EventEmitter<InvoiceStatusUpdateEvent> = new EventEmitter<InvoiceStatusUpdateEvent>();
 
-    public invoiceList: Array<InvoiceModel> = [];
+    public invoiceList: Array<Invoice> = [];
 
     constructor(private invoiceService: InvoiceService,
                 private modalService: ModalService,

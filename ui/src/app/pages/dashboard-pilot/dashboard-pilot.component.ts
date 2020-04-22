@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {InvoiceStatusEnum} from '../../models/invoice-status.type';
 import {DashboardColumnConfiguration} from '../../common/components/dashboard/dashboard-column-configuration';
+import {InvoiceStatusEnum} from '../../domain/invoice/invoice-status.type';
 
 @Component({
     templateUrl: './dashboard-pilot.component.html',
@@ -14,6 +14,6 @@ export class DashboardPilotComponent implements OnInit {
         this.columns.push(
             new DashboardColumnConfiguration('dashboard.column.draft', InvoiceStatusEnum.DRAFT),
             new DashboardColumnConfiguration('dashboard.column.preparation.waiting', InvoiceStatusEnum.READY, true),
-            new DashboardColumnConfiguration('dashboard.column.to.validate', InvoiceStatusEnum.WAITING_VALIDATION))  ;
+            new DashboardColumnConfiguration('dashboard.column.to.validate', InvoiceStatusEnum.WAITING_VALIDATION));
     }
 }

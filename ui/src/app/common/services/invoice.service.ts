@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {plainToClass} from 'class-transformer';
 import {HttpClient} from '@angular/common/http';
-import {InvoiceStatusEnum, InvoiceStatusType} from '../../models/invoice-status.type';
 import {Invoice} from '../../domain/invoice/invoice';
 import {SearchParams} from '../../domain/search-params';
 import {InvoiceSearchFilter} from '../../domain/invoice/invoice-search-filter';
 import {SalesExportParameters} from '../../pages/analyze/sales-export-parameters';
+import {InvoiceStatusEnum, InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
 
 @Injectable()
 export class InvoiceService {
@@ -18,7 +18,7 @@ export class InvoiceService {
     constructor(private http: HttpClient) {
     }
 
-    public fetchInvoiceList(invoiceSearchModel: InvoiceSearchFilter): Observable<InvoiceModel[]> {
+    public fetchInvoiceList(invoiceSearchModel: InvoiceSearchFilter): Observable<Invoice[]> {
         return this.http
             .get(this.baseUrl, {params: SearchParams.toHttpParams(invoiceSearchModel)})
             .map((result: any) => plainToClass(Invoice, result as Object[]))

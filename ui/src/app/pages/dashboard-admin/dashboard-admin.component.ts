@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {InvoiceStatusEnum} from '../../models/invoice-status.type';
 import {DashboardColumnConfiguration} from '../../common/components/dashboard/dashboard-column-configuration';
+import {InvoiceStatusEnum} from '../../domain/invoice/invoice-status.type';
 
 @Component({
     templateUrl: './dashboard-admin.component.html',

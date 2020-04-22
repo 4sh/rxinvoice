@@ -15,14 +15,12 @@
         </a>
         <a routerLink="/app/invoices" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
             <i class="ion-document-text"></i><span>{{'nav.invoices' | translate}}</span>
-            <!--<div class="sidebar-menu-item-notif">3</div>-->
-            <!-- TODO add notif-->
         </a>
         <a routerLink="/app/analyze" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-document-text"></i>{{'nav.analyze' | translate}}
+            <i class="ion-document-text"></i><span>{{'nav.analyze' | translate}}</span>
         </a>
         <a routerLink="/app/seller-settings" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-document-text"></i>{{'nav.seller.settings' | translate}}
+            <i class="ion-document-text"></i><span>{{'nav.seller.settings' | translate}}</span>
         </a>
         <a routerLink="/app/drafts" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
             <i class="ion-document"></i><span>{{'nav.drafts' | translate}}</span>
