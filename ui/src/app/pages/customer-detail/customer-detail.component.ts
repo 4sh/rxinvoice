@@ -22,7 +22,7 @@ export class CustomerDetailComponent implements OnInit {
     public editMode = false;
     public companyId: string;
     public canDelete: boolean;
-    @ViewChild('customerForm') form: FormGroup;
+    @ViewChild('customerForm', { static: true }) form: FormGroup;
     private currentYearTurnover: number = 0;
     private currentYearTurnoverExpected: number = 0;
     private totalTurnover: number = 0;

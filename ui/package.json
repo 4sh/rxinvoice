@@ -12,18 +12,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/build-angular": "~0.13.0",
-    "@angular/animations": "7.2.16",
-    "@angular/common": "7.2.16",
-    "@angular/compiler": "7.2.16",
-    "@angular/core": "7.2.16",
-    "@angular/forms": "7.2.16",
-    "@angular/http": "7.2.16",
-    "@angular/platform-browser": "7.2.16",
-    "@angular/platform-browser-dynamic": "7.2.16",
-    "@angular/platform-server": "7.2.16",
-    "@angular/router": "7.2.16",
-    "@ng-select/ng-select": "2.20.5",
+    "@angular-devkit/build-angular": "~0.803.25",
+    "@angular/animations": "8.2.14",
+    "@angular/common": "8.2.14",
+    "@angular/compiler": "8.2.14",
+    "@angular/core": "8.2.14",
+    "@angular/forms": "8.2.14",
+    "@angular/platform-browser": "8.2.14",
+    "@angular/platform-browser-dynamic": "8.2.14",
+    "@angular/platform-server": "8.2.14",
+    "@angular/router": "8.2.14",
+    "@ng-select/ng-select": "3.7.3",
     "@ngx-translate/core": "9.0.2",
     "@ngx-translate/http-loader": "2.0.1",
     "class-transformer": "0.1.8",
@@ -41,13 +40,14 @@
     "sweetalert2": "7.10.0",
     "ts-md5": "1.2.2",
     "tslib": "^1.9.0",
-    "zone.js": "0.8.29"
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular/cli": "7.3.10",
-    "@angular/compiler-cli": "7.2.16",
+    "@angular/cli": "8.3.26",
+    "@angular/compiler-cli": "8.2.14",
     "@types/jasmine": "2.5.38",
     "@types/node": "6.0.60",
+    "codelyzer": "^5.0.1",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "3.2.0",
     "karma": "1.4.1",
@@ -59,6 +59,6 @@
     "protractor": "5.1.0",
     "ts-node": "2.0.0",
     "tslint": "4.5.0",
-    "typescript": "3.2.4"
+    "typescript": "3.5.3"
   }
 }

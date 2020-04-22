@@ -13,7 +13,7 @@ export class VatDetailComponent implements OnInit {
     @Input() vats: VatRate[];
     @Input() editMode: boolean;
     @Output() vatsChange: EventEmitter<VatRate[]> = new EventEmitter();
-    @ViewChild('vatForm') vatForm: FormGroup;
+    @ViewChild('vatForm', { static: false }) vatForm: FormGroup;
 
   constructor() { }
 

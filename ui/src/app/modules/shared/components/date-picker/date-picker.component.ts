@@ -18,9 +18,9 @@ export class InDatePickerComponent implements AfterViewInit, ControlValueAccesso
     @Input() datePickerFormGroup: FormGroup;
     @Input() datePickerFormControlName: string;
     @Input() tabindex?: string;
-    @ViewChild('picker')
+    @ViewChild('picker', { static: true })
     datePicker: DatePickerComponent;
-    @ViewChild('dateInput')
+    @ViewChild('dateInput', { static: false })
     dateInput: ElementRef;
     dateMoment: moment.Moment;
     date: Date;

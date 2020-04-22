@@ -44,7 +44,7 @@ export class InvoiceDetailComponent implements OnInit {
     public selectedCompany: Company;
     public canDelete: boolean;
 
-    @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
+    @ViewChild(AttachmentsDetailComponent, { static: false }) attachmentsComponent: AttachmentsDetailComponent;
 
     constructor(private fb: FormBuilder,
                 private companyService: CompanyService,

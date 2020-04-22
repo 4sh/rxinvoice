@@ -30,7 +30,8 @@ const routes: Routes = [
             {path: 'customers/detail/:id', component: CustomerDetailComponent},
             {path: 'analyze', component: AnalyzeComponent},
             {
-                path: 'seller-settings', loadChildren: './modules/referential/referential-routing.module#ReferentialRoutingModule'
+                path: 'seller-settings', loadChildren: () => import('./modules/referential/referential-routing.module')
+                    .then(m => m.ReferentialRoutingModule)
             },
             {path: 'drafts', component: DraftsComponent},
             {path: '**', redirectTo: '/app/dashboard'}

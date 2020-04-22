@@ -18,7 +18,7 @@ import {Modal} from '../../modal.models/modal.model';
 })
 export class ModalContainerComponent {
 
-    @ViewChild('modalContainer', {read: ViewContainerRef}) private modalContainer: ViewContainerRef;
+    @ViewChild('modalContainer', { read: ViewContainerRef, static: true }) private modalContainer: ViewContainerRef;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
