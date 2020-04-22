@@ -109,10 +109,10 @@
   @include new('invoiceAction') {
     right: 0;
     height: $height-newCustomerAction;
-    width: calc(100% - #{$sidebar-width-md});
+    width: calc(100% - #{$sidebar-width-sm});
 
     @include breakpoint(large only) {
-      width: calc(100% - #{$sidebar-width-lg});
+      width: calc(100% - #{$sidebar-width-sm});
     }
 
     @include has('container') {

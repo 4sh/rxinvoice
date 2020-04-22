@@ -21,8 +21,9 @@
     .dashboard {
       padding: 8px;
       height: calc(100vh - 122px);
-      width: 100%;
+      width: calc(100vw - 64px);
       overflow-y: scroll;
+      flex-flow: row wrap;
 
       dashboard-column {
         width: calc(100% / 3);

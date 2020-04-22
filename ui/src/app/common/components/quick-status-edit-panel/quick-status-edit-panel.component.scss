@@ -8,11 +8,11 @@
   width: 100vw;
   height: 100vh;
   top: rem-calc(-$appHeader-height);
-  left: rem-calc(-$sidebar-width-md);
+  left: rem-calc(-$sidebar-width-sm);
   background-color: rgba($black, 0.8);
 
   @include breakpoint(large only) {
-    left: rem-calc(-$sidebar-width-lg);
+    left: rem-calc(-$sidebar-width-sm);
   }
 }
 

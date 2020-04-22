@@ -3,6 +3,7 @@
 
 /* DEBUT scss composant TICKET FACTURE */
 .invoice {
+  min-height: 110px;
   cursor: move;
   margin: 6px;
   border-radius: 2px;
@@ -12,6 +13,7 @@
 
   &.disable {
     cursor: no-drop;
+    background-color: #efefef;
   }
 
   &.status-draft {
@@ -40,10 +42,6 @@
 
   &.status-waiting_validation {
     border-left: 2px solid $status-waiting-validation-color;
-
-    &.admin {
-      background-color: #efefef;
-    }
 
     .date {
       background-color: $status-waiting-validation-color;
@@ -107,16 +105,20 @@
   }
 
   .date {
-    font-size: 11px;
+    font-size: 9px;
     letter-spacing: 2px;
     padding: 4px 6px;
     border-radius: 2px;
     color: #fff;
     font-weight: 600;
+
+    @include breakpoint(xlarge only) {
+      font-size: 11px;
+    }
   }
 
   .action-button {
-    margin-left: 10px;
+    margin-left: 6px;
     cursor: pointer;
     i {
       font-size: 23px;
@@ -125,24 +127,33 @@
   }
 
   .invoice-info {
-
-    .buyer-name, .business-name {
-
-
-      margin: 0;
-      line-height: 18px;
-      margin-top: 4px;
-    }
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
+    padding: 0 0.5rem;
 
     .buyer-name {
       color: #172b4d;
       font-weight: 500;
       font-size: 14px;
+      margin: 0;
+      line-height: 18px;
+      margin-top: 4px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
     .business-name {
       color: #2B364D;
       font-size: 12px;
+      margin: 0;
+      line-height: 18px;
+      margin-top: 4px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
     .invoice-number {
@@ -150,6 +161,9 @@
       font-size: 12px;
       font-weight: 600;
       margin: 0;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
 }
