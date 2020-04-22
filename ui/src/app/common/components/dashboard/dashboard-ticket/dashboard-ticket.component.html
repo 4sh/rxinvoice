@@ -3,18 +3,19 @@
      [dndEffectAllowed]="'move'"
      (dndMoved)="onDragEnd($event)"
      [class.disable]="disabled"
-     [dndType]="invoice.status">
+     [dndType]="invoice.status"
+     [ngClass]="{'draft-invoice': isDraftInvoice()}">
     <div class="row">
-        <div class="column small-15">
+        <div class="column small-15" *ngIf="!isDraftInvoice()">
             <span class="date">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
         </div>
-        <div class="column small-9 text-right">
+        <div class="column small-9 text-right invoice-actions">
             <button class="action-button" (click)="openPopup()">
               <i class="ion-android-more-horizontal"></i>
             </button>
             <button class="action-button" *ngIf="isDraftInvoice()"
                     [routerLink]="['/app/invoices/detail/' + invoice._id]">
-                <i class="ion-eye"></i>
+                <i class="ion-edit"></i>
             </button>
             <button class="action-button" *ngIf="!isDraftInvoice()" (click)="downloadInvoice(invoice)">
               <i class="ion-document"></i>
@@ -29,9 +30,12 @@
             <p class="buyer-name">{{invoice.buyer?.name}}</p>
             <p class="business-name">{{invoice.business?.name}}</p>
         </div>
-        <div class="column small-9 invoice-action">
+        <div class="column small-9 invoice-button">
             <button class="button">PAYÉE</button>
         </div>
+    </div>
+    <div class="label-draft" *ngIf="isDraftInvoice()">
+        {{ 'dashboard.ticket.draft' | translate }}
     </div>
 </div>
 

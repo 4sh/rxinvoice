@@ -9,7 +9,10 @@
   border-radius: 2px;
   background-color: white;
   box-shadow: 0 0 1px 0 rgba(9, 30, 66, 0.31), 0 2px 4px -1px rgba(9, 30, 66, 0.25);
-  padding: 10px;
+
+  .row {
+    padding: 10px;
+  }
 
   &.disable {
     cursor: no-drop;
@@ -17,17 +20,15 @@
   }
 
   &.status-draft {
-    border-left: 2px solid $status-draft-color;
 
-    .date {
+    .label-draft {
       background-color: $status-draft-color;
     }
   }
 
   &.status-ready {
-    border-left: 2px solid $status-ready-color;
 
-    .date {
+    .label-draft {
       background-color: $status-ready-color;
     }
   }
@@ -109,14 +110,27 @@
     }
   }
 
-  .action-button {
-    margin-left: 6px;
-    cursor: pointer;
-    i {
-      font-size: 23px;
-      color: #a7a7a7;
+  .invoice-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    .action-button {
+      margin-left: 6px;
+      cursor: pointer;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      i.ion-document, i.ion-android-more-horizontal {
+        font-size: 23px;
+        color: #a7a7a7;
+      }
+      i.ion-edit {
+        font-size: 15px;
+        color: #a7a7a7;
+      }
     }
   }
+
 
   .invoice-info {
     width: 100%;
@@ -158,7 +172,7 @@
       white-space: nowrap;
     }
   }
-  .invoice-action {
+  .invoice-button {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -175,6 +189,21 @@
         background-color: #eee;
         color: #4c637b;
       }
+    }
+  }
+
+  &.draft-invoice {
+    .row {
+      flex-direction: row-reverse;
+      min-height: 95px;
+    }
+    .label-draft {
+      text-align: center;
+      text-transform: uppercase;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
   }
 }
