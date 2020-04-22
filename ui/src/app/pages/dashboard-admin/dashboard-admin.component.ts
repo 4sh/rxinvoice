@@ -13,7 +13,7 @@ export class DashboardAdminComponent implements OnInit {
     ngOnInit() {
         this.columns.push(
             new DashboardColumnConfiguration('dashboard.column.to.prepare', InvoiceStatusEnum.READY),
-            new DashboardColumnConfiguration('dashboard.column.validation.waiting', InvoiceStatusEnum.WAITING_VALIDATION, true),
+            new DashboardColumnConfiguration('dashboard.column.validation.waiting', InvoiceStatusEnum.WAITING_VALIDATION, false, true),
             new DashboardColumnConfiguration('dashboard.column.to.send', InvoiceStatusEnum.VALIDATED),
             new DashboardColumnConfiguration('dashboard.column.payment.waiting', InvoiceStatusEnum.SENT),
             new DashboardColumnConfiguration('dashboard.column.late', InvoiceStatusEnum.LATE));
