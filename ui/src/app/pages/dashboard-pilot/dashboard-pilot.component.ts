@@ -1,7 +1,6 @@
-import {Component, OnInit, Optional} from '@angular/core';
-import {InvoiceStatusEnum, InvoiceStatusType} from '../../models/invoice-status.type';
+import {Component, OnInit} from '@angular/core';
+import {InvoiceStatusEnum} from '../../models/invoice-status.type';
 import {DashboardColumnConfiguration} from '../../common/components/dashboard/dashboard-column-configuration';
-import {InvoiceChangeEvent} from '../../common/components/dashboard/Invoice-change-event';
 
 @Component({
     templateUrl: './dashboard-pilot.component.html',

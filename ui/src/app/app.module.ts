@@ -43,8 +43,6 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {ToggleComponent} from './common/components/toggle-boolean/toggle.component';
 import {OrderByPipe} from './common/pipes/orderBy.pipe';
 import {DownloadInvoiceService} from './common/services/download-invoice.service';
-import {QuickStatusEditPanelComponent
-} from './common/components/quick-status-edit-panel/quick-status-edit-panel.component';
 import {StyleGuideModule} from './style-guide-module/style-guide.module';
 import {DpDatePickerModule} from "ng2-date-picker";
 import { VatSelectComponent } from './common/components/selects/vat-select/vat-select.component';
@@ -56,7 +54,10 @@ import { DashboardTicketComponent } from './common/components/dashboard/dashboar
 import { DashboardPilotComponent } from './pages/dashboard-pilot/dashboard-pilot.component';
 import {DndModule} from 'ngx-drag-drop';
 import { DraftsComponent } from './pages/drafts/drafts.component';
-
+import {DashboardEventBusService} from './common/services/dashboard-event-bus.service';
+import {ModalService} from './common/components/modal/modal-service.service';
+import {ModalContainerComponent} from './common/components/modal/components/modal-container/modal-container.component';
+import { InvoiceEditionPopupComponent } from './common/components/invoice-edition-popup/invoice-edition-popup.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/i18n/', 'labels.json');
@@ -93,7 +94,6 @@ export function createTranslateLoader(http: HttpClient) {
         TabComponent,
         TabsComponent,
         ToggleComponent,
-        QuickStatusEditPanelComponent,
         VatSelectComponent,
         InvoiceLineFormComponent,
         InvoiceLineHeaderComponent,
@@ -102,7 +102,9 @@ export function createTranslateLoader(http: HttpClient) {
         DashboardPilotComponent,
         DashboardColumnComponent,
         DashboardTicketComponent,
-        DraftsComponent
+        DraftsComponent,
+        ModalContainerComponent,
+        InvoiceEditionPopupComponent,
     ],
     imports: [
         AppRoutingModule,
@@ -140,8 +142,12 @@ export function createTranslateLoader(http: HttpClient) {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpInterceptorService,
             multi: true
-        }
+        },
+        DashboardEventBusService,
+        ModalService,
     ],
+    entryComponents: [ModalContainerComponent, InvoiceEditionPopupComponent],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -120,10 +120,5 @@
 <!-- [END HEADER] -->
 
 <invoices-list [invoices]="invoices | orderBy: filterString"
-               (quickUpdate)="selectForQuickUpdate($event)" [isPending]="isPending"></invoices-list>
-
-<quick-status-edit-panel  *ngIf="selectedForQuickUpdate"
-                          [invoice]="selectedForQuickUpdate"
-                          (closeQuickUpdate)="closeQuickUpdate()"
-                          (invoiceUpdate)="updatedInvoice($event)">
-</quick-status-edit-panel>
+               (quickUpdate)="selectForQuickUpdate($event)" [isPending]="isPending">
+</invoices-list>

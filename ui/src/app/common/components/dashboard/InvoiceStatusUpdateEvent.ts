@@ -1,15 +1,13 @@
 import {InvoiceStatusType} from '../../../models/invoice-status.type';
 import {InvoiceModel} from '../../../models/invoice.model';
 
-export class InvoiceChangeEvent {
+export class InvoiceStatusUpdateEvent {
 
     public fromStatus: InvoiceStatusType;
-    public toStatus: InvoiceStatusType;
     public invoice: InvoiceModel;
 
-    constructor(fromStatus: InvoiceStatusType, toStatus: InvoiceStatusType, invoice: InvoiceModel) {
+    constructor(fromStatus: InvoiceStatusType, invoice: InvoiceModel) {
         this.fromStatus = fromStatus;
-        this.toStatus = toStatus;
         this.invoice = invoice;
     }
 }

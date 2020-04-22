@@ -6,8 +6,7 @@
     <div class="content">
         <dashboard-ticket *ngFor="let invoice of invoiceList"
                           [invoice]="invoice"
-                          [disabled]="columnConfiguration.disabled"
-                          (invoiceUpdated)="onDragEnded($event)">
+                          [disabled]="columnConfiguration.disabled">
         </dashboard-ticket>
     </div>
 </div>

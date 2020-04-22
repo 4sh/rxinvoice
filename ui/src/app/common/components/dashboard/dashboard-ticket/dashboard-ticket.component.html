@@ -1,10 +1,7 @@
-<div class="invoice {{statusClass}}"
-     [dndDraggable]="invoice"
-     [dndEffectAllowed]="'move'"
-     (dndMoved)="onDragEnd($event)"
+<div class="invoice {{statusClass}}" [ngClass]="{'draft-invoice': isDraftInvoice()}"
      [class.disable]="disabled"
-     [dndType]="invoice.status"
-     [ngClass]="{'draft-invoice': isDraftInvoice()}">
+     [dndDraggable]="invoice"
+     [dndType]="invoice.status">
     <div class="row">
         <div class="column small-15" *ngIf="!isDraftInvoice()">
             <span class="date">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
@@ -39,8 +36,3 @@
     </div>
 </div>
 
-<quick-status-edit-panel *ngIf="popupOpened"
-                          [invoice]="invoice"
-                          (closeQuickUpdate)="closeQuickUpdate()"
-                          (invoiceUpdate)="updateInvoice()">
-</quick-status-edit-panel>
