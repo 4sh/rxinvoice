@@ -28,7 +28,7 @@
             ],
             "styles": [
               "src/styles/main.scss",
-              "node_modules/sweetalert2/dist/sweetalert2.css",
+              "node_modules/sweetalert2/dist/sweetalert2.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
