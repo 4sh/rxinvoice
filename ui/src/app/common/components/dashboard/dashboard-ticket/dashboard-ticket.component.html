@@ -20,14 +20,17 @@
               <i class="ion-document"></i>
             </button>
         </div>
-        <div class="invoice-info">
+        <div class="invoice-info column small-15">
             <p class="invoice-number">
-      <span *ngIf="invoice.reference">
-         N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
-      </span>
+              <span *ngIf="invoice.reference">
+                 N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
+              </span>
             </p>
             <p class="buyer-name">{{invoice.buyer?.name}}</p>
             <p class="business-name">{{invoice.business?.name}}</p>
+        </div>
+        <div class="column small-9 invoice-action">
+            <button class="button">PAYÉE</button>
         </div>
     </div>
 </div>

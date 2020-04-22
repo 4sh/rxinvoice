@@ -158,6 +158,25 @@
       white-space: nowrap;
     }
   }
+  .invoice-action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    button {
+      padding: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      background-color: #f4f5f7;
+      color: #8395a9;
+      text-transform: uppercase;
+
+      &:hover {
+        background-color: #eee;
+        color: #4c637b;
+      }
+    }
+  }
 }
 
 /* FIN scss composant TICKET FACTURE */
