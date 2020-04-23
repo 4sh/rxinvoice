@@ -37,8 +37,7 @@
             <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
         </td>
         <td (click)="quickUpdate.emit(invoice)">
-            <span class="invoiceList-status draft">
-                <i class="ion-ios-circle-filled"></i>
+            <span class="invoiceList-status">
                 {{ 'invoice.status.' + invoice.status | translate}}
             </span>
         </td>
