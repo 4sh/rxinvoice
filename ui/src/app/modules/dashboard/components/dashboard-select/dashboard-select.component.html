@@ -1,0 +1,8 @@
+<ng-select
+        [items]="dashboards"
+        [bindLabel]="'title'"
+        [clearable]="false"
+        [searchable]="false"
+        [ngModel]="dashboard"
+        (ngModelChange)="onChange($event)">
+</ng-select>
