@@ -76,6 +76,7 @@ $global-radius: 4px;
 $global-text-direction: ltr;
 $global-flexbox: false;
 $print-transparent-backgrounds: true;
+$xy-grid: false;
 
 @include add-foundation-colors;
 
