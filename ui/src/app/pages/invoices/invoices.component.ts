@@ -24,8 +24,6 @@ export class InvoicesComponent implements OnInit {
     public kinds: ServiceKind[];
     public filterString = 'reference';
     public isPending = true;
-    public showQuickPanelStatusEdit = false;
-    public selectedForQuickUpdate: Invoice;
 
     constructor(private fb: FormBuilder,
                 private invoiceService: InvoiceService,
@@ -82,23 +80,6 @@ export class InvoicesComponent implements OnInit {
         } else {
             return 0;
         }
-    }
-
-    public selectForQuickUpdate(invoice) {
-        this.selectedForQuickUpdate = invoice;
-    }
-
-    public closeQuickUpdate(): void {
-        this.selectedForQuickUpdate = undefined;
-        this.research();
-    }
-
-    public updatedInvoice(invoice: Invoice) {
-        this.invoiceService.saveInvoice(invoice)
-            .subscribe(value => {
-                this.selectedForQuickUpdate = value;
-                this.closeQuickUpdate();
-            });
     }
 
     public buildUri(): string {

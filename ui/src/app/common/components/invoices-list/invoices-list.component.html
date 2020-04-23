@@ -1,34 +1,32 @@
-<!-- [INVOICE LIST] -->
-
 <spinner [hidden]="!isPending"></spinner>
 
 <table class="invoiceList">
     <thead>
     <tr>
-        <th width="10%">Référence</th>
-        <th>Client</th>
-        <th>Affaire</th>
-        <th>Objet</th>
-        <th width="10%">Montant (HT)</th>
-        <th width="10%">Date de facture</th>
-        <th width="10%">Statut</th>
-        <th width="8%">Actions</th>
+        <th width="10%">{{'invoice.list.column.reference'|translate}}</th>
+        <th>{{'invoice.list.column.buyer'|translate}}</th>
+        <th>{{'invoice.list.column.business'|translate}}</th>
+        <th>{{'invoice.list.column.object'|translate}}</th>
+        <th width="10%">{{'invoice.list.column.gross.amount'|translate}}</th>
+        <th width="10%">{{'invoice.list.column.date'|translate}}</th>
+        <th width="10%">{{'invoice.list.column.status'|translate}}</th>
+        <th width="8%">{{'invoice.list.column.actions'|translate}}</th>
     </tr>
     </thead>
 
     <tbody>
     <tr *ngFor="let invoice of invoices">
         <td>
-            <span>0000000</span>
+            <span>{{invoice.reference}}</span>
         </td>
         <td (click)="goToDetail(invoice)" class="text-click">
-            <span class="invoiceList-value">{{invoice.business?.name}}</span>
+            <span class="invoiceList-value">{{invoice.buyer.name}}</span>
         </td>
         <td (click)="goToDetail(invoice)" class="text-click">
-            <span class="invoiceList-value">{{invoice.business?.name}}</span>
+            <span class="invoiceList-value">{{invoice.business.name}}</span>
         </td>
         <td (click)="goToDetail(invoice)" class="text-click">
-            <span class="invoiceList-value">{{invoice.business?.name}}</span>
+            <span class="invoiceList-value">{{invoice.object}}</span>
         </td>
         <td (click)="goToDetail(invoice)" class="text-click">
             <span class="invoiceList-value">{{invoice.grossAmount | currency:'EUR':'symbol':'1.2-2':'fr'}}</span>
@@ -36,8 +34,8 @@
         <td (click)="goToDetail(invoice)" class="text-click">
             <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
         </td>
-        <td (click)="quickUpdate.emit(invoice)">
-            <span class="invoiceList-status">
+        <td>
+            <span class="invoiceList-status" [ngClass]="invoice.status">
                 {{ 'invoice.status.' + invoice.status | translate}}
             </span>
         </td>
@@ -49,6 +47,3 @@
     </tr>
     </tbody>
 </table>
-
-
-<!-- [END INVOICE LIST] -->
