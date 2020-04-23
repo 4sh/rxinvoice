@@ -20,11 +20,12 @@ import {SweetAlertService} from '../../modules/shared/services/sweetAlert.servic
 import {AttachmentsDetailComponent} from '../../common/components/attachments-detail/attachments-detail.component';
 import {Location} from '@angular/common';
 import {AuthenticationService} from '../../common/services/authentication.service';
-import {DateUtils} from "../../modules/shared/utils/date-utils";
-import {DownloadInvoiceService} from "../../common/services/download-invoice.service";
-import {map, switchMap} from "rxjs/operators";
-import {timer, of} from "rxjs";
+import {DateUtils} from '../../modules/shared/utils/date-utils';
+import {DownloadInvoiceService} from '../../common/services/download-invoice.service';
+import {map, switchMap} from 'rxjs/operators';
 import * as moment from 'moment';
+import {of} from 'rxjs/internal/observable/of';
+import {timer} from 'rxjs/internal/observable/timer';
 
 @Component({
     selector: 'invoice-detail',
@@ -61,8 +62,7 @@ export class InvoiceDetailComponent implements OnInit {
     ngOnInit() {
         this.fetchInvoice();
         this.authService.userEvents
-            .subscribe(currentUser =>
-            {
+            .subscribe(currentUser => {
                 this.companyService.fetchCompany(currentUser.companyRef).subscribe(value => this.seller = value);
                 this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0;
             });

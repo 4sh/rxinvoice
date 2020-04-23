@@ -54,7 +54,7 @@ export class SellerSettingsComponent implements OnInit {
     }
 
     public addServiceReference(serviceKind: ServiceKind): void {
-        let serviceReferenceModel = new ServiceReference();
+        const serviceReferenceModel = new ServiceReference();
         serviceReferenceModel.kind = serviceKind;
         serviceReferenceModel.vatRate = new AccountantVatRate();
         this.sellerSettingsModel.serviceReferenceList.push(serviceReferenceModel);

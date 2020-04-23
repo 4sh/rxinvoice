@@ -2,11 +2,13 @@ import {AfterViewInit, Component, ElementRef, forwardRef, Input, ViewChild} from
 import {ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
 import * as moment from 'moment';
 import {DatePickerComponent} from 'ng2-date-picker';
+
 const DATE_PICKER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InDatePickerComponent),
     multi: true
 };
+
 @Component({
     selector: 'date-picker',
     templateUrl: './date-picker.component.html',
@@ -18,7 +20,7 @@ export class InDatePickerComponent implements AfterViewInit, ControlValueAccesso
     @Input() datePickerFormGroup: FormGroup;
     @Input() datePickerFormControlName: string;
     @Input() tabindex?: string;
-    @ViewChild('picker', { static: true })
+    @ViewChild('picker', {static: true})
     datePicker: DatePickerComponent;
     @ViewChild('dateInput')
     dateInput: ElementRef;
@@ -28,9 +30,11 @@ export class InDatePickerComponent implements AfterViewInit, ControlValueAccesso
     config = {format: 'DD/MM/YYYY', locale: 'fr'};
     private initiated = false;
     private firstChange = true;
+
     ngAfterViewInit(): void {
         this.initiated = true;
     }
+
     writeValue(obj: any): void {
         this.date = obj;
         if (obj) {
@@ -39,23 +43,27 @@ export class InDatePickerComponent implements AfterViewInit, ControlValueAccesso
             this.dateMoment = null;
             if (this.datePicker) {
                 // otherwise value stay in input
-                //this.datePicker.writeValue(undefined);
+                // this.datePicker.writeValue(undefined);
             }
             if (this.dateInput) {
                 this.dateInput.nativeElement.value = undefined;
             }
         }
     }
+
     onChange = (_: any) => {
     };
     onTouched = () => {
     };
+
     registerOnChange(fn: (value: any) => any): void {
         this.onChange = fn;
     }
+
     registerOnTouched(fn: () => any): void {
         this.onTouched = fn;
     }
+
     dateChange(date: any) {
         if (this.initiated) {
             // to keep pristine state
@@ -75,16 +83,19 @@ export class InDatePickerComponent implements AfterViewInit, ControlValueAccesso
             this.firstChange = false;
         }
     }
+
     public isMobileDevice() {
         return navigator.userAgent.match(/iPhone|iPad|iPod/i)
             || navigator.userAgent.match(/Android/i);
     }
+
     setDisabledState(isDisabled: boolean): void {
         if (this.datePicker) {
             this.datePicker.setDisabledState(isDisabled);
         }
         this.disabled = isDisabled;
     }
+
     clear() {
         this.writeValue(null);
         this.dateChange(null);

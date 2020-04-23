@@ -8,7 +8,7 @@ import {RepositoryService} from '../../common/services/repository.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CurrencyPipe} from '@angular/common';
 import * as moment from 'moment';
-import {SearchParams} from "../../domain/search-params";
+import {SearchParams} from '../../domain/search-params';
 
 @Component({
     selector: 'invoices',
@@ -49,7 +49,7 @@ export class InvoicesComponent implements OnInit {
         this.kinds = this.repositoryService.fetchInvoiceKind();
         this.searchForm.valueChanges.pipe(
             debounceTime(250),
-            distinctUntilChanged(),)
+            distinctUntilChanged())
             .subscribe(() => {
                 this.research();
             });
@@ -102,6 +102,6 @@ export class InvoicesComponent implements OnInit {
     }
 
     public buildUri(): string {
-        return "/api/exports/invoices?" + SearchParams.toHttpParams(this.searchForm.value).toString();
+        return '/api/exports/invoices?' + SearchParams.toHttpParams(this.searchForm.value).toString();
     }
 }

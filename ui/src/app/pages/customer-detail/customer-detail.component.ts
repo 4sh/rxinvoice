@@ -22,10 +22,10 @@ export class CustomerDetailComponent implements OnInit {
     public editMode = false;
     public companyId: string;
     public canDelete: boolean;
-    @ViewChild('customerForm', { static: true }) form: FormGroup;
-    public currentYearTurnover: number = 0;
-    public currentYearTurnoverExpected: number = 0;
-    public totalTurnover: number = 0;
+    @ViewChild('customerForm', {static: true}) form: FormGroup;
+    public currentYearTurnover = 0;
+    public currentYearTurnoverExpected = 0;
+    public totalTurnover = 0;
     public companyFiscalYearBounds: string;
 
     constructor(private companyService: CompanyService,
@@ -83,11 +83,11 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     private buildCompanyFiscalYearBounds(company: Company) {
-        let fiscalYear = company.fiscalYear;
-        let now = Moment();
+        const fiscalYear = company.fiscalYear;
+        const now = Moment();
 
-        let startDate = Moment(fiscalYear.start).year(now.year());
-        let endDate = Moment(fiscalYear.end).year(now.year());
+        const startDate = Moment(fiscalYear.start).year(now.year());
+        const endDate = Moment(fiscalYear.end).year(now.year());
 
         if (now.isBefore(startDate)) {
             startDate.year(startDate.year() - 1);
@@ -97,11 +97,11 @@ export class CustomerDetailComponent implements OnInit {
         }
 
         // Sorry for code below
-        let startMonth = startDate
+        const startMonth = startDate
             .add(1, 'd')
             .locale('fr')
             .format('MMMM YYYY');
-        let endMonth = endDate
+        const endMonth = endDate
             .add(-1, 'd')
             .locale('fr')
             .format('MMMM YYYY');

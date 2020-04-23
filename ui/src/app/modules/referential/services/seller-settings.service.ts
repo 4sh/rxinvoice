@@ -9,7 +9,7 @@ import {catchError, map} from 'rxjs/operators';
 @Injectable()
 export class SellerSettingsService {
 
-    private baseUrl: string = '/api/companies';
+    private baseUrl = '/api/companies';
 
     constructor(private http: HttpClient) {
     }

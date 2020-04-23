@@ -1,6 +1,6 @@
 import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {CompanyService} from "../../../../../common/services/company.service";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {CompanyService} from '../../../../../common/services/company.service';
 import {VatRate} from '../../../../../domain/common/vat-rate';
 
 const VALUE_ACCESSOR = {
@@ -25,7 +25,7 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
     public companyRef: string;
 
     @Output()
-    public vatChanged:EventEmitter<VatRate> = new EventEmitter<VatRate>();
+    public vatChanged: EventEmitter<VatRate> = new EventEmitter<VatRate>();
 
     public vatModelList: Array<VatRate> = [];
     public selectedVat: VatRate;
@@ -45,7 +45,7 @@ export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccess
 
     private initializeVatList() {
         const defaultVAT: VatRate = new VatRate();
-        defaultVAT.label = "Taux normal - 20 %";
+        defaultVAT.label = 'Taux normal - 20 %';
         defaultVAT.rate = 20;
 
         if (this.companyRef) {
