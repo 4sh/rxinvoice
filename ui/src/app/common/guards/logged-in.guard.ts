@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
-import {Observable} from 'rxjs';
-import {map, filter, tap} from "rxjs/operators";
+import {Observable} from 'rxjs/internal/Observable';
+import {filter, map, tap} from 'rxjs/operators';
 
 @Injectable()
 export class LoggedInGuard implements CanActivate {
@@ -12,7 +12,7 @@ export class LoggedInGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        return this.authService.userEvents.pipe(
+        return this.authService.fetchCurrent().pipe(
             filter(user => user !== undefined),
             map(user => user !== null),
             tap(isConnectedUser => {

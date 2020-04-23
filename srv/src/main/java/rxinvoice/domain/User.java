@@ -21,6 +21,7 @@ public class User implements RestxPrincipal {
     private String name;
     private String email;
     private Collection<String> roles;
+    private Collection<CompanyRole> companyRoles;
 
     private String companyRef;
 
@@ -74,6 +75,15 @@ public class User implements RestxPrincipal {
         return this;
     }
 
+    public Collection<CompanyRole> getCompanyRoles() {
+        return companyRoles;
+    }
+
+    public User setCompanyRoles(Collection<CompanyRole> companyRoles) {
+        this.companyRoles = companyRoles;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -83,10 +93,6 @@ public class User implements RestxPrincipal {
                 ", roles=" + roles +
                 ", companyRef='" + companyRef + '\'' +
                 '}';
-    }
-
-    public boolean isSeller() {
-        return this.roles != null && this.roles.contains(AppModule.Roles.SELLER);
     }
 
     public static class Rules {

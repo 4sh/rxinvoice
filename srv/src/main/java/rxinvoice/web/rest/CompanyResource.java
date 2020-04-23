@@ -84,7 +84,7 @@ public class CompanyResource {
     @PUT("/companies/{sellerRef}/accountantConfiguration")
     public SellerSettings updateSellerSettings(String sellerRef, SellerSettings sellerSettings) {
         User user = AppModule.currentUser();
-        if (user.isSeller() && !user.getCompanyRef().equals(sellerRef)) {
+        if (user.getRoles().contains(SELLER) && !user.getCompanyRef().equals(sellerRef)) {
             throw new WebException(HttpStatus.FORBIDDEN,
                     String.format("Seller user %s is not part of company %s", user.getName(), sellerRef));
         }

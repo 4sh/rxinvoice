@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
-import {Observable, BehaviorSubject} from 'rxjs';
 import {Md5} from 'ts-md5/dist/md5';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {User} from '../../domain/user/user';
+import {ConnectedUser, User} from '../../domain/user/user';
 import {Company} from '../../domain/company/company';
 import {CompanyService} from './company.service';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, mergeMap, tap} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {Observable} from 'rxjs/internal/Observable';
 
 @Injectable()
 export class AuthenticationService {
@@ -26,36 +27,27 @@ export class AuthenticationService {
 
         const authPayload = {principal: {name: login.name, passwordHash: md5}};
 
-        this.http.post(this.baseUrl, authPayload, {withCredentials: true}).pipe(
-            map((result: any) => result.principal),
-            tap((user: User) => this.userEvents.next(user)),
-            switchMap(user => this.companyService.fetchCompany(user.companyRef)))
-            .subscribe(company =>
-                    this.companyEvents.next(company),
-                () => {
-                        this.userEvents.next(undefined),
-                        this.companyEvents.next(undefined)
-                });
-        return this.userEvents;
+        return this.http.post(this.baseUrl, authPayload, {withCredentials: true})
+            .pipe(
+                map((result: any) => result.principal),
+                tap((user: User) => this.userEvents.next(user)),
+                mergeMap(user => this.companyService.fetchCompany(user.companyRef)
+                    .pipe(
+                        tap((company: Company) => this.companyEvents.next(company)),
+                        map(company => user)
+                    )));
     }
 
-    public fetchCurrent(): Observable<User> {
-        this.http.get(this.baseUrl + '/current', {withCredentials: true}).pipe(
-            map((result: any) => result.principal))
-            .subscribe((user: User) => {
-                this.userEvents.next(user);
-                this.companyService.fetchCompany(user.companyRef)
-                    .subscribe(company => this.companyEvents.next(company))
-            });
-            // tap((user: User) => this.userEvents.next(user)),
-            // switchMap(user => this.companyService.fetchCompany(user.companyRef)))
-            // .subscribe(company =>
-            //         c
-            //     () => {
-            //         this.userEvents.next(undefined),
-            //             this.companyEvents.next(undefined)
-            //     });
-        return this.userEvents;
+    public fetchCurrent(): Observable<ConnectedUser> {
+        return this.http.get(this.baseUrl + '/current', {withCredentials: true})
+            .pipe(
+                map((result: any) => result.principal),
+                tap((user: User) => this.userEvents.next(user)),
+                mergeMap(user => this.companyService.fetchCompany(user.companyRef)
+                    .pipe(
+                        tap((company: Company) => this.companyEvents.next(company)),
+                        map(company => new ConnectedUser(user, company))
+                    )));
     }
 
     public getCurrentUser(): User {

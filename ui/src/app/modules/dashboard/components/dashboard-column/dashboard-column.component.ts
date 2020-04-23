@@ -1,14 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {isNumber} from "util";
 import {DndDropEvent} from 'ngx-drag-drop';
-import {InvoiceService} from '../../../services/invoice.service';
-import {DashboardColumnConfiguration} from '../dashboard-column-configuration';
-import {DashboardEventBusService} from '../../../services/dashboard-event-bus.service';
-import {DashboardColumnObserver} from '../dashboard-column-observer';
-import {ModalService} from '../../modal/modal-service.service';
-import {InvoiceEditionPopupComponent} from '../../invoice-edition-popup/invoice-edition-popup.component';
+import {InvoiceService} from '../../../../common/services/invoice.service';
+import {DashboardColumnConfiguration} from '../../../../domain/company/dashboard/dashboard-column-configuration';
+import {DashboardEventBusService} from '../../services/dashboard-event-bus.service';
+import {DashboardColumnObserver} from './dashboard-column-observer';
+import {ModalService} from '../../../../common/components/modal/modal-service.service';
+import {InvoiceEditionPopupComponent} from '../../../../common/components/invoice-edition-popup/invoice-edition-popup.component';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {InvoiceStatusesWorkflow, InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
+import {InvoiceSearchFilter} from '../../../../domain/invoice/invoice-search-filter';
 
 @Component({
     selector: 'dashboard-column',
@@ -33,7 +34,9 @@ export class DashboardColumnComponent implements OnInit, DashboardColumnObserver
     }
 
     public loadInvoices() {
-        this.invoiceService.fetchInvoiceList(this.columnConfiguration.invoiceSearchFilter)
+        const invoiceSearchFilter = new InvoiceSearchFilter();
+        invoiceSearchFilter.statuses = [this.columnConfiguration.invoiceStatus];
+        this.invoiceService.fetchInvoiceList(invoiceSearchFilter)
             .subscribe(invoices => this.invoiceList = invoices);
     }
 

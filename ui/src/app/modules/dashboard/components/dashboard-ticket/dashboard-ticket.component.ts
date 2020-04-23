@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DownloadInvoiceService} from '../../../services/download-invoice.service';
-import {InvoiceService} from '../../../services/invoice.service';
-import {DashboardEventBusService} from '../../../services/dashboard-event-bus.service';
-import {ModalService} from '../../modal/modal-service.service';
-import {InvoiceEditionPopupComponent} from '../../invoice-edition-popup/invoice-edition-popup.component';
+import {DownloadInvoiceService} from '../../../../common/services/download-invoice.service';
+import {InvoiceService} from '../../../../common/services/invoice.service';
+import {DashboardEventBusService} from '../../services/dashboard-event-bus.service';
+import {ModalService} from '../../../../common/components/modal/modal-service.service';
+import {InvoiceEditionPopupComponent} from '../../../../common/components/invoice-edition-popup/invoice-edition-popup.component';
 import {switchMap} from 'rxjs/operators';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {InvoiceStatusesWorkflow} from '../../../../domain/invoice/invoice-status.type';
