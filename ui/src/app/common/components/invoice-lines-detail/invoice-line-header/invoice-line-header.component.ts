@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class InvoiceLineHeaderComponent implements OnInit {
 
     @Input()
-    private vatEnabled: boolean;
+    public vatEnabled: boolean;
 
     constructor() {
     }

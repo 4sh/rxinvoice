@@ -21,10 +21,11 @@ export class ServiceKindSelectComponent implements OnInit, ControlValueAccessor 
 
     public serviceKindList: Array<ServiceKind>;
     public serviceKind: ServiceKind;
+    public items: Array<EnumOption>;
+    public selectedItem: EnumOption;
+
     private onNgChange: (serviceKind: ServiceKind) => void;
     private onNgTouched: () => void;
-    private items: Array<EnumOption>;
-    private selectedItem: EnumOption;
 
     constructor(private translateService: TranslateService) {
     }

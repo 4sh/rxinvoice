@@ -21,7 +21,7 @@ export class AccountantVatRateSelectComponent implements ControlValueAccessor {
     @Input()
     public disabled: boolean;
 
-    private selectedVat: AccountantVatRate;
+    public selectedVat: AccountantVatRate;
     private onNgChange: (vatRate: AccountantVatRate) => void;
     private onNgTouched: () => void;
 

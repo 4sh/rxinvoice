@@ -18,17 +18,17 @@ const VALUE_ACCESSOR = {
 export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     @Input()
-    private disabled: boolean;
+    public disabled: boolean;
     @Input()
-    private required: boolean;
+    public required: boolean;
     @Input()
-    private companyRef: string;
+    public companyRef: string;
 
     @Output()
-    private vatChanged:EventEmitter<VatRate> = new EventEmitter<VatRate>();
+    public vatChanged:EventEmitter<VatRate> = new EventEmitter<VatRate>();
 
-    private vatModelList: Array<VatRate> = [];
-    private selectedVat: VatRate;
+    public vatModelList: Array<VatRate> = [];
+    public selectedVat: VatRate;
     private companyService: CompanyService;
 
     constructor(companyService: CompanyService) {

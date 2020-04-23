@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {assign} from 'lodash';
 import {TranslateService} from '@ngx-translate/core';
-import swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Injectable()
 export class SweetAlertService {
@@ -20,7 +20,7 @@ export class SweetAlertService {
         };
         if (options.text) { options.text = this.translateService.instant(options.text); }
         if (options.title) {  options.title = this.translateService.instant(options.title); }
-        return swal(assign(baseOptions, options));
+        return Swal.question(assign(baseOptions, options));
     }
 
     private alert(options: SweetAlertOptions) {
@@ -33,7 +33,7 @@ export class SweetAlertService {
             showCloseButton: false,
             timer: 1500
         };
-        return swal(assign(baseOptions, options));
+        return Swal.alert(assign(baseOptions, options));
     }
 
     confirm(options: SweetAlertOptions) {

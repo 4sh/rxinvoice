@@ -3,6 +3,7 @@ import {InvoiceLine} from "../../../../domain/invoice/invoice-line";
 import {ControlContainer, NgForm} from "@angular/forms";
 import {LineMoveEvent} from '../line-move-event';
 import {VatRate} from '../../../../domain/common/vat-rate';
+import {InvoiceLineEditionMode} from '../../../../domain/invoice/invoice-edition-mode';
 
 @Component({
     selector: 'invoice-line-form',
@@ -42,12 +43,12 @@ export class InvoiceLineFormComponent implements OnInit {
         this.line.vat = vatModel;
     }
 
-    private unitCostChanged(unitCost: number): void {
+    public unitCostChanged(unitCost: number): void {
         this.line.unitCost = unitCost;
         this.computeGrossAmount();
     }
 
-    private quantityChanged(quantity: number): void {
+    public quantityChanged(quantity: number): void {
         this.line.quantity = quantity;
         this.computeGrossAmount();
     }

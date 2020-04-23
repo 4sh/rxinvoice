@@ -1,4 +1,4 @@
-enum InvoiceLineEditionMode {
+export enum InvoiceLineEditionMode {
     CREATION = "CREATION",
     EDITION = "EDITION"
 }

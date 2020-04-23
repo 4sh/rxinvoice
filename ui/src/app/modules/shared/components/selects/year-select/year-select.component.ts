@@ -17,10 +17,10 @@ const VALUE_ACCESSOR = {
 })
 export class YearSelectComponent implements OnInit {
 
-    private yearsList: Array<number> = [];
+    public year: number;
+    public yearsList: Array<number> = [];
     private onNgChange: (year: number) => void;
     private onNgTouched: () => void;
-    private year: number;
 
     constructor() {
     }

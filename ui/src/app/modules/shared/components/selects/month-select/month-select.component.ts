@@ -18,10 +18,10 @@ const VALUE_ACCESSOR = {
 })
 export class MonthSelectComponent implements OnInit, ControlValueAccessor {
 
-    private monthsList: Array<MonthItem> = [];
+    public month: number;
+    public monthsList: Array<MonthItem> = [];
     private onNgChange: (month: number) => void;
     private onNgTouched: () => void;
-    private month: number;
 
     constructor(private translateService: TranslateService) {
     }

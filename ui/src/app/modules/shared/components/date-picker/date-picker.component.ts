@@ -20,7 +20,7 @@ export class InDatePickerComponent implements AfterViewInit, ControlValueAccesso
     @Input() tabindex?: string;
     @ViewChild('picker', { static: true })
     datePicker: DatePickerComponent;
-    @ViewChild('dateInput', { static: false })
+    @ViewChild('dateInput')
     dateInput: ElementRef;
     dateMoment: moment.Moment;
     date: Date;

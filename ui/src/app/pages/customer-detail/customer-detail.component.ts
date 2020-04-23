@@ -23,9 +23,9 @@ export class CustomerDetailComponent implements OnInit {
     public companyId: string;
     public canDelete: boolean;
     @ViewChild('customerForm', { static: true }) form: FormGroup;
-    private currentYearTurnover: number = 0;
-    private currentYearTurnoverExpected: number = 0;
-    private totalTurnover: number = 0;
+    public currentYearTurnover: number = 0;
+    public currentYearTurnoverExpected: number = 0;
+    public totalTurnover: number = 0;
     public companyFiscalYearBounds: string;
 
     constructor(private companyService: CompanyService,
