@@ -1,117 +1,34 @@
 <!-- [HEADER] -->
 
+<div class="title">
+    <span>Mes factures</span>
+</div>
 
-<form class="invoiceFilter" [formGroup]="searchForm">
-    <div class="row valign-middle">
-        <div class="columns auto">
-            <div class="row">
-                <div class="columns shrink">
-                    <div class="row align-middle">
-                        <div class="columns shrink">
-                            <h6>{{'invoices.filter.title' | translate}}</h6>
-                        </div>
 
-                        <div class="columns">
-                            <button type="button"
-                                    (click)="toggleFilter('reference')"
-                                    [ngClass]="{'isActive green': filterString ===  'reference',
-                   'spinner':  filterString ===  'REFERENCE' && isPending}"
-                                    class="round large listFilter-item">
-                                {{'invoices.filter.ref' | translate}}
-                            </button>
-                        </div>
+<form class="row align-bottom" [formGroup]="searchForm">
+    <div class="columns small-10">
+        <input class="input search" type="text" placeholder="{{'invoice.search.name' | translate}}"
+               formControlName="query">
+    </div>
 
-                        <div class="columns">
-                            <button type="button"
-                                    (click)="toggleFilter('date')"
-                                    [ngClass]="{'isActive green': filterString ===  'date',
-                   'spinner':  filterString ===  'DATE' && isPending}"
-                                    class="round large listFilter-item">
-                                {{'invoices.filter.date' | translate}}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="columns auto inner-space-top-5">
-                    <input class="input search" type="text" placeholder="{{'invoice.search.name' | translate}}"
-                           formControlName="query">
-                </div>
-            </div>
-        </div>
-
-        <div class="columns shrink">
-            <div class="row align-right inner-space-top-2">
-                <div class="columns shrink text-right">
-                    <a class="button medium primary ripple has-img" [href]="buildUri()">
-                        <img class="icon" src="assets/images/png/icon_excel_white.png">
-                    </a>
-                    <button class="button medium green ripple"
-                            routerLink="/app/invoices/new"
-                            type="button">
-                        <i class="ion-plus-round"></i>{{'invoices.newInvoice' | translate}}
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="columns small-24">
-            <spacer size="12"></spacer>
-        </div>
-
-        <div class="columns auto">
-            <div class="row">
-                <div class="columns small-5">
+    <div class="columns auto margin-left-24">
+        <div class="row">
+            <div class="columns small-6">
+                <p class="title-section">Entre</p>
+                <div class="date-picker columns shrink">
                     <div class="invoiceSelect-date">
                         <date-picker formControlName="startDate"></date-picker>
                     </div>
                 </div>
+            </div>
 
-                <div class="columns small-5">
+            <div class="columns small-6">
+                <p class="title-section">Et</p>
+                <div class="date-picker columns shrink">
                     <div class="invoiceSelect-date">
                         <date-picker formControlName="endDate"></date-picker>
                     </div>
                 </div>
-
-                <div class="columns small-5">
-                    <div class="invoiceSelect-item">
-                        <customer-select [isClearable]="true" [isBindingId]="true"
-                                         [label]="'name'"
-                                         [control]="searchForm.controls.buyerRef"></customer-select>
-                    </div>
-                </div>
-
-                <div class="columns small-5">
-                    <div class="invoiceSelect-item">
-                        <select formControlName="statuses">
-                            <option value="">{{'invoice.status.all' | translate}}</option>
-                            <option *ngFor="let status of statusTypes" [ngValue]="status">
-                                {{'invoice.status.' + status | translate}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="columns small-4">
-                    <div class="invoiceSelect-item">
-                        <select formControlName="kind">
-                            <option value="">{{'invoice.kind.all' | translate}}</option>
-                            <option *ngFor="let kind of kinds" [ngValue]="kind">
-                                {{'invoice.kind.' + kind | translate}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="columns shrink">
-            <!-- Invoice number -->
-            <div class="invoiceNumber columns auto inner-space-top-2">
-                <h6><strong class="nb">{{ invoices && invoices.length ? invoices.length : 0 }}</strong>
-                    {{'invoices.total.number' | translate}}
-                    <strong class="nb">{{getGrossAmount()}} {{'invoices.total.exTaxes' | translate}}</strong>
-                </h6>
             </div>
         </div>
     </div>
@@ -119,6 +36,123 @@
 
 <!-- [END HEADER] -->
 
+
 <invoices-list [invoices]="invoices | orderBy: filterString"
-               (quickUpdate)="selectForQuickUpdate($event)" [isPending]="isPending">
-</invoices-list>
+               (quickUpdate)="selectForQuickUpdate($event)" [isPending]="isPending"></invoices-list>
+
+
+<!--<form class="invoiceFilter" [formGroup]="searchForm">-->
+<!--    <div class="row valign-middle">-->
+<!--        <div class="columns auto">-->
+<!--            <div class="row">-->
+<!--                <div class="columns shrink">-->
+<!--                    <div class="row align-middle">-->
+<!--                        <div class="columns shrink">-->
+<!--                            <h6>{{'invoices.filter.title' | translate}}</h6>-->
+<!--                        </div>-->
+
+<!--                        <div class="columns">-->
+<!--                            <button type="button"-->
+<!--                                    (click)="toggleFilter('reference')"-->
+<!--                                    [ngClass]="{'isActive green': filterString ===  'reference',-->
+<!--                   'spinner':  filterString ===  'REFERENCE' && isPending}"-->
+<!--                                    class="round large listFilter-item">-->
+<!--                                {{'invoices.filter.ref' | translate}}-->
+<!--                            </button>-->
+<!--                        </div>-->
+
+<!--                        <div class="columns">-->
+<!--                            <button type="button"-->
+<!--                                    (click)="toggleFilter('date')"-->
+<!--                                    [ngClass]="{'isActive green': filterString ===  'date',-->
+<!--                   'spinner':  filterString ===  'DATE' && isPending}"-->
+<!--                                    class="round large listFilter-item">-->
+<!--                                {{'invoices.filter.date' | translate}}-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="columns auto inner-space-top-5">-->
+<!--                    <input class="input search" type="text" placeholder="{{'invoice.search.name' | translate}}"-->
+<!--                           formControlName="query">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="columns shrink">-->
+<!--            <div class="row align-right inner-space-top-2">-->
+<!--                <div class="columns shrink text-right">-->
+<!--                    <a class="button medium primary ripple has-img" [href]="buildUri()">-->
+<!--                        <img class="icon" src="assets/images/png/icon_excel_white.png">-->
+<!--                    </a>-->
+<!--                    <button class="button medium green ripple"-->
+<!--                            routerLink="/app/invoices/new"-->
+<!--                            type="button">-->
+<!--                        <i class="ion-plus-round"></i>{{'invoices.newInvoice' | translate}}-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="columns small-24">-->
+<!--            <spacer size="12"></spacer>-->
+<!--        </div>-->
+
+<!--        <div class="columns auto">-->
+<!--            <div class="row">-->
+<!--                <div class="columns small-5">-->
+<!--                    <div class="invoiceSelect-date">-->
+<!--                        <date-picker formControlName="startDate"></date-picker>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="columns small-5">-->
+<!--                    <div class="invoiceSelect-date">-->
+<!--                        <date-picker formControlName="endDate"></date-picker>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="columns small-5">-->
+<!--                    <div class="invoiceSelect-item">-->
+<!--                        <customer-select [isClearable]="true" [isBindingId]="true"-->
+<!--                                         [label]="'name'"-->
+<!--                                         [control]="searchForm.controls.buyerRef"></customer-select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="columns small-5">-->
+<!--                    <div class="invoiceSelect-item">-->
+<!--                        <select formControlName="statuses">-->
+<!--                            <option value="">{{'invoice.status.all' | translate}}</option>-->
+<!--                            <option *ngFor="let status of statusTypes" [ngValue]="status">-->
+<!--                                {{'invoice.status.' + status | translate}}-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="columns small-4">-->
+<!--                    <div class="invoiceSelect-item">-->
+<!--                        <select formControlName="kind">-->
+<!--                            <option value="">{{'invoice.kind.all' | translate}}</option>-->
+<!--                            <option *ngFor="let kind of kinds" [ngValue]="kind">-->
+<!--                                {{'invoice.kind.' + kind | translate}}-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="columns shrink">-->
+<!--            &lt;!&ndash; Invoice number &ndash;&gt;-->
+<!--            <div class="invoiceNumber columns auto inner-space-top-2">-->
+<!--                <h6><strong class="nb">{{ invoices && invoices.length ? invoices.length : 0 }}</strong>-->
+<!--                    {{'invoices.total.number' | translate}}-->
+<!--                    <strong class="nb">{{getGrossAmount()}} {{'invoices.total.exTaxes' | translate}}</strong>-->
+<!--                </h6>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->

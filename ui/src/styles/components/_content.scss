@@ -1,3 +1,18 @@
+@import '../../styles/base-component';
+
+.title {
+    background-color: #415469;
+    height: 5.8rem;
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+
+    span {
+        color: #fefefe;
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
+}
 
 footer {
     padding: rem-calc(8px);

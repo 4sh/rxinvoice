@@ -2,34 +2,35 @@
 
 
 :host {
-  position: relative;
-  display: block;
-  width: 100%;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: rem-calc(16px);
 }
 
 @include new('invoiceFilter') {
-  padding: rem-calc(20px 20px 0 12px);
+    padding: rem-calc(20px 20px 0 12px);
 
-  @include has('search') {
-    margin-left: rem-calc(50px);
+    @include has('search') {
+        margin-left: rem-calc(50px);
 
-    &:focus {
-      transition: 0.30s ease;
-      color: $input-border-color;
+        &:focus {
+            transition: 0.30s ease;
+            color: $input-border-color;
+        }
     }
-  }
 }
 
 @include new('invoiceNumber') {
-  margin: rem-calc(35px 0 0 0);
-  padding-left: 8px;
+    margin: rem-calc(35px 0 0 0);
+    padding-left: 8px;
 }
 
 // ---- Customer Button
 
 @include new('invoiceNewButton') {
-  display: flex;
-  margin-right: rem-calc(8px);
+    display: flex;
+    margin-right: rem-calc(8px);
 }
 
 
@@ -38,69 +39,50 @@
 @include new('invoiceSelect') {
     cursor: pointer;
 
-  @include has('item') {
-    cursor: pointer;
-  }
+    @include has('item') {
+        cursor: pointer;
+    }
 }
 
 // ---- Invoice List Table
 
 @include new('invoiceList') {
-  padding: rem-calc(10px);
-  border-spacing: 0;
+    margin-top: rem-calc(12px);
 
-  @include has('row') {
-    background-color: $content-dark-list-color;
-    padding-left: 4px;
+    @include has('status') {
+        border-radius: rem-calc(50px);
+        padding: rem-calc(4px 16px);
 
-    &:hover {
-      background-color: $content-hover-list-color;
-      box-shadow: 0 0 8px -2px #aaa;
+        &.draft {
+            background: rgba($app-warning-color, 0.1);
+            color: $app-warning-color;
+            font-weight: bold;
+
+            &:before {
+                background: $app-warning-color;
+            }
+        }
+
+        &.validate {
+            background: rgba($app-success-color, 0.1);
+            color: $app-success-color;
+            font-weight: bold;
+        }
     }
 
-    &:nth-child(even) {
-      background-color: $content-light-list-color;
+    @include has('download') {
+        background: rgba($app-main-light-color, 0.2);
+        color: $app-main-light-color;
+        cursor: pointer;
+        border: transparent;
 
-      &:hover {
-        background-color: $content-hover-list-color;
-        box-shadow: 0 0 8px -2px #aaa;
-      }
+        &:hover {
+            background: rgba($app-main-color, 0.2);
+            color: $app-main-color;
+        }
     }
-
-    tr {
-      background-color: transparent;
-
-      td {
-        padding: 16px 0 0 8px;
-      }
-
-      + tr td {
-        padding: 2px 0 8px 8px;
-      }
-    }
-  }
-
-  @include has('label') {
-    color: $body-light-font-color;
-    font-weight: 500;
-
-    img {
-      width: rem-calc(15px);
-    }
-  }
-
-  @include has('value') {
-    color: $body-dark-font-color;
-    font-weight: 500;
-  }
-
-  .width-80-purcent {
-    width: 88%;
-  }
-
-  .inline-block {
-    display: inline-block;
-  }
 }
+
+
 
 

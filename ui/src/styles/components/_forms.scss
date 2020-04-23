@@ -6,125 +6,157 @@
 //---- Search input ---- //
 
 .form-group {
-  position: relative;
+    position: relative;
 
-  input:focus + i {
-    @extend %transition;
-    color: $blue-bayoux;
-  }
+    input:focus + i {
+        @extend %transition;
+        color: $blue-bayoux;
+    }
 
-  i {
-    @extend %transition;
-    position: absolute;
-    left: rem-calc(15px);
-    bottom: 0;
-    font-size: rem-calc(22px);
-    height: rem-calc(36px);
-    color: $regent-gray;
-  }
+    i {
+        @extend %transition;
+        position: absolute;
+        left: rem-calc(15px);
+        bottom: 0;
+        font-size: rem-calc(22px);
+        height: rem-calc(36px);
+        color: $regent-gray;
+    }
 
-  // === Options Icons
+    // === Options Icons
 
-  .has-icon-left { padding-left: rem-calc(44px);}
-  .has-icon-right{ padding-right: rem-calc(44px);}
+    .has-icon-left {
+        padding-left: rem-calc(44px);
+    }
+
+    .has-icon-right {
+        padding-right: rem-calc(44px);
+    }
 }
 
 input {
-  border-radius: rem-calc(14px);
-  margin-bottom: 0 !important;
+    border-radius: rem-calc(8px) !important;
+    height: rem-calc(50px) !important;
+    margin-bottom: 0 !important;
 
-  &.ng-invalid.ng-touched {
-    border: 2px solid rgba($cinnabar, 0.5);
+    &.ng-invalid.ng-touched {
+        border: 2px solid rgba($cinnabar, 0.5);
+    }
+}
+
+[type=text],
+[type=password],
+[type=date],
+[type=datetime],
+[type=datetime-local],
+[type=month],
+[type=week],
+[type=email],
+[type=number],
+[type=search],
+[type=tel],
+[type=time],
+[type=url],
+[type=color],
+textarea {
+  border: 1px solid $silver-rust;
+  box-shadow: none;
+
+  &:focus {
+    box-shadow: none;
   }
 }
 
 .input {
-  margin-bottom: 0;
-  box-shadow: none;
-  font-weight: 500;
-  color: $body-dark-font-color;
-  padding-left: rem-calc(40px);
-
-  &.search {
-    border: 2px solide $button-border-light-color ;
+    margin-bottom: 0;
     box-shadow: none;
-    padding-left: rem-calc(40px);
     font-weight: 500;
-    background-image: url("../#{$svg-path}icon_search.svg");
-    background-size: rem-calc(20px);
-    background-repeat: no-repeat;
-    background-position: rem-calc(10px);
+    color: $body-dark-font-color;
+    padding-left: rem-calc(40px);
 
-    &.small {
-      width: 30vw;
-      margin-bottom: 0;
+    &.search {
+        border: 2px solide $button-border-light-color;
+        box-shadow: none;
+        padding-left: rem-calc(40px);
+        font-weight: 500;
+        background-image: url("../#{$svg-path}icon_search.svg");
+        background-size: rem-calc(20px);
+        background-repeat: no-repeat;
+        background-position: rem-calc(10px);
+
+        &.small {
+            width: 30vw;
+            margin-bottom: 0;
+        }
+
+        &.large {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            background-color: $appHeader-bg-color;
+            background-size: rem-calc(20px);
+            background-repeat: no-repeat;
+            background-position: left center;
+            width: 28vw;
+            margin-bottom: 0;
+
+            &:focus {
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: 2px solid #3CA3D2;
+            }
+        }
     }
 
-    &.large {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      background-color: $appHeader-bg-color;
-      background-size: rem-calc(20px);
-      background-repeat: no-repeat;
-      background-position: left center;
-      width: 28vw;
-      margin-bottom: 0;
-      &:focus {
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: 2px solid #3CA3D2;
-      }
+    &.select {
+        cursor: pointer;
     }
-  }
-
-  &.select {
-    cursor: pointer;
-  }
 }
 
 // === Custom Select
 
 .opened {
-  .ng-control {
-    border: $input-border-focus !important;
-    box-shadow: $input-shadow-focus;
-  }
+    .ng-control {
+        border: $input-border-focus !important;
+        box-shadow: $input-shadow-focus;
+    }
 }
 
 select, .ng-control {
-  box-shadow: none !important;
-  border: $input-border !important;
+    box-shadow: none !important;
+    border: $input-border !important;
 
-  &:focus {
-    border: $input-border-focus !important;
-  }
+    &:focus {
+        border: $input-border-focus !important;
+    }
 
-  &.ng-invalid.ng-touched {
-    border: 2px solid rgba($cinnabar, 0.5) !important;
-  }
+    &.ng-invalid.ng-touched {
+        border: 2px solid rgba($cinnabar, 0.5) !important;
+    }
 }
 
 .ng-select .ng-control {
-  min-height: rem-calc(41px) !important;
+    min-height: rem-calc(41px) !important;
 }
 
 // ==== Textaera
 
 textarea {
-  min-width: 100%;
+    min-width: 100%;
 }
 
 // ==== Label strip
 
 .label-strip {
-  border-radius: rem-calc(3px 3px 0 0);
-  padding: rem-calc(2px 10px);
-  margin-bottom: rem-calc(-1px);
-  color: white;
+    border-radius: rem-calc(3px 3px 0 0);
+    padding: rem-calc(2px 10px);
+    margin-bottom: rem-calc(-1px);
+    color: white;
 
-  &.dark {  background: $blue-bayoux;}
+    &.dark {
+        background: $blue-bayoux;
+    }
 }
 
 
