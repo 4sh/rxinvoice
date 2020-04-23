@@ -7,7 +7,7 @@ if (script) {
         {
             "companyRef" : "53c535a5c8d11a14c7269436",
             "title": "Dashboard administratif",
-            "role" : "admin",
+            "role" : "ADMINISTRATIVE",
             "columnConfigurations" : [
                 {
                     "actionRequired" : false,
@@ -44,7 +44,7 @@ if (script) {
         {
             "companyRef" : "53c535a5c8d11a14c7269436",
             "title": "Dashboard pilotes projet",
-            "role" : "seller",
+            "role" : "INVOICING",
             "columnConfigurations" : [
                 {
                     "actionRequired" : false,
