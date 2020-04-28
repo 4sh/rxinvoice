@@ -91,7 +91,7 @@ public class CommercialRelationshipDao {
                 .update("{sellerRef: #, customerRef: #}", sellerRef, customerRef)
                 .with("{$set: {" +
                         "lastSentDate: #," +
-                        "lastSentInvoice: #}}", lastSendDate, lastSentInvoice);
+                        "lastSentInvoice: #}}", lastSendDate.toDate(), lastSentInvoice);
     }
 
     public void updateLastInvoicePayment(String sellerRef,
@@ -105,7 +105,7 @@ public class CommercialRelationshipDao {
                 .update("{sellerRef: #, customerRef: #}", sellerRef, customerRef)
                 .with("{$set: {" +
                         "lastPaymentDate: #," +
-                        "lastPaidInvoice: #}}", lastPaymentDate, lastPaidInvoice);
+                        "lastPaidInvoice: #}}", lastPaymentDate.toDate(), lastPaidInvoice);
     }
 
     public void updateGeneralData(String sellerRef,
