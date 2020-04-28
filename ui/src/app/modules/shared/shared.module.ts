@@ -11,6 +11,7 @@ import {CommonModule} from '@angular/common';
 import {DpDatePickerModule} from 'ng2-date-picker';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {SweetAlertService} from './services/sweetAlert.service';
+import {InvoiceCurrencyPipe} from './pipes/invoice-currency.pipe';
 
 const components = [
     ToggleComponent,
@@ -18,7 +19,8 @@ const components = [
     SpinnerComponent,
     TabComponent,
     TabsComponent,
-    SpacerComponent
+    SpacerComponent,
+    InvoiceCurrencyPipe
 ];
 
 @NgModule({

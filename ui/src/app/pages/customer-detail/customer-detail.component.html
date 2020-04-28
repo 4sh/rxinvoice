@@ -25,10 +25,10 @@
                 <div class="column small-24">
                     <div class="row align-middle newCustomerDetail-container-valueNumber">
                         <h3 class="column small-12 highlight-text-bold">
-                            {{currentYearTurnover | currency:'EUR':'symbol':'.2-2':'fr' }}
+                            {{currentYearTurnover | invoiceCurrency }}
                         </h3>
                         <h3 class="column small-12 highlight-text-bold">
-                            {{currentYearTurnoverExpected  | currency:'EUR':'symbol':'.2-2':'fr' }}
+                            {{currentYearTurnoverExpected  | invoiceCurrency }}
                         </h3>
                     </div>
                 </div>
@@ -191,12 +191,12 @@
                                     | translate}} :</h6>
                                 <span class="total-nb">{{(customer?.commercialRelationship?.companyMetrics?.global?.invoiced
                                     + customer?.commercialRelationship?.companyMetrics?.global?.paid
-                                    + customer?.commercialRelationship?.companyMetrics?.global?.expired)| currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                                    + customer?.commercialRelationship?.companyMetrics?.global?.expired)| invoiceCurrency}}</span>
 
                             </div>
                             <div class="row align-middle newCustomerAction-container-number-label total-value">
                                 <h6 class="column auto"><i class="ion-arrow-graph-down-right"></i>{{'newCustomer.label.totalDebt' | translate}} :</h6>
-                                <span class="total-nb">{{customer?.commercialRelationship?.companyMetrics?.global?.expired | currency:'EUR':'symbol':'4.2-2':'fr' }}</span>
+                                <span class="total-nb">{{customer?.commercialRelationship?.companyMetrics?.global?.expired | invoiceCurrency}}</span>
                             </div>
                         </div>
                     </div>

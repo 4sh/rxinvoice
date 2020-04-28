@@ -26,7 +26,7 @@
             <span class="customerList-item-value float-right">{{(customer.commercialRelationship.companyMetrics.previousYear?.paid +
                 customer.commercialRelationship.companyMetrics.previousYear?.invoiced +
                 customer.commercialRelationship.companyMetrics.previousYear?.expected +
-                customer.commercialRelationship.companyMetrics.previousYear?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+                customer.commercialRelationship.companyMetrics.previousYear?.expired) | invoiceCurrency}}</span>
         </td>
     </tr>
 
@@ -53,7 +53,7 @@
             <span class="customerList-item-value">{{(customer.commercialRelationship.companyMetrics.currentYear?.paid +
                 customer.commercialRelationship.companyMetrics.currentYear?.invoiced +
                 customer.commercialRelationship.companyMetrics.currentYear?.expected +
-                customer.commercialRelationship.companyMetrics.currentYear?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}
+                customer.commercialRelationship.companyMetrics.currentYear?.expired) | invoiceCurrency }}
             </span>
         </td>
     </tr>
@@ -68,7 +68,7 @@
             <span class="customerList-item-value float-right">{{(customer.commercialRelationship.companyMetrics.nextYear?.paid +
                 customer.commercialRelationship.companyMetrics.nextYear?.invoiced +
                 customer.commercialRelationship.companyMetrics.nextYear?.expected +
-                customer.commercialRelationship.companyMetrics.nextYear?.expired) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+                customer.commercialRelationship.companyMetrics.nextYear?.expired) | invoiceCurrency}}</span>
         </td>
     </tr>
 </tbody>

@@ -29,7 +29,7 @@
             <span class="invoiceList-value">{{invoice.object}}</span>
         </td>
         <td (click)="goToDetail(invoice)" class="text-click">
-            <span class="invoiceList-value">{{invoice.grossAmount | currency:'EUR':'symbol':'1.2-2':'fr'}}</span>
+            <span class="invoiceList-value">{{invoice.grossAmount | invoiceCurrency}}</span>
         </td>
         <td (click)="goToDetail(invoice)" class="text-click">
             <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>

@@ -26,7 +26,7 @@
             </p>
             <p class="buyer-name">{{invoice.buyer?.name}}</p>
             <p class="business-name">{{invoice.business?.name}}</p>
-            <p class="invoice-price">3 456 €</p>
+            <p class="invoice-price">{{invoice.grossAmount | invoiceCurrency}}</p>
         </div>
         <div class="column small-9 invoice-button">
             <button class="button" (click)="quickAction()" *ngIf="quickActionVisible">{{quickActionLabel | translate}}</button>

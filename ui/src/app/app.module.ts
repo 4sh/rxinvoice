@@ -3,7 +3,6 @@ import {CustomerSelectComponent} from './modules/shared/components/selects/custo
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgModule} from '@angular/core';
 import {DebounceDirective} from './common/directives/debounce.directive';
-import {DashboardComponent} from './modules/dashboard/components/dashboard/dashboard.component';
 import {AppComponent} from './app/app.component';
 import {InvoicesListComponent} from './common/components/invoices-list/invoices-list.component';
 import {SidebarComponent} from './common/components/sidebar/sidebar.component';
@@ -48,17 +47,10 @@ import {YearSelectComponent} from './modules/shared/components/selects/year-sele
 import {MonthSelectComponent} from './modules/shared/components/selects/month-select/month-select.component';
 import {ReferentialModule} from './modules/referential/referential.module';
 import {SharedModule} from './modules/shared/shared.module';
-import {DashboardColumnComponent} from './modules/dashboard/components/dashboard-column/dashboard-column.component';
-import {DashboardTicketComponent} from './modules/dashboard/components/dashboard-ticket/dashboard-ticket.component';
-import {DndModule} from 'ngx-drag-drop';
 import {DraftsComponent} from './pages/drafts/drafts.component';
-import {DashboardEventBusService} from './modules/dashboard/services/dashboard-event-bus.service';
 import {ModalService} from './common/components/modal/modal-service.service';
 import {ModalContainerComponent} from './common/components/modal/components/modal-container/modal-container.component';
 import {InvoiceEditionPopupComponent} from './common/components/invoice-edition-popup/invoice-edition-popup.component';
-import {DashboardService} from './modules/dashboard/services/dashboard.service';
-import {DashboardResolver} from './modules/dashboard/resolvers/dashboard.resolver';
-import { DashboardSelectComponent } from './modules/dashboard/components/dashboard-select/dashboard-select.component';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
 
 export function createTranslateLoader(http: HttpClient) {

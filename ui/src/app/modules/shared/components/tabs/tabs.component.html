@@ -5,7 +5,7 @@
             <span class="invoice-total-value">
                 ({{activeTab && activeTab.numberOfElements ?
                 activeTab.numberOfElements: '00'}}) -
-                 {{activeTab && activeTab.amount ? (activeTab.amount | currency:'EUR':'symbol':'4.2-2':'fr') : '00 000 €'}}
+                 {{activeTab.amount | invoiceCurrency}}
             </span>
         </div>
 

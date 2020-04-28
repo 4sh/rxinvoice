@@ -8,6 +8,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {AccountantVatRateSelectComponent} from './components/accountant-vat-select/accountant-vat-rate-select.component';
 import {ServiceKindSelectComponent} from '../shared/components/selects/service-kind-select/service-kind-select.component';
 import {SellerSettingsService} from './services/seller-settings.service';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import {SellerSettingsService} from './services/seller-settings.service';
         RouterModule,
         TranslateModule,
         FormsModule,
-        NgSelectModule
+        NgSelectModule,
+        SharedModule
     ],
     providers: [SellerSettingsService]
 })

@@ -12,6 +12,7 @@ import {RouterModule} from '@angular/router';
 import {DashboardService} from './services/dashboard.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
         TranslateModule,
         FormsModule,
         DndModule,
-        NgSelectModule
+        NgSelectModule,
+        SharedModule
     ],
     providers: [
         DashboardService,
