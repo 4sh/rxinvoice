@@ -3,7 +3,7 @@
 
 /* DEBUT scss composant TICKET FACTURE */
 .invoice {
-  min-height: 110px;
+  min-height: 130px;
   cursor: move;
   margin: 6px;
   border-radius: 2px;
@@ -24,12 +24,18 @@
     .label-draft {
       background-color: $status-draft-color;
     }
+    .invoice-price {
+      color: $status-draft-color;
+    }
   }
 
   &.status-ready {
 
     .label-draft {
       background-color: $status-ready-color;
+    }
+    .invoice-price {
+      color: $status-ready-color;
     }
   }
 
@@ -39,6 +45,9 @@
     .date {
       background-color: $status-waiting-validation-color;
     }
+    .invoice-price {
+      color: $status-waiting-validation-color;
+    }
   }
 
   &.status-validated {
@@ -46,6 +55,9 @@
 
     .date {
       background-color: $status-validated-color;
+    }
+    .invoice-price {
+      color: $status-validated-color;
     }
   }
 
@@ -55,6 +67,9 @@
     .date {
       background-color: $status-sent-color;
     }
+    .invoice-price {
+      color: $status-sent-color;
+    }
   }
 
   &.status-paid {
@@ -62,6 +77,9 @@
 
     .date {
       background-color: $status-paid-color;
+    }
+    .invoice-price {
+      color: $status-paid-color;
     }
   }
 
@@ -71,6 +89,9 @@
     .date {
       background-color: $status-payment-scheduled-color;
     }
+    .invoice-price {
+      color: $status-payment-scheduled-color;
+    }
   }
 
   &.status-late {
@@ -78,6 +99,9 @@
 
     .date {
       background-color: $status-late-color;
+    }
+    .invoice-price {
+      color: $status-late-color;
     }
   }
 
@@ -87,6 +111,9 @@
     .date {
       background-color: $status-unpaid-color;
     }
+    .invoice-price {
+      color: $status-unpaid-color;
+    }
   }
 
   &.status-cancelled {
@@ -94,6 +121,9 @@
 
     .date {
       background-color: $status-cancelled-color;
+    }
+    .invoice-price {
+      color: $status-cancelled-color;
     }
   }
 
@@ -162,6 +192,16 @@
       white-space: nowrap;
     }
 
+    .invoice-price {
+      font-size: 12px;
+      margin: 0;
+      line-height: 18px;
+      margin-top: 4px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
     .invoice-number {
       color: #5e6c84;
       font-size: 12px;
@@ -195,7 +235,7 @@
   &.draft-invoice {
     .row {
       flex-direction: row-reverse;
-      min-height: 95px;
+      min-height: 115px;
     }
     .label-draft {
       text-align: center;
@@ -204,6 +244,7 @@
       font-size: 10px;
       font-weight: 600;
       letter-spacing: 0.5px;
+      border-radius: 0 0 2px 2px;
     }
   }
 }
