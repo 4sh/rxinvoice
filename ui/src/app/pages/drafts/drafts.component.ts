@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Invoice} from '../../domain/invoice/invoice';
+import {DraftService} from '../../common/services/draft.service';
 
 @Component({
-  selector: 'drafts',
-  templateUrl: './drafts.component.html',
-  styleUrls: ['./drafts.component.scss']
+    selector: 'drafts',
+    templateUrl: './drafts.component.html',
+    styleUrls: ['./drafts.component.scss']
 })
 export class DraftsComponent implements OnInit {
 
-  constructor() { }
+    public drafts: Array<Invoice>;
 
-  ngOnInit() {
-  }
+    constructor(private draftService: DraftService) {
+    }
+
+    ngOnInit() {
+      this.draftService.fetchDrafts().subscribe(value => this.drafts = value)
+    }
 
 }

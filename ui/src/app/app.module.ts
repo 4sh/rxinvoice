@@ -52,6 +52,7 @@ import {ModalService} from './common/components/modal/modal-service.service';
 import {ModalContainerComponent} from './common/components/modal/components/modal-container/modal-container.component';
 import {InvoiceEditionPopupComponent} from './common/components/invoice-edition-popup/invoice-edition-popup.component';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
+import {DraftService} from './common/services/draft.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/i18n/', 'labels.json');
@@ -117,6 +118,7 @@ export function createTranslateLoader(http: HttpClient) {
     ],
     providers: [
         InvoiceService,
+        DraftService,
         TranslateService,
         RepositoryService,
         CompanyService,
