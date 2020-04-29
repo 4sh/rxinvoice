@@ -2,32 +2,44 @@
 
 .dashboard-column {
   height: 100%;
-  border: 6px solid white;
   padding: 0;
-  width: 100%;
+  width: calc(100% - 12px);
+  margin: rem-calc(6px);
 
   &.disable {
     .content {
-      background-color: #e8e8e8;
+      background-color: $app-disabled-color;
     }
   }
 
   .title-column {
     text-transform: uppercase;
-    color: #7B8C9C;
-    font-size: 12px;
+    color: $regent-gray;
+    font-size: rem-calc(12px);
     font-weight: 500;
-    letter-spacing: 0.5px;
+    letter-spacing: rem-calc(0.5px);
 
     &-amount {
-      color: #7B8C9C;
-      font-size: 10px;
-      margin-bottom: 10px;
+      color: $regent-gray;
+      font-size: rem-cal(10px);
+      margin-bottom: rem-calc(10px);
     }
   }
 
   .content {
-    background-color: #f4f5f7;
-    padding: 1px;
+    background-color: $black-squeeze;
+    padding: rem-calc(1px);
+  }
+
+  &.allowedDrop {
+
+    .content {
+      border: rem-calc(2px) dashed $app-success-color;
+      background-color: rgba(103, 186, 47, 0.1);
+
+      dashboard-ticket {
+        display: none;
+      }
+    }
   }
 }

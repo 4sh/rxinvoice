@@ -3,20 +3,21 @@
 
 /* DEBUT scss composant TICKET FACTURE */
 .invoice {
-  min-height: 130px;
+  min-height: rem-calc(130px);
   cursor: move;
-  margin: 6px;
-  border-radius: 2px;
+  margin: rem-calc(6px);
+  border-radius: rem-calc(2px);
   background-color: white;
-  box-shadow: 0 0 1px 0 rgba(9, 30, 66, 0.31), 0 2px 4px -1px rgba(9, 30, 66, 0.25);
+  box-shadow: 0 0 rem-calc(1px) 0 rgba(9, 30, 66, 0.31), 0 rem-calc(2px) rem-calc(4px) rem-calc(-1px) rgba(9, 30, 66, 0.25);
 
   .row {
-    padding: 10px;
+    padding: rem-calc(10px);
   }
 
   &.disable {
     cursor: no-drop;
-    background-color: #efefef;
+    background-color: $app-disabled-color;
+    opacity: 0.7;
   }
 
   &.status-draft {
@@ -40,7 +41,7 @@
   }
 
   &.status-waiting_validation {
-    border-left: 2px solid $status-waiting-validation-color;
+    border-left: rem-calc(2px) solid $status-waiting-validation-color;
 
     .date {
       background-color: $status-waiting-validation-color;
@@ -51,7 +52,7 @@
   }
 
   &.status-validated {
-    border-left: 2px solid $status-validated-color;
+    border-left: rem-calc(2px) solid $status-validated-color;
 
     .date {
       background-color: $status-validated-color;
@@ -62,7 +63,7 @@
   }
 
   &.status-sent {
-    border-left: 2px solid $status-sent-color;
+    border-left: rem-calc(2px) solid $status-sent-color;
 
     .date {
       background-color: $status-sent-color;
@@ -73,7 +74,7 @@
   }
 
   &.status-paid {
-    border-left: 2px solid $status-paid-color;
+    border-left: rem-calc(2px) solid $status-paid-color;
 
     .date {
       background-color: $status-paid-color;
@@ -84,7 +85,7 @@
   }
 
   &.status-payment_scheduled {
-    border-left: 2px solid $status-payment-scheduled-color;
+    border-left: rem-calc(2px) solid $status-payment-scheduled-color;
 
     .date {
       background-color: $status-payment-scheduled-color;
@@ -95,7 +96,7 @@
   }
 
   &.status-late {
-    border-left: 2px solid $status-late-color;
+    border-left: rem-calc(2px) solid $status-late-color;
 
     .date {
       background-color: $status-late-color;
@@ -106,7 +107,7 @@
   }
 
   &.status-unpaid {
-    border-left: 2px solid $status-unpaid-color;
+    border-left: rem-calc(2px) solid $status-unpaid-color;
 
     .date {
       background-color: $status-unpaid-color;
@@ -117,7 +118,7 @@
   }
 
   &.status-cancelled {
-    border-left: 2px solid $status-cancelled-color;
+    border-left: rem-calc(2px) solid $status-cancelled-color;
 
     .date {
       background-color: $status-cancelled-color;
@@ -128,15 +129,15 @@
   }
 
   .date {
-    font-size: 9px;
-    letter-spacing: 2px;
-    padding: 4px 6px;
-    border-radius: 2px;
-    color: #fff;
+    font-size: rem-calc(9px);
+    letter-spacing: rem-calc(2px);
+    padding: rem-calc(4px) rem-calc(6px);
+    border-radius: rem-calc(2px);
+    color: white;
     font-weight: 600;
 
     @include breakpoint(xlarge only) {
-      font-size: 11px;
+      font-size: rem-calc(11px);
     }
   }
 
@@ -145,17 +146,17 @@
     justify-content: flex-end;
 
     .action-button {
-      margin-left: 6px;
+      margin-left: rem-calc(6px);
       cursor: pointer;
-      height: 24px;
+      height: rem-calc(24px);
       display: flex;
       align-items: center;
       i.ion-document, i.ion-android-more-horizontal {
-        font-size: 23px;
+        font-size: rem-calc(23px);
         color: #a7a7a7;
       }
       i.ion-edit {
-        font-size: 15px;
+        font-size: rem-calc(15px);
         color: #a7a7a7;
       }
     }
@@ -167,15 +168,15 @@
     width: -moz-available;
     width: -webkit-fill-available;
     width: stretch;
-    padding: 0 0.5rem;
+    padding: 0 rem-calc(5px);
 
     .buyer-name {
       color: #172b4d;
       font-weight: 500;
-      font-size: 14px;
+      font-size: rem-calc(14px);
       margin: 0;
-      line-height: 18px;
-      margin-top: 4px;
+      line-height: rem-calc(18px);
+      margin-top: rem-calc(4px);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -183,20 +184,20 @@
 
     .business-name {
       color: #2B364D;
-      font-size: 12px;
+      font-size: rem-calc(12px);
       margin: 0;
-      line-height: 18px;
-      margin-top: 4px;
+      line-height: rem-calc(18px);
+      margin-top: rem-calc(4px);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
     }
 
     .invoice-price {
-      font-size: 12px;
+      font-size: rem-calc(12px);
       margin: 0;
-      line-height: 18px;
-      margin-top: 4px;
+      line-height: rem-calc(18px);
+      margin-top: rem-calc(4px);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -204,7 +205,7 @@
 
     .invoice-number {
       color: #5e6c84;
-      font-size: 12px;
+      font-size: rem-calc(12px);
       font-weight: 600;
       margin: 0;
       text-overflow: ellipsis;
@@ -218,8 +219,8 @@
     align-items: flex-end;
 
     button {
-      padding: 6px;
-      font-size: 10px;
+      padding: rem-calc(6px);
+      font-size: rem-calc(10px);
       font-weight: 700;
       background-color: #f4f5f7;
       color: #8395a9;
@@ -235,18 +236,16 @@
   &.draft-invoice {
     .row {
       flex-direction: row-reverse;
-      min-height: 115px;
+      min-height: rem-calc(115px);
     }
     .label-draft {
       text-align: center;
       text-transform: uppercase;
       color: #fff;
-      font-size: 10px;
+      font-size: rem-calc(10px);
       font-weight: 600;
-      letter-spacing: 0.5px;
-      border-radius: 0 0 2px 2px;
+      letter-spacing: rem-calc(0.5px);
+      border-radius: 0 0 rem-calc(2px) rem-calc(2px);
     }
   }
 }
-
-/* FIN scss composant TICKET FACTURE */
