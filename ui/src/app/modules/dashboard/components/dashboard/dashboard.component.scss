@@ -22,13 +22,11 @@
   }
 
   &-dashboard {
+    padding: rem-calc(10px);
 
     .dashboard {
-      padding: rem-calc(8px);
-      height: calc(100vh - 122px);
-      width: calc(100vw - 64px);
-      overflow-y: scroll;
-      flex-flow: row wrap;
+      height: calc(100vh - 210px);
+      overflow-x: scroll;
 
       .column-width- {
         &2 {
