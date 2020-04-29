@@ -28,7 +28,6 @@ $geyser :                                        #CCD4DA !default;
 $silver-rust :                                   #cdcdcd !default;
 $black-squeeze :                                 #F2F6FA !default;
 $alice-blue:                                     #FCFEFF !default;
-$catskill-white :                                #E3EAF3 !default;
 $sail :                                          #9CD8F4 !default;
 $shakespeare :                                   #3CA3D2 !default;
 $blue-bayoux :                                   #4c637b !default;
@@ -43,6 +42,14 @@ $black :                                         #000000 !default;
 $regent-gray :                                   #7B8C9C !default;
 $wild-sand :                                     #F6F6F6 !default;
 $white :                                         #ffffff !default;
+
+$torea-bay :                                     #1011A3 !default;
+$persian-blue :                                  #1E1ED4 !default;
+$indigo :                                        #5C60C5 !default;
+$catskill-white :                                #E9F0F5 !default;
+$cadet-blue :                                    #A1AEBF !default;
+$slate-gray :                                    #7B8898 !default;
+$jacarta :                                       #252668 !default;
 
 
 // == Colors by function
@@ -141,7 +148,7 @@ $sidebar-item-bg-color :                            $app-main-light-color !defau
 // ---------------------------------------------------------------------- >
 
 $appHeader-height:                                    64px !default;
-$appHeader-bg-color :                                 $app-sub-light-color   !default;
+$appHeader-bg-color :                                 white   !default;
 
 
 // < ----------------------------------------------------------------------
