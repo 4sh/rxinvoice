@@ -1,81 +1,90 @@
 <form novalidate *ngIf="sellerSettingsModel" #sellerSettingsForm="ngForm">
     <div class="headerContainer">
-        <h4 class="title">{{'nav.seller.settings'|translate}}</h4>
-        <div class="headerContainer-menu">
-
-<!--            <div *ngFor="let serviceKind of serviceKinds;index as j"-->
-<!--                 (click)="selectServiceKind(serviceKind)"-->
-<!--                 [class.selected]="selectedServiceKind == serviceKind"-->
-<!--                 class="headerContainer-menu-wrapper">-->
-<!--                <h6 class="headerContainer-menu-text">{{'service.kind.' + serviceKind|translate}}</h6>-->
-<!--            </div>-->
-        </div>
-
         <div class="row">
             <div class="column small-12">
-                <div class="listTab rightTab">
-                        <div>
+                <div class="listTab leftTab">
+                    <div class="row align-middle subtitleContainer">
+                        <div class="columns">
                             <h5>{{'seller.settings.vat.title' | translate}}</h5>
-                            <button class="round medium green1 ripple" (click)="addVatRate()">
-                                <i class="ion-android-add"></i>
+                        </div>
+                        <div class="columns text-right">
+                            <button class="button small primary ripple" (click)="addVatRate()">
+                                <i class="fas fa-plus"></i>
+                                <span>{{'seller.settings.vat.button.add.tva' | translate}}</span>
                             </button>
                         </div>
-                        <div>
-                            <table>
-                                <thead>
-                                <td>{{'seller.settings.vat.table.label'|translate}}</td>
-                                <td>{{'seller.settings.vat.table.rate'|translate}}</td>
-                                <td>{{'seller.settings.vat.table.account.number'|translate}}</td>
-                                <td>{{'seller.settings.vat.table.actions'|translate}}</td>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let vatRate of sellerSettingsModel.vatRates; index as i">
-                                    <td>
-                                        <input [(ngModel)]="vatRate.label" type="text" required
-                                               [name]="'label' + i"/>
-                                    </td>
-                                    <td>
-                                        <input [(ngModel)]="vatRate.rate" type="number" step="0.1" required min="0"
-                                               class="text-right"
-                                               [name]="'rate' + i"/>
-                                    </td>
-                                    <td>
-                                        <input [(ngModel)]="vatRate.accountNumber" type="text" required
-                                               class="text-right"
-                                               [name]="'vatAccountNumber' + i">
-                                    </td>
-                                    <td>
-                                        <button class="round medium green1 ripple" (click)="deleteVatRate(i)">
-                                            <i class="ion-android-delete"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
+                    <div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th width="250px">{{'seller.settings.vat.table.label'|translate}}</th>
+                                <th width="250px">{{'seller.settings.vat.table.rate'|translate}}</th>
+                                <th width="250px">{{'seller.settings.vat.table.account.number'|translate}}</th>
+                                <th width="100px">{{'seller.settings.vat.table.actions'|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let vatRate of sellerSettingsModel.vatRates; index as i">
+                                <td width="250px">
+                                    <input [(ngModel)]="vatRate.label" type="text" required
+                                           [name]="'label' + i"/>
+                                </td>
+                                <td width="250px">
+                                    <input [(ngModel)]="vatRate.rate" type="number" step="0.1" required min="0"
+                                           class="text-right"
+                                           [name]="'rate' + i"/>
+                                </td>
+                                <td width="250px">
+                                    <input [(ngModel)]="vatRate.accountNumber" type="text" required
+                                           class="text-right"
+                                           [name]="'vatAccountNumber' + i">
+                                </td>
+                                <td width="100px">
+                                    <button class="round medium red ripple" (click)="deleteVatRate(i)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
             <div class="column small-12">
                 <div class="listTab rightTab">
-                    <div style="display: inline-block">
-                    <h5>{{'seller.settings.accountant.reference'|translate}}</h5>
-                        <button class="round medium green1 ripple" (click)="addServiceReference(selectedServiceKind)">
-                            <i class="ion-android-add"></i>
-                        </button>
+                    <div class="row align-middle subtitleContainer">
+                        <div class="columns">
+                            <h5>{{'seller.settings.accountant.reference'|translate}}</h5>
+                        </div>
+                        <div class="columns text-right">
+                            <button class="button small primary ripple"
+                                    (click)="addServiceReference(selectedServiceKind)">
+                                <i class="fas fa-plus"></i>
+                                {{'seller.settings.vat.button.add.ref' | translate}}
+                            </button>
+                        </div>
                     </div>
-                        <service-kind-select [ngModel]="selectedServiceKind"
+                    <div class="row">
+                        <service-kind-select class="columns small-10"
+                                             [ngModel]="selectedServiceKind"
                                              name="serviceref"
                                              (ngModelChange)="selectServiceKind($event)">
                         </service-kind-select>
+                    </div>
                     <table>
                         <thead>
-                            <td>{{'seller.settings.accountant.reference.vat'|translate}}</td>
-                            <td>{{'seller.settings.accountant.reference.accountant.number'|translate}}</td>
-                            <td>{{'seller.settings.accountant.reference.actions'|translate}}</td>
+                        <tr>
+                            <th width="350px">{{'seller.settings.accountant.reference.vat'|translate}}</th>
+                            <th width="350px">{{'seller.settings.accountant.reference.accountant.number'|translate}}</th>
+                            <th width="100px">{{'seller.settings.accountant.reference.actions'|translate}}</th>
+                        </tr>
                         </thead>
+
                         <tbody>
                         <tr *ngFor="let serviceReference of getServiceReferences(selectedServiceKind);index as k">
-                            <td>
+                            <td width="350px">
                                 <span>
                                    <accountant-vat-select [name]="'vatRate' + k"
                                                           [accountantVatRateList]="sellerSettingsModel.vatRates"
@@ -84,15 +93,16 @@
                                    </accountant-vat-select>
                                 </span>
                             </td>
-                            <td>
+                            <td width="350px">
                                 <input [(ngModel)]="serviceReference.accountNumber" type="text"
                                        required
                                        class="text-right"
                                        [name]="'accountNumber' + k"/>
                             </td>
-                            <td>
-                                <button class="round medium green1 ripple" (click)="deleteServiceReference(serviceReference)">
-                                    <i class="ion-android-delete"></i>
+                            <td width="100px">
+                                <button class="round medium red ripple"
+                                        (click)="deleteServiceReference(serviceReference)">
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
                         </tr>
@@ -103,16 +113,14 @@
         </div>
     </div>
 
-    <footer>
-        <div class="column buttonContainer">
-            <button class="button medium grey ripple" (click)="cancel()"
-                    type="button">
-                <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}
-            </button>
-            <button class="button medium green ripple" (click)="save()" [disabled]="sellerSettingsForm.form.invalid">
-                <i class="ion-edit"></i>
-                {{'button.label.save'|translate}}
-            </button>
-        </div>
-    </footer>
+    <div class="column buttonContainer">
+        <button class="button medium grey ripple" (click)="cancel()"
+                type="button">
+            <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}
+        </button>
+        <button class="button medium green ripple rightButton" (click)="save()" [disabled]="sellerSettingsForm.form.invalid">
+            <i class="ion-edit"></i>
+            {{'button.label.save'|translate}}
+        </button>
+    </div>
 </form>

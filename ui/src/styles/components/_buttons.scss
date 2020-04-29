@@ -2,6 +2,19 @@
 // This file contains all styles related to the BUTTONS component.
 // -----------------------------------------------------------------------------
 
+
+// ================ //
+// Button Container Style
+// ================ //
+.buttonContainer {
+  margin: rem-calc(24px 16px);
+  text-align: right;
+
+  .rightButton {
+    margin-left: rem-calc(8px);
+  }
+}
+
 // ================ //
 // Button Style Round
 // ================ //
@@ -44,7 +57,7 @@
 
     i {
       position: absolute;
-      top: calc(50% + 2px);
+      top: calc(50%);
       left: 50%;
       transform: translate(-50%, -50%);
 
@@ -58,11 +71,11 @@
     position: relative;
     width: rem-calc(38px);
     height: rem-calc(38px);
-    font-size: rem-calc(18px) !important;
+    font-size: rem-calc(14px) !important;
 
     i {
       position: absolute;
-      top: calc(50% + 1px);
+      top: calc(50%);
       left: 50%;
       transform: translate(-50%, -50%);
     }
@@ -188,6 +201,9 @@ button a [type='file'] {
 }
 
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   white-space: nowrap;
   transition: 240ms;
@@ -328,19 +344,19 @@ button a [type='file'] {
   }
 
   &.primary {
-    background-color: $app-main-color;
+    background-color: $button-primary-color;
     color: white;
 
     &:hover, &:focus {
       transition: 240ms;
       opacity: 0.8;
       filter: alpha(opacity=50);
-      background-color: $app-main-color;
+      background-color: $button-primary-color;
       color: white;
     }
 
     &:disabled {
-      background-color: $app-main-color !important;
+      background-color: $button-primary-color !important;
     }
   }
 
@@ -357,16 +373,16 @@ button a [type='file'] {
   }
 
   &.green {
-    background-color: $button-primary-color;
+    background-color: $button-green;
     color: white;
     &:hover, &:focus {
       transition: 240ms;
       opacity: 0.8;
       filter: alpha(opacity=50);
-      background-color: $button-primary-color;
+      background-color: $button-green;
     }
     &:disabled {
-      background-color: $button-primary-color !important;
+      background-color: $button-green !important;
     }
   }
 

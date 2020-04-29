@@ -7,93 +7,28 @@
     font-size: rem-calc(30px);
 }
 
-@include new('headerContainer') {
-    height: 17vh;
-    background: linear-gradient(96deg, $app-main-color 0%, $app-main-light-color 100%);
-    padding: rem-calc(24px 0);
-
-    @include has('menu') {
-        display: flex;
-
-        @include has('text') {
-            padding: rem-calc(16px 4px);
-            width: rem-calc(160px);
-            color: white;
-            margin-bottom: 0;
-            cursor: pointer;
-            text-align: center;
-
-            &:hover {
-                background: rgba(white, 0.4);
-                border-radius: rem-calc(8px 8px 0 0);
-                font-weight: bold;
-            }
-        }
-
-        .selected {
-            background: white;
-            border-radius: rem-calc(8px 8px 0 0);
-            cursor: pointer;
-
-            h6 {
-                color: $app-main-color;
-                font-weight: bold;
-            }
-
-            &:first-child {
-                border-radius: rem-calc(0 8px 0 0);
-            }
-        }
-    }
-}
-
-@include new('referenceContainer') {
-    padding: rem-calc(24px 32px);
-
-    @include has('percent') {
-        background: $app-main-light-color;
-        padding: rem-calc(4px);
-        border-radius: rem-calc(4px);
-        color: white;
-        font-weight: bold;
-        width: rem-calc(70px);
-        text-align: center;
-    }
+@include new('subtitleContainer') {
+    padding: rem-calc(16px 0);
 }
 
 @include new('listTab') {
-    margin-top: rem-calc(24px);
+    background: rgba($app-main-light-color, 0.025);
+    border-radius: 8px;
+    height: 72vh;
+    margin: rem-calc(8px 32px 8px 8px);
     padding: rem-calc(0 32px);
     width: 100%;
+    overflow: hidden;
 
     &.leftTab {
-        margin-top: rem-calc(40px);
+        table {
+            margin-top: rem-calc(56px);
+        }
     }
 
     &.rightTab {
-        background: #fbfbfb;
-        border-radius: 8px;
-        height: 62vh;
-        margin-right: 32px;
-    }
-
-    table {
-        border-radius: rem-calc(4px);
-
-        thead {
-            td {
-                background: rgba($app-main-light-color, 0.1);
-                border: none;
-                font-weight: initial;
-                color: $blue-bayoux;
-                font-size: rem-calc(12px);
-            }
-        }
-
-        tbody {
-            tr:nth-child(even) {
-                background: rgba($app-main-light-color, 0.05);
-            }
+        table {
+            margin-top: rem-calc(16px);
         }
     }
 
@@ -103,8 +38,8 @@
     }
 }
 
-form {
-    margin-bottom: rem-calc(78px);
+tbody {
+    height: 47vh;
 }
 
 @include new('inputContainer') {
