@@ -55,121 +55,121 @@
         font-weight: bold;
 
         &.DRAFT {
-            background: rgba($app-warning-color, 0.1);
-            color: $app-warning-color;
+            background: rgba($status-draft-color, 0.1) !important;
+            color: $status-draft-color;
 
             &:before {
                 content: "\f12c";
                 font-family: Ionicons;
-                color: $app-warning-color;
+                color: $status-draft-color;
                 opacity: 0.7;
             }
         }
 
         &.READY {
-            background: rgba($app-success-color, 0.1);
-            color: $app-success-color;
+            background: rgba($status-ready-color, 0.1) !important;
+            color: $status-ready-color;
 
             &:before {
                 content: "\f36e";
                 font-family: Ionicons;
-                color: $app-success-color;
+                color: $status-ready-color;
                 opacity: 0.7;
             }
         }
 
         &.WAITING_VALIDATION {
-            background: rgba($app-warning-color, 0.1);
-            color: $app-warning-color;
+            background: rgba($status-waiting-validation-color, 0.1) !important;
+            color: $status-waiting-validation-color;
 
             &:before {
                 content: "\f3b3";
                 font-family: Ionicons;
-                color: $app-warning-color;
+                color: $status-waiting-validation-color;
                 opacity: 0.7;
             }
         }
 
         &.VALIDATED {
-            background: rgba($app-success-color, 0.1);
-            color: $app-success-color;
+            background: rgba($status-validated-color, 0.1) !important;
+            color: $status-validated-color;
 
             &:before {
                 content: "\f120";
                 font-family: Ionicons;
-                color: $app-success-color;
+                color: $status-validated-color;
                 opacity: 0.7;
             }
         }
 
         &.SENT {
-            background: rgba($app-success-color, 0.1);
-            color: $app-success-color;
+            background: rgba($status-sent-color, 0.1) !important;
+            color: $status-sent-color;
 
             &:before {
                 content: "\f474";
                 font-family: Ionicons;
-                color: $app-success-color;
+                color: $status-sent-color;
                 opacity: 0.7;
             }
         }
 
         &.PAID {
-            background: rgba($app-success-color, 0.1);
-            color: $app-success-color;
+            background: rgba($status-paid-color, 0.1) !important;
+            color: $status-paid-color;
 
             &:before {
                 content: "\f119";
                 font-family: Ionicons;
-                color: $app-success-color;
+                color: $status-paid-color;
                 opacity: 0.7;
             }
         }
 
         &.PAYMENT_SCHEDULED {
-            background: rgba($app-warning-color, 0.1);
-            color: $app-warning-color;
+            background: rgba($status-payment-scheduled-color, 0.1) !important;
+            color: $status-payment-scheduled-color;
 
             &:before {
                 content: "\f119";
                 font-family: Ionicons;
-                color: $app-warning-color;
+                color: $status-payment-scheduled-color;
                 opacity: 0.7;
             }
         }
 
         &.LATE {
-            background: rgba($app-warning-color, 0.1);
-            color: $app-warning-color;
+            background: rgba($status-late-color, 0.1) !important;
+            color: $status-late-color;
 
             &:before {
                 content: "\f36e";
                 font-family: Ionicons;
-                color: $app-warning-color;
+                color: $status-late-color;
                 opacity: 0.7;
             }
         }
 
         &.UNPAID {
-            background: rgba($app-error-color, 0.1);
-            color: $app-error-color;
+            background: rgba($status-unpaid-color, 0.1) !important;
+            color: $status-unpaid-color;
 
             &:before {
                 content: "\f119";
                 font-family: Ionicons;
-                color: $app-error-color;
+                color: $status-unpaid-color;
                 opacity: 0.7;
             }
         }
 
         &.CANCELLED {
-            background: rgba($app-error-color, 0.1);
-            color: $app-error-color;
+            background: rgba($status-cancelled-color, 0.1) !important;
+            color: $status-cancelled-color;
 
             &:before {
                 content: "\f36e";
                 font-family: Ionicons;
-                color: $app-error-color;
+                color: $status-cancelled-color;
                 opacity: 0.7;
             }
         }
@@ -182,8 +182,25 @@
         border: transparent;
 
         &:hover {
-            background: rgba($app-main-color, 0.2);
-            color: $app-main-color;
+            background: $app-main-color;
+            color: white;
+        }
+    }
+}
+
+@include new('buttonContainer') {
+    display: flex;
+
+    @include has('green') {
+        border: 2px solid $app-main-light-color;
+        background: white;
+        color: $app-main-light-color;
+        margin-left: rem-calc(8px);
+
+        &:hover {
+            border: 2px solid $app-main-color;
+            background: $app-main-color;
+            color: white;
         }
     }
 }

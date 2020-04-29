@@ -3,47 +3,54 @@
 <table class="invoiceList">
     <thead>
     <tr>
-        <th width="10%">{{'invoice.list.column.reference'|translate}}</th>
-        <th>{{'invoice.list.column.buyer'|translate}}</th>
-        <th>{{'invoice.list.column.business'|translate}}</th>
-        <th>{{'invoice.list.column.object'|translate}}</th>
-        <th width="10%">{{'invoice.list.column.gross.amount'|translate}}</th>
-        <th width="10%">{{'invoice.list.column.date'|translate}}</th>
-        <th width="10%">{{'invoice.list.column.status'|translate}}</th>
-        <th width="8%">{{'invoice.list.column.actions'|translate}}</th>
+        <th width="100px">{{'invoice.list.column.reference'|translate}}</th>
+        <th width="150px">{{'invoice.list.column.buyer'|translate}}</th>
+        <th width="150px">{{'invoice.list.column.business'|translate}}</th>
+        <th width="430px">{{'invoice.list.column.object'|translate}}</th>
+        <th width="150px" class="text-right">{{'invoice.list.column.gross.amount'|translate}}</th>
+        <th width="130px">{{'invoice.list.column.date'|translate}}</th>
+        <th width="230px">{{'invoice.list.column.status'|translate}}</th>
+        <th width="150px">{{'invoice.list.column.actions'|translate}}</th>
     </tr>
     </thead>
 
     <tbody>
     <tr *ngFor="let invoice of invoices">
-        <td>
-            <span>{{invoice.reference}}</span>
+        <td  width="100px">
+            <span>{{invoice.reference}}00000000</span>
         </td>
-        <td (click)="goToDetail(invoice)" class="text-click">
+        <td  width="150px" (click)="goToDetail(invoice)" class="text-click">
             <span class="invoiceList-value">{{invoice.buyer.name}}</span>
         </td>
-        <td (click)="goToDetail(invoice)" class="text-click">
+        <td  width="150px" (click)="goToDetail(invoice)" class="text-click">
             <span class="invoiceList-value">{{invoice.business.name}}</span>
         </td>
-        <td (click)="goToDetail(invoice)" class="text-click">
+        <td  width="500px" (click)="goToDetail(invoice)" class="text-click">
             <span class="invoiceList-value">{{invoice.object}}</span>
         </td>
-        <td (click)="goToDetail(invoice)" class="text-click">
+        <td  width="150px" (click)="goToDetail(invoice)" class="text-click text-right">
             <span class="invoiceList-value">{{invoice.grossAmount | invoiceCurrency}}</span>
         </td>
-        <td (click)="goToDetail(invoice)" class="text-click">
+        <td  width="150px" (click)="goToDetail(invoice)" class="text-click">
             <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
         </td>
-        <td>
-            <span class="invoiceList-status" [ngClass]="invoice.status">
+        <td  width="230px">
+            <span class="invoiceList-status text-right" [ngClass]="invoice.status">
                 {{ 'invoice.status.' + invoice.status | translate}}
             </span>
         </td>
-        <td>
+        <td  width="150px" class="buttonContainer">
             <button class="round medium invoiceList-download">
                 <i class="ion-android-upload"></i>
+            </button>
+            <button class="round medium buttonContainer-green">
+                <i class="fas fa-file-excel"></i>
             </button>
         </td>
     </tr>
     </tbody>
 </table>
+
+
+
+

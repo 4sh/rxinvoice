@@ -34,9 +34,13 @@
     }
 }
 
+label {
+    font-weight: bold;
+    color: $app-sub-color;
+    font-size: rem-calc(12px)
+}
+
 input {
-    border-radius: rem-calc(8px) !important;
-    height: rem-calc(50px) !important;
     margin-bottom: 0 !important;
 
     &.ng-invalid.ng-touched {
@@ -59,12 +63,13 @@ input {
 [type=url],
 [type=color],
 textarea {
-  border: 1px solid $silver-rust;
-  box-shadow: none;
-
-  &:focus {
+    border: 1px solid $silver-rust;
     box-shadow: none;
-  }
+    height: rem-calc(40px);
+
+    &:focus {
+        box-shadow: none;
+    }
 }
 
 .input {
@@ -138,6 +143,10 @@ select, .ng-control {
 
 .ng-select .ng-control {
     min-height: rem-calc(41px) !important;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: rem-calc(40px);
 }
 
 // ==== Textaera
