@@ -1,16 +1,28 @@
 <header class="appHeader">
-  <div class="appHeader-search">
-    <!--<input class="input search" type="text" placeholder="Recherche">-->
-      <span class="underline"></span>
-  </div>
+    <div class="title">
+        <span>Mes factures</span>
+    </div>
 
   <div class="appHeader-menu">
-    <div class="appHeader-menu-user">{{user?.name}}</div>
+      <div class="menu-container">
+          <div class="menu-tag">
+              <i class="ion-person"></i>
+          </div>
+          <div class="menu-user">
+              <span class="user-name">{{user?.name}}</span>
+              <span class="user-role">Administrateur</span> <!--TODO : inserer le rôle du user-->
+          </div>
+      </div>
+
+      <div class="logout">
+          <button class="button small" (click)="logout()"><i class="ion-power icon-sidebar"></i></button>
+      </div>
+
 
       <!-- [TIMELINE] -->
 
     <div class="history" [ngClass]="{'isOpen' : activityMenuOpen}" (click)="activityMenuOpen = !activityMenuOpen">
-        <button class="button small green"><i class="ion-navicon-round"></i></button>
+        <button class="button small"><i class="ion-social-rss"></i></button>
 
         <div class="history-detail">
             <h5 class="history-detail-title">{{'activity.feed' | translate}}</h5>

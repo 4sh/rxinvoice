@@ -5,29 +5,22 @@
 
     <nav class="sidebar-menu">
         <a routerLink="/app/dashboard" [routerLinkActive]="['isActive']" class="sidebar-menu-item toto">
-          <i class="ion-home"></i><span>{{'nav.home' | translate}}</span>
+          <i class="ion-home icon-sidebar"></i><span>{{'nav.home' | translate}}</span>
         </a>
         <a routerLink="/app/customers" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-person"></i><span>{{'nav.customers' | translate}}</span>
+            <i class="ion-person icon-sidebar"></i><span>{{'nav.customers' | translate}}</span>
         </a>
         <a routerLink="/app/invoices" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-document-text"></i><span>{{'nav.invoices' | translate}}</span>
+            <i class="ion-document-text icon-sidebar"></i><span>{{'nav.invoices' | translate}}</span>
         </a>
         <a routerLink="/app/analyze" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-document-text"></i><span>{{'nav.analyze' | translate}}</span>
+            <i class="ion-document-text icon-sidebar"></i><span>{{'nav.analyze' | translate}}</span>
         </a>
         <a routerLink="/app/seller-settings" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-document-text"></i><span>{{'nav.seller.settings' | translate}}</span>
+            <i class="ion-document-text icon-sidebar"></i><span>{{'nav.seller.settings' | translate}}</span>
         </a>
         <a routerLink="/app/drafts" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="ion-document"></i><span>{{'nav.drafts' | translate}}</span>
+            <i class="ion-document icon-sidebar"></i><span>{{'nav.drafts' | translate}}</span>
         </a>
     </nav>
-
-    <a  class="sidebar-logout" (click)="logout()">
-    <button type="button" class="logout-button">
-        <i class="ion-power"></i>
-        <span>{{'user.logout' | translate}}</span>
-    </button>
-    </a>
 </div>

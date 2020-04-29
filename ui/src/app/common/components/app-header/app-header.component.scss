@@ -7,19 +7,11 @@
   display: flex;
   height: rem-calc($appHeader-height);
   background-color: $appHeader-bg-color;
-  box-shadow: rem-calc(4px 0px 12px) #aaa;
+  box-shadow: rem-calc(4px 0px 5px) rgba(#aaa, 0.5);
   z-index: 999999;
 
   @include breakpoint(large only) {
     width: calc(100% - #{$sidebar-width-sm});
-  }
-
-  @include has('search') {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    margin-left: rem-calc(15px);
-    max-width: 50vw;
   }
 
   @include has('menu') {
@@ -27,14 +19,70 @@
     display: flex;
     justify-content: flex-end;
 
-    @include has('user') {
+
+    .menu-container {
+      width: 170px;
       display: flex;
-      justify-content: center;
+      flex-direction: row;
       align-items: center;
-      width: rem-calc($appHeader-height);
-      font-weight: 600;
-      color: $body-dark-font-color;
-      background-color: $white;
+
+      .menu-tag {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $catskill-white;
+        margin-right: rem-calc(18px);
+        width: rem-calc(40px);
+        height: rem-calc(40px);
+        border-radius: rem-calc(20px);
+
+        i {
+          color: $cadet-blue;
+          font-size: rem-calc(25px);
+        }
+      }
+
+      .menu-user {
+        display: flex;
+        flex-direction: column;
+
+        .user-name {
+          font-weight: 600;
+          color: $jacarta;
+        }
+        .user-role {
+          font-size: rem-calc(13px);
+          color: $cadet-blue;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    height: rem-calc($appHeader-height);
+    border-radius: 0;
+    background-color: transparent;
+    padding: rem-calc(8px) rem-calc(5px) rem-calc(8px) rem-calc(18px);
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    i {
+      color: $indigo;
+      font-size: 20px;
+      margin: 0;
+
+      &:hover {
+        color: $jacarta;
+      }
     }
   }
 }
@@ -47,15 +95,20 @@
   button {
     height: rem-calc($appHeader-height);
     border-radius: 0;
+    background-color: transparent;
 
-    @include when('click') {
-        background-color: red;
+    &:hover {
+      box-shadow: none;
     }
 
     i {
-      color: white;
-      font-size: 28px;
+      color: $slate-gray;
+      font-size: 20px;
       margin: 0;
+
+      &:hover {
+        color: $torea-bay;
+      }
     }
   }
 

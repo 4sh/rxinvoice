@@ -10,6 +10,8 @@
 .content {
   display: block;
   height: 100%;
+  background-color: $content-bg-color;
+  padding: rem-calc(40px);
 }
 
 .container {

@@ -4,6 +4,7 @@ import {User} from '../../../domain/user/user';
 import {Activity} from '../../../domain/common/activity';
 import {ActivityService} from '../../services/activity.service';
 import * as moment from 'moment';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-header',
@@ -17,7 +18,8 @@ export class AppHeaderComponent implements OnInit {
     activities: Activity[];
 
     constructor(private authenticationService: AuthenticationService,
-                private activityService: ActivityService) {
+                private activityService: ActivityService,
+                private authService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -50,6 +52,10 @@ export class AppHeaderComponent implements OnInit {
                 break;
             }
         }
+    }
+
+    public logout() {
+        this.authService.logout();
     }
 
 }

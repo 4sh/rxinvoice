@@ -1,16 +1,15 @@
 @import '../../styles/base-component';
 
 .title {
-    background-color: #415469;
-    height: 5.8rem;
+    height: rem-calc(64px);
     display: flex;
     align-items: center;
-    padding: 15px 25px;
+    padding: rem-calc(22px);
 
     span {
-        color: #fefefe;
+        color: $appHeader-color-title;
         font-weight: bold;
-        font-size: 1.6rem;
+        font-size: rem-calc(18px);
     }
 }
 

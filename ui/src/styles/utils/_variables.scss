@@ -68,12 +68,18 @@ $app-warning-color :                              $coral !default;
 $app-success-color :                              $sushi !default;
 $app-notif-color :                                $coral !default;
 
+$app-gradient :                                   linear-gradient($indigo, $persian-blue) !default;
+
 // = Content color
+$content-bg-color :                               $catskill-white !default;
+
 $content-dark-list-color :                        lighten($catskill-white, 5%) !default;
 $content-medium-list-color :                      $black-squeeze !default;
 $content-light-list-color :                       $alice-blue !default;
 
 $content-hover-list-color :                       $catskill-white !default;
+
+$content-radius :                                 5px !default;
 
 // = Fonts color
 $body-dark-font-color :                           $regent-gray !default;
@@ -134,7 +140,9 @@ $sidebar-width-lg :                                    190px !default;
 $sidebar-width-md :                                    296px !default;
 $sidebar-width-sm :                                    64px !default;
 
-$sidebar-bg-color :                                 $app-main-color !default;
+$sidebar-bg-color :                                 $app-gradient !default;
+$sidebar-item-color :                               rgba(white, 0.5) !default;
+$sidebar-item-active-bg-color :                     rgba(white, 0.5) !default;
 $sidebar-item-bg-color :                            $app-main-light-color !default;
 
 
@@ -149,6 +157,7 @@ $sidebar-item-bg-color :                            $app-main-light-color !defau
 
 $appHeader-height:                                    64px !default;
 $appHeader-bg-color :                                 white   !default;
+$appHeader-color-title :                              $jacarta !default;
 
 
 // < ----------------------------------------------------------------------

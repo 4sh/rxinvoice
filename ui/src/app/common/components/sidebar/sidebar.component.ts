@@ -11,14 +11,9 @@ export class SidebarComponent implements OnInit {
 
   activityMenu = false;
 
-  constructor( private router: Router,
-               private authService: AuthenticationService) { }
+  constructor( private router: Router) { }
 
   ngOnInit() {
   }
-
-    public logout() {
-        this.authService.logout();
-    }
 
 }

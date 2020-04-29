@@ -1,9 +1,13 @@
 @import 'src/styles/base-component';
 
 .invoiceListHome {
+  display: block;
+  position: relative;
+  width: 100%;
+  background-color: white;
+  border-radius: $content-radius;
 
   &-header {
-    background-color: $app-main-dark-color;
     height: rem-calc(58px);
     display: flex;
     align-items: center;
