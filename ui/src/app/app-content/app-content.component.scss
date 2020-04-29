@@ -8,3 +8,13 @@
   flex: 1;
   padding-top: rem-calc($appHeader-height);
 }
+
+@include new('blockContainer') {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 140px);
+  background-color: white;
+  border-radius: rem-calc(5px);
+  overflow: hidden;
+}
