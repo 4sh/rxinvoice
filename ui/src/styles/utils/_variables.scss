@@ -50,13 +50,14 @@ $catskill-white :                                #E9F0F5 !default;
 $cadet-blue :                                    #A1AEBF !default;
 $slate-gray :                                    #7B8898 !default;
 $jacarta :                                       #252668 !default;
+$auchico :                                       #915260 !default;
 
 
 // == Colors by function
 // = General
-$app-main-color:                                  $blue-bayoux !default;
-$app-main-light-color:                            $shakespeare !default;
-$app-main-dark-color :                            mix($blue-bayoux, black, 85%) !default;
+$app-main-color:                                  $persian-blue !default;
+$app-main-light-color:                            $indigo !default;
+$app-main-dark-color :                            mix($persian-blue, black, 85%) !default;
 
 $app-sub-color :                                  $regent-gray !default;
 $app-sub-light-color :                            $catskill-white !default;
@@ -64,7 +65,7 @@ $app-sub-light-color :                            $catskill-white !default;
 $app-disabled-color :                             $silver-rust !default;
 
 $app-error-color :                                $cinnabar !default;
-$app-warning-color :                              $coral !default;
+$status-late-colorapp-warning-color :                              $coral !default;
 $app-success-color :                              $sushi !default;
 $app-notif-color :                                $coral !default;
 
@@ -105,14 +106,20 @@ $status-unpaid-color :                            $black !default;
 $status-cancelled-color :                         $regent-gray !default;
 
 // = Buttons color
-$button-primary-color :                           $sushi !default;
-$button-secondary-color :                         $shakespeare !default;
-$button-red :                                     $cinnabar !default;
+$button-primary-color :                           $app-main-light-color !default;
+$button-secondary-color :                         $jacarta !default;
+$button-green :                                   $sushi !default;
+$button-red :                                     $auchico !default;
 $button-yellow :                                  $bright-sun !default;
 $button-filter-color :                            $black-squeeze !default;
 $button-border-dark-color :                       $regent-gray !default;
 $button-border-light-color :                      $geyser !default;
 $button-access-color :                            $regent-gray !default;
+
+// = Table color
+$table-header :                                    lighten($indigo, 35%) !default;
+$table-line :                                      lighten($indigo, 42%) !default;
+$table-line-hover :                                lighten($indigo, 41%) !default;
 
 // = Input color
 $input-border-color :                             $geyser !default;
