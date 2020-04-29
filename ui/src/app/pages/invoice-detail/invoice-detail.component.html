@@ -1,203 +1,335 @@
-<form #invoiceDetailForm="ngForm">
-<div class="invoice full-height">
-    <div class="row align-middle invoiceHeader">
-        <div class="columns shrink">
-            <a class="button small white ripple"
-               (click)="goBack()"><i class="ion-arrow-left-c"></i></a>
-        </div>
-
-        <div class="columns shrink invoiceHeader-name">
-            <span class="invoiceHeader-name-ref" *ngIf="invoice.reference">
-                {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
-            </span>
-            <span class="invoiceHeader-name-title">
-                {{ (invoice && invoice._id) ? invoice.object : 'invoices.label.back' | translate }}
-            </span>
-        </div>
-    </div>
-
-    <div class="row invoiceDetail" [ngClass]="{'mode-edit': form.enabled}">
-        <form [formGroup]="form" *ngIf="form && invoice" (submit)="save()" novalidate class="column small-8">
-            <div class="column invoiceDetail-container dark">
-
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.reference' | translate}}</h6>
-                    <div class="column">
-                        <input type="text" formControlName="reference">
+<form class="align-center"
+      #invoiceDetailForm="ngForm">
+    <div class="row filterContainer">
+        <div class="columns small-20">
+            <div class="row">
+                <div class="colummns small-24 detailFilter">
+                    <div class="row">
+                        <div class="columns detailFilter-wrapper">
+                            <label>Client</label>
+                            <ng-select [items]="companies"
+                                       [searchable]="false"
+                                       placeholder="{{'invoices.filter.client' | translate}}"
+                                       clearAllText="isClearable">
+                            </ng-select>
+                        </div>
+                        <div class="columns detailFilter-wrapper">
+                            <label>Affaires</label>
+                            <ng-select [items]="companies"
+                                       [searchable]="false"
+                                       placeholder="- Toutes les affaires -"
+                                       clearAllText="isClearable">
+                            </ng-select>
+                        </div>
+                        <div class="columns detailFilter-wrapper">
+                            <label>Réf. commande client</label>
+                            <input type="text">
+                        </div>
+                        <div class="columns detailFilter-wrapper">
+                            <label>Avec TVA</label>
+                            <toggle></toggle>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoices.label.client' | translate}} *</h6>
-                    <div class="column">
-                        <customer-select [label]="'name'" (valueChange)="fetchBuyer($event)"
-                                         [control]="form.controls.buyer"></customer-select>
-                    </div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.reference.customer' | translate}}</h6>
-                    <div class="column">
-                        <input type="text" formControlName="customerInvoiceRef">
-                    </div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.business' | translate}}</h6>
-                    <div class="column">
-                        <select formControlName="business" [compareWith]="comparRef" *ngIf="selectedCompany && selectedCompany.commercialRelationship">
-                            <option [ngValue]="null">{{'invoice.no.business' | translate}}</option>
-                            <option *ngFor="let business of selectedCompany.commercialRelationship.businessList" [ngValue]="business">
-                                {{business.name}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.object' | translate}} *</h6>
-                    <div class="column">
-                        <textarea type="text" formControlName="object"
-                                  rows="3" cols="10">
-                        </textarea>
-                    </div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.kind' | translate}} *</h6>
-                    <div class="column">
-                        <select formControlName="kind">
-                            <option value="">{{'service.kind.all' | translate}}</option>
-                            <option *ngFor="let kind of kinds" [ngValue]="kind">
-                                {{'invoice.kind.' + kind | translate}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.withVAT' | translate}}</h6>
-                    <div class="column">
-                        <toggle [item]="form.controls.withVAT.value" [disabled]="form.disabled"
-                                (itemChange)="form.controls.withVAT.setValue($event)"></toggle>
-                    </div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label" *ngIf="form.controls.date">
-                    <h6 class="column small-8"> {{'invoice.label.invoice.date' | translate}}</h6>
-                    <div class="column">
-                        <date-picker formControlName="date"></date-picker>
-                    </div>
-                </div>
-
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.label.sentDate' | translate}}</h6>
-                    <div class="column">{{getSentDate() | date: 'dd MMM. yyyy'}}</div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.label.dueDate' | translate}}</h6>
-                    <div class="column">
-                        <date-picker formControlName="dueDate"></date-picker>
-                    </div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.label.status' | translate}} *</h6>
-                    <div class="column">
-                        <select formControlName="status">
-                            <option value="">{{'invoice.status.all' | translate}}</option>
-                            <option *ngFor="let status of statuses" [ngValue]="status">
-                                {{'invoice.status.' + status | translate}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row align-middle invoiceDetail-container-label">
-                    <h6 class="column small-8"> {{'invoice.label.comment' | translate}}</h6>
-                    <div class="column panel panel-default">
-                           <textarea type="text" formControlName="comment"
-                                     rows="10" cols="50">
-                           </textarea>
+                    <div class="row">
+                        <div class="columns detailFilter-wrapper">
+                            <label>Référence de la facture</label>
+                            <input type="text">
+                        </div>
+                        <div class="columns detailFilter-wrapper">
+                            <label>Date de facture</label>
+                            <date-picker formControlName="startDate"></date-picker>
+                        </div>
+                        <div class="columns detailFilter-wrapper">
+                            <label>Date d'envoi</label>
+                            <date-picker formControlName="startDate"></date-picker>
+                        </div>
+                        <div class="columns detailFilter-wrapper">
+                            <label>Type</label>
+                            <ng-select [items]="companies"
+                                       [searchable]="false"
+                                       placeholder="- Tous les types -"
+                                       clearAllText="isClearable">
+                            </ng-select>
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
 
-        <div class="column auto" *ngIf="invoice">
-            <invoice-lines-detail [(lines)]="invoice.lines"
-                                  [vatEnabled]="form.controls.withVAT.value || invoice.withVAT"
-                                  [editMode]="form.enabled"
-                                  [companyRef]="selectedCompany?._id">
-            </invoice-lines-detail>
-<!--            <vat-detail [(vats)]="invoice.vats" [editMode]="form.enabled" [hidden]="!form.controls['withVAT'].value"></vat-detail>-->
-            <attachments-detail *ngIf="invoice && invoice._id"
-                                [invoiceId]="invoiceId"
-                                [editMode]="form.enabled"
-                                [attachments]="invoice.attachments"
-                                (deleteFile)="deleteAttachment($event)"
-                                (attachmentsChange)="fetchInvoice()"></attachments-detail>
-
-            <!--<activity-panel *ngIf="invoice && invoice._id"  [(activities)]="invoice.activities"></activity-panel>-->
+        <div class="columns small-4 detailFilter-wrapper">
+            <label>Objet</label>
+            <textarea type="text"
+                      rows="2" cols="20">
+                </textarea>
         </div>
     </div>
-
-    <footer class="row invoiceAction">
-            <span class="overlay-state-edit" *ngIf="form.enabled">
-                <i class="ion-edit"></i>
-            </span>
-        <div class="column">
-            <div class="row invoiceAction-container align-middle">
-                <div class="columns shrink">
-                    <button *ngIf="form.enabled"
-                            class="button medium green ripple"
-                            type="submit"
-                            (click)="invoice && invoice._id  ? save() : create()"
-                            [disabled]="form.invalid || form.pending || invoiceDetailForm.invalid">
-                        <i class="ion-checkmark-round"></i>
-                        {{( !invoiceId ? 'button.label.create' : 'button.label.save') | translate}}
-                    </button>
-                    <button *ngIf="form.disabled"
-                            (click)="form.enable()"
-                            class="button medium green ripple">
-                        <i class="ion-edit"></i>{{'button.label.update' | translate}}
-                    </button>
-                    <button *ngIf="form.disabled"
-                            (click)="duplicate()"
-                            class="button medium grey ripple">
-                        <i class="ion-ios-copy"></i>{{'button.label.copy' | translate}}
-                    </button>
-                </div>
-
-                <div class="columns shrink" *ngIf="invoiceId && canDelete">
-                    <button class="button medium grey ripple"
-                            type="button"
-                            (click)="delete()">
-                        <i class="ion-trash-a"></i>{{'button.label.delete' | translate}}
-                    </button>
-                </div>
-
-                <div class="columns shrink" *ngIf="invoiceId && !form.enabled">
-                    <button class="button medium grey ripple"
-                            type="button"
-                            (click)="download()">
-                        <i class="ion-code-download"></i>{{'button.label.download' | translate}}
-                    </button>
-                </div>
-
-                <div class="columns medium" *ngIf="invoiceId">
-                    <button *ngIf="form.enabled"
-                            class="button medium grey ripple"
-                            type="button"
-                            (click)="reset()">
-                        <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
 </form>
+
+<div class="row">
+    <table>
+        <thead>
+        <tr>
+            <th width="600px">Désignation</th>
+            <th width="150px">Quantité</th>
+            <th width="150px">Coût unitaire</th>
+            <th width="150px">Montant (HT)</th>
+            <th width="500px">TVA (%)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td width="600px">Hébergement des mois de Octobre, Novembre Décembre</td>
+            <td width="150px">-</td>
+            <td width="150px">-</td>
+            <td width="150px">-</td>
+            <td width="500px">
+                <ng-select [items]="companies"
+                           [searchable]="false"
+                           placeholder="- Tous les types -"
+                           clearAllText="isClearable">
+                </ng-select>
+            </td>
+        </tr>
+        <tr>
+            <td>3 mois x 290€ HT</td>
+            <td>3</td>
+            <td>290</td>
+            <td>870</td>
+            <td>
+                <ng-select [items]="companies"
+                           [searchable]="false"
+                           placeholder="- Tous les types -"
+                           clearAllText="isClearable">
+                </ng-select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row footerStyle">
+    <div class="columns small-8">
+        <label>Objet</label>
+        <textarea type="text"
+                  rows="3" cols="20">
+                </textarea>
+    </div>
+    <div class="columns small-4">
+        <label>Pièces jointes</label>
+    </div>
+</div>
+
+<div>
+    <button class="button small white ripple"
+    (click)="goBack()">
+        <i class="ion-arrow-left-c"></i>
+        Retour
+    </button>
+</div>
+
+
+<!--<form #invoiceDetailForm="ngForm">-->
+<!--<div class="invoice full-height">-->
+<!--    <div class="row align-middle invoiceHeader">-->
+<!--        <div class="columns shrink">-->
+<!--            <a class="button small white ripple"-->
+<!--               (click)="goBack()"><i class="ion-arrow-left-c"></i></a>-->
+<!--        </div>-->
+
+<!--        <div class="columns shrink invoiceHeader-name">-->
+<!--            <span class="invoiceHeader-name-ref" *ngIf="invoice.reference">-->
+<!--                {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}-->
+<!--            </span>-->
+<!--            <span class="invoiceHeader-name-title">-->
+<!--                {{ (invoice && invoice._id) ? invoice.object : 'invoices.label.back' | translate }}-->
+<!--            </span>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="row invoiceDetail" [ngClass]="{'mode-edit': form.enabled}">-->
+<!--        <form [formGroup]="form" *ngIf="form && invoice" (submit)="save()" novalidate class="column small-8">-->
+<!--            <div class="column invoiceDetail-container dark">-->
+
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.reference' | translate}}</h6>-->
+<!--                    <div class="column">-->
+<!--                        <input type="text" formControlName="reference">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoices.label.client' | translate}} *</h6>-->
+<!--                    <div class="column">-->
+<!--                        <customer-select [label]="'name'" (valueChange)="fetchBuyer($event)"-->
+<!--                                         [control]="form.controls.buyer"></customer-select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.reference.customer' | translate}}</h6>-->
+<!--                    <div class="column">-->
+<!--                        <input type="text" formControlName="customerInvoiceRef">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.business' | translate}}</h6>-->
+<!--                    <div class="column">-->
+<!--                        <select formControlName="business" [compareWith]="comparRef" *ngIf="selectedCompany && selectedCompany.commercialRelationship">-->
+<!--                            <option [ngValue]="null">{{'invoice.no.business' | translate}}</option>-->
+<!--                            <option *ngFor="let business of selectedCompany.commercialRelationship.businessList" [ngValue]="business">-->
+<!--                                {{business.name}}-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.object' | translate}} *</h6>-->
+<!--                    <div class="column">-->
+<!--                        <textarea type="text" formControlName="object"-->
+<!--                                  rows="3" cols="10">-->
+<!--                        </textarea>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.kind' | translate}} *</h6>-->
+<!--                    <div class="column">-->
+<!--                        <select formControlName="kind">-->
+<!--                            <option value="">{{'service.kind.all' | translate}}</option>-->
+<!--                            <option *ngFor="let kind of kinds" [ngValue]="kind">-->
+<!--                                {{'invoice.kind.' + kind | translate}}-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.withVAT' | translate}}</h6>-->
+<!--                    <div class="column">-->
+<!--                        <toggle [item]="form.controls.withVAT.value" [disabled]="form.disabled"-->
+<!--                                (itemChange)="form.controls.withVAT.setValue($event)"></toggle>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label" *ngIf="form.controls.date">-->
+<!--                    <h6 class="column small-8"> {{'invoice.label.invoice.date' | translate}}</h6>-->
+<!--                    <div class="column">-->
+<!--                        <date-picker formControlName="date"></date-picker>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.label.sentDate' | translate}}</h6>-->
+<!--                    <div class="column">{{getSentDate() | date: 'dd MMM. yyyy'}}</div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.label.dueDate' | translate}}</h6>-->
+<!--                    <div class="column">-->
+<!--                        <date-picker formControlName="dueDate"></date-picker>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.label.status' | translate}} *</h6>-->
+<!--                    <div class="column">-->
+<!--                        <select formControlName="status">-->
+<!--                            <option value="">{{'invoice.status.all' | translate}}</option>-->
+<!--                            <option *ngFor="let status of statuses" [ngValue]="status">-->
+<!--                                {{'invoice.status.' + status | translate}}-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="row align-middle invoiceDetail-container-label">-->
+<!--                    <h6 class="column small-8"> {{'invoice.label.comment' | translate}}</h6>-->
+<!--                    <div class="column panel panel-default">-->
+<!--                           <textarea type="text" formControlName="comment"-->
+<!--                                     rows="10" cols="50">-->
+<!--                           </textarea>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+
+<!--        <div class="column auto" *ngIf="invoice">-->
+<!--            <invoice-lines-detail [(lines)]="invoice.lines"-->
+<!--                                  [vatEnabled]="form.controls.withVAT.value || invoice.withVAT"-->
+<!--                                  [editMode]="form.enabled"-->
+<!--                                  [companyRef]="selectedCompany?._id">-->
+<!--            </invoice-lines-detail>-->
+<!--&lt;!&ndash;            <vat-detail [(vats)]="invoice.vats" [editMode]="form.enabled" [hidden]="!form.controls['withVAT'].value"></vat-detail>&ndash;&gt;-->
+<!--            <attachments-detail *ngIf="invoice && invoice._id"-->
+<!--                                [invoiceId]="invoiceId"-->
+<!--                                [editMode]="form.enabled"-->
+<!--                                [attachments]="invoice.attachments"-->
+<!--                                (deleteFile)="deleteAttachment($event)"-->
+<!--                                (attachmentsChange)="fetchInvoice()"></attachments-detail>-->
+
+<!--            &lt;!&ndash;<activity-panel *ngIf="invoice && invoice._id"  [(activities)]="invoice.activities"></activity-panel>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <footer class="row invoiceAction">-->
+<!--            <span class="overlay-state-edit" *ngIf="form.enabled">-->
+<!--                <i class="ion-edit"></i>-->
+<!--            </span>-->
+<!--        <div class="column">-->
+<!--            <div class="row invoiceAction-container align-middle">-->
+<!--                <div class="columns shrink">-->
+<!--                    <button *ngIf="form.enabled"-->
+<!--                            class="button medium green ripple"-->
+<!--                            type="submit"-->
+<!--                            (click)="invoice && invoice._id  ? save() : create()"-->
+<!--                            [disabled]="form.invalid || form.pending || invoiceDetailForm.invalid">-->
+<!--                        <i class="ion-checkmark-round"></i>-->
+<!--                        {{( !invoiceId ? 'button.label.create' : 'button.label.save') | translate}}-->
+<!--                    </button>-->
+<!--                    <button *ngIf="form.disabled"-->
+<!--                            (click)="form.enable()"-->
+<!--                            class="button medium green ripple">-->
+<!--                        <i class="ion-edit"></i>{{'button.label.update' | translate}}-->
+<!--                    </button>-->
+<!--                    <button *ngIf="form.disabled"-->
+<!--                            (click)="duplicate()"-->
+<!--                            class="button medium grey ripple">-->
+<!--                        <i class="ion-ios-copy"></i>{{'button.label.copy' | translate}}-->
+<!--                    </button>-->
+<!--                </div>-->
+
+<!--                <div class="columns shrink" *ngIf="invoiceId && canDelete">-->
+<!--                    <button class="button medium grey ripple"-->
+<!--                            type="button"-->
+<!--                            (click)="delete()">-->
+<!--                        <i class="ion-trash-a"></i>{{'button.label.delete' | translate}}-->
+<!--                    </button>-->
+<!--                </div>-->
+
+<!--                <div class="columns shrink" *ngIf="invoiceId && !form.enabled">-->
+<!--                    <button class="button medium grey ripple"-->
+<!--                            type="button"-->
+<!--                            (click)="download()">-->
+<!--                        <i class="ion-code-download"></i>{{'button.label.download' | translate}}-->
+<!--                    </button>-->
+<!--                </div>-->
+
+<!--                <div class="columns medium" *ngIf="invoiceId">-->
+<!--                    <button *ngIf="form.enabled"-->
+<!--                            class="button medium grey ripple"-->
+<!--                            type="button"-->
+<!--                            (click)="reset()">-->
+<!--                        <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </footer>-->
+<!--</div>-->
+<!--</form>-->

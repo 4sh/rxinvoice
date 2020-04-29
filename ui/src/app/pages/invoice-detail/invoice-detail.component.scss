@@ -1,143 +1,41 @@
 @import '../../../styles/base-component';
 
-@include new('invoice') {
-  background-color: $background-color;
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+}
 
-  @include new('invoiceHeader') {
-    background-color: $app-main-dark-color;
-    padding: rem-calc(8px);
+@include new('filterContainer') {
+  padding: rem-calc(16px);
+  border-radius: rem-calc(8px);
 
-    @include has('name') {
-      color: white;
-      font-weight: bold;
+}
 
-      @include has('ref') {
-        position: relative;
-        margin-right: rem-calc(24px);
-        padding: rem-calc(16px);
-        background-color: $regent-gray;
+form, table {
+  background: rgba($app-main-light-color, 0.025);
+  border-radius: 8px;
+  margin: rem-calc(16px);
+}
 
-        &:after {
-          position: absolute;
-          right: rem-calc(-18px);
-          top: 0;
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: rem-calc(24px 0 24px 18px);
-          border-color: transparent transparent transparent $regent-gray;
-          content: '';
-        }
-      }
+table {
+  margin-top: rem-calc(24px);
 
-      @include has('title') {
-
-      }
-    }
+  tbody {
+    height: 30vh;
   }
+}
 
-  @include new('invoiceDetail') {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 64px - 145px);
-    padding: 0 8px;
-    overflow-y: auto;
+@include new('detailFilter') {
+    padding: rem-calc(0 16px);
 
-    @include has('container') {
-      margin-top: rem-calc(12px);
-      box-shadow: 0 1px 5px $silver-rust;
-      background-color: white;
-      border-radius: $global-radius;
-
-      @include when('dark') {
-        background-image: url('../../../' + $img-path + 'png/patern-login.png');
-        background-size: cover;
-        background-position: center center;
-        background-color: darken($blue-bayoux, 15%);
-        padding: rem-calc(24px);
-        color: white;
-
-        h6 {
-          position: relative;
-          color: white;
-
-          &:after {
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: rem-calc(1px);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(125, 185, 232, 0) 100%);
-            content: '';
-            opacity: 0.3;
-          }
-
-          &.no-border {
-            &:after {
-              display: none;
-            }
-          }
-        }
-      }
-
-      @include has('labelNumber') {
-        display: flex;
-        margin-top: rem-calc(16px);
-      }
-
-      @include has('valueNumber') {
-        display: flex;
-        margin-bottom: rem-calc(32px);
-      }
-
-      @include has('label') {
-        display: flex;
-        margin: rem-calc(16px 0);
-      }
-
-      @include has('content') {
-        margin: rem-calc(16px 0);
-
-        button {
-          margin-left: rem-calc(8px);
-          cursor: pointer;
-        }
-      }
-    }
+  @include has('wrapper') {
+      margin: rem-calc(8px 0);
   }
+}
 
-  @include new('invoiceAction') {
-    right: 0;
-    height: $height-newCustomerAction;
-    width: calc(100% - #{$sidebar-width-sm});
-
-    @include breakpoint(large only) {
-      width: calc(100% - #{$sidebar-width-sm});
-    }
-
-    @include has('container') {
-      padding: rem-calc(24px 12px);
-      border: 1px solid $black-squeeze;
-      box-shadow: 0 1px 5px $silver-rust;
-      background-color: white;
-
-      button {
-        margin-right: rem-calc(8px);
-      }
-
-      @include has('label') {
-        display: flex;
-        margin: rem-calc(16px 0);
-      }
-
-      @include has('content') {
-        button {
-          margin-left: rem-calc(8px);
-          cursor: pointer;
-        }
-      }
-    }
-  }
+@include new('footerStyle') {
+    padding: rem-calc(16px);
 }
 
 

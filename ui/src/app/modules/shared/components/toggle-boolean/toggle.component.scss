@@ -1,3 +1,5 @@
+@import '../../../../../styles/base-component';
+
 .switch {
   position: relative;
   display: inline-block;
@@ -26,17 +28,17 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   left: 4px;
-  bottom: -4px;
+  bottom: 1px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #3CA3D2;
+  background-color: $app-main-color;
 }
 
 input:focus + .slider {
