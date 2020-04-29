@@ -31,15 +31,20 @@
     padding: rem-calc(1px);
   }
 
-  &.allowedDrop {
-
+  &.dndDragover {
     .content {
-      border: rem-calc(2px) dashed $app-success-color;
-      background-color: rgba(103, 186, 47, 0.1);
+      border: 2px dashed $persian-blue;
+      background-color: rgba($persian-blue, 0.1);
 
-      dashboard-ticket {
-        display: none;
-      }
+    }
+
+    .ticketDragging {
+      display: block;
+      min-height: rem-calc(130px);
+      border: 2px dashed $persian-blue;
+      margin: 8px;
     }
   }
 }
+
+

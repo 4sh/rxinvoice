@@ -4,6 +4,7 @@
     <div class="title-column">{{columnConfiguration.title | translate}} ({{invoiceList?.length}})</div>
     <div class="title-column-amount">{{getAmount() | invoiceCurrency}}</div>
     <div class="content">
+        <div class="ticketDragging"></div>
         <dashboard-ticket *ngFor="let invoice of invoiceList"
                           [invoice]="invoice"
                           [disabled]="columnConfiguration.disabled">

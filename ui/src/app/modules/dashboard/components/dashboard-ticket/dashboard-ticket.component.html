@@ -1,6 +1,7 @@
 <div class="invoice {{statusClass}}" [ngClass]="{'draft-invoice': isDraftInvoice()}"
      [class.disable]="disabled"
      [dndDraggable]="invoice"
+     [dndDraggingClass]="'dndDragging'"
      [dndType]="invoice.status">
     <div class="row">
         <div class="column small-15" *ngIf="!isDraftInvoice()">

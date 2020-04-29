@@ -48,7 +48,7 @@
       &:focus {
         @extend %transition;
         color: white;
-        background-color: rgba($torea-bay, 0.5);
+        background-color: rgba($torea-bay, 0.3);
       }
 
       i {
@@ -93,49 +93,6 @@
       top: rem-calc(-1px);
       width: rem-calc(20px);
       margin-right: rem-calc(12px);
-    }
-  }
-
-  @include has('logout') {
-    display: flex;
-    align-items: center;
-    text-transform: uppercase;
-    color: $white;
-    height: rem-calc(50px);
-    padding: 0 rem-calc(20px);
-    cursor: pointer;
-    @extend %transition;
-    @extend %rippleEffect;
-
-    .logout-button {
-      color: white;
-
-      span {
-        display: none!important;
-      }
-    }
-
-    &:hover,
-    &:focus {
-      @extend %transition;
-      background-color: $sidebar-item-bg-color;
-    }
-
-    @include has('icon') {
-      position: relative;
-      top: rem-calc(-1px);
-      left: rem-calc(-2px);
-      width: rem-calc(20px);
-      margin-right: rem-calc(10px);
-    }
-
-    i {
-      display: inline-block;
-      vertical-align: middle;
-      width: rem-calc(24px);
-      margin-right: rem-calc(12px);
-      font-size: rem-calc(20px);
-      text-align: center;
     }
   }
 
