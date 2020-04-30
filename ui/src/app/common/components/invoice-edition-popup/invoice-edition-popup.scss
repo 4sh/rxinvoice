@@ -18,6 +18,10 @@
     border-radius: $global-radius 0 $global-radius $global-radius;
     padding: rem-calc(30px);
 
+    @include breakpoint(large) {
+      width: 1000px;
+    }
+
     &-close {
       display: flex;
       align-items: center;

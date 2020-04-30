@@ -33,15 +33,15 @@
 
   &.dndDragover {
     .content {
-      border: 2px dashed $persian-blue;
-      background-color: rgba($persian-blue, 0.1);
+      border: 2px dashed rgba($indigo, 0.5);
+      background-color: rgba($indigo, 0.1);
 
     }
 
     .ticketDragging {
       display: block;
       min-height: rem-calc(130px);
-      border: 2px dashed $persian-blue;
+      border: 2px dashed rgba($indigo, 0.5);
       margin: 8px;
     }
   }
