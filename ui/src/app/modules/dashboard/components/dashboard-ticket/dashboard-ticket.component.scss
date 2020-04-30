@@ -23,7 +23,8 @@
   &.status-draft {
 
     .label-draft {
-      background-color: $status-draft-color;
+      background-color: rgba($status-draft-color, 0.1);
+      color: $status-draft-color;
     }
     .invoice-price {
       color: $status-draft-color;
@@ -33,7 +34,8 @@
   &.status-ready {
 
     .label-draft {
-      background-color: $status-ready-color;
+      background-color: rgba($status-ready-color, 0.1);
+      color: $status-ready-color;
     }
     .invoice-price {
       color: $status-ready-color;
@@ -44,7 +46,8 @@
     border-left: rem-calc(2px) solid $status-waiting-validation-color;
 
     .date {
-      background-color: $status-waiting-validation-color;
+      background-color: rgba($status-waiting-validation-color, 0.1);
+      color: $status-waiting-validation-color;
     }
     .invoice-price {
       color: $status-waiting-validation-color;
@@ -55,7 +58,8 @@
     border-left: rem-calc(2px) solid $status-validated-color;
 
     .date {
-      background-color: $status-validated-color;
+      background-color: rgba($status-validated-color, 0.1);
+      color: $status-validated-color;
     }
     .invoice-price {
       color: $status-validated-color;
@@ -66,7 +70,8 @@
     border-left: rem-calc(2px) solid $status-sent-color;
 
     .date {
-      background-color: $status-sent-color;
+      background-color: rgba($status-sent-color, 0.1);
+      color: $status-sent-color;
     }
     .invoice-price {
       color: $status-sent-color;
@@ -77,7 +82,8 @@
     border-left: rem-calc(2px) solid $status-paid-color;
 
     .date {
-      background-color: $status-paid-color;
+      background-color: rgba($status-paid-color, 0.1);
+      color: $status-paid-color;
     }
     .invoice-price {
       color: $status-paid-color;
@@ -88,7 +94,8 @@
     border-left: rem-calc(2px) solid $status-payment-scheduled-color;
 
     .date {
-      background-color: $status-payment-scheduled-color;
+      background-color: rgba($status-payment-scheduled-color, 0.1);
+      color: $status-payment-scheduled-color;
     }
     .invoice-price {
       color: $status-payment-scheduled-color;
@@ -99,7 +106,8 @@
     border-left: rem-calc(2px) solid $status-late-color;
 
     .date {
-      background-color: $status-late-color;
+      background-color: rgba($status-late-color, 0.1);
+      color: $status-late-color;
     }
     .invoice-price {
       color: $status-late-color;
@@ -110,7 +118,8 @@
     border-left: rem-calc(2px) solid $status-unpaid-color;
 
     .date {
-      background-color: $status-unpaid-color;
+      background-color: rgba($status-unpaid-color, 0.1);
+      color: $status-unpaid-color;
     }
     .invoice-price {
       color: $status-unpaid-color;
@@ -121,7 +130,8 @@
     border-left: rem-calc(2px) solid $status-cancelled-color;
 
     .date {
-      background-color: $status-cancelled-color;
+      background-color: rgba($status-cancelled-color, 0.1);
+      color: $status-cancelled-color;
     }
     .invoice-price {
       color: $status-cancelled-color;
@@ -129,16 +139,14 @@
   }
 
   .date {
-    font-size: rem-calc(9px);
-    letter-spacing: rem-calc(2px);
-    padding: rem-calc(4px) rem-calc(6px);
-    border-radius: rem-calc(2px);
-    color: white;
+    font-size: rem-calc(11px);
+    padding: rem-calc(8px) rem-calc(16px);
+    border-radius: rem-calc(20px);
     font-weight: 600;
+    display: block;
+    margin-bottom: rem-calc(10px);
+    width: rem-calc(100px);
 
-    @include breakpoint(xlarge only) {
-      font-size: rem-calc(11px);
-    }
   }
 
   .invoice-actions {
@@ -241,7 +249,6 @@
     .label-draft {
       text-align: center;
       text-transform: uppercase;
-      color: #fff;
       font-size: rem-calc(10px);
       font-weight: 600;
       letter-spacing: rem-calc(0.5px);

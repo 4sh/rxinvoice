@@ -3,6 +3,7 @@ import {Modal} from '../modal/modal.models/modal.model';
 import {RepositoryService} from '../../services/repository.service';
 import {InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 import {Invoice} from '../../../domain/invoice/invoice';
+import {InvoiceService} from "../../services/invoice.service";
 
 @Component({
     selector: 'invoice-edition-popup',
@@ -14,7 +15,8 @@ export class InvoiceEditionPopupComponent extends Modal implements OnInit {
     public invoice: Invoice;
     public statuses: InvoiceStatusType[];
 
-    constructor(private repositoryService: RepositoryService) {
+    constructor(private repositoryService: RepositoryService,
+                private invoiceService: InvoiceService) {
         super();
     }
 
@@ -33,5 +35,9 @@ export class InvoiceEditionPopupComponent extends Modal implements OnInit {
 
     cancel(): void {
         this.dismiss('canceling');
+    }
+
+    public isDraftInvoice(): boolean {
+        return this.invoiceService.isDraftInvoice(this.invoice.status);
     }
 }

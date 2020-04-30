@@ -17,7 +17,9 @@
     <tbody>
     <tr *ngFor="let invoice of invoices">
         <td  width="100px">
-            <span>{{invoice.reference}}00000000</span>
+            <span>
+                 N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
+            </span>
         </td>
         <td  width="150px" (click)="goToDetail(invoice)" class="text-click">
             <span class="invoiceList-value">{{invoice.buyer.name}}</span>

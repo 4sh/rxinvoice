@@ -1,14 +1,53 @@
+<div class="status-panel-container">
 <div class="row quick-status-panel">
-    <div class="columns shrink">
-        <div class="row align-middle text-center">
-            <div class="columns small-24 quick-status-panel-header">
-                {{'dashboard.quickEdition.title' | translate}}
-                <h5>{{invoice.object}}</h5>
-                <span class="quick-status-panel-header-close" (click)="close()">
-                    <i class="ion-close"></i>
-                </span>
-            </div>
-        </div>
+        <span class="quick-status-panel-close" (click)="close()">
+            <i class="ion-close"></i>
+        </span>
+
+        <table class="invoiceList">
+            <thead>
+            <tr>
+                <th width="100px" *ngIf="invoice.reference">{{'invoice.list.column.reference'|translate}}</th>
+                <th width="150px">{{'invoice.list.column.buyer'|translate}}</th>
+                <th width="150px">{{'invoice.list.column.business'|translate}}</th>
+                <th width="430px">{{'invoice.list.column.object'|translate}}</th>
+                <th width="150px" class="text-right">{{'invoice.list.column.gross.amount'|translate}}</th>
+                <th width="130px">{{'invoice.list.column.date'|translate}}</th>
+                <th width="230px">{{'invoice.list.column.status'|translate}}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td  width="100px" *ngIf="invoice.reference">
+                    <span>
+                         N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
+                    </span>
+                </td>
+                <td  width="150px" class="text-click">
+                    <span class="invoiceList-value">{{invoice.buyer.name}}</span>
+                </td>
+                <td  width="150px" class="text-click">
+                    <span class="invoiceList-value">{{invoice.business.name}}</span>
+                </td>
+                <td  width="500px" class="text-click">
+                    <span class="invoiceList-value">{{invoice.object}}</span>
+                </td>
+                <td  width="150px" class="text-click text-right">
+                    <span class="invoiceList-value">{{invoice.grossAmount | invoiceCurrency}}</span>
+                </td>
+                <td  width="150px" class="text-click">
+                    <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
+                </td>
+                <td  width="230px">
+                    <span class="invoiceList-status text-right" [ngClass]="invoice.status">
+                        {{ 'invoice.status.' + invoice.status | translate}}
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
 
         <div class="row quick-status-panel-content">
             <div class="columns small-24">
@@ -38,11 +77,11 @@
                 </textarea>
             </div>
             <div class="columns small-24 text-right">
-                <button class="button medium ripple grey"
+                <button class="button medium ripple white force-space-right-10"
                         (click)="cancel()">
                     <i class="ion-arrow-return-left"></i>{{ 'dashboard.quickEdition.cancel' | translate}}
                 </button>
-                <button class="button medium green ripple"
+                <button class="button medium btn-default ripple"
                         (click)="save()">
                     <i class="ion-checkmark"></i>{{ 'dashboard.quickEdition.save' | translate}}
                 </button>
