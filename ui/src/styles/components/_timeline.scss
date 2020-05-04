@@ -12,7 +12,7 @@
 
     &:hover, &:focus, &:active {
       @extend %transition;
-      background: darken($content-medium-list-color, 5%);
+      background: darken($table-line, 5%);
       border-left: 2px solid darken($body-light-font-color, 10%);
 
       .timeline-item-marker {
@@ -26,7 +26,7 @@
       padding: 0;
       font-weight: bold;
       font-size: rem-calc(11px);
-      color: $body-light-font-color;
+      color: $app-secondary;
 
       i {
         display: inline-block;
@@ -51,8 +51,8 @@
       height: rem-calc(12px);
       width: rem-calc(12px);
       border-radius: rem-calc(50px);
-      background-color: $content-medium-list-color;
-      border: 2px solid $body-light-font-color;
+      background-color: $app-grey_light;
+      border: 2px solid $app-grey_light;
       @extend %transition;
     }
 
@@ -65,7 +65,7 @@
       color: $body-dark-font-color;
 
       @include has('blue') {
-        color: $app-main-light-color;
+        color: $app-secondary;
       }
 
     }

@@ -12,7 +12,7 @@
 }
 
 @include new('listTab') {
-    background: rgba($app-main-light-color, 0.025);
+    background: rgba($app-secondary, 0.025);
     border-radius: 8px;
     height: 72vh;
     margin: rem-calc(8px 32px 8px 8px);
@@ -53,7 +53,7 @@ tbody {
         top: rem-calc(-18px);
         padding: rem-calc(8px 16px);
         background: white;
-        color: $app-main-light-color;
+        color: $app-secondary;
         font-weight: bold;
         min-width: rem-calc(80px);
         font-size: rem-calc(12px);
@@ -65,7 +65,7 @@ tbody {
             top: rem-calc(4px);
             border-radius: rem-calc(3px);
             padding: rem-calc(14px 16px);
-            background: rgba($app-main-light-color, 0.15);
+            background: rgba($app-secondary, 0.15);
             min-width: rem-calc(70px);
         }
     }

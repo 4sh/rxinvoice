@@ -35,7 +35,7 @@
   width: 100%;
   height: rem-calc(50px);
   padding: rem-calc(0 20px 0 20px);
-  background-color: $app-main-dark-color;
+  background-color: $app-primary_medium;
   border-radius: rem-calc(3px);
   box-shadow: 0.3px 0.4px 1.5px 0 rgba(0, 0, 0, 0.06);
   overflow: hidden;
@@ -47,7 +47,7 @@
       height: 100%;
       margin: rem-calc(0 1px);
       padding: rem-calc(0 25px);
-      background: rgba($blue-bayoux, 0.7);
+      background: rgba($app-primary, 0.7);
       line-height: 3.7;
       font-size: rem-calc(14px);
       font-weight: bold;
@@ -57,11 +57,11 @@
 
       &:hover {
         @extend %transition;
-        background-color: lighten($blue-bayoux, 5%);
+        background-color: lighten($app-secondary, 5%);
       }
 
       &.active {
-        background-color: $app-main-light-color;
+        background-color: $app-secondary;
         color: white;
       }
     }

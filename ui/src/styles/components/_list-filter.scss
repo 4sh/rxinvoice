@@ -25,8 +25,8 @@
 
     &:hover, &:focus, &:active {
       @extend %transition;
-      background-color: $wild-sand;
-      border-color: $wild-sand;
+      background-color: $app-grey_light;
+      border-color: $app-grey_light;
     }
 
     @include when('isActive') {
@@ -39,7 +39,7 @@
 // --- MultiSelect Filter --- //
 
 select {
-  border: 1px solid $black-squeeze;
-  box-shadow: 1px 1px 12px 0px $black-squeeze;
+  border: 1px solid $app-grey_light;
+  box-shadow: 1px 1px 12px 0px $app-grey_light;
 }
 

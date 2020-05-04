@@ -48,7 +48,7 @@
       &:focus {
         @extend %transition;
         color: white;
-        background-color: rgba($torea-bay, 0.3);
+        background-color: rgba($app-primary_dark, 0.3);
       }
 
       i {
@@ -63,7 +63,7 @@
 
       @include when('isActive') {
           color: white;
-          background-color: rgba($torea-bay, 0.5);
+          background-color: rgba($app-primary_dark, 0.5);
 
       }
 
@@ -82,7 +82,7 @@
         font-weight: bold;
         line-height: rem-calc(17px);
         color: white;
-        background-color: $app-notif-color ;
+        background-color: $app-error ;
         cursor: pointer;
         animation: pulse 1s infinite;
       }

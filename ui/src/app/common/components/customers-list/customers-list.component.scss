@@ -8,10 +8,10 @@
 
 
   @include has('row') {
-    background-color: $content-dark-list-color;
+    background-color: white;
 
     &:nth-child(even) {
-      background-color: $content-light-list-color;
+      background-color: $table-line;
     }
 
     tr {

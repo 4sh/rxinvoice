@@ -1,5 +1,5 @@
 .mode-edit {
-  border: rem-calc(6px) solid $sushi;
+  border: rem-calc(6px) solid $app-success;
   transition: 340ms;
 }
 
@@ -13,8 +13,8 @@
   width: rem-calc(70px);
   padding-left: rem-calc(24px);
   border-radius: rem-calc(10px 10px 0 0);
-  background-color: $sushi;
-  background-image: url("../#{$gif-path}spinner-edit.gif");
+  background-color: $app-success;
+  ackground-image: url($path-gif + 'spinner-edit.gif');
   background-position: 26px center;
   background-size: rem-calc(34px);
   background-repeat: no-repeat;

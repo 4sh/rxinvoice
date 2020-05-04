@@ -1,179 +1,141 @@
-// ---------------------------------------------------------------------- >
-// ~ SEARCH HELP
-// ---------------------------------------------------------------------- >
-// Hierarchy :
-// ~  : High level section. Title is in summary, separate by "arrow" at the begin and the end (except search help and summary).
-// ==== : Upper level in a section
-// == : Sub level in a section
-// = : Lower level in a section
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the VARIABLES component.
+// -----------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------- >
-// ~ SUMMARY
-// ---------------------------------------------------------------------- >
-// 1 - MISC
+/** General color style */
+$app-primary :                                  #1E1ED4 !default;
+$app-primary_medium :                           #1011A3 !default;
+$app-primary_dark :                             #252668 !default;
 
-// ---------------------------------------------------------------------- >
-// ~ MISC
-// ---------------------------------------------------------------------- >
+$app-secondary:                                 #5C60C5 !default;
 
-// ==== Define Fonts
-//$body-font : 'Open Sans', sans-serif;
+$app-tertiary:                                  #915260 !default;
 
-// ==== Define Colors
-// == Colors by name (based on : http://chir.ag/projects/name-that-color/)
-// USE ONLY TO DEFINE COLORS BY FUNCTION, don't use in others vars declaration.
+$app-grey:                                      #A1AEBF !default;
+$app-grey_light:                                #E9F0F5 !default;
+$app-grey_medium:                               #7B8898 !default;
+$app-grey_dark:                                 #7B8C9C !default;
 
+$white :                                        #ffffff !default;
+$black :                                        #000000 !default;
 
-$geyser :                                        #CCD4DA !default;
-$silver-rust :                                   #cdcdcd !default;
-$black-squeeze :                                 #F2F6FA !default;
-$alice-blue:                                     #FCFEFF !default;
-$sail :                                          #9CD8F4 !default;
-$shakespeare :                                   #3CA3D2 !default;
-$blue-bayoux :                                   #4c637b !default;
-$lima :                                          #4daf7c !default;
-$keppel :                                        #38A886 !default;
-$sushi :                                         #67BA2F !default;
-$bright-sun :                                    #efcd38 !default;
-$coral :                                         #FF9452 !default;
-$cinnabar :                                      #E53935 !default;
-$lavender :                                      #B77EDB !default;
-$black :                                         #000000 !default;
-$regent-gray :                                   #7B8C9C !default;
-$wild-sand :                                     #F6F6F6 !default;
-$white :                                         #ffffff !default;
+$app-success :                                  #34AF68 !default;
+$app-warning :                                  #FBB819 !default;
+$app-error :                                    #E74C3C !default;
 
-$torea-bay :                                     #1011A3 !default;
-$persian-blue :                                  #1E1ED4 !default;
-$indigo :                                        #5C60C5 !default;
-$catskill-white :                                #E9F0F5 !default;
-$cadet-blue :                                    #A1AEBF !default;
-$slate-gray :                                    #7B8898 !default;
-$jacarta :                                       #252668 !default;
-$jacartai :                                       #eee !default;
-$auchico :                                       #915260 !default;
+$app-disabled :                                 #A1AEBF !default;
 
+$app-gradient :                                 linear-gradient($app-secondary, $app-primary) !default;
 
-// == Colors by function
-// = General
-$app-main-color:                                  $persian-blue !default;
-$app-main-light-color:                            $indigo !default;
-$app-main-dark-color :                            mix($persian-blue, black, 85%) !default;
+/** General color settings */
+$content-radius :                               8px !default;
 
-$app-sub-color :                                  $regent-gray !default;
-$app-sub-light-color :                            $catskill-white !default;
+/** Font color style */
+$body-dark-font-color :                         $app-grey_dark !default;
+$body-light-font-color :                        $app-grey_light !default;
 
-$app-disabled-color :                             $silver-rust !default;
+/** Status color LABEL*/
+$status-draft-color :                           $app-warning !default;
+$status-ready-color :                           #B68CB8 !default;
+$status-waiting-validation-color :              #0BC9CD !default;
+$status-validated-color :                       #1D8A99 !default;
+$status-sent-color :                            #533A7B !default;
+$status-paid-color :                            $app-success !default;
+$status-payment-scheduled-color :               #F17105 !default;
+$status-late-color :                            $app-error !default;
+$status-unpaid-color :                          #000 !default;
+$status-cancelled-color :                       $app-grey !default;
 
-$app-error-color :                                $cinnabar !default;
-$status-late-colorapp-warning-color :                              $coral !default;
-$app-success-color :                              $sushi !default;
-$app-notif-color :                                $coral !default;
+/** Status color TAB*/
+$status-tovalidate-color :                      #1D8A99 !default;
+$status-toprepare-color :                       $app-warning !default;
+$status-torelaunched-color :                    $app-error  !default;
+$status-tosend-color :                          $app-grey_medium  !default;
+$status-border-light-color :                    $app-grey_light !default;
 
-$app-gradient :                                   linear-gradient($indigo, $persian-blue) !default;
+/** Buttons color*/
+$button-primary-color :                         $app-primary !default;
+$button-secondary-color :                       $app-secondary !default;
+$button-green :                                 $app-success !default;
+$button-red :                                   $app-error !default;
+$button-yellow :                                $app-warning !default;
+$button-filter-color :                          $app-grey_light !default;
+$button-border-dark-color :                     $app-grey !default;
+$button-border-light-color :                    $app-grey_light !default;
+$button-access-color :                          $app-grey !default;
 
-// = Content color
-$content-bg-color :                               $catskill-white !default;
+/** Table color style */
+$table-header :                                lighten($app-secondary, 35%) !default;
+$table-line :                                  lighten($app-secondary, 42%) !default;
+$table-line-hover :                            lighten($app-secondary, 41%) !default;
 
-$content-dark-list-color :                        lighten($catskill-white, 5%) !default;
-$content-medium-list-color :                      $black-squeeze !default;
-$content-light-list-color :                       $alice-blue !default;
-
-$content-hover-list-color :                       $catskill-white !default;
-
-$content-radius :                                 5px !default;
-
-// = Fonts color
-$body-dark-font-color :                           $regent-gray !default;
-$body-light-font-color :                          $geyser !default;
-
-// = Status color TAB
-$status-tovalidate-color :                        $shakespeare !default;
-$status-toprepare-color :                         $bright-sun !default;
-$status-torelaunched-color :                      $cinnabar  !default;
-$status-tosend-color :                            $blue-bayoux  !default;
-$status-border-light-color :                      $geyser !default;
-
-// = Status color LABEL
-$status-draft-color :                             $bright-sun !default;
-$status-ready-color :                             $lavender !default;
-$status-waiting-validation-color :                $shakespeare !default;
-$status-validated-color :                         $blue-bayoux !default;
-$status-sent-color :                              $keppel !default;
-$status-paid-color :                              $sushi !default;
-$status-payment-scheduled-color :                 $coral !default;
-$status-late-color :                              $cinnabar !default;
-$status-unpaid-color :                            $black !default;
-$status-cancelled-color :                         $regent-gray !default;
-
-// = Buttons color
-$button-primary-color :                           $app-main-light-color !default;
-$button-secondary-color :                         $jacarta !default;
-$button-green :                                   $sushi !default;
-$button-red :                                     $auchico !default;
-$button-yellow :                                  $bright-sun !default;
-$button-filter-color :                            $black-squeeze !default;
-$button-border-dark-color :                       $regent-gray !default;
-$button-border-light-color :                      $geyser !default;
-$button-access-color :                            $regent-gray !default;
-
-// = Table color
-$table-header :                                    lighten($indigo, 35%) !default;
-$table-line :                                      lighten($indigo, 42%) !default;
-$table-line-hover :                                lighten($indigo, 41%) !default;
-
-// = Input color
-$input-border-color :                             $geyser !default;
-
-// = Background color
-$background-color :                               $wild-sand !default;
+/** Input color style */
+$input-border-color :                          $app-grey !default;
 
 
-  // = PATHS
-$img-path :                                     'assets/images/' !default;
-$svg-path :                                     'assets/images/svg/' !default;
-$gif-path :                                     'assets/images/gif/' !default;
-
-//$font-path :                                    '../fonts/' !default;
-
-// < ----------------------------------------------------------------------
-// ~ MISC END
-// < ----------------------------------------------------------------------
-
-// ---------------------------------------------------------------------- >
-// ~ SIDEBAR
-// ---------------------------------------------------------------------- >
-
-$sidebar-width-lg :                                    190px !default;
-$sidebar-width-md :                                    296px !default;
-$sidebar-width-sm :                                    64px !default;
-
-$sidebar-bg-color :                                 $app-gradient !default;
-$sidebar-item-color :                               rgba(white, 0.5) !default;
-$sidebar-item-active-bg-color :                     rgba(white, 0.5) !default;
-$sidebar-item-bg-color :                            $app-main-light-color !default;
 
 
-// < ----------------------------------------------------------------------
-// ~ SIDEBAR END
-// < ----------------------------------------------------------------------
+/**
+ * BODY
+ * **************************************************************************************** >
+ */
+$app-body-font :                                 'Roboto', Arial, sans-serif !default;
+$app-body-fontColor :                             $app-grey_light !default;
+$app-body-blockContainer :                        calc(100vh - 140px) !default;
 
 
-// ---------------------------------------------------------------------- >
-// ~ HEADER
-// ---------------------------------------------------------------------- >
 
-$appHeader-height:                                    64px !default;
-$appHeader-bg-color :                                 white   !default;
-$appHeader-color-title :                              $jacarta !default;
+/**
+ * SIDEBAR
+ * **************************************************************************************** >
+ */
+$sidebar-width-lg :                                190px !default;
+$sidebar-width-md :                                296px !default;
+$sidebar-width-sm :                                64px !default;
+$sidebar-bg-color :                                $app-gradient !default;
+$sidebar-item-color :                              rgba(white, 0.5) !default;
+$sidebar-item-active-bg-color :                    rgba(white, 0.5) !default;
+$sidebar-item-bg-color :                           $app-secondary !default;
 
 
-// < ----------------------------------------------------------------------
-// ~ HEADER END
-// < ----------------------------------------------------------------------
 
+/**
+ * HEADER
+ * **************************************************************************************** >
+ */
+$appHeader-height:                                64px !default;
+$appHeader-bg-color :                             white   !default;
+$appHeader-color-title :                          $app-primary_dark !default;
+
+
+
+
+/**
+ * HEIGHT
+ * **************************************************************************************** >
+ */
 $height-customerFilter :                                120px !default;
 $height-invoiceFilter :                                 120px !default;
 $height-newCustomerHeader :                             80px !default;
 $height-newCustomerAction :                             94px !default;
+
+
+
+
+/**
+ * PATH
+ * **************************************************************************************** >
+ */
+/** Images path */
+$path-img :                                     '../assets/images/' !default;
+$path-jpg :                                     '#{$path-img}jpg/' !default;
+$path-png :                                     '#{$path-img}png/' !default;
+$path-svg :                                     '#{$path-img}svg/' !default;
+$path-gif :                                     '#{$path-img}gif/' !default;
+
+
+/** Fonts path */
+$path-font:                                     '../assets/fonts/' !default;
+$path-icon:                                     '#{$path-font}icon/' !default;
+$path-police:                                   '#{$path-font}police/' !default;
 

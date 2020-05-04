@@ -1,7 +1,7 @@
 @import '../../../../../styles/base-component';
 
 button {
-    background: rgba($app-main-light-color, 0.1);
+    background: rgba($app-secondary, 0.1);
     border-radius: 100%;
     height: 30px;
     width: 34px;
@@ -9,6 +9,6 @@ button {
 
     i {
         font-size: rem-calc(12px);
-        color: $app-main-light-color;
+        color: $app-secondary;
     }
 }

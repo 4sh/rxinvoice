@@ -10,7 +10,7 @@ dp-date-picker {
 // Define variables colors for DatePicker
 // ================ //
 
-$primary-datepicker: $blue-bayoux;
+$primary-datepicker: $app-secondary;
 $grey-light-datepicker: #F2F2F2;
 $grey-medium-datepicker: #89898a;
 $grey-dark-datepicker: #444444;
@@ -198,6 +198,6 @@ date-picker {
   border-radius: 0 3px 3px 0;
 
   &:active {
-    background-color: darken($alice-blue, 4%);
+    background-color: darken($app-primary, 4%);
   }
 }

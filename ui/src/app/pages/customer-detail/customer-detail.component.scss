@@ -17,14 +17,14 @@
     top: rem-calc(-26px);
     left: 0;
     padding: rem-calc(4px 16px);
-    background-color: darken($blue-bayoux, 15%);
+    background-color: darken($app-secondary, 15%);
     font-weight: bold;
     border-radius: rem-calc(16px 4px 0 0);
   }
 }
 
 @include new('newCustomer') {
-  background-color: $background-color;
+  background-color: $app-body-fontColor;
 
   @include new('newCustomerHeader') {
     position: absolute;
@@ -32,7 +32,7 @@
     left: 0;
     width: 100%;
     height: $height-newCustomerHeader;
-    background-color: $app-main-dark-color;
+    background-color: $app-primary_medium;
     padding: rem-calc(8px);
     z-index: 999;
 
@@ -53,15 +53,15 @@
 
     @include has('container') {
       margin-top: rem-calc(12px);
-      box-shadow: 0 1px 5px $silver-rust;
+      box-shadow: 0 1px 5px $app-grey;
       background-color: white;
       border-radius: $global-radius;
 
       @include when('dark') {
-        background-image: url('../../../' + $img-path + 'png/patern-login.png');
+        background-image: url('../../' + $path-png + 'patern-login.png');
         background-size: cover;
         background-position: center center;
-        background-color: darken($blue-bayoux, 15%);
+        background-color: darken($app-secondary, 15%);
         padding: rem-calc(24px);
         color: white;
 
@@ -126,8 +126,8 @@
 
     @include has('container') {
       padding: rem-calc(24px 12px);
-      border: 1px solid $black-squeeze;
-      box-shadow: 0 1px 5px $silver-rust;
+      border: 1px solid $app-grey_light;
+      box-shadow: 0 1px 5px $app-grey;
       background-color: white;
 
       button {
@@ -147,8 +147,8 @@
           height: 50%;
           padding: rem-calc(0 16px 0 12px);
 
-          &:first-child { background: $blue-bayoux;}
-          &:last-child { background: $cinnabar;}
+          &:first-child { background: $app-secondary;}
+          &:last-child { background: $app-primary;}
 
           h6 {
             position: relative;

@@ -10,7 +10,7 @@
 
     input:focus + i {
         @extend %transition;
-        color: $blue-bayoux;
+        color: $app-secondary;
     }
 
     i {
@@ -36,7 +36,7 @@
 
 label {
     font-weight: bold;
-    color: $app-sub-color;
+    color: $app-grey;
     font-size: rem-calc(12px)
 }
 
@@ -44,7 +44,7 @@ input {
     margin-bottom: 0 !important;
 
     &.ng-invalid.ng-touched {
-        border: 2px solid rgba($cinnabar, 0.5);
+        border: 2px solid rgba($app-error, 0.5);
     }
 }
 
@@ -63,7 +63,7 @@ input {
 [type=url],
 [type=color],
 textarea {
-    border: 1px solid $silver-rust;
+    border: 1px solid $app-grey;
     box-shadow: none;
     height: rem-calc(40px);
 
@@ -84,7 +84,7 @@ textarea {
         box-shadow: none;
         padding-left: rem-calc(40px);
         font-weight: 500;
-        background-image: url("../#{$svg-path}icon_search.svg");
+        background-image: url($path-svg + 'icon_search.svg');
         background-size: rem-calc(20px);
         background-repeat: no-repeat;
         background-position: rem-calc(10px);
@@ -137,7 +137,7 @@ select, .ng-control {
     }
 
     &.ng-invalid.ng-touched {
-        border: 2px solid rgba($cinnabar, 0.5) !important;
+        border: 2px solid rgba($app-error, 0.5) !important;
     }
 }
 
@@ -164,7 +164,7 @@ textarea {
     color: white;
 
     &.dark {
-        background: $blue-bayoux;
+        background: $app-secondary;
     }
 }
 

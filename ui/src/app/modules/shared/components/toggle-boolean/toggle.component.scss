@@ -38,7 +38,7 @@
 }
 
 input:checked + .slider {
-  background-color: $app-main-color;
+  background-color: $app-primary;
 }
 
 input:focus + .slider {

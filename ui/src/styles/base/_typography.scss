@@ -23,13 +23,13 @@
     }
   }
 
-  &.blue-link { color: $app-main-light-color;}
+  &.blue-link { color: $app-secondary;}
 }
 
 // Text
 
 .text {
-  &.blue-text { color: $app-main-light-color !important;}
+  &.blue-text { color: $app-secondary !important;}
 }
 
 .text-white { color: white;}
@@ -52,5 +52,5 @@ h6 {
   display: inline-block;
   font-size: rem-calc(20px);
   font-weight: bold;
-  color: $blue-bayoux;
+  color: $app-secondary;
 }

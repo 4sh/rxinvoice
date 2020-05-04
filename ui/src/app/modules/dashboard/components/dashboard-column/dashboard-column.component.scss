@@ -8,7 +8,7 @@
 
   &.disable {
     .content {
-      background-color: $app-disabled-color;
+      background-color: $app-disabled;
     }
   }
 
@@ -27,21 +27,21 @@
   }
 
   .content {
-    background-color: $black-squeeze;
+    background-color: $app-grey_light;
     padding: rem-calc(1px);
   }
 
   &.dndDragover {
     .content {
-      border: 2px dashed rgba($indigo, 0.5);
-      background-color: rgba($indigo, 0.1);
+      border: 2px dashed $app-primary;
+      background-color: rgba($app-primary, 0.1);
 
     }
 
     .ticketDragging {
       display: block;
       min-height: rem-calc(130px);
-      border: 2px dashed rgba($indigo, 0.5);
+      border: 2px dashed $app-primary;
       margin: 8px;
     }
   }

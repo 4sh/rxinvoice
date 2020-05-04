@@ -176,13 +176,13 @@
     }
 
     @include has('download') {
-        background: rgba($app-main-light-color, 0.2);
-        color: $app-main-light-color;
+        background: rgba($app-secondary, 0.2);
+        color: $app-secondary;
         cursor: pointer;
         border: transparent;
 
         &:hover {
-            background: $app-main-color;
+            background: $app-primary;
             color: white;
         }
     }
@@ -192,14 +192,14 @@
     display: flex;
 
     @include has('green') {
-        border: 2px solid $app-main-light-color;
+        border: 2px solid $app-secondary;
         background: white;
-        color: $app-main-light-color;
+        color: $app-secondary;
         margin-left: rem-calc(8px);
 
         &:hover {
-            border: 2px solid $app-main-color;
-            background: $app-main-color;
+            border: 2px solid $app-primary;
+            background: $app-primary;
             color: white;
         }
     }

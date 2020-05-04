@@ -28,20 +28,7 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-image: url('../' + $img-path + 'png/patern-login.png');
-    background-size: cover;
-    background-position: center center;
-    content: '';
-    opacity: 0.5;
-    z-index: -1;
-  }
+  background : $app-gradient;
 
   .logo-app {
     text-align: center;
@@ -89,7 +76,7 @@
   align-content: center;
   height: 100%;
   padding: 0 5% 10% 5%;
-  background-image: url('../' + $img-path + 'jpg/bg-login.jpg');
+  background-image: url($path-jpg + 'bg-login.jpg');
   background-size: cover;
   background-position: center center;
 

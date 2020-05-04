@@ -10,34 +10,3 @@
   height: 100vh !important;
   z-index: 999999 !important;
 }
-
-
-// .swal2-for-edit {
-//   width: calc(100% - #{$sidebar-width-md});
-//   margin-top: 64px;
-//   height: calc(100% - 158px) !important;
-//   right: 0 !important;
-//   left: inherit !important;
-//   align-items: center !important;
-//
-//   @include breakpoint(large only) {
-//     width: calc(100% - #{$sidebar-width-lg});
-//   }
-//
-//   .swal2-popup {
-//     position: relative !important;
-//     margin: 0 auto;
-//   }
-// }
-//
-// .swal2-container + .swal2-for-edit {
-//   width: 54.2%;
-//   right: 0 !important;
-//   left: inherit !important;
-//   align-items: center !important;
-//
-//   .swal2-popup {
-//     position: relative !important;
-//     margin: 0 auto;
-//   }
-// }

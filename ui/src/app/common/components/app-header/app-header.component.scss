@@ -27,18 +27,22 @@
       align-items: center;
 
       .menu-tag {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $catskill-white;
+        background-color: $app-grey_light;
         margin-right: rem-calc(18px);
         width: rem-calc(40px);
         height: rem-calc(40px);
         border-radius: rem-calc(20px);
+        overflow: hidden;
 
         i {
-          color: $cadet-blue;
-          font-size: rem-calc(25px);
+          position: absolute;
+          bottom: 0;
+          color: $app-grey;
+          font-size: rem-calc(30px);
         }
       }
 
@@ -48,11 +52,11 @@
 
         .user-name {
           font-weight: 600;
-          color: $jacarta;
+          color: $app-primary_dark;
         }
         .user-role {
           font-size: rem-calc(13px);
-          color: $cadet-blue;
+          color: $app-grey;
           font-weight: 500;
         }
       }
@@ -76,12 +80,12 @@
     }
 
     i {
-      color: $indigo;
+      color: $app-primary;
       font-size: 20px;
       margin: 0;
 
       &:hover {
-        color: $jacarta;
+        color: $app-primary_dark;
       }
     }
   }
@@ -102,12 +106,12 @@
     }
 
     i {
-      color: $slate-gray;
+      color: $app-grey;
       font-size: 20px;
       margin: 0;
 
       &:hover {
-        color: $torea-bay;
+        color: $app-secondary;
       }
     }
   }
@@ -132,7 +136,7 @@
     width: 25vw;
     transform: translate(25vw);
     height: calc(100vh - #{$appHeader-height});
-    background-color: $content-medium-list-color;
+    background-color: white;
     box-shadow: 4px 0 40px -8px lightgrey;
     border: 2px solid rgba(211, 211, 211, 0.29);
     @extend %transition;

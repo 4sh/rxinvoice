@@ -14,8 +14,9 @@
 }
 
 footer {
-    padding: rem-calc(8px);
-    border: 1px solid $black-squeeze;
-    box-shadow: 0 1px 5px $silver-rust;
+    display: block;
+    position: relative;
+    width: 100%;
     background-color: white;
+    border-radius: $content-radius;
 }

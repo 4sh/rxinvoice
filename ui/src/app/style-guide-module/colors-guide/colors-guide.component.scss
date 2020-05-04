@@ -22,11 +22,11 @@
   );
 
   $colours: (
-          'mainColor'       : $blue-bayoux,
+          'mainColor'       : $app-secondary,
           'mainLightColor'  : $shakespeare ,
-          'mainDarkColor'   : mix($blue-bayoux, black, 85%),
+          'mainDarkColor'   : mix($app-secondary, black, 85%),
           'subColor'        : $regent-gray,
-          'subLightColor'   : $catskill-white,
+          'subLightColor'   : $app-grey_light,
 
           // Status
           'Validate'         : $status-tovalidate-color,
