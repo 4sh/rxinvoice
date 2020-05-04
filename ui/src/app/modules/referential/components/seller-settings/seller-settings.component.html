@@ -116,10 +116,12 @@
     <div class="column buttonContainer">
         <button class="button medium grey ripple" (click)="cancel()"
                 type="button">
-            <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}
+            <i class="fas fa-times"></i>
+            {{'button.label.cancel' | translate}}
         </button>
-        <button class="button medium green ripple rightButton" (click)="save()" [disabled]="sellerSettingsForm.form.invalid">
-            <i class="ion-edit"></i>
+        <button class="button medium green ripple rightButton" (click)="save()"
+                [disabled]="sellerSettingsForm.form.invalid">
+            <i class="fas fa-check"></i>
             {{'button.label.save'|translate}}
         </button>
     </div>
