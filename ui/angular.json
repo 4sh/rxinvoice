@@ -28,8 +28,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/main.scss",
-              "node_modules/sweetalert2/dist/sweetalert2.css"
+              "node_modules/sweetalert2/dist/sweetalert2.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "src/styles/main.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
@@ -146,5 +147,8 @@
       }
     }
   },
-  "defaultProject": "ui"
+  "defaultProject": "ui",
+  "cli": {
+    "analytics": false
+  }
 }
