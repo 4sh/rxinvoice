@@ -31,7 +31,7 @@
       right: rem-calc(-62px);
       height: rem-calc(38px);
       width: rem-calc(38px);
-      color: $indigo;
+      color: $app-secondary;
       background: rgb(221, 222, 243);
       cursor: pointer;
       border-radius: 0 rem-calc(5px) rem-calc(5px) 0;
@@ -40,7 +40,7 @@
 
       &:hover {
         @extend %transition;
-          background: $app-main-light-color;
+          background: $app-secondary;
           color: white;
       }
     }
@@ -189,13 +189,13 @@
 }
 
 .btn-default {
-  background: rgba($app-main-light-color, 0.2);
-  color: $app-main-light-color;
+  background: rgba($app-secondary, 0.2);
+  color: $app-secondary;
   cursor: pointer;
   border: transparent;
 
   &:hover {
-    background: $app-main-light-color;
+    background: $app-secondary;
     color: white;
   }
 }
