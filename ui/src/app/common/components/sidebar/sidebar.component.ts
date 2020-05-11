@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
-import {Router} from '@angular/router';
 
 @Component({
-  selector: 'sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+    selector: 'sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+    draftMenuVisible: Boolean;
 
-  activityMenu = false;
+    constructor(private authenticationService: AuthenticationService) {
+    }
 
-  constructor( private router: Router) { }
-
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.draftMenuVisible = !this.authenticationService.getCurrentUser().isAdministrative();
+    }
 
 }

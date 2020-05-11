@@ -22,35 +22,35 @@ const routes: Routes = [
                 path: 'dashboard',
                 loadChildren: () => import('./modules/dashboard/dashboard-routing.module')
                     .then(m => m.DashboardRoutingModule),
-                data: {title : 'nav.home'}
+                data: {title: 'nav.home'}
             },
             {
                 path: 'invoices',
                 loadChildren: () => import('./modules/invoice/invoice-routing.module')
                     .then(m => m.InvoiceRoutingModule),
-                data: {title : 'nav.invoices'}
+                data: {title: 'nav.invoices'}
             },
             {
                 path: 'drafts',
                 loadChildren: () => import('./modules/draft/draft-routing.module')
                     .then(m => m.DraftRoutingModule),
-                data: {title : 'nav.drafts'}
+                data: {title: 'nav.drafts'}
             },
-            {path: 'customers', component: CustomersComponent, data: {title : 'nav.customers'}},
+            {path: 'customers', component: CustomersComponent, data: {title: 'nav.customers'}},
             {path: 'customers/new', component: CustomerDetailComponent},
             {path: 'customers/detail/:id', component: CustomerDetailComponent},
-            {path: 'analyze', component: AnalyzeComponent, data: {title : 'nav.analyze'}},
+            {path: 'analyze', component: AnalyzeComponent, data: {title: 'nav.analyze'}},
             {
                 path: 'seller-settings', loadChildren: () => import('./modules/referential/referential-routing.module')
                     .then(m => m.ReferentialRoutingModule),
-                data: {title : 'nav.seller.settings'}
+                data: {title: 'nav.seller.settings'}
             },
             {path: '**', redirectTo: '/app/dashboard'}
 
         ]
     },
     {path: '', redirectTo: '/app/dashboard', pathMatch: 'full'},
-    {path: 'style', children: GuideRoutes},
+    {path: 'style', children: GuideRoutes}
 ];
 
 @NgModule({

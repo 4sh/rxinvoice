@@ -15,7 +15,11 @@ export class User {
     }
 
     public isInvoicing(): Boolean {
-        return this.companyRole  === CompanyRoleEnum.INVOICING;
+        return this.companyRole === CompanyRoleEnum.INVOICING;
+    }
+
+    public isAdministrative(): Boolean {
+        return this.companyRole === CompanyRoleEnum.ADMINISTRATIVE;
     }
 }
 
@@ -28,6 +32,7 @@ export class ConnectedUser extends User {
         this.name = user.name;
         this.email = user.email;
         this.roles = user.roles;
+        this.companyRole = user.companyRole;
         this.companyRef = user.companyRef;
         this.company = company;
     }

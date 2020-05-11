@@ -7,13 +7,14 @@ import {SharedModule} from '../shared/shared.module';
 import {DraftService} from './services/draft.service';
 import {DraftsComponent} from './components/drafts/drafts.component';
 import {InvoiceModule} from '../invoice/invoice.module';
+import {DraftGuard} from './guards/draft.guard';
 
 const components = [DraftsComponent];
 
 @NgModule({
     declarations: components,
     exports: components,
-    providers: [DraftService],
+    providers: [DraftService, DraftGuard],
     imports: [
         CommonModule,
         RouterModule,
