@@ -24,8 +24,11 @@ $app-warning :                                  #FBB819 !default;
 $app-error :                                    #E74C3C !default;
 
 $app-disabled :                                 #A1AEBF !default;
+$app-disabled-bgColor :                         #F5F5F5 !default;
+$app-disabled-fontColor :                       #C7C7C7 !default;
 
 $app-gradient :                                 linear-gradient($app-secondary, $app-primary) !default;
+
 
 /** General color settings */
 $content-radius :                               8px !default;

@@ -10,9 +10,9 @@ const DATE_PICKER_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'date-picker',
-    templateUrl: './date-picker.component.html',
-    styleUrls: ['./date-picker.component.scss'],
+    selector: 'a-date-picker',
+    templateUrl: './a-date-picker.component.html',
+    styleUrls: ['./a-date-picker.component.scss'],
     providers: [DATE_PICKER_VALUE_ACCESSOR]
 })
 export class InDatePickerComponent implements AfterViewInit, ControlValueAccessor {

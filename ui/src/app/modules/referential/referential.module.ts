@@ -6,15 +6,13 @@ import {FormsModule} from '@angular/forms';
 import {SellerSettingsComponent} from './components/seller-settings/seller-settings.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {AccountantVatRateSelectComponent} from './components/accountant-vat-select/accountant-vat-rate-select.component';
-import {ServiceKindSelectComponent} from '../shared/components/selects/service-kind-select/service-kind-select.component';
 import {SellerSettingsService} from './services/seller-settings.service';
 import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
     declarations: [
         SellerSettingsComponent,
-        AccountantVatRateSelectComponent,
-        ServiceKindSelectComponent
+        AccountantVatRateSelectComponent
     ],
     imports: [
         CommonModule,

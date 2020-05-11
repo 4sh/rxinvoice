@@ -1,16 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Company} from '../../../../../domain/company/company';
-import {CompanyService} from '../../../../../common/services/company.service';
+import {Company} from '../../../../../../domain/company/company';
+import {CompanyService} from '../../../../../../common/services/company.service';
 import {FormControl} from '@angular/forms';
 
 @Component({
-    selector: 'customer-select',
-    templateUrl: './customer-select.component.html',
-    styleUrls: ['./customer-select.component.scss'],
-
+    selector: 'a-customer-select',
+    templateUrl: './a-customer-select.component.html',
+    styleUrls: ['./a-customer-select.component.scss']
 })
 
-export class CustomerSelectComponent implements OnInit {
+export class ACustomerSelectComponent implements OnInit {
 
     @Input() isClearable = false;
     @Input() bindValue = '_id';

@@ -4,18 +4,18 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => YearSelectComponent),
+    useExisting: forwardRef(() => AYearSelectComponent),
     multi: true
 };
 
 @Component({
-    selector: 'year-select',
-    templateUrl: './year-select.component.html',
-    styleUrls: ['./year-select.component.scss'],
+    selector: 'a-year-select',
+    templateUrl: './a-year-select.component.html',
+    styleUrls: ['./a-year-select.component.scss'],
     providers: [VALUE_ACCESSOR]
 
 })
-export class YearSelectComponent implements OnInit {
+export class AYearSelectComponent implements OnInit {
 
     public year: number;
     public yearsList: Array<number> = [];

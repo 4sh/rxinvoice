@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-    selector: 'toggle',
-    templateUrl: './toggle.component.html',
-    styleUrls: ['./toggle.component.scss']
+    selector: 'a-toggle',
+    templateUrl: './a-toggle.component.html',
+    styleUrls: ['./a-toggle.component.scss']
 })
-export class ToggleComponent {
+export class AToggleComponent {
 
     @Input() showLabel = true;
     @Input() label: String;

@@ -1,5 +1,5 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
-import {SERVICE_KINDS, ServiceKind} from '../../../../../domain/common/service.kind';
+import {SERVICE_KINDS, ServiceKind} from '../../../../../../domain/common/service.kind';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {map} from 'rxjs/operators';
@@ -8,17 +8,17 @@ import {forkJoin} from 'rxjs/internal/observable/forkJoin';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ServiceKindSelectComponent),
+    useExisting: forwardRef(() => AServiceKindSelectComponent),
     multi: true
 };
 
 @Component({
-    selector: 'service-kind-select',
-    templateUrl: './service-kind-select.component.html',
-    styleUrls: ['./service-kind-select.component.scss'],
+    selector: 'a-service-kind-select',
+    templateUrl: './a-service-kind-select.component.html',
+    styleUrls: ['./a-service-kind-select.component.scss'],
     providers: [VALUE_ACCESSOR]
 })
-export class ServiceKindSelectComponent implements OnInit, ControlValueAccessor {
+export class AServiceKindSelectComponent implements OnInit, ControlValueAccessor {
 
     public serviceKindList: Array<ServiceKind>;
     public serviceKind: ServiceKind;

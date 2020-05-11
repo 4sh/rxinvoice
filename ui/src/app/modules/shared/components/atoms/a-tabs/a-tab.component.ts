@@ -1,12 +1,12 @@
 import { Component, EventEmitter, forwardRef, Inject, Input, Output } from '@angular/core';
-import { TabsComponent } from './tabs.component';
-import {AbstractComponent} from '../../../../common/components/abstract-component';
+import { ATabsComponent } from './a-tabs.component';
+import {AbstractComponent} from '../../../../../common/components/abstract-component';
 
 @Component({
-    selector: 'tab',
-    templateUrl: './tab.component.html'
+    selector: 'a-tab',
+    templateUrl: './a-tab.component.html'
 })
-export class TabComponent extends AbstractComponent  {
+export class ATabComponent extends AbstractComponent  {
 
     @Input() tabTitle: string;
     @Input() tabId: string;
@@ -16,7 +16,7 @@ export class TabComponent extends AbstractComponent  {
     @Output() onQueryChanged: EventEmitter<string> = new EventEmitter();
     active: boolean;
 
-    constructor(@Inject(forwardRef(() => TabsComponent)) private tabs: TabsComponent) {
+    constructor(@Inject(forwardRef(() => ATabsComponent)) private tabs: ATabsComponent) {
         super();
         tabs.addTab(this);
     }

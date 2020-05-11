@@ -6,17 +6,17 @@ import {TranslateService} from '@ngx-translate/core';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => MonthSelectComponent),
+    useExisting: forwardRef(() => AMonthSelectComponent),
     multi: true
 };
 
 @Component({
-    selector: 'month-select',
-    templateUrl: './month-select.component.html',
-    styleUrls: ['./month-select.component.scss'],
+    selector: 'a-month-select',
+    templateUrl: './a-month-select.component.html',
+    styleUrls: ['./a-month-select.component.scss'],
     providers: [VALUE_ACCESSOR]
 })
-export class MonthSelectComponent implements OnInit, ControlValueAccessor {
+export class AMonthSelectComponent implements OnInit, ControlValueAccessor {
 
     public month: number;
     public monthsList: Array<MonthItem> = [];

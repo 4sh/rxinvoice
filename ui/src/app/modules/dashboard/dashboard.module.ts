@@ -13,6 +13,7 @@ import {DashboardService} from './services/dashboard.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {SharedModule} from '../shared/shared.module';
+import {ButtonsModule} from "../shared/components/atoms/buttons/buttons.module";
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import {SharedModule} from '../shared/shared.module';
         FormsModule,
         DndModule,
         NgSelectModule,
-        SharedModule
+        SharedModule,
+        ButtonsModule
     ],
     providers: [
         DashboardService,

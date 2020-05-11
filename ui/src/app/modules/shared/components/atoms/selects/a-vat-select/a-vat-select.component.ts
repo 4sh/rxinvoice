@@ -1,21 +1,21 @@
 import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {CompanyService} from '../../../../../common/services/company.service';
-import {VatRate} from '../../../../../domain/common/vat-rate';
+import {CompanyService} from '../../../../../../common/services/company.service';
+import {VatRate} from '../../../../../../domain/common/vat-rate';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => VatSelectComponent),
+    useExisting: forwardRef(() => AVatSelectComponent),
     multi: true
 };
 
 @Component({
-    selector: 'vat-select',
-    templateUrl: './vat-select.component.html',
-    styleUrls: ['./vat-select.component.scss'],
+    selector: 'a-vat-select',
+    templateUrl: './a-vat-select.component.html',
+    styleUrls: ['./a-vat-select.component.scss'],
     providers: [VALUE_ACCESSOR]
 })
-export class VatSelectComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class AVatSelectComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     @Input()
     public disabled: boolean;

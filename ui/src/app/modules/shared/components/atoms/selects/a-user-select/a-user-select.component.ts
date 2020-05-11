@@ -1,21 +1,21 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {User} from '../../../../../domain/user/user';
-import {UserService} from '../../../../../common/services/user.service';
+import {User} from '../../../../../../domain/user/user';
+import {UserService} from '../../../../../../common/services/user.service';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => UserSelectComponent),
+    useExisting: forwardRef(() => AUserSelectComponent),
     multi: true
 };
 
 @Component({
-    selector: 'user-select',
-    templateUrl: './user-select.component.html',
-    styleUrls: ['./user-select.component.scss'],
+    selector: 'a-user-select',
+    templateUrl: './a-user-select.component.html',
+    styleUrls: ['./a-user-select.component.scss'],
     providers: [VALUE_ACCESSOR]
 })
-export class UserSelectComponent implements OnInit, ControlValueAccessor {
+export class AUserSelectComponent implements OnInit, ControlValueAccessor {
 
     public users: Array<User> = [];
     public user: User;

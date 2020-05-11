@@ -1,17 +1,17 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
-import {TabComponent} from './tab.component';
+import {ATabComponent} from './a-tab.component';
 import {Router} from '@angular/router';
-import {AbstractComponent} from '../../../../common/components/abstract-component';
+import {AbstractComponent} from '../../../../../common/components/abstract-component';
 
 @Component({
-    selector: 'tabs',
-    templateUrl: './tabs.component.html',
-    styleUrls: ['./tabs.component.scss']
+    selector: 'a-tabs',
+    templateUrl: './a-tabs.component.html',
+    styleUrls: ['./a-tabs.component.scss']
 })
-export class TabsComponent extends AbstractComponent implements AfterViewInit {
+export class ATabsComponent extends AbstractComponent implements AfterViewInit {
 
-    activeTab?: TabComponent;
-    tabs: TabComponent[] = [];
+    activeTab?: ATabComponent;
+    tabs: ATabComponent[] = [];
 
     constructor(private router: Router) {
         super();
@@ -25,11 +25,11 @@ export class TabsComponent extends AbstractComponent implements AfterViewInit {
         });
     }
 
-    public addTab(tab: TabComponent) {
+    public addTab(tab: ATabComponent) {
         this.tabs.push(tab);
     }
 
-    public selectTab(selection: TabComponent) {
+    public selectTab(selection: ATabComponent) {
         if (!selection.disabled) {
             this.tabs.forEach(tab => tab.active = false);
             if (selection.tabId) {

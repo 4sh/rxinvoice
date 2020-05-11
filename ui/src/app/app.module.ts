@@ -1,5 +1,4 @@
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {CustomerSelectComponent} from './modules/shared/components/selects/customer-select/customer-select.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgModule} from '@angular/core';
 import {DebounceDirective} from './common/directives/debounce.directive';
@@ -37,14 +36,10 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {OrderByPipe} from './common/pipes/orderBy.pipe';
 import {DownloadInvoiceService} from './common/services/download-invoice.service';
 import {StyleGuideModule} from './style-guide-module/style-guide.module';
-import {VatSelectComponent} from './modules/shared/components/selects/vat-select/vat-select.component';
 import {InvoiceLineFormComponent} from './common/components/invoice-lines-detail/invoice-line-form/invoice-line-form.component';
 import {InvoiceLineHeaderComponent} from './common/components/invoice-lines-detail/invoice-line-header/invoice-line-header.component';
-import {UserSelectComponent} from './modules/shared/components/selects/user-select/user-select.component';
 import {UserService} from './common/services/user.service';
 import {AnalyzeComponent} from './pages/analyze/analyze.component';
-import {YearSelectComponent} from './modules/shared/components/selects/year-select/year-select.component';
-import {MonthSelectComponent} from './modules/shared/components/selects/month-select/month-select.component';
 import {ReferentialModule} from './modules/referential/referential.module';
 import {SharedModule} from './modules/shared/shared.module';
 import {DraftsComponent} from './pages/drafts/drafts.component';
@@ -53,6 +48,7 @@ import {ModalContainerComponent} from './common/components/modal/components/moda
 import {InvoiceEditionPopupComponent} from './common/components/invoice-edition-popup/invoice-edition-popup.component';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
 import {DraftService} from './common/services/draft.service';
+import {ButtonsModule} from "./modules/shared/components/atoms/buttons/buttons.module";
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/i18n/', 'labels.json');
@@ -80,17 +76,12 @@ export function createTranslateLoader(http: HttpClient) {
         VatDetailComponent,
         CustomerDetailComponent,
         InvoiceDetailComponent,
-        CustomerSelectComponent,
         InvoiceLinesDetailComponent,
         AttachmentsDetailComponent,
         ActivityPanelComponent,
-        VatSelectComponent,
         InvoiceLineFormComponent,
         InvoiceLineHeaderComponent,
-        UserSelectComponent,
         AnalyzeComponent,
-        YearSelectComponent,
-        MonthSelectComponent,
         DraftsComponent,
         ModalContainerComponent,
         InvoiceEditionPopupComponent
@@ -114,7 +105,8 @@ export function createTranslateLoader(http: HttpClient) {
                 useFactory: (createTranslateLoader),
                 deps: [HttpClient]
             }
-        })
+        }),
+        ButtonsModule
     ],
     providers: [
         InvoiceService,
