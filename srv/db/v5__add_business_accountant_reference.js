@@ -12,7 +12,7 @@ if (script) {
             "AFD Technologies": "CAFD",
             "AGEFOS PME": "CAGEFO",
             "AlgoLinked": "CALGOLIN",
-            "VIR": "ALOGIA	CALOGIA",
+            "ALOGIA": "CALOGIA",
             "ARKHÉ INTERNATIONAL": "CARKHE",
             "ARRG": "CARRG",
             "ASTREE CONSULTANT": "CASTREE",
