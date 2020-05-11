@@ -1,0 +1,32 @@
+@import '../../../../../../../styles/base-component';
+
+:host {
+  display: block;
+  width: fit-content;
+}
+
+button, .button {
+  &._cancel {
+    background-color: $app-grey_light;
+    border: rem-calc(1px) solid $app-grey_medium;
+    color: $app-grey_dark;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: darken($app-grey_light, 2%);
+      color: $app-grey_dark;
+      transition: all 0.2s;
+    }
+  }
+
+  &:disabled, &._disabled {
+    color: $app-disabled-fontColor;
+    background-color: $app-disabled-bgColor;
+
+    &:hover {
+      color: $app-disabled-fontColor;
+      background-color: $app-disabled-bgColor;
+    }
+  }
+}
+

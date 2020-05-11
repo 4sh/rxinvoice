@@ -1,0 +1,4 @@
+<a [class]="'button ' + fromSize(size) + ' ' + fromVisibility(visibility) + ' ' + fromRole(role)"
+   [class._disabled]="disabled">
+    <ng-content></ng-content>
+</a>

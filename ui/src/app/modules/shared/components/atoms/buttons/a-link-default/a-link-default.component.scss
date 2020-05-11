@@ -1,0 +1,16 @@
+@import '../../../../../../../styles/base-component';
+
+:host {
+  display: block;
+  width: fit-content;
+}
+
+.button {
+  &:disabled, &._disabled {
+    opacity: 0.4;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

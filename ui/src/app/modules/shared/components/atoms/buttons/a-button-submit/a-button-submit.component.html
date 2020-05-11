@@ -1,0 +1,9 @@
+<button
+        [class]="'button ' + fromSize(size) + ' ' + fromRole(role)"
+        type="submit"
+        [class._validate]="validate"
+        [class._disabled]="disabled"
+        [disabled]="disabled"
+        (click)="doAction($event)">
+    <ng-content></ng-content>
+</button>

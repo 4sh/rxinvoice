@@ -1,0 +1,165 @@
+@import '../../../../../../styles/base-component';
+
+button, .button {
+  margin-bottom: 0;
+  min-width: rem-calc(132px);
+  font-weight: bold;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  ::ng-deep i {
+    margin-right: rem-calc(4px);
+  }
+
+  &:disabled, &._disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  /**
+* BUTTON COLOR
+* **************************************************************************************** >
+*/
+
+  &._secondary {
+    color: white;
+  }
+
+
+  /**
+* BUTTON SIZE
+* **************************************************************************************** >
+*/
+
+  &._tiny {
+    min-width: rem-calc(75px);
+  }
+
+  &._small {
+    min-width: rem-calc(85px);
+  }
+
+  &._large {
+    height: rem-calc(40px);
+    line-height: rem-calc(20px);
+  }
+
+
+  /**
+ * BUTTON VISIBILITY
+ * **************************************************************************************** >
+ */
+
+  &._highRevert {
+    background-color: $white;
+    color: $app-primary;
+
+    &:hover {
+      background-color: darken($white, 10%);
+    }
+  }
+
+  &._high {
+    background-color: $app-primary;
+    color: white;
+
+    &:hover {
+      background-color: $app-primary_medium;
+    }
+  }
+
+  &._medium {
+    background-color: transparent;
+    color: $app-primary;
+    border: rem-calc(1px) solid $app-primary;
+
+    &:hover {
+      background-color: rgba($app-primary, 0.1);
+    }
+  }
+
+  &._low {
+    background-color: transparent;
+    color: black;
+    border: rem-calc(1px) solid black;
+
+    &:hover {
+      background-color: rgba(black, 0.1);
+    }
+  }
+
+
+  /**
+ * BUTTON ROLE
+ * **************************************************************************************** >
+ */
+
+  &._previous {
+    position: relative;
+    text-align: right;
+    padding-left: rem-calc(32px);
+
+    &:before {
+      position: absolute;
+      content: '\f104';
+      font-family: "Font Awesome 5 Free", sans-serif;
+      left: rem-calc(16px);
+      top: calc(50% - 6.5px);
+    }
+
+    &._large {
+      &:before {
+        line-height: rem-calc(14px);
+      }
+    }
+  }
+
+  &._next {
+    position: relative;
+    text-align: left;
+    padding-right: rem-calc(32px);
+
+    &:after {
+      position: absolute;
+      content: '\f105';
+      font-family: "Font Awesome 5 Free", sans-serif;
+      right: rem-calc(16px);
+      top: calc(50% - 6.5px);
+    }
+
+    &._large {
+      &:after {
+        line-height: rem-calc(14px);
+      }
+    }
+  }
+
+  &._upload {
+    height: rem-calc(36px);
+    border-style: dashed;
+    border-color: black;
+    color: black;
+    width: 100%;
+    margin-bottom: rem-calc(16px);
+
+    &:hover {
+      background-color: $app-grey_light;
+    }
+  }
+
+  &._validate {
+    background-color: $app-success;
+    border: none;
+    color: white;
+
+    &:disabled, &._disabled {
+      &:hover {
+        background-color: $app-success;
+        border: none;
+        color: white;
+      }
+    }
+  }
+}

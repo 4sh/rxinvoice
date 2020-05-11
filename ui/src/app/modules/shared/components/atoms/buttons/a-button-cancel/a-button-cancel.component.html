@@ -1,0 +1,4 @@
+<button [class]="'button _cancel ' + fromSize(size) + ' ' + fromRole(role)" type="button"
+        [class._disabled]="disabled" [disabled]="disabled" (click)="doAction()">
+    <ng-content></ng-content>
+</button>

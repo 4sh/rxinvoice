@@ -1,0 +1,4 @@
+<button [class]="'button ' + fromSize(size) + ' ' + fromVisibility(visibility) + ' ' + fromRole(role)" type="button"
+        [class._disabled]="disabled" [disabled]="disabled" [class._validate]="validate" (click)="doAction($event)">
+    <ng-content></ng-content>
+</button>

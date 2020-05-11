@@ -1,0 +1,26 @@
+@import '../../../../../../../styles/base-component';
+
+.buttonIcon {
+  margin-bottom: 0;
+  width: rem-calc(30px);
+  height: rem-calc(30px);
+  border-radius: 50%;
+  background-color: $app-secondary;
+  color: $app-primary;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: darken($app-secondary, 5%);
+    color: $app-primary_medium;
+    cursor: pointer;
+  }
+
+  &:disabled, &._disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+
+    &:hover {
+      background-color: $app-secondary;
+    }
+  }
+}

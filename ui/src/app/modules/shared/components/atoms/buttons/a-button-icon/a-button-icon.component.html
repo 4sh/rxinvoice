@@ -1,0 +1,4 @@
+<button [class]="'buttonIcon ' + fromVisibility(visibility)" type="button" [class._disabled]="disabled"
+        [disabled]="disabled" (click)="doAction($event)">
+    <ng-content></ng-content>
+</button>
