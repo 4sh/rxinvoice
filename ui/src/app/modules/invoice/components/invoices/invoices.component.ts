@@ -1,14 +1,14 @@
 import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
-import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
-import {ServiceKind} from '../../domain/common/service.kind';
-import {Invoice} from '../../domain/invoice/invoice';
-import {InvoiceService} from '../../common/services/invoice.service';
-import {RepositoryService} from '../../common/services/repository.service';
+import {InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
+import {ServiceKind} from '../../../../domain/common/service.kind';
+import {Invoice} from '../../../../domain/invoice/invoice';
+import {InvoiceService} from '../../services/invoice.service';
+import {RepositoryService} from '../../../../common/services/repository.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CurrencyPipe} from '@angular/common';
 import * as moment from 'moment';
-import {SearchParams} from '../../domain/search-params';
+import {SearchParams} from '../../../../domain/search-params';
 
 @Component({
     selector: 'invoices',

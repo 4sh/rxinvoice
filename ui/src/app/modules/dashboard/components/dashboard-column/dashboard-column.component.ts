@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {isNumber} from "util";
 import {DndDropEvent} from 'ngx-drag-drop';
-import {InvoiceService} from '../../../../common/services/invoice.service';
+import {InvoiceService} from '../../../invoice/services/invoice.service';
 import {DashboardColumnConfiguration} from '../../../../domain/company/dashboard/dashboard-column-configuration';
 import {DashboardEventBusService} from '../../services/dashboard-event-bus.service';
 import {DashboardColumnObserver} from './dashboard-column-observer';

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SalesExportParameters} from './sales-export-parameters';
-import {InvoiceService} from '../../common/services/invoice.service';
+import {InvoiceService} from '../../modules/invoice/services/invoice.service';
 
 @Component({
     selector: 'analyze',

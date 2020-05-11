@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Company} from '../../domain/company/company';
+import {Company} from '../../../../domain/company/company';
 import {ActivatedRoute, Router} from '@angular/router';
 import {
     ControlContainer,
@@ -9,19 +9,19 @@ import {
     NgForm,
     Validators
 } from '@angular/forms';
-import {CompanyService} from '../../common/services/company.service';
-import {Invoice} from '../../domain/invoice/invoice';
-import {InvoiceService} from '../../common/services/invoice.service';
-import {ServiceKind} from '../../domain/common/service.kind';
-import {RepositoryService} from '../../common/services/repository.service';
-import {InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
+import {CompanyService} from '../../../../common/services/company.service';
+import {Invoice} from '../../../../domain/invoice/invoice';
+import {InvoiceService} from '../../services/invoice.service';
+import {ServiceKind} from '../../../../domain/common/service.kind';
+import {RepositoryService} from '../../../../common/services/repository.service';
+import {InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
 import * as _ from 'lodash';
-import {SweetAlertService} from '../../modules/shared/services/sweetAlert.service';
-import {AttachmentsDetailComponent} from '../../common/components/attachments-detail/attachments-detail.component';
+import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
+import {AttachmentsDetailComponent} from '../attachments-detail/attachments-detail.component';
 import {Location} from '@angular/common';
-import {AuthenticationService} from '../../common/services/authentication.service';
-import {DateUtils} from '../../modules/shared/utils/date-utils';
-import {DownloadInvoiceService} from '../../common/services/download-invoice.service';
+import {AuthenticationService} from '../../../../common/services/authentication.service';
+import {DateUtils} from '../../../shared/utils/date-utils';
+import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import {map, switchMap} from 'rxjs/operators';
 import * as moment from 'moment';
 import {of} from 'rxjs/internal/observable/of';

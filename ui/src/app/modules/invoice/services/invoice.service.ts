@@ -2,11 +2,11 @@ import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {plainToClass} from 'class-transformer';
 import {HttpClient} from '@angular/common/http';
-import {Invoice} from '../../domain/invoice/invoice';
-import {SearchParams} from '../../domain/search-params';
-import {InvoiceSearchFilter} from '../../domain/invoice/invoice-search-filter';
-import {SalesExportParameters} from '../../pages/analyze/sales-export-parameters';
-import {InvoiceStatusEnum, InvoiceStatusType} from '../../domain/invoice/invoice-status.type';
+import {Invoice} from '../../../domain/invoice/invoice';
+import {SearchParams} from '../../../domain/search-params';
+import {InvoiceSearchFilter} from '../../../domain/invoice/invoice-search-filter';
+import {SalesExportParameters} from '../../../pages/analyze/sales-export-parameters';
+import {InvoiceStatusEnum, InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 import {Observable} from 'rxjs/internal/Observable';
 import {throwError} from 'rxjs/internal/observable/throwError';
 

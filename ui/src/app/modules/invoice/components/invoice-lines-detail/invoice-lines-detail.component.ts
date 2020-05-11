@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ControlContainer, NgForm} from '@angular/forms';
-import {InvoiceLine} from '../../../domain/invoice/invoice-line';
+import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {LineMoveEvent} from './line-move-event';
-import {VatRate} from '../../../domain/common/vat-rate';
+import {VatRate} from '../../../../domain/common/vat-rate';
 
 @Component({
     selector: 'invoice-lines-detail',

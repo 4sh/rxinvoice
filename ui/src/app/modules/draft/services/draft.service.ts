@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs/internal/Observable';
-import {Invoice} from '../../domain/invoice/invoice';
+import {Invoice} from '../../../domain/invoice/invoice';
 import {catchError, map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {throwError} from 'rxjs/internal/observable/throwError';

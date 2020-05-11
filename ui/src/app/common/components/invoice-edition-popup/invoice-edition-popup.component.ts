@@ -3,7 +3,7 @@ import {Modal} from '../modal/modal.models/modal.model';
 import {RepositoryService} from '../../services/repository.service';
 import {InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 import {Invoice} from '../../../domain/invoice/invoice';
-import {InvoiceService} from "../../services/invoice.service";
+import {InvoiceService} from '../../../modules/invoice/services/invoice.service';
 
 @Component({
     selector: 'invoice-edition-popup',

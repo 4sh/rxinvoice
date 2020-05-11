@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Blob} from '../../../domain/blob';
+import {Blob} from '../../../../domain/blob';
 import { FileUploader} from 'ng2-file-upload';
-import {SweetAlertService} from '../../../modules/shared/services/sweetAlert.service';
+import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
 
 @Component({
     selector: 'attachments-detail',

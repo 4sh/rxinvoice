@@ -8,14 +8,14 @@ export class DownloadInvoiceService {
     constructor() {
     }
 
-    seeInvoice(invoice) {
-        const url = this.baseUrl + '?invoiceId='+ invoice._id;
+    openInvoicePdfAsTab(invoice) {
+        const url = this.baseUrl + '?invoiceId=' + invoice._id;
         const url2 = '&filename=' + invoice.generatePdfFilename(invoice);
         window.open(url + url2, '_blank');
     }
 
     downloadInvoice(invoice) {
-        const url = this.baseUrl + '?invoiceId=' + invoice._id ;
+        const url = this.baseUrl + '?invoiceId=' + invoice._id;
         const url2 = '&filename=' + invoice.generatePdfFilename(invoice);
         window.location.href = url + url2;
     }

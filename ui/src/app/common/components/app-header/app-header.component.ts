@@ -4,7 +4,8 @@ import {User} from '../../../domain/user/user';
 import {Activity} from '../../../domain/common/activity';
 import {ActivityService} from '../../services/activity.service';
 import * as moment from 'moment';
-import {Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {filter, map, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
@@ -16,18 +17,35 @@ export class AppHeaderComponent implements OnInit {
     activityMenuOpen = false;
     user: User;
     activities: Activity[];
+    pageTitle: string;
 
     constructor(private authenticationService: AuthenticationService,
                 private activityService: ActivityService,
+                private activatedRoute: ActivatedRoute,
+                private router: Router,
                 private authService: AuthenticationService) {
     }
 
     ngOnInit() {
         this.user = this.authenticationService.getCurrentUser();
+        this.pageTitle = this.activatedRoute.firstChild.snapshot.data['title'];
         this.activityService.fetchActivities()
             .subscribe(activities =>  {
                 this.activities = activities;
             });
+      this.router
+          .events.pipe(
+          filter(event => event instanceof NavigationStart),
+          map(() => {
+              const child = this.activatedRoute.firstChild;
+              if (child.snapshot.data['title']) {
+                  return child.snapshot.data['title'];
+              }
+              return '';
+          })
+      ).subscribe((ttl: string) => {
+          this.pageTitle = ttl;
+      });
     }
 
     public getMomentFromNow(date) {

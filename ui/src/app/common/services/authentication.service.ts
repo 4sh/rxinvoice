@@ -8,6 +8,7 @@ import {CompanyService} from './company.service';
 import {map, mergeMap, tap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {Observable} from 'rxjs/internal/Observable';
+import {plainToClass} from 'class-transformer';
 
 @Injectable()
 export class AuthenticationService {
@@ -30,6 +31,7 @@ export class AuthenticationService {
         return this.http.post(this.baseUrl, authPayload, {withCredentials: true})
             .pipe(
                 map((result: any) => result.principal),
+                map(principal => plainToClass(User, principal as Object)),
                 tap((user: User) => this.userEvents.next(user)),
                 mergeMap(user => this.companyService.fetchCompany(user.companyRef)
                     .pipe(
@@ -42,6 +44,7 @@ export class AuthenticationService {
         return this.http.get(this.baseUrl + '/current', {withCredentials: true})
             .pipe(
                 map((result: any) => result.principal),
+                map(principal => plainToClass(User, principal as Object)),
                 tap((user: User) => this.userEvents.next(user)),
                 mergeMap(user => this.companyService.fetchCompany(user.companyRef)
                     .pipe(

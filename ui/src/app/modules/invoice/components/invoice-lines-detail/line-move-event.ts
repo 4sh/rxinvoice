@@ -1,4 +1,4 @@
-import {InvoiceLine} from '../../../domain/invoice/invoice-line';
+import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 
 export class LineMoveEvent {
 

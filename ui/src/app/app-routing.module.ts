@@ -3,11 +3,11 @@ import {NgModule} from '@angular/core';
 import {CustomersComponent} from './pages/customers/customers.component';
 import {LoginComponent} from './pages/login/login.component';
 import {AppContentComponent} from './app-content/app-content.component';
-import {InvoicesComponent} from './pages/invoices/invoices.component';
+import {InvoicesComponent} from './modules/invoice/components/invoices/invoices.component';
 import {CustomerDetailComponent} from './pages/customer-detail/customer-detail.component';
-import {InvoiceDetailComponent} from './pages/invoice-detail/invoice-detail.component';
+import {InvoiceDetailComponent} from './modules/invoice/components/invoice-detail/invoice-detail.component';
 import {GuideRoutes} from './style-guide-module/guide.routes';
-import {DraftsComponent} from './pages/drafts/drafts.component';
+import {DraftsComponent} from './modules/draft/components/drafts/drafts.component';
 import {AnalyzeComponent} from './pages/analyze/analyze.component';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 
@@ -21,20 +21,30 @@ const routes: Routes = [
             {
                 path: 'dashboard',
                 loadChildren: () => import('./modules/dashboard/dashboard-routing.module')
-                    .then(m => m.DashboardRoutingModule)
+                    .then(m => m.DashboardRoutingModule),
+                data: {title : 'nav.home'}
             },
-            {path: 'invoices', component: InvoicesComponent},
-            {path: 'invoices/new', component: InvoiceDetailComponent},
-            {path: 'invoices/detail/:id', component: InvoiceDetailComponent},
-            {path: 'customers', component: CustomersComponent},
+            {
+                path: 'invoices',
+                loadChildren: () => import('./modules/invoice/invoice-routing.module')
+                    .then(m => m.InvoiceRoutingModule),
+                data: {title : 'nav.invoices'}
+            },
+            {
+                path: 'drafts',
+                loadChildren: () => import('./modules/draft/draft-routing.module')
+                    .then(m => m.DraftRoutingModule),
+                data: {title : 'nav.drafts'}
+            },
+            {path: 'customers', component: CustomersComponent, data: {title : 'nav.customers'}},
             {path: 'customers/new', component: CustomerDetailComponent},
             {path: 'customers/detail/:id', component: CustomerDetailComponent},
-            {path: 'analyze', component: AnalyzeComponent},
+            {path: 'analyze', component: AnalyzeComponent, data: {title : 'nav.analyze'}},
             {
                 path: 'seller-settings', loadChildren: () => import('./modules/referential/referential-routing.module')
-                    .then(m => m.ReferentialRoutingModule)
+                    .then(m => m.ReferentialRoutingModule),
+                data: {title : 'nav.seller.settings'}
             },
-            {path: 'drafts', component: DraftsComponent},
             {path: '**', redirectTo: '/app/dashboard'}
 
         ]

@@ -3,7 +3,7 @@
 <table class="invoiceList">
     <thead>
     <tr>
-        <th width="100px">{{'invoice.list.column.reference'|translate}}</th>
+        <th width="100px" *ngIf="referenceNumberColumnDisplayed">{{'invoice.list.column.reference'|translate}}</th>
         <th width="150px">{{'invoice.list.column.buyer'|translate}}</th>
         <th width="150px">{{'invoice.list.column.business'|translate}}</th>
         <th width="430px">{{'invoice.list.column.object'|translate}}</th>
@@ -11,13 +11,12 @@
         <th width="130px">{{'invoice.list.column.date'|translate}}</th>
         <th width="230px">{{'invoice.list.column.status'|translate}}</th>
         <th width="150px">{{'invoice.list.column.actions'|translate}}</th>
-        <a-button-default></a-button-default>
     </tr>
     </thead>
 
     <tbody>
     <tr *ngFor="let invoice of invoices">
-        <td  width="100px">
+        <td  width="100px" *ngIf="referenceNumberColumnDisplayed">
             <span>
                  N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
             </span>
@@ -43,11 +42,12 @@
             </span>
         </td>
         <td  width="150px" class="buttonContainer">
-            <button class="round medium invoiceList-download">
+            <button class="round medium invoiceList-download" (click)="downloadInvoice(invoice)">
                 <i class="ion-android-upload"></i>
             </button>
-            <button class="round medium buttonContainer-green">
-                <i class="fas fa-file-excel"></i>
+            <button class="round medium invoiceList-launch" (click)="launchInvoice(invoice)"
+                    *ngIf="isLaunchButtonVisible(invoice)">
+              Launch
             </button>
         </td>
     </tr>

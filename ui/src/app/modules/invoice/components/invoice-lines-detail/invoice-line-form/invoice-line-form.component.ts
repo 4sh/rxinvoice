@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {InvoiceLine} from "../../../../domain/invoice/invoice-line";
+import {InvoiceLine} from "../../../../../domain/invoice/invoice-line";
 import {ControlContainer, NgForm} from "@angular/forms";
 import {LineMoveEvent} from '../line-move-event';
-import {VatRate} from '../../../../domain/common/vat-rate';
-import {InvoiceLineEditionMode} from '../../../../domain/invoice/invoice-edition-mode';
+import {VatRate} from '../../../../../domain/common/vat-rate';
+import {InvoiceLineEditionMode} from '../../../../../domain/invoice/invoice-edition-mode';
 
 @Component({
     selector: 'invoice-line-form',

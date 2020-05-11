@@ -1,6 +1,6 @@
 <header class="appHeader">
     <div class="title">
-        <span>Mes factures</span>
+        <span>{{pageTitle | translate}}</span>
     </div>
 
   <div class="appHeader-menu">
@@ -10,7 +10,7 @@
           </div>
           <div class="menu-user">
               <span class="user-name">{{user?.name}}</span>
-              <span class="user-role">Administrateur</span> <!--TODO : inserer le rôle du user-->
+              <span class="user-role">{{'company.role.' + user?.companyRole | translate}}</span>
           </div>
       </div>
 

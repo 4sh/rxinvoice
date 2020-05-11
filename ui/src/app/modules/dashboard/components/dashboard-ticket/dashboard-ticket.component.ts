@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DownloadInvoiceService} from '../../../../common/services/download-invoice.service';
-import {InvoiceService} from '../../../../common/services/invoice.service';
+import {DownloadInvoiceService} from '../../../invoice/services/download-invoice.service';
+import {InvoiceService} from '../../../invoice/services/invoice.service';
 import {DashboardEventBusService} from '../../services/dashboard-event-bus.service';
 import {ModalService} from '../../../../common/components/modal/modal-service.service';
 import {InvoiceEditionPopupComponent} from '../../../../common/components/invoice-edition-popup/invoice-edition-popup.component';

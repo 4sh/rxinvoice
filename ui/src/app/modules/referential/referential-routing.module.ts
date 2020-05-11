@@ -8,7 +8,7 @@ import {NgModule} from '@angular/core';
         ReferentialModule,
         RouterModule.forChild([
                 {
-                    path: '', component: SellerSettingsComponent
+                    path: '', component: SellerSettingsComponent, data: {title: 'fdssdf'}
                 }
             ]
         )

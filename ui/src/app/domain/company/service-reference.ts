@@ -6,4 +6,4 @@ export class ServiceReference {
     kind: ServiceKind;
     vatRate?: AccountantVatRate;
     accountNumber: string;
-}       
+}

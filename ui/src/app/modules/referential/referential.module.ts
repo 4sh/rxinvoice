@@ -8,21 +8,26 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {AccountantVatRateSelectComponent} from './components/accountant-vat-select/accountant-vat-rate-select.component';
 import {SellerSettingsService} from './services/seller-settings.service';
 import {SharedModule} from '../shared/shared.module';
+import {ButtonsModule} from '../shared/components/atoms/buttons/buttons.module';
+
+const components = [
+    SellerSettingsComponent,
+    AccountantVatRateSelectComponent
+];
 
 @NgModule({
-    declarations: [
-        SellerSettingsComponent,
-        AccountantVatRateSelectComponent
-    ],
+    declarations: [components],
+    exports : [components],
+    providers: [SellerSettingsService],
     imports: [
         CommonModule,
         RouterModule,
         TranslateModule,
         FormsModule,
         NgSelectModule,
-        SharedModule
-    ],
-    providers: [SellerSettingsService]
+        SharedModule,
+        ButtonsModule
+    ]
 })
 export class ReferentialModule {
 }
