@@ -23,10 +23,9 @@ public class DashboardConfigurationDao {
                 .as(DashboardConfiguration.class);
     }
 
-    public Iterable<DashboardConfiguration> findCompanyDashboardsForRoles(String companyId,
-                                                                          Collection<CompanyRole> roles) {
+    public Iterable<DashboardConfiguration> findCompanyDashboardsForRoles(String companyId, CompanyRole role) {
         return this.dashboardConfigurations.get()
-                .find("{companyRef: #, role: {$in: #}}", companyId, roles)
+                .find("{companyRef: #, role: #}}", companyId, role)
                 .as(DashboardConfiguration.class);
     }
 

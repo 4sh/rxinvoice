@@ -15,13 +15,10 @@ public class DashboardConfigurationService {
         this.dashboardConfigurationDao = dashboardConfigurationDao;
     }
 
-    public Iterable<DashboardConfiguration> findDashboardConfigurations(String companyId, Collection<CompanyRole> roles) {
-        Iterable<DashboardConfiguration> dashboards;
-        if (roles.contains(CompanyRole.DIRECTOR)) {
-            dashboards = this.dashboardConfigurationDao.findCompanyDashboards(companyId);
-        } else {
-            dashboards = this.dashboardConfigurationDao.findCompanyDashboardsForRoles(companyId, roles);
+    public Iterable<DashboardConfiguration> findDashboardConfigurations(String companyId, CompanyRole companyRole) {
+        if (CompanyRole.DIRECTOR.equals(companyRole)) {
+            return this.dashboardConfigurationDao.findCompanyDashboards(companyId);
         }
-        return dashboards;
+        return this.dashboardConfigurationDao.findCompanyDashboardsForRoles(companyId, companyRole);
     }
 }

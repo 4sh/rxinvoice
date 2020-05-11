@@ -21,7 +21,7 @@ public class User implements RestxPrincipal {
     private String name;
     private String email;
     private Collection<String> roles;
-    private Collection<CompanyRole> companyRoles;
+    private CompanyRole companyRole;
 
     private String companyRef;
 
@@ -75,12 +75,12 @@ public class User implements RestxPrincipal {
         return this;
     }
 
-    public Collection<CompanyRole> getCompanyRoles() {
-        return companyRoles;
+    public CompanyRole getCompanyRole() {
+        return companyRole;
     }
 
-    public User setCompanyRoles(Collection<CompanyRole> companyRoles) {
-        this.companyRoles = companyRoles;
+    public User setCompanyRole(CompanyRole companyRole) {
+        this.companyRole = companyRole;
         return this;
     }
 

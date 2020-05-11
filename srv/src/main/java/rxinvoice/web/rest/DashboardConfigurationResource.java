@@ -26,7 +26,7 @@ public class DashboardConfigurationResource {
         checkEquals("companyId", companyId, "connected user company", connectedUser.getCompanyRef());
         return this.dashboardConfigurationService.findDashboardConfigurations(
                 connectedUser.getCompanyRef(),
-                connectedUser.getCompanyRoles());
+                connectedUser.getCompanyRole());
     }
 
 }

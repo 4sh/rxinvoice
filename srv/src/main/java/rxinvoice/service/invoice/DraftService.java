@@ -28,7 +28,7 @@ public class DraftService {
 
     public Iterable<Invoice> findAll() {
         User user = AppModule.currentUser();
-        if (user.getCompanyRoles().isEmpty() || (user.getCompanyRoles().size() == 1 && user.getCompanyRoles().contains(CompanyRole.ADMINISTRATIVE))) {
+        if (null == user.getCompanyRole() || CompanyRole.ADMINISTRATIVE.equals(user.getCompanyRole())) {
             throw new UnsupportedOperationException("");
         }
 
@@ -38,7 +38,7 @@ public class DraftService {
         builder.and("status").is("DRAFT");
 
 
-        if (!user.getCompanyRoles().contains(CompanyRole.DIRECTOR) && user.getCompanyRoles().contains(CompanyRole.INVOICING)) {
+        if (CompanyRole.INVOICING.equals(user.getCompanyRole())) {
             QueryBuilder.start().or(
                     QueryBuilder.start("business.businessManagerRef").is(MoreJongos.containsIgnoreCase(user.getKey())).get(),
                     QueryBuilder.start("commercialRelation.customerManagerRef").is(MoreJongos.containsIgnoreCase(user.getKey())).get())
