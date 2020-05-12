@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {InvoiceLine} from "../../../../../domain/invoice/invoice-line";
-import {ControlContainer, NgForm} from "@angular/forms";
+import {InvoiceLine} from '../../../../../domain/invoice/invoice-line';
+import {ControlContainer, NgForm} from '@angular/forms';
 import {LineMoveEvent} from '../line-move-event';
 import {VatRate} from '../../../../../domain/common/vat-rate';
 import {InvoiceLineEditionMode} from '../../../../../domain/invoice/invoice-edition-mode';
@@ -40,7 +40,7 @@ export class InvoiceLineFormComponent implements OnInit {
     }
 
     public updateVat(vatModel: VatRate) {
-        this.line.vat = vatModel;
+        this.line.vatRate = vatModel;
     }
 
     public unitCostChanged(unitCost: number): void {
@@ -61,7 +61,7 @@ export class InvoiceLineFormComponent implements OnInit {
         this.lineDeleted.emit(this.line);
     }
 
-    public moveUp():void {
+    public moveUp(): void {
         this.lineMoved.emit(new LineMoveEvent(this.line, -1))
     }
 

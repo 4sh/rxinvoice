@@ -40,13 +40,13 @@ export class InvoiceLinesDetailComponent implements OnInit {
     }
 
     private createNewLine(): InvoiceLine {
-        let line = new InvoiceLine();
-        line.vat = new VatRate();
+        const line = new InvoiceLine();
+        line.vatRate = new VatRate();
         return line;
     }
 
     public lineMoved(lineMoveEvent: LineMoveEvent):void {
-        let index = this.lines.indexOf(lineMoveEvent.line);
+        const index = this.lines.indexOf(lineMoveEvent.line);
         if (lineMoveEvent.direction > 0 ) {
             this.lines[index] = this.lines[index + 1];
             this.lines[index + 1] = lineMoveEvent.line;

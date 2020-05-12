@@ -6,51 +6,43 @@
                 <div class="colummns small-24 detailFilter">
                     <div class="row">
                         <div class="columns detailFilter-wrapper">
-                            <label>Client</label>
-                            <ng-select [items]="companies"
-                                       [searchable]="false"
-                                       placeholder="{{'invoices.filter.client' | translate}}"
-                                       clearAllText="isClearable">
-                            </ng-select>
+                            <label>{{'invoice.detail.customer' | translate}}</label>
+                            <a-customer-select name="customer" [ngModel]="invoice.buyer._id"></a-customer-select>
                         </div>
                         <div class="columns detailFilter-wrapper">
-                            <label>Affaires</label>
-                            <ng-select [items]="companies"
-                                       [searchable]="false"
-                                       placeholder="- Toutes les affaires -"
-                                       clearAllText="isClearable">
-                            </ng-select>
+                            <label>{{'invoice.detail.business' | translate}}</label>
+                            <a-customer-select name="customer" [ngModel]="invoice.buyer._id"></a-customer-select>
                         </div>
                         <div class="columns detailFilter-wrapper">
-                            <label>Réf. commande client</label>
-                            <input type="text">
+                            <label>{{'invoice.detail.customer.reference'|translate}}</label>
+                            <input type="text" name="customerReference" [(ngModel)]="invoice.customerInvoiceRef">
                         </div>
                         <div class="columns detailFilter-wrapper">
-                            <label>Avec TVA</label>
-                            <a-toggle></a-toggle>
+                            <label>{{'invoice.detail.without.vat'|translate}}</label>
+                            <a-toggle name="withoutVat" [(ngModel)]="!invoice.withVAT"></a-toggle>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="columns detailFilter-wrapper">
-                            <label>Référence de la facture</label>
-                            <input type="text">
+                            <label>{{'invoice.detail.referenceNumber'|translate}}</label>
+                            <input type="text" name="reference" [(ngModel)]="invoice.reference">
                         </div>
                         <div class="columns detailFilter-wrapper">
-                            <label>Date de facture</label>
-                            <date-picker formControlName="startDate"></date-picker>
+                            <label>{{'invoice.detail.invoice.date'|translate}}</label>
+                            <a-date-picker name="invoiceDate" [(ngModel)]="invoice.date"></a-date-picker>
                         </div>
                         <div class="columns detailFilter-wrapper">
-                            <label>Date d'envoi</label>
-                            <date-picker formControlName="startDate"></date-picker>
+                            <label>{{'invoice.detail.sent.date'|translate}}</label>
+                            <span>{{invoice.sentDate | date}}</span>
                         </div>
                         <div class="columns detailFilter-wrapper">
-                            <label>Type</label>
-                            <ng-select [items]="companies"
-                                       [searchable]="false"
-                                       placeholder="- Tous les types -"
-                                       clearAllText="isClearable">
-                            </ng-select>
+                            <label>{{'invoice.detail.due.date'|translate}}</label>
+                            <a-date-picker name="dueDate" [(ngModel)]="invoice.dueDate"></a-date-picker>
+                        </div>
+                        <div class="columns detailFilter-wrapper">
+                            <label>{{'invoice.detail.service.kind'|translate}}</label>
+                            <a-service-kind-select name="kind" [(ngModel)]="invoice.kind"></a-service-kind-select>
                         </div>
                     </div>
                 </div>
@@ -58,9 +50,9 @@
         </div>
 
         <div class="columns small-4 detailFilter-wrapper">
-            <label>Objet</label>
-            <textarea type="text"
-                      rows="2" cols="20">
+            <label>{{'invoice.detail.object'|translate}}</label>
+            <textarea type="text" name="object" [(ngModel)]="invoice.object"
+                      rows="3" cols="20">
                 </textarea>
         </div>
     </div>
@@ -70,39 +62,22 @@
     <table>
         <thead>
         <tr>
-            <th width="600px">Désignation</th>
-            <th width="150px">Quantité</th>
-            <th width="150px">Coût unitaire</th>
-            <th width="150px">Montant (HT)</th>
-            <th width="500px">TVA (%)</th>
+            <th width="600px">{{'invoice.line.label'|translate}}</th>
+            <th width="150px">{{'invoice.line.quantity'|translate}}</th>
+            <th width="150px">{{'invoice.line.unit.cost'|translate}}</th>
+            <th width="150px">{{'invoice.line.gross.amount'|translate}}</th>
+            <th width="500px" *ngIf="invoice.withVAT">{{'invoice.line.vat.rate'|translate}}</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr>
-            <td width="600px">Hébergement des mois de Octobre, Novembre Décembre</td>
-            <td width="150px">-</td>
-            <td width="150px">-</td>
-            <td width="150px">-</td>
-            <td width="500px">
-                <ng-select [items]="companies"
-                           [searchable]="false"
-                           placeholder="- Tous les types -"
-                           clearAllText="isClearable">
-                </ng-select>
-            </td>
-        </tr>
-        <tr>
-            <td>3 mois x 290€ HT</td>
-            <td>3</td>
-            <td>290</td>
-            <td>870</td>
-            <td>
-                <ng-select [items]="companies"
-                           [searchable]="false"
-                           placeholder="- Tous les types -"
-                           clearAllText="isClearable">
-                </ng-select>
+        <tr *ngFor="let line of invoice.lines">
+            <td width="600px">{{line.description}}</td>
+            <td width="150px">{{line.quantity | number : '1.2'}}</td>
+            <td width="150px">{{line.unitCost | invoiceCurrency}}</td>
+            <td width="150px">{{line.grossAmount | invoiceCurrency}}</td>
+            <td width="500px" *ngIf="invoice.withVAT">
+                {{line.vatRate?.rate | number: '1.2'}} {{line.vatRate?.rate ? ' %' : ''}}
             </td>
         </tr>
         </tbody>

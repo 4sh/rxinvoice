@@ -1,7 +1,7 @@
 import {Company} from '../company/company';
 import {VAT} from '../common/VAT';
 import {Business} from '../commercial-relationship/business';
-import {InvoiceStatusType} from './invoice-status.type';
+import {InvoiceStatusEnum, InvoiceStatusType} from './invoice-status.type';
 import {Activity} from '../common/activity';
 import {ServiceKind} from '../common/service.kind';
 import {InvoiceLine} from './invoice-line';
@@ -40,8 +40,8 @@ export class Invoice {
     }
 
     public copy(): Invoice {
-        var copy = _.cloneDeep(this);
-        copy.status = "DRAFT";
+        const copy = _.cloneDeep(this);
+        copy.status = InvoiceStatusEnum.DRAFT;
         copy._id = null;
         copy.reference = null;
         copy.sentDate = null;

@@ -16,6 +16,7 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {InvoiceService} from './services/invoice.service';
 import {DownloadInvoiceService} from './services/download-invoice.service';
 import {ButtonsModule} from '../shared/components/atoms/buttons/buttons.module';
+import {InvoiceResolver} from './resolvers/invoice.resolver';
 
 const components = [
     InvoicesListComponent,
@@ -31,7 +32,8 @@ const components = [
     exports: [components],
     providers: [
         InvoiceService,
-        DownloadInvoiceService
+        DownloadInvoiceService,
+        InvoiceResolver
     ],
     imports: [
         CommonModule,
