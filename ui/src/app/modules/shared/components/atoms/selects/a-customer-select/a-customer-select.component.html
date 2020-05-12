@@ -1,29 +1,10 @@
-
-<ng-select *ngIf="companies && !isBindingId && control.enabled"
-           [items]="companies"
-           [bindLabel]="label"
-           [searchable]="false"
-           placeholder="{{'invoices.filter.client' | translate}}"
-           clearAllText="isClearable"
-           [ngModel]="control.value"
-           (ngModelChange)="update($event)">
-</ng-select>
-
-<select *ngIf="companies && !isBindingId && control.disabled"   [compareWith]="comparId"
-        [ngModel]="control.value" [disabled]="control.disabled" (ngModelChange)="update($event)">
-    <option  [ngValue]="">{{'invoices.filter.client' | translate}}</option>
-    <option *ngFor="let company of companies" [ngValue]="company">
-        {{company.name}}
-    </option>
-</select>
-
-<ng-select *ngIf="companies && isBindingId "
-           [items]="companies"
-           [bindValue]="bindValue"
-           [bindLabel]="label"
-           [searchable]="false"
-           placeholder="{{'invoices.filter.client' | translate}}"
-           clearAllText="isClearable"
-           [ngModel]="control.value"
-           (ngModelChange)="update($event)">
+<ng-select
+        [items]="companies"
+        [bindLabel]="'name'"
+        [searchable]="false"
+        [clearable]="false"
+        [disabled]="disabled"
+        [ngModel]="company"
+        placeholder="{{'invoices.filter.client' | translate}}"
+        (ngModelChange)="onChange($event)">
 </ng-select>
