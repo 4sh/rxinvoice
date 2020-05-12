@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 public class Line {
 
     private String description;
-    private VATRate vat;
+    private VATRate vatRate;
 
     @FixedPrecision(2)
     private BigDecimal quantity;
@@ -41,9 +41,9 @@ public class Line {
      */
     public BigDecimal computeVatAmount() {
         BigDecimal vatAmount = BigDecimal.ZERO;
-        if (null != vat && null != vat.getRate() && null != grossAmount) {
+        if (null != vatRate && null != vatRate.getRate() && null != grossAmount) {
             vatAmount = this.grossAmount
-                    .multiply(this.vat.getRate())
+                    .multiply(this.vatRate.getRate())
                     .divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_EVEN);
         }
         return vatAmount.setScale(2, RoundingMode.HALF_UP);
@@ -60,7 +60,7 @@ public class Line {
                 ", quantity=" + quantity +
                 ", unitCost=" + unitCost +
                 ", grossAmount=" + grossAmount +
-                ", vat=" + vat +
+                ", vatRate=" + vatRate +
                 '}';
     }
 
@@ -73,12 +73,12 @@ public class Line {
         return this;
     }
 
-    public VATRate getVat() {
-        return vat;
+    public VATRate getVatRate() {
+        return vatRate;
     }
 
-    public Line setVat(VATRate vat) {
-        this.vat = vat;
+    public Line setVatRate(VATRate vatRate) {
+        this.vatRate = vatRate;
         return this;
     }
 

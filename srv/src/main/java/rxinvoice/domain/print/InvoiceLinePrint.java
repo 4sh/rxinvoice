@@ -15,7 +15,7 @@ public class InvoiceLinePrint {
 
     public InvoiceLinePrint(Line line) {
         this.description = line.getDescription();
-        this.vat = line.getVat() == null ? null : line.getVat().toVatView();
+        this.vat = line.getVatRate() == null ? null : line.getVatRate().toVatView();
         this.quantity = (line.getQuantity() == null ? BigDecimal.ZERO : line.getQuantity())
                 .setScale(2, RoundingMode.HALF_EVEN).toString();
         this.unitCost = PrintUtils.NUMBER_FORMAT.format(line.getUnitCost() == null

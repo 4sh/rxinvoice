@@ -144,8 +144,8 @@ public class InvoiceService {
 
     void updateVatRates(Invoice invoice) {
         invoice.setVatRates(invoice.getLines().stream()
-                .filter(line -> line.getVat() != null)
-                .map(Line::getVat)
+                .filter(line -> line.getVatRate() != null)
+                .map(Line::getVatRate)
                 .collect(Collectors.toList()));
     }
 
@@ -352,12 +352,12 @@ public class InvoiceService {
 
             // Update VAT amounts
             BigDecimal lineVATAmount = line.computeVatAmount();
-            if (null != line.getVat() && null != line.getVat().getRate()) {
-                VATAmount vatAmount = invoiceVATAmounts.get(line.getVat().getRate());
+            if (null != line.getVatRate() && null != line.getVatRate().getRate()) {
+                VATAmount vatAmount = invoiceVATAmounts.get(line.getVatRate().getRate());
                 if (null == vatAmount) {
-                    vatAmount = new VATAmount().setLabel(line.getVat().getLabel());
+                    vatAmount = new VATAmount().setLabel(line.getVatRate().getLabel());
                 }
-                invoiceVATAmounts.put(line.getVat().getRate(), vatAmount.setAmount(vatAmount.getAmount().add(lineVATAmount)));
+                invoiceVATAmounts.put(line.getVatRate().getRate(), vatAmount.setAmount(vatAmount.getAmount().add(lineVATAmount)));
             }
 
             // Update net amount

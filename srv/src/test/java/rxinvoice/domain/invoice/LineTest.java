@@ -48,7 +48,7 @@ class LineTest {
     void should_compute_vat_amount_with_missing_gross_amount() {
         VATRate vatRate = new VATRate().setRate(BigDecimal.valueOf(20));
         Line line = new Line()
-                .setVat(vatRate)
+                .setVatRate(vatRate)
                 .setGrossAmount(null);
         assertThat(line.computeVatAmount(), is(equalTo(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP))));
     }
@@ -57,7 +57,7 @@ class LineTest {
     void should_compute_vat_amount_with_missing_line_vat() {
         VATRate vatRate = new VATRate().setRate(null);
         Line line = new Line()
-                .setVat(vatRate)
+                .setVatRate(vatRate)
                 .setGrossAmount(BigDecimal.valueOf(500));
         assertThat(line.computeVatAmount(), is(equalTo(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP))));
     }
@@ -66,7 +66,7 @@ class LineTest {
     void should_compute_vat_amount_with_missing_vat_rate() {
         VATRate vatRate = new VATRate().setRate(BigDecimal.valueOf(20));
         Line line = new Line()
-                .setVat(vatRate)
+                .setVatRate(vatRate)
                 .setGrossAmount(BigDecimal.valueOf(1000));
         assertThat(line.computeVatAmount(), is(equalTo(BigDecimal.valueOf(200).setScale(2, RoundingMode.HALF_UP))));
     }

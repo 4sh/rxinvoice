@@ -64,14 +64,14 @@ class InvoiceServiceTest {
     @Test
     void should_update_vat_amount_multiple_rates() {
         List<Line> lines = Lists.newArrayList(
-                new Line().setQuantity(null).setUnitCost(BigDecimal.valueOf(1000)).setVat(rate_8_5),
-                new Line().setQuantity(BigDecimal.valueOf(45)).setUnitCost(null).setVat(rate_20),
-                new Line().setQuantity(BigDecimal.valueOf(45)).setUnitCost(BigDecimal.valueOf(1000)).setVat(rate_8_5),
-                new Line().setQuantity(BigDecimal.valueOf(1)).setUnitCost(BigDecimal.valueOf(24000)).setVat(rate_8_5),
-                new Line().setQuantity(BigDecimal.valueOf(3)).setUnitCost(BigDecimal.valueOf(5000)).setVat(rate_8_5),
-                new Line().setQuantity(BigDecimal.valueOf(5)).setUnitCost(BigDecimal.valueOf(6000)).setVat(rate_20),
-                new Line().setQuantity(BigDecimal.valueOf(10)).setUnitCost(BigDecimal.valueOf(800)).setVat(rate_20),
-                new Line().setQuantity(null).setUnitCost(null).setVat(rate_8_5)
+                new Line().setQuantity(null).setUnitCost(BigDecimal.valueOf(1000)).setVatRate(rate_8_5),
+                new Line().setQuantity(BigDecimal.valueOf(45)).setUnitCost(null).setVatRate(rate_20),
+                new Line().setQuantity(BigDecimal.valueOf(45)).setUnitCost(BigDecimal.valueOf(1000)).setVatRate(rate_8_5),
+                new Line().setQuantity(BigDecimal.valueOf(1)).setUnitCost(BigDecimal.valueOf(24000)).setVatRate(rate_8_5),
+                new Line().setQuantity(BigDecimal.valueOf(3)).setUnitCost(BigDecimal.valueOf(5000)).setVatRate(rate_8_5),
+                new Line().setQuantity(BigDecimal.valueOf(5)).setUnitCost(BigDecimal.valueOf(6000)).setVatRate(rate_20),
+                new Line().setQuantity(BigDecimal.valueOf(10)).setUnitCost(BigDecimal.valueOf(800)).setVatRate(rate_20),
+                new Line().setQuantity(null).setUnitCost(null).setVatRate(rate_8_5)
         );
         Invoice invoice = new Invoice().setLines(lines).setVatRates(
                 Lists.newArrayList(rate_8_5, rate_20));
@@ -88,7 +88,7 @@ class InvoiceServiceTest {
 
     @Test
     void should_update_vat_rates_no_rate() {
-        Invoice invoice = new Invoice().setLines(Lists.newArrayList(new Line().setVat(rate_20)));
+        Invoice invoice = new Invoice().setLines(Lists.newArrayList(new Line().setVatRate(rate_20)));
         this.invoiceService.updateVatRates(invoice);
         assertThat(invoice.getVatRates().size(), is(equalTo(1)));
         assertThat(invoice.getVatRates().get(0).getRate(), is(equalTo(rate_20.getRate())));
@@ -98,9 +98,9 @@ class InvoiceServiceTest {
     @Test
     void should_update_vat_rates_multiple_lines_with_no_rate() {
         Invoice invoice = new Invoice().setLines(Lists.newArrayList(
-                new Line().setVat(rate_20),
-                new Line().setVat(null),
-                new Line().setVat(rate_8_5)));
+                new Line().setVatRate(rate_20),
+                new Line().setVatRate(null),
+                new Line().setVatRate(rate_8_5)));
         this.invoiceService.updateVatRates(invoice);
         assertThat(invoice.getVatRates().size(), is(equalTo(2)));
         assertThat(invoice.getVatRates().get(0).getRate(), is(equalTo(rate_20.getRate())));

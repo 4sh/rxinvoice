@@ -7,7 +7,7 @@ export class InvoiceLine {
     quantity?: number;
     unitCost?: number;
     grossAmount?: number;
-    vat?: VatRate;
+    vatRate?: VatRate;
 
   constructor() { }
 
