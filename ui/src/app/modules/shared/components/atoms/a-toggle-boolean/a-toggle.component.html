@@ -2,9 +2,8 @@
     <span class="form-label" *ngIf="showLabel">{{label}}</span>
     <label class="switch">
         <input type="checkbox"
-               [(ngModel)]="item" name="toggle"
-               (change)="itemChange.emit(item)"
-                [disabled]="disabled">
+               [(ngModel)]="value"
+               [disabled]="disabled">
         <div class="slider round"></div>
     </label>
 </div>
