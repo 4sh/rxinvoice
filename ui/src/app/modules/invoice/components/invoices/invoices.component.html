@@ -7,7 +7,7 @@
 
     <div class="columns auto margin-left-24">
         <div class="row">
-            <div class="columns small-6">
+            <div class="columns small-12">
                 <p class="title-section">Entre</p>
                 <div class="date-picker columns shrink">
                     <div class="invoiceSelect-date">
@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="columns small-6">
+            <div class="columns small-12">
                 <p class="title-section">Et</p>
                 <div class="date-picker columns shrink">
                     <div class="invoiceSelect-date">
@@ -26,6 +26,11 @@
             </div>
         </div>
     </div>
+
+    <a-button-default size="LARGE" visibility="HIGH">
+        <i class="far fa-file-excel"></i>
+        {{'analyze.sales.export' | translate}}
+    </a-button-default>
 </form>
 <!--<button class="round medium buttonContainer-green">-->
 <!--    <i class="fas fa-file-excel"></i>-->

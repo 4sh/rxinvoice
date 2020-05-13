@@ -1,7 +1,7 @@
 <div class="status-panel-container">
 <div class="row quick-status-panel">
         <span class="quick-status-panel-close" (click)="close()">
-            <i class="ion-close"></i>
+            <i class="fas fa-times"></i>
         </span>
 
         <table class="invoiceList">
@@ -76,15 +76,14 @@
                           rows="10" cols="50">
                 </textarea>
             </div>
-            <div class="columns small-24 text-right">
-                <button class="button medium ripple white force-space-right-10"
-                        (click)="cancel()">
-                    <i class="ion-arrow-return-left"></i>{{ 'dashboard.quickEdition.cancel' | translate}}
-                </button>
-                <button class="button medium btn-default ripple"
-                        (click)="save()">
-                    <i class="ion-checkmark"></i>{{ 'dashboard.quickEdition.save' | translate}}
-                </button>
+            <div class="columns small-24 align-right grid-x">
+                <a-button-cancel size="DEFAULT" visibility="MEDIUM" (click)="cancel()">
+                    <i class="fas fa-times"></i>{{ 'dashboard.quickEdition.cancel' | translate}}
+                </a-button-cancel>
+                <a-spacer [sizeX]="10"></a-spacer>
+                <a-button-default size="DEFAULT" visibility="MEDIUM" (click)="save()">
+                    <i class="fas fa-check"></i>{{ 'dashboard.quickEdition.save' | translate}}
+                </a-button-default>
             </div>
         </div>
     </div>

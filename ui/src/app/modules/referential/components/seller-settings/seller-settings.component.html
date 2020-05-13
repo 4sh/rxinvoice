@@ -7,11 +7,11 @@
                         <div class="columns">
                             <h5>{{'seller.settings.vat.title' | translate}}</h5>
                         </div>
-                        <div class="columns text-right">
-                            <button class="button small primary ripple" (click)="addVatRate()">
-                                <i class="fas fa-plus"></i>
-                                <span>{{'seller.settings.vat.button.add.tva' | translate}}</span>
-                            </button>
+                        <div class="columns align-right grid-x">
+                            <a-button-default size="DEFAULT" visibility="HIGH"
+                                              (click)="addVatRate()">
+                                <i class="fas fa-plus"></i>{{'seller.settings.vat.button.add.tva' | translate}}
+                            </a-button-default>
                         </div>
                     </div>
                     <div>
@@ -58,12 +58,11 @@
                         <div class="columns">
                             <h5>{{'seller.settings.accountant.reference'|translate}}</h5>
                         </div>
-                        <div class="columns text-right">
-                            <button class="button small primary ripple"
-                                    (click)="addServiceReference(selectedServiceKind)">
-                                <i class="fas fa-plus"></i>
-                                {{'seller.settings.vat.button.add.ref' | translate}}
-                            </button>
+                        <div class="columns align-right grid-x">
+                            <a-button-default size="DEFAULT" visibility="HIGH"
+                                              (click)="addServiceReference(selectedServiceKind)">
+                                <i class="fas fa-plus"></i>{{'seller.settings.vat.button.add.ref' | translate}}
+                            </a-button-default>
                         </div>
                     </div>
                     <div class="row">
@@ -113,16 +112,14 @@
         </div>
     </div>
 
-    <div class="column buttonContainer">
-        <button class="button medium grey ripple" (click)="cancel()"
-                type="button">
-            <i class="fas fa-times"></i>
-            {{'button.label.cancel' | translate}}
-        </button>
-        <button class="button medium green ripple rightButton" (click)="save()"
-                [disabled]="sellerSettingsForm.form.invalid">
-            <i class="fas fa-check"></i>
-            {{'button.label.save'|translate}}
-        </button>
+    <div class="columns small-24 align-right grid-x">
+        <a-spacer [sizeX]="10"></a-spacer>
+        <a-button-cancel size="LARGE" visibility="MEDIUM" (click)="cancel()">
+            <i class="fas fa-times"></i>{{ 'dashboard.quickEdition.cancel' | translate}}
+        </a-button-cancel>
+        <a-spacer [sizeX]="10"></a-spacer>
+        <a-button-default size="LARGE" visibility="MEDIUM" (click)="save()" [disabled]="sellerSettingsForm.form.invalid">
+            <i class="fas fa-check"></i>{{ 'dashboard.quickEdition.save' | translate}}
+        </a-button-default>
     </div>
 </form>

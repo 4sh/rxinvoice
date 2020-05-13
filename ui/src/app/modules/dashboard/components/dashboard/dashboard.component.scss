@@ -19,8 +19,12 @@
     padding: rem-calc(10px);
 
     .dashboard {
-      height: calc(100vh - 210px);
+      height: calc(100vh - 230px);
       overflow-x: scroll;
+
+      &.fullHeight {
+        height: calc(100vh - 170px)!important;
+      }
 
       .column-width- {
         &2 {

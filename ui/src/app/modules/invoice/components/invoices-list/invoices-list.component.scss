@@ -205,6 +205,23 @@
     }
 }
 
+.invoiceList-launch {
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+    height: 25px;
+    font-size: 10px;
+    background-color: transparent;
+    border: 1px solid rgba($app-primary, .3);
+    color: rgba($app-primary, .7);
+    margin-right: 10px;
+
+    &:hover {
+        background-color: $app-primary;
+        color: white;
+        border-color: $app-primary;
+    }
+}
 
 
 

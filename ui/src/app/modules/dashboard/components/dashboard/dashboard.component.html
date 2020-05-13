@@ -1,14 +1,13 @@
 <div class="invoiceListHome">
     <div class="invoiceListHome-header">
-        <!--<span>Accueil - Suivi des factures</span>-->
-        <dashboard-select *ngIf="dashboards.length > 1"
+        <a-dashboard-select *ngIf="dashboards.length > 1"
                           [(ngModel)]="currentDashboard"
                           [dashboards]="dashboards">
-        </dashboard-select>
+        </a-dashboard-select>
     </div>
 
     <div class="invoiceListHome-dashboard">
-        <div class="row dashboard">
+        <div class="row dashboard" [ngClass]="{'fullHeight' : dashboards.length < 2}">
             <dashboard-column [class]="'column-width-' + currentDashboard.columnConfigurations.length"
                               *ngFor="let columnConfiguration of currentDashboard.columnConfigurations"
                               [columnConfiguration]="columnConfiguration">

@@ -9,6 +9,8 @@
 
   @include has('row') {
     background-color: white;
+    height: 100px!important;
+    box-shadow: none;
 
     &:nth-child(even) {
       background-color: $table-line;
@@ -17,6 +19,7 @@
     tr {
       padding: 0 16px;
       background-color: transparent;
+      width: 100%!important;
 
       td {
         padding: 0 16px;

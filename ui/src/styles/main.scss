@@ -20,6 +20,10 @@
 @import 'vendors/prism';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+@import 'vendors/foundation-settings';
+@import '../../node_modules/foundation-sites/scss/foundation';
+@include foundation-everything();
+
 // ~ BASE
 // ====================================================================== >
 @import 'base/base';

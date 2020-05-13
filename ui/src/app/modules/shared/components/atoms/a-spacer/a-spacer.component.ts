@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class ASpacerComponent {
 
     @Input()
-    public size: number;
+    public sizeX: number;
+    public sizeY: number;
 }

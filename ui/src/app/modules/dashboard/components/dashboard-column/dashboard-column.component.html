@@ -1,8 +1,10 @@
 <div class="column dashboard-column" [class.disable]="columnConfiguration.disabled"
      [dndDropzone]="getDropAllowedTypes()"
      (dndDrop)="onDrop($event)">
-    <div class="title-column">{{columnConfiguration.title | translate}} ({{invoiceList?.length}})</div>
-    <div class="title-column-amount">{{getAmount() | invoiceCurrency}}</div>
+    <div class="title-container">
+        <div class="title-column">{{columnConfiguration.title | translate}} ({{invoiceList?.length}})</div>
+        <div class="title-column-amount">{{getAmount() | invoiceCurrency}}</div>
+    </div>
     <div class="content">
         <div class="ticketDragging"></div>
         <dashboard-ticket *ngFor="let invoice of invoiceList"

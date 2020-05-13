@@ -8,32 +8,41 @@
 
   &.disable {
     .content {
-      background-color: $app-disabled;
+      background-color: $app-disabled-bgColor;
     }
   }
 
-  .title-column {
-    text-transform: uppercase;
-    color: $regent-gray;
-    font-size: rem-calc(12px);
-    font-weight: 500;
-    letter-spacing: rem-calc(0.5px);
+  .title-container {
+    display: block;
+    background-color: rgba($app-primary_light, 0.2);
+    color: $app-grey;
+    font-size: 1.2rem;
+    border-radius: 8px 8px 0 0;
+    border: none;
+    padding: 5px 13px;
 
-    &-amount {
-      color: $regent-gray;
-      font-size: rem-cal(10px);
-      margin-bottom: rem-calc(10px);
+    .title-column {
+      text-transform: uppercase;
+      color: rgba($app-primary, .7);
+      font-size: rem-calc(12px);
+      font-weight: 500;
+      letter-spacing: rem-calc(0.5px);
+
+      &-amount {
+        color: $regent-gray;
+        margin-bottom: rem-calc(5px);
+      }
     }
   }
 
   .content {
-    background-color: $app-grey_light;
+    background-color: rgba($app-primary_light, 0.2);
     padding: rem-calc(1px);
   }
 
   &.dndDragover {
     .content {
-      border: 2px dashed $app-primary;
+      border: 1.5px dashed $app-primary;
       background-color: rgba($app-primary, 0.1);
 
     }
@@ -41,7 +50,7 @@
     .ticketDragging {
       display: block;
       min-height: rem-calc(130px);
-      border: 2px dashed $app-primary;
+      border: 1.5px dashed $app-primary;
       margin: 8px;
     }
   }

@@ -41,14 +41,16 @@
                 {{ 'invoice.status.' + invoice.status | translate}}
             </span>
         </td>
-        <td  width="150px" class="buttonContainer">
-            <button class="round medium invoiceList-download" (click)="downloadInvoice(invoice)">
-                <i class="ion-android-upload"></i>
-            </button>
-            <button class="round medium invoiceList-launch" (click)="launchInvoice(invoice)"
+        <td  width="150px" class="buttonContainer grid-x align-right align-middle">
+
+            <button class="invoiceList-launch" (click)="launchInvoice(invoice)"
                     *ngIf="isLaunchButtonVisible(invoice)">
-              Launch
+                {{ 'invoice.list.column.launch' | translate}}
             </button>
+
+            <a-button-icon size="DEFAULT" visibility="HIGH" (click)="downloadInvoice(invoice)">
+                <i class="far fa-file-pdf"></i>
+            </a-button-icon>
         </td>
     </tr>
     </tbody>

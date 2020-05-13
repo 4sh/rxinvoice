@@ -3,11 +3,12 @@
 // -----------------------------------------------------------------------------
 
 /** General color style */
-$app-primary :                                  #1E1ED4 !default;
-$app-primary_medium :                           #1011A3 !default;
-$app-primary_dark :                             #252668 !default;
 
-$app-secondary:                                 #5C60C5 !default;
+$app-primary :                                  #5C60C5 !default;
+$app-primary_medium:                            #433ec5 !default;
+$app-primary_light:                             #dddef3 !default;
+
+$app-secondary:                                 #1011A3 !default;
 
 $app-tertiary:                                  #915260 !default;
 
@@ -22,12 +23,13 @@ $black :                                        #000000 !default;
 $app-success :                                  #34AF68 !default;
 $app-warning :                                  #FBB819 !default;
 $app-error :                                    #E74C3C !default;
+$app-cancel :                                   #E74C3C !default;
 
 $app-disabled :                                 #A1AEBF !default;
 $app-disabled-bgColor :                         #F5F5F5 !default;
 $app-disabled-fontColor :                       #C7C7C7 !default;
 
-$app-gradient :                                 linear-gradient($app-secondary, $app-primary) !default;
+$app-gradient :                                 linear-gradient($app-primary, $app-secondary) !default;
 
 
 /** General color settings */
@@ -68,9 +70,9 @@ $button-border-light-color :                    $app-grey_light !default;
 $button-access-color :                          $app-grey !default;
 
 /** Table color style */
-$table-header :                                lighten($app-secondary, 35%) !default;
-$table-line :                                  lighten($app-secondary, 42%) !default;
-$table-line-hover :                            lighten($app-secondary, 41%) !default;
+$table-header :                                $app-primary_light !default;
+$table-line :                                  rgba($app-primary_light, 0.15) !default;
+$table-line-hover :                            rgba($app-primary_light, 0.45) !default;
 
 /** Input color style */
 $input-border-color :                          $app-grey !default;
@@ -85,6 +87,7 @@ $input-border-color :                          $app-grey !default;
 $app-body-font :                                 'Roboto', Arial, sans-serif !default;
 $app-body-fontColor :                             $app-grey_light !default;
 $app-body-blockContainer :                        calc(100vh - 140px) !default;
+$app-body-bgColor :                               #eee !default;
 
 
 
@@ -108,7 +111,7 @@ $sidebar-item-bg-color :                           $app-secondary !default;
  */
 $appHeader-height:                                64px !default;
 $appHeader-bg-color :                             white   !default;
-$appHeader-color-title :                          $app-primary_dark !default;
+$appHeader-color-title :                          $app-primary_medium !default;
 
 
 

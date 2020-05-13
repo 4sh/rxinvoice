@@ -3,14 +3,13 @@
 button, .button {
   margin-bottom: 0;
   min-width: rem-calc(132px);
-  font-weight: bold;
   text-decoration: none;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 
   ::ng-deep i {
-    margin-right: rem-calc(4px);
+    margin-right: rem-calc(10px);
   }
 
   &:disabled, &._disabled {
@@ -44,6 +43,7 @@ button, .button {
   &._large {
     height: rem-calc(40px);
     line-height: rem-calc(20px);
+    font-size: rem-calc(14px);
   }
 
 
@@ -52,43 +52,37 @@ button, .button {
  * **************************************************************************************** >
  */
 
-  &._highRevert {
-    background-color: $white;
-    color: $app-primary;
-
-    &:hover {
-      background-color: darken($white, 10%);
-    }
-  }
-
   &._high {
     background-color: $app-primary;
     color: white;
 
     &:hover {
       background-color: $app-primary_medium;
+      color: white;
     }
   }
 
   &._medium {
-    background-color: transparent;
+    background-color: $app-primary_light;
     color: $app-primary;
-    border: rem-calc(1px) solid $app-primary;
 
     &:hover {
-      background-color: rgba($app-primary, 0.1);
+      background-color: $app-primary;
+      color: white;
     }
   }
 
   &._low {
     background-color: transparent;
-    color: black;
-    border: rem-calc(1px) solid black;
+    color: $app-primary;
+    border: rem-calc(1px) solid $app-primary_light;
 
     &:hover {
-      background-color: rgba(black, 0.1);
+      background-color: $app-primary;
+      color: white;
     }
   }
+
 
 
   /**

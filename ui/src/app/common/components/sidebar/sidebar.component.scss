@@ -48,13 +48,13 @@
       &:focus {
         @extend %transition;
         color: white;
-        background-color: rgba($app-primary_dark, 0.3);
+        background-color: rgba($app-primary_medium, 0.3);
       }
 
       i {
         display: inline-block;
         vertical-align: middle;
-        font-size: rem-calc(20px);
+        font-size: rem-calc(17px);
         text-align: center;
         width: rem-calc(44px);
         height: rem-calc(44px);
@@ -63,7 +63,7 @@
 
       @include when('isActive') {
           color: white;
-          background-color: rgba($app-primary_dark, 0.5);
+          background-color: rgba($app-primary_medium, 0.5);
 
       }
 

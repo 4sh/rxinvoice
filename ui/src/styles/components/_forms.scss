@@ -2,7 +2,6 @@
 // This file contains all styles related to the FORMS component.
 // -----------------------------------------------------------------------------
 
-
 //---- Search input ---- //
 
 .form-group {
@@ -146,7 +145,31 @@ select, .ng-control {
 }
 
 .ng-select.ng-select-single .ng-select-container {
-    height: rem-calc(40px);
+    height: rem-calc(20px);
+    border: 1px solid $app-primary_light;
+    color: $app-primary;
+
+    .ng-input {
+        display: none!important;
+    }
+
+    .ng-arrow {
+        border-color: $app-primary transparent transparent;
+    }
+
+
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+    color: $app-primary;
+    background-color: rgba($app-primary_light, .3);
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+    background-color: rgba($app-primary_light, .5);
+    color: $app-primary;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    background-color: white;
+    color: $app-primary;
 }
 
 // ==== Textaera

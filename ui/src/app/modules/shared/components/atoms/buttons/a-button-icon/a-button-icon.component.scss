@@ -2,17 +2,33 @@
 
 .buttonIcon {
   margin-bottom: 0;
-  width: rem-calc(30px);
-  height: rem-calc(30px);
+  width: rem-calc(40px);
+  height: rem-calc(40px);
   border-radius: 50%;
-  background-color: $app-secondary;
-  color: $app-primary;
   transition: all 0.2s;
 
-  &:hover {
-    background-color: darken($app-secondary, 5%);
-    color: $app-primary_medium;
-    cursor: pointer;
+  &._high {
+    color: $app-primary;
+    background-color: rgba($app-primary_light, .5);
+
+    &:hover {
+      background-color: $app-primary;
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  &._medium {
+    color: $app-primary;
+    background-color: transparent;
+    border:  1px solid rgba($app-primary, .5);
+
+    &:hover {
+      background-color: $app-primary;
+      border-color: $app-primary;
+      color: white;
+      cursor: pointer;
+    }
   }
 
   &:disabled, &._disabled {
@@ -22,5 +38,9 @@
     &:hover {
       background-color: $app-secondary;
     }
+  }
+
+  i {
+    font-size: rem-calc(17px);
   }
 }

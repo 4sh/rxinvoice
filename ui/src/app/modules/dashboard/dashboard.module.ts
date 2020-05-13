@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DashboardColumnComponent} from './components/dashboard-column/dashboard-column.component';
-import {DashboardSelectComponent} from './components/dashboard-select/dashboard-select.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {DashboardTicketComponent} from './components/dashboard-ticket/dashboard-ticket.component';
 import {DashboardResolver} from './resolvers/dashboard.resolver';
@@ -18,7 +17,6 @@ import {ButtonsModule} from '../shared/components/atoms/buttons/buttons.module';
 @NgModule({
     declarations: [
         DashboardColumnComponent,
-        DashboardSelectComponent,
         DashboardComponent,
         DashboardTicketComponent
     ],

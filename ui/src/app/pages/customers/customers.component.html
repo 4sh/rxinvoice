@@ -47,12 +47,10 @@
                 <strong class="nb">{{getNumberOfBusiness()}}</strong> {{'customers.total.deal' | translate}}</h6>
         </div>
 
-        <div class="columns auto text-right inner-space-top-10">
-            <button class="button medium green ripple"
-                    type="button"
-                    routerLink="/app/customers/new">
-                <i class="ion-plus-round"></i>{{'customers.filter.client' | translate}}
-            </button>
+        <div class="columns auto align-right grid-x">
+            <a-button-default size="DEFAULT" visibility="HIGH" routerLink="/app/customers/new">
+                <i class="fas fa-plus"></i>{{'customers.filter.client' | translate}}
+            </a-button-default>
         </div>
     </div>
 </div>

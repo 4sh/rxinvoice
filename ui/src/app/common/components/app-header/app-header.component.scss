@@ -52,7 +52,7 @@
 
         .user-name {
           font-weight: 600;
-          color: $app-primary_dark;
+          color: $app-primary_medium;
         }
         .user-role {
           font-size: rem-calc(13px);
@@ -85,7 +85,7 @@
       margin: 0;
 
       &:hover {
-        color: $app-primary_dark;
+        color: $app-primary_medium;
       }
     }
   }

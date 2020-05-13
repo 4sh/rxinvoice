@@ -21,6 +21,7 @@ import {AYearSelectComponent} from './components/atoms/selects/a-year-select/a-y
 import {ACustomerSelectComponent} from './components/atoms/selects/a-customer-select/a-customer-select.component';
 import {ASpinnerComponent} from './components/atoms/a-spinner/a-spinner.component';
 import {ButtonsModule} from './components/atoms/buttons/buttons.module';
+import {ADashboardSelectComponent} from "./components/atoms/selects/a-dashboard-select/a-dashboard-select.component";
 
 const components = [
     AToggleComponent,
@@ -36,7 +37,8 @@ const components = [
     AUserSelectComponent,
     AVatSelectComponent,
     AYearSelectComponent,
-    ACustomerSelectComponent
+    ACustomerSelectComponent,
+    ADashboardSelectComponent
 ];
 
 const pipes = [OrderByPipe];

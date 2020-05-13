@@ -7,15 +7,24 @@
 
 button, .button {
   &._cancel {
-    background-color: $app-grey_light;
-    border: rem-calc(1px) solid $app-grey_medium;
-    color: $app-grey_dark;
     transition: all 0.2s;
+    background-color: transparent;
+    color: $app-cancel;
+    border: 0.1rem solid $app-primary_light;
 
     &:hover {
-      background-color: darken($app-grey_light, 2%);
-      color: $app-grey_dark;
+      background-color: $app-cancel;
+      color: white;
       transition: all 0.2s;
+      border: 0.1rem solid $app-cancel;
+
+      i {
+        color: white;
+      }
+    }
+
+    i {
+      color: $app-primary;
     }
   }
 

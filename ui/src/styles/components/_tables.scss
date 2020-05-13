@@ -4,7 +4,7 @@ table {
     thead {
         display: block;
         background: $table-header;
-        color: $app-grey;
+        color: rgba($app-primary, .7);
         font-size: rem-calc(12px);
         border-radius: 8px 8px 0 0;
         border: none;

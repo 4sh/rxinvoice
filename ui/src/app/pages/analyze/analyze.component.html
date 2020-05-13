@@ -58,11 +58,10 @@
             </div>
 
             <div class="column">
-                <!--<input [(ngModel)]="salesExportParameters.month" name="month">-->
-                <a class="button medium primary ripple has-img" [href]="exportSales()">
-                    <img class="icon"
-                         src="assets/images/png/icon_excel_white.png">{{'analyze.sales.export' | translate}}
-                </a>
+                <a-button-default size="DEFAULT" visibility="HIGH" (click)="exportSales()">
+                    <i class="far fa-file-excel"></i>
+                    {{'analyze.sales.export' | translate}}
+                </a-button-default>
             </div>
         </div>
     </div>
