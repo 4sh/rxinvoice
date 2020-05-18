@@ -10,6 +10,7 @@ import {AttachmentsDetailComponent} from '../attachments-detail/attachments-deta
 import {Location} from '@angular/common';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
+import {InvoiceStatusType} from "../../../../domain/invoice/invoice-status.type";
 
 @Component({
     selector: 'invoice-detail',
@@ -21,6 +22,7 @@ export class InvoiceDetailComponent implements OnInit {
     private seller: Company;
     public invoice: Invoice;
     public canDelete: Boolean;
+    public statuses: InvoiceStatusType[];
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
 
@@ -44,6 +46,8 @@ export class InvoiceDetailComponent implements OnInit {
                 this.companyService.fetchCompany(currentUser.companyRef).subscribe(value => this.seller = value);
                 this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0;
             });
+        this.repositoryService.fetchInvoiceStatus()
+            .subscribe(statuses => this.statuses = statuses);
     }
 
     // private invoiceReferenceAsyncValidator() {

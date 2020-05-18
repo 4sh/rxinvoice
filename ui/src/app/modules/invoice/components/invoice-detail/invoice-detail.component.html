@@ -1,310 +1,175 @@
+<div class="invoice-header grid-x">
+    <a-button-default size="SMALL" visibility="LOW" (click)="goBack()" class="cell shrink">
+        <i class="ion-arrow-left-c"></i>
+        Retour
+    </a-button-default>
+    <h2 class="cell phone-16">{{invoice.buyer.name}}</h2>
+    <div class="cell auto grid-x align-right">
+        <select [(ngModel)]="invoice.status">
+            <option value="">{{'invoice.status.all' | translate}}</option>
+            <option *ngFor="let status of statuses" [ngValue]="status">
+                {{'invoice.status.' + status | translate}}
+            </option>
+        </select>
+    </div>
+</div>
+
 <form class="align-center"
       #invoiceDetailForm="ngForm">
-    <div class="row filterContainer">
-        <div class="columns small-20">
-            <div class="row">
-                <div class="colummns small-24 detailFilter">
-                    <div class="row">
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.customer' | translate}}</label>
-                            <a-customer-select name="customer" [ngModel]="invoice.buyer._id"></a-customer-select>
-                        </div>
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.business' | translate}}</label>
-                            <a-customer-select name="customer" [ngModel]="invoice.buyer._id"></a-customer-select>
-                        </div>
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.customer.reference'|translate}}</label>
-                            <input type="text" name="customerReference" [(ngModel)]="invoice.customerInvoiceRef">
-                        </div>
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.without.vat'|translate}}</label>
-                            <a-toggle name="withoutVat" [(ngModel)]="!invoice.withVAT"></a-toggle>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.referenceNumber'|translate}}</label>
-                            <input type="text" name="reference" [(ngModel)]="invoice.reference">
-                        </div>
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.invoice.date'|translate}}</label>
-                            <a-date-picker name="invoiceDate" [(ngModel)]="invoice.date"></a-date-picker>
-                        </div>
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.sent.date'|translate}}</label>
-                            <span>{{invoice.sentDate | date}}</span>
-                        </div>
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.due.date'|translate}}</label>
-                            <a-date-picker name="dueDate" [(ngModel)]="invoice.dueDate"></a-date-picker>
-                        </div>
-                        <div class="columns detailFilter-wrapper">
-                            <label>{{'invoice.detail.service.kind'|translate}}</label>
-                            <a-service-kind-select name="kind" [(ngModel)]="invoice.kind"></a-service-kind-select>
-                        </div>
-                    </div>
+    <div class="filterContainer grid-x grid-padding-x">
+        <div class="cell phone-12 detailFilter">
+            <div class="grid-x grid-padding-x">
+                <div class="cell phone-12">
+                    <label>{{'invoice.detail.customer' | translate}}</label>
+                    <a-customer-select name="customer" [ngModel]="invoice.buyer._id"></a-customer-select>
                 </div>
+                <div class="cell phone-12">
+                    <label>{{'invoice.detail.business' | translate}}</label>
+                    <a-customer-select name="customer" [ngModel]="invoice.buyer._id"></a-customer-select>
+                </div>
+            </div>
+            <div class="grid-x grid-padding-x">
+                <div class="cell phone-20">
+                    <label>{{'invoice.detail.customer.reference'|translate}}</label>
+                    <input type="text" name="customerReference" [(ngModel)]="invoice.customerInvoiceRef">
+                </div>
+                <div class="cell phone-4 vat-block">
+                    <label>{{'invoice.detail.without.vat'|translate}}</label>
+                    <a-toggle name="withoutVat" [(ngModel)]="!invoice.withVAT"></a-toggle>
+                </div>
+            </div>
+            <div>
+                <label>{{'invoice.detail.object'|translate}}</label>
+                <textarea type="text" name="object" [(ngModel)]="invoice.object"
+                          rows="3" cols="20">
+                </textarea>
+            </div>
+        </div>
+        <div class="cell phone-12 detailFilter">
+            <div class="grid-x grid-padding-x">
+                <div class="cell phone-12">
+                    <label>{{'invoice.detail.referenceNumber'|translate}}</label>
+                    <input type="text" name="reference" [(ngModel)]="invoice.reference">
+                </div>
+                <div class="cell phone-12">
+                    <label>{{'invoice.detail.invoice.date'|translate}}</label>
+                    <a-date-picker name="invoiceDate" [(ngModel)]="invoice.date"></a-date-picker>
+                </div>
+            </div>
+            <div class="grid-x grid-padding-x">
+                <div class="cell phone-12">
+                    <label>{{'invoice.detail.sent.date'|translate}}</label>
+                    <a-date-picker name="sentDate" [(ngModel)]="invoice.sentDate"></a-date-picker>
+                </div>
+                <div class="cell phone-12">
+                    <label>{{'invoice.detail.due.date'|translate}}</label>
+                    <a-date-picker name="dueDate" [(ngModel)]="invoice.dueDate"></a-date-picker>
+                </div>
+            </div>
+            <div>
+                <label>{{'invoice.detail.service.kind'|translate}}</label>
+                <a-service-kind-select name="kind" [(ngModel)]="invoice.kind"></a-service-kind-select>
             </div>
         </div>
 
-        <div class="columns small-4 detailFilter-wrapper">
-            <label>{{'invoice.detail.object'|translate}}</label>
-            <textarea type="text" name="object" [(ngModel)]="invoice.object"
-                      rows="3" cols="20">
-                </textarea>
-        </div>
     </div>
 </form>
 
-<div class="row">
-    <table>
-        <thead>
-        <tr>
-            <th width="600px">{{'invoice.line.label'|translate}}</th>
-            <th width="150px">{{'invoice.line.quantity'|translate}}</th>
-            <th width="150px">{{'invoice.line.unit.cost'|translate}}</th>
-            <th width="150px">{{'invoice.line.gross.amount'|translate}}</th>
-            <th width="500px" *ngIf="invoice.withVAT">{{'invoice.line.vat.rate'|translate}}</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr *ngFor="let line of invoice.lines">
-            <td width="600px">{{line.description}}</td>
-            <td width="150px">{{line.quantity | number : '1.2'}}</td>
-            <td width="150px">{{line.unitCost | invoiceCurrency}}</td>
-            <td width="150px">{{line.grossAmount | invoiceCurrency}}</td>
-            <td width="500px" *ngIf="invoice.withVAT">
-                {{line.vatRate?.rate | number: '1.2'}} {{line.vatRate?.rate ? ' %' : ''}}
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="invoicing-block">
+    <div class="invoicing-head">
+        <div class="grid-x grid-padding-x">
+            <div class="cell phone-1"></div>
+            <div class="cell phone-12">{{'invoice.line.label'|translate}}</div>
+            <div class="cell phone-2">{{'invoice.line.quantity'|translate}}</div>
+            <div class="cell phone-3">{{'invoice.line.unit.cost'|translate}}</div>
+            <div class="cell phone-3">{{'invoice.line.gross.amount'|translate}}</div>
+            <div class="cell phone-2">{{'invoice.line.vat.rate'|translate}}</div>
+            <div class="cell phone-1"></div>
+        </div>
+    </div>
+    <div class="invoicing-line-block">
+        <div class="invoicing-line grid-x grid-padding-x" *ngFor="let line of invoice.lines">
+            <div class="cell phone-1 drag-drop-icon"><i class="fas fa-grip-horizontal"></i></div>
+            <div class="cell phone-12">{{line.description}}</div>
+            <div class="cell phone-2">{{line.quantity | number : '1.2'}}</div>
+            <div class="cell phone-3">{{line.unitCost | invoiceCurrency}}</div>
+            <div class="cell phone-3">{{line.grossAmount | invoiceCurrency}}</div>
+            <div class="cell phone-2">{{line.vatRate?.rate | number: '1.2'}} {{line.vatRate?.rate ? ' %' : ''}}</div>
+            <div class="cell phone-1 grid-x align-right">
+                <button class="cell phone-11 action-icon delete-action">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="invoicing-line-footer">
+        <div class="grid-x grid-padding-x align-middle">
+            <div class="cell phone-1"></div>
+            <div class="cell phone-12">
+                <input type="text" placeholder="{{'invoice.line.label'|translate}}">
+            </div>
+            <div class="cell phone-2">
+                <input type="text" placeholder="{{'invoice.line.quantity'|translate}}">
+            </div>
+            <div class="cell phone-3">
+                <input type="text" placeholder="{{'invoice.line.unit.cost'|translate}}">
+            </div>
+            <div class="cell phone-3">
+                <input type="text" placeholder="{{'invoice.line.gross.amount'|translate}}">
+            </div>
+            <div class="cell phone-2">
+                <input type="text" placeholder="{{'invoice.line.vat.rate'|translate}}">
+            </div>
+            <div class="cell phone-1 grid-x align-right">
+                <button class="cell phone-11 action-icon validate-action">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row footerStyle">
-    <div class="columns small-8">
-        <label>Objet</label>
+
+<div class="footer-invoice grid-x grid-padding-x">
+    <div class="cell phone-8">
+        <label>Notes</label>
         <textarea type="text"
                   rows="3" cols="20">
                 </textarea>
     </div>
-    <div class="columns small-4">
+    <div class="cell phone-8">
         <label>Pièces jointes</label>
+        <div class="import-files-invoice grid-x align-center">
+            <p><i class="fas fa-cloud-upload-alt"></i>Glissez-déposez vos fichiers ou</p>
+            <a-button-default visibility="MEDIUM" size="SMALL">
+                Sélectionnez en un
+            </a-button-default>
+        </div>
+    </div>
+    <div class="cell phone-8 list-files">
+        <label>Fichiers</label>
+        <ul>
+            <li>
+                <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
+                <i class="far fa-trash-alt"></i>
+            </li>
+            <li>
+                <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
+                <i class="far fa-trash-alt"></i>
+            </li>
+            <li>
+                <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
+                <i class="far fa-trash-alt"></i>
+            </li>
+            <li>
+                <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
+                <i class="far fa-trash-alt"></i>
+            </li>
+            <li>
+                <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
+                <i class="far fa-trash-alt"></i>
+            </li>
+
+        </ul>
     </div>
 </div>
-
-<div>
-    <button class="button small white ripple"
-    (click)="goBack()">
-        <i class="ion-arrow-left-c"></i>
-        Retour
-    </button>
-</div>
-
-
-<!--<form #invoiceDetailForm="ngForm">-->
-<!--<div class="invoice full-height">-->
-<!--    <div class="row align-middle invoiceHeader">-->
-<!--        <div class="columns shrink">-->
-<!--            <a class="button small white ripple"-->
-<!--               (click)="goBack()"><i class="ion-arrow-left-c"></i></a>-->
-<!--        </div>-->
-
-<!--        <div class="columns shrink invoiceHeader-name">-->
-<!--            <span class="invoiceHeader-name-ref" *ngIf="invoice.reference">-->
-<!--                {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}-->
-<!--            </span>-->
-<!--            <span class="invoiceHeader-name-title">-->
-<!--                {{ (invoice && invoice._id) ? invoice.object : 'invoices.label.back' | translate }}-->
-<!--            </span>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <div class="row invoiceDetail" [ngClass]="{'mode-edit': form.enabled}">-->
-<!--        <form [formGroup]="form" *ngIf="form && invoice" (submit)="save()" novalidate class="column small-8">-->
-<!--            <div class="column invoiceDetail-container dark">-->
-
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.reference' | translate}}</h6>-->
-<!--                    <div class="column">-->
-<!--                        <input type="text" formControlName="reference">-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoices.label.client' | translate}} *</h6>-->
-<!--                    <div class="column">-->
-<!--                        <customer-select [label]="'name'" (valueChange)="fetchBuyer($event)"-->
-<!--                                         [control]="form.controls.buyer"></customer-select>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.reference.customer' | translate}}</h6>-->
-<!--                    <div class="column">-->
-<!--                        <input type="text" formControlName="customerInvoiceRef">-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.business' | translate}}</h6>-->
-<!--                    <div class="column">-->
-<!--                        <select formControlName="business" [compareWith]="comparRef" *ngIf="selectedCompany && selectedCompany.commercialRelationship">-->
-<!--                            <option [ngValue]="null">{{'invoice.no.business' | translate}}</option>-->
-<!--                            <option *ngFor="let business of selectedCompany.commercialRelationship.businessList" [ngValue]="business">-->
-<!--                                {{business.name}}-->
-<!--                            </option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.object' | translate}} *</h6>-->
-<!--                    <div class="column">-->
-<!--                        <textarea type="text" formControlName="object"-->
-<!--                                  rows="3" cols="10">-->
-<!--                        </textarea>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.kind' | translate}} *</h6>-->
-<!--                    <div class="column">-->
-<!--                        <select formControlName="kind">-->
-<!--                            <option value="">{{'service.kind.all' | translate}}</option>-->
-<!--                            <option *ngFor="let kind of kinds" [ngValue]="kind">-->
-<!--                                {{'invoice.kind.' + kind | translate}}-->
-<!--                            </option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.withVAT' | translate}}</h6>-->
-<!--                    <div class="column">-->
-<!--                        <toggle [item]="form.controls.withVAT.value" [disabled]="form.disabled"-->
-<!--                                (itemChange)="form.controls.withVAT.setValue($event)"></toggle>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label" *ngIf="form.controls.date">-->
-<!--                    <h6 class="column small-8"> {{'invoice.label.invoice.date' | translate}}</h6>-->
-<!--                    <div class="column">-->
-<!--                        <date-picker formControlName="date"></date-picker>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.label.sentDate' | translate}}</h6>-->
-<!--                    <div class="column">{{getSentDate() | date: 'dd MMM. yyyy'}}</div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.label.dueDate' | translate}}</h6>-->
-<!--                    <div class="column">-->
-<!--                        <date-picker formControlName="dueDate"></date-picker>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.label.status' | translate}} *</h6>-->
-<!--                    <div class="column">-->
-<!--                        <select formControlName="status">-->
-<!--                            <option value="">{{'invoice.status.all' | translate}}</option>-->
-<!--                            <option *ngFor="let status of statuses" [ngValue]="status">-->
-<!--                                {{'invoice.status.' + status | translate}}-->
-<!--                            </option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row align-middle invoiceDetail-container-label">-->
-<!--                    <h6 class="column small-8"> {{'invoice.label.comment' | translate}}</h6>-->
-<!--                    <div class="column panel panel-default">-->
-<!--                           <textarea type="text" formControlName="comment"-->
-<!--                                     rows="10" cols="50">-->
-<!--                           </textarea>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </form>-->
-
-<!--        <div class="column auto" *ngIf="invoice">-->
-<!--            <invoice-lines-detail [(lines)]="invoice.lines"-->
-<!--                                  [vatEnabled]="form.controls.withVAT.value || invoice.withVAT"-->
-<!--                                  [editMode]="form.enabled"-->
-<!--                                  [companyRef]="selectedCompany?._id">-->
-<!--            </invoice-lines-detail>-->
-<!--&lt;!&ndash;            <vat-detail [(vats)]="invoice.vats" [editMode]="form.enabled" [hidden]="!form.controls['withVAT'].value"></vat-detail>&ndash;&gt;-->
-<!--            <attachments-detail *ngIf="invoice && invoice._id"-->
-<!--                                [invoiceId]="invoiceId"-->
-<!--                                [editMode]="form.enabled"-->
-<!--                                [attachments]="invoice.attachments"-->
-<!--                                (deleteFile)="deleteAttachment($event)"-->
-<!--                                (attachmentsChange)="fetchInvoice()"></attachments-detail>-->
-
-<!--            &lt;!&ndash;<activity-panel *ngIf="invoice && invoice._id"  [(activities)]="invoice.activities"></activity-panel>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <footer class="row invoiceAction">-->
-<!--            <span class="overlay-state-edit" *ngIf="form.enabled">-->
-<!--                <i class="ion-edit"></i>-->
-<!--            </span>-->
-<!--        <div class="column">-->
-<!--            <div class="row invoiceAction-container align-middle">-->
-<!--                <div class="columns shrink">-->
-<!--                    <button *ngIf="form.enabled"-->
-<!--                            class="button medium green ripple"-->
-<!--                            type="submit"-->
-<!--                            (click)="invoice && invoice._id  ? save() : create()"-->
-<!--                            [disabled]="form.invalid || form.pending || invoiceDetailForm.invalid">-->
-<!--                        <i class="ion-checkmark-round"></i>-->
-<!--                        {{( !invoiceId ? 'button.label.create' : 'button.label.save') | translate}}-->
-<!--                    </button>-->
-<!--                    <button *ngIf="form.disabled"-->
-<!--                            (click)="form.enable()"-->
-<!--                            class="button medium green ripple">-->
-<!--                        <i class="ion-edit"></i>{{'button.label.update' | translate}}-->
-<!--                    </button>-->
-<!--                    <button *ngIf="form.disabled"-->
-<!--                            (click)="duplicate()"-->
-<!--                            class="button medium grey ripple">-->
-<!--                        <i class="ion-ios-copy"></i>{{'button.label.copy' | translate}}-->
-<!--                    </button>-->
-<!--                </div>-->
-
-<!--                <div class="columns shrink" *ngIf="invoiceId && canDelete">-->
-<!--                    <button class="button medium grey ripple"-->
-<!--                            type="button"-->
-<!--                            (click)="delete()">-->
-<!--                        <i class="ion-trash-a"></i>{{'button.label.delete' | translate}}-->
-<!--                    </button>-->
-<!--                </div>-->
-
-<!--                <div class="columns shrink" *ngIf="invoiceId && !form.enabled">-->
-<!--                    <button class="button medium grey ripple"-->
-<!--                            type="button"-->
-<!--                            (click)="download()">-->
-<!--                        <i class="ion-code-download"></i>{{'button.label.download' | translate}}-->
-<!--                    </button>-->
-<!--                </div>-->
-
-<!--                <div class="columns medium" *ngIf="invoiceId">-->
-<!--                    <button *ngIf="form.enabled"-->
-<!--                            class="button medium grey ripple"-->
-<!--                            type="button"-->
-<!--                            (click)="reset()">-->
-<!--                        <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </footer>-->
-<!--</div>-->
-<!--</form>-->
