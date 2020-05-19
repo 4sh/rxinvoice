@@ -23,6 +23,7 @@ export class InvoiceDetailComponent implements OnInit {
     public invoice: Invoice;
     public canDelete: Boolean;
     public statuses: InvoiceStatusType[];
+    public dropdownBlock: boolean = false;
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
 
@@ -139,5 +140,10 @@ export class InvoiceDetailComponent implements OnInit {
 
     public duplicate() {
         this.invoice = this.invoice.copy();
+    }
+
+
+    public clickDropEvent(){
+        this.dropdownBlock = !this.dropdownBlock;
     }
 }

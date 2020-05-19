@@ -9,8 +9,12 @@
   height: 100%;
 }
 
+.invoice-detail-container {
+  height: 100%;
+}
+
 .invoice-header {
-  margin: rem-calc(16px) rem-calc(16px) 0;
+  padding: rem-calc(16px);
 
   h2 {
     line-height: rem-calc(30px);
@@ -20,18 +24,20 @@
   }
 
   select {
-    margin: 0!important;
+    margin: 0 !important;
     height: 30px;
-    color: #5b60c5;
     font-weight: bold;
-    border: 1px solid #dddff3!important;
-    background-color: #dddff3;
+    width: auto;
+    border-radius: 17px;
+    padding-left: 13px;
+    color: #FFC107;
+    border: 1px solid #FFC107!important;
+    background-color: #ffc1071f;
   }
 }
 
 @include new('filterContainer') {
-  padding: rem-calc(16px);
-  border-radius: rem-calc(8px);
+  justify-content: space-between;
 
   .vat-block {
     max-height: rem-calc(55px);
@@ -41,13 +47,16 @@
 }
 
 form {
-  background: rgba($app-secondary, 0.025);
   border-radius: 8px;
-  margin: rem-calc(16px) rem-calc(16px) 0;
+  padding: 0 rem-calc(16px);
 }
 
 @include new('detailFilter') {
-    padding: rem-calc(0 16px);
+  &.right-detail {
+    background: rgba(16, 17, 163, 0.025);
+    border-radius: rem-calc(8px);
+    padding: rem-calc(10px 16px);
+  }
 
   @include has('wrapper') {
       margin: rem-calc(8px 0);
@@ -59,8 +68,8 @@ form {
 }
 
 .invoicing-block {
-  margin: rem-calc(16px) rem-calc(16px) 0;
-  min-height: 30%;
+  padding: rem-calc(16px) rem-calc(16px) 0;
+  min-height: 36%;
 
   .invoicing-head {
     display: block;
@@ -73,7 +82,8 @@ form {
     padding: rem-calc(15px);
   }
   .invoicing-line-block {
-    min-height: 50%;
+    min-height: calc(100% - 186px);
+    max-height: calc(100% - 186px);
     overflow: scroll;
 
     .invoicing-line {
@@ -104,6 +114,12 @@ form {
     border:  1px solid rgba($app-primary, .5);
     margin-left: rem-calc(5px);
 
+    &.edit-action:hover {
+      background-color: $app-primary;
+      border-color: $app-primary;
+      color: white;
+      cursor: pointer;
+    }
     &.delete-action:hover {
       background-color: $app-error;
       border-color: $app-error;
@@ -122,17 +138,37 @@ form {
     }
   }
   .invoicing-line-footer {
-    padding: rem-calc(15px);
+    padding: rem-calc(10px) rem-calc(15px);
     background-color: rgba($app-primary_light, 0.3);
     border-radius: 0 0 rem-calc(5px) rem-calc(5px);
   }
+  .totaux-line {
+    padding: 1rem 1.5rem;
+    background-color: #dddff3;
+    border-radius: 0 0 8px 8px;
+
+    span {
+      width: 100%;
+      text-align: right;
+    }
+
+    .phone-17 span {
+      color: $app-primary;
+    }
+
+  }
+}
+.footer-container {
+  margin-top: rem-calc(45px);
 }
 .footer-invoice {
   padding: rem-calc(15px);
   margin-top: rem-calc(16px);
   width: 100%;
-  background-color: rgba(233, 240, 245, 0.4);
+  background-color: rgb(246, 249, 251);
   border-radius: 0 0 rem-calc(5px) rem-calc(5px);
+  position: absolute;
+  bottom: 65px;
 
   .import-files-invoice {
     border: 2px dashed rgba($app-primary, 0.4);
@@ -179,4 +215,61 @@ form {
       }
     }
   }
+
+  &.close {
+    height: 28px;
+    padding: 4px;
+
+    textarea, .import-files-invoice, .list-files ul {
+      display: none;
+    }
+
+    label {
+      color: $app-primary;
+    }
+
+    .dropdownBlock-button {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      background-color: #62636524;
+      border-radius: 3px;
+      padding: 5px 7px;
+      color: #626365;
+      display: flex;
+      align-items: center;
+
+      i {
+        height: 10px;
+        line-height: 23px;
+      }
+    }
+  }
+  &.open {
+    box-shadow: 0 -7px 16px 4px #8080802e;
+
+    .dropdownBlock-button {
+      position: absolute;
+      right: 0px;
+      bottom: 125px;
+      background-color: #62636524;
+      border-radius: 3px;
+      padding: 2px 7px;
+      color: #626365;
+      display: flex;
+      align-items: center;
+
+      i {
+        height: 18px;
+      }
+    }
+  }
 }
+
+.control-bar {
+  display: flex;
+  align-items: center;
+  padding: 1.6rem;
+  border-top: 1px solid #dddff3;
+}
+
