@@ -3,11 +3,8 @@ import {NgModule} from '@angular/core';
 import {CustomersComponent} from './pages/customers/customers.component';
 import {LoginComponent} from './pages/login/login.component';
 import {AppContentComponent} from './app-content/app-content.component';
-import {InvoicesComponent} from './modules/invoice/components/invoices/invoices.component';
 import {CustomerDetailComponent} from './pages/customer-detail/customer-detail.component';
-import {InvoiceDetailComponent} from './modules/invoice/components/invoice-detail/invoice-detail.component';
 import {GuideRoutes} from './style-guide-module/guide.routes';
-import {DraftsComponent} from './modules/draft/components/drafts/drafts.component';
 import {AnalyzeComponent} from './pages/analyze/analyze.component';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 

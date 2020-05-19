@@ -39,6 +39,7 @@ import {ButtonsModule} from './modules/shared/components/atoms/buttons/buttons.m
 import {InvoiceModule} from './modules/invoice/invoice.module';
 import {DraftModule} from './modules/draft/draft.module';
 import {DpDatePickerModule} from 'ng2-date-picker';
+import {CustomerService} from './common/services/customer.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/i18n/', 'labels.json');
@@ -96,6 +97,7 @@ export function createTranslateLoader(http: HttpClient) {
         TranslateService,
         RepositoryService,
         CompanyService,
+        CustomerService,
         LoggedInGuard,
         AuthenticationService,
         ActivityService,

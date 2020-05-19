@@ -1,0 +1,10 @@
+<ng-select
+        [items]="businessList"
+        [bindLabel]="'name'"
+        [searchable]="false"
+        [clearable]="false"
+        [disabled]="disabled"
+        [ngModel]="business"
+        placeholder="{{'business.select.placeholder' | translate}}"
+        (ngModelChange)="onChange($event)">
+</ng-select>

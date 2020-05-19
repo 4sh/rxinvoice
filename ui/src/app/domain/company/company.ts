@@ -1,6 +1,6 @@
 import {CompanyKindType} from './company-kind.type';
 import {FiscalYear} from './fiscal-year';
-import {Address} from "./address";
+import {Address} from './address';
 import {CommercialRelationship} from '../commercial-relationship/commercial-relationship';
 import {SellerSettings} from './seller-settings';
 

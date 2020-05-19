@@ -51,9 +51,8 @@ public class CompanyResource {
                 && !user.getPrincipalRoles().contains(SELLER)) {
             throw new WebException(HttpStatus.FORBIDDEN);
         }
-        return companyService.findCompanyByKeyWithCommercialRelation(key);
+        return companyService.findByKey(key);
     }
-
 
     @RolesAllowed({ADMIN, SELLER})
     @POST("/companies")

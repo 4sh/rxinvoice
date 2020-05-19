@@ -10,7 +10,9 @@ import {AttachmentsDetailComponent} from '../attachments-detail/attachments-deta
 import {Location} from '@angular/common';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
-import {InvoiceStatusType} from "../../../../domain/invoice/invoice-status.type";
+import {InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
+import {CustomerService} from '../../../../common/services/customer.service';
+import {Business} from '../../../../domain/commercial-relationship/business';
 
 @Component({
     selector: 'invoice-detail',
@@ -19,15 +21,16 @@ import {InvoiceStatusType} from "../../../../domain/invoice/invoice-status.type"
 })
 export class InvoiceDetailComponent implements OnInit {
 
-    private seller: Company;
+    public seller: Company;
     public invoice: Invoice;
     public canDelete: Boolean;
     public statuses: InvoiceStatusType[];
-    public dropdownBlock: boolean = false;
+    public dropdownBlock: Boolean = false;
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
 
     constructor(private companyService: CompanyService,
+                private customerService: CustomerService,
                 private repositoryService: RepositoryService,
                 private invoiceService: InvoiceService,
                 private route: ActivatedRoute,
@@ -39,14 +42,15 @@ export class InvoiceDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.data.subscribe(data => {
-            this.invoice = data.invoice;
+        this.route.data.subscribe(routeData => {
+            this.invoice = routeData.invoice;
+            this.authService.companyEvents
+                .subscribe(companyEvent => this.seller = companyEvent)
         });
         this.authService.userEvents
-            .subscribe(currentUser => {
-                this.companyService.fetchCompany(currentUser.companyRef).subscribe(value => this.seller = value);
-                this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0;
-            });
+            .subscribe(currentUser =>
+                this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0
+            );
         this.repositoryService.fetchInvoiceStatus()
             .subscribe(statuses => this.statuses = statuses);
     }
@@ -61,7 +65,7 @@ export class InvoiceDetailComponent implements OnInit {
     //             map(res => {
     //                 return res.length === 0 ? null : {referenceExist: true}
     //             }))
-    //     };
+    //     };O
     // };
 
     public create(): void {
@@ -143,7 +147,7 @@ export class InvoiceDetailComponent implements OnInit {
     }
 
 
-    public clickDropEvent(){
+    public clickDropEvent() {
         this.dropdownBlock = !this.dropdownBlock;
     }
 }
