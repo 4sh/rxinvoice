@@ -35,7 +35,7 @@ export class AppHeaderComponent implements OnInit {
             });
       this.router
           .events.pipe(
-          filter(event => event instanceof NavigationStart),
+          filter(event => event instanceof NavigationEnd),
           map(() => {
               const child = this.activatedRoute.firstChild;
               if (child.snapshot.data['title']) {

@@ -62,7 +62,7 @@ public class CompanyService {
         return  this.companyDao.findByKey(key);
     }
 
-    public Optional<Company> findCompanyByKeyWithCommercialRelation(String key) {
+    public Optional<Company> findCustomerCompanyByKeyWithCommercialRelation(String key) {
         Optional<Company> companyOptional = this.companyDao.findByKey(key);
         companyOptional.ifPresent(company -> {
             company.setCommercialRelationship(this.commercialRelationshipService.findByCustomer(key));

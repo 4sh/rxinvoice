@@ -11,8 +11,7 @@ import {DashboardResolver} from './resolvers/dashboard.resolver';
                 {
                     path: '',
                     component: DashboardComponent,
-                    resolve: {dashboards: DashboardResolver},
-                    data: {title: 'sdfsdfsdfsdfdfsdf'}
+                    resolve: {dashboards: DashboardResolver}
                 }
             ]
         )

@@ -23,13 +23,6 @@ export class CompanyService {
                 catchError((response: Response) => throwError({message: 'Unable to fetch companies', response: response})));
     }
 
-    public fetchCompanyBuyers(): Observable<Company[]> {
-        return this.http
-            .get(this.baseUrl + '/buyers').pipe(
-                map((result: any) => plainToClass(Company, result as Object[])),
-                catchError((response: Response) => throwError({message: 'Unable to fetch buyers', response: response})));
-    }
-
     public fetchCompany(id): Observable<Company> {
         return this.http
             .get(this.baseUrl + '/' + id).pipe(

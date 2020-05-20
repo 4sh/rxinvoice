@@ -33,7 +33,10 @@
                 <div class="grid-x grid-padding-x">
                     <div class="cell phone-12">
                         <label>{{'invoice.detail.business' | translate}}</label>
-                        <a-customer-select name="customer" [ngModel]="invoice.buyer._id"></a-customer-select>
+                        <a-business-select name="business"
+                                           [customerRef]="invoice.buyer._id"
+                                           [(ngModel)]="invoice.business">
+                        </a-business-select>
                     </div>
                     <div class="cell phone-9">
                         <label>{{'invoice.detail.service.kind'|translate}}</label>
