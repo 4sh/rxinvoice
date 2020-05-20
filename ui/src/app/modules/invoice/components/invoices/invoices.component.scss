@@ -24,3 +24,10 @@ form {
 @include new('date-picker') {
     padding: 0;
 }
+
+.date-picker-block {
+    padding-left: rem-calc(15px);
+}
+.list-action {
+    padding-top: rem-calc(18px);
+}
