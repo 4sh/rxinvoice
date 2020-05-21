@@ -13,7 +13,7 @@ import {fromRole, fromSize, fromVisibility, Role, Size, Visibility} from '../but
 export class AButtonDefaultComponent {
 
   @Input()
-  public disabled: boolean = false;
+  public disabled: boolean;
 
   @Input()
   public validate: boolean;

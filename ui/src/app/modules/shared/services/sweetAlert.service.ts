@@ -33,7 +33,7 @@ export class SweetAlertService {
             showCloseButton: false,
             timer: 1500
         };
-        return Swal.alert(assign(baseOptions, options));
+        return Swal.fire(assign(baseOptions, options));
     }
 
     confirm(options: SweetAlertOptions) {

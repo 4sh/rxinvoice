@@ -94,19 +94,13 @@ export class InvoiceDetailComponent implements OnInit {
     }
 
     public save(): void {
-        // this.form.disable();
-        if (!this.invoice) {
-            this.invoice = new Invoice();
-        }
-        // _.merge(this.invoice, this.invoice, this.form.value);
         this.invoiceService.saveInvoice(this.invoice)
             .subscribe(() => {
                     this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
                 },
                 () => {
                     this.alertService.error({title: 'alert.update.error', customClass: 'swal2-for-edit'});
-                }
-            );
+                });
     }
 
     public delete(): void {

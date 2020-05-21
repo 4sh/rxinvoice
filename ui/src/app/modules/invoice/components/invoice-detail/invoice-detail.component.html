@@ -6,12 +6,12 @@
             </a-button-default>
             <h2 class="cell phone-16">{{invoice.buyer.name}}</h2>
             <div class="cell auto grid-x align-right">
-<!--                <select [(ngModel)]="invoice.status" >-->
-<!--                    <option value="">{{'invoice.status.all' | translate}}</option>-->
-<!--                    <option *ngFor="let status of statuses" [ngValue]="status">-->
-<!--                        {{'invoice.status.' + status | translate}}-->
-<!--                    </option>-->
-<!--                </select>-->
+                <!--                <select [(ngModel)]="invoice.status" >-->
+                <!--                    <option value="">{{'invoice.status.all' | translate}}</option>-->
+                <!--                    <option *ngFor="let status of statuses" [ngValue]="status">-->
+                <!--                        {{'invoice.status.' + status | translate}}-->
+                <!--                    </option>-->
+                <!--                </select>-->
             </div>
         </div>
 
@@ -204,7 +204,8 @@
                         <i class="fas fa-copy"></i>
                         {{'button.label.copy' | translate}}
                     </a-button-default>
-                    <a-button-default (click)="save()">
+                    <a-button-default (click)="save()"
+                                      [disabled]="invoiceForm.invalid">
                         <i class="fas fa-save"></i>
                         {{'button.label.save' | translate}}
                     </a-button-default>

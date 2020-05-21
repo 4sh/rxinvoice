@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Invoice} from '../../../../domain/invoice/invoice';
@@ -19,6 +19,9 @@ const VALUE_ACCESSOR = {
     providers: [VALUE_ACCESSOR]
 })
 export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
+
+    @ViewChild('invoiceLineForm')
+    public invoiceLineForm: NgForm;
 
     public line: InvoiceLine;
     public vatRateList: Array<VatRate>;
@@ -71,6 +74,11 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     public addLine(): void {
         this.invoice.lines.push(this.line);
         this.lineAddedEventEmitter.emit();
+        for (const field in this.invoiceLineForm.controls) {
+            if (field) {
+                this.invoiceLineForm.controls[field].markAsUntouched();
+            }
+        }
     }
 
     public quantityUpdated(quantity: number): void {
