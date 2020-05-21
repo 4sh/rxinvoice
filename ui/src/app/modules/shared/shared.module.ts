@@ -12,7 +12,6 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {SweetAlertService} from './services/sweetAlert.service';
 import {InvoiceCurrencyPipe} from './pipes/invoice-currency.pipe';
 import {OrderByPipe} from './pipes/order-by.pipe';
-import {AStatusComponent} from './components/atoms/a-status/a-status.component';
 import {AMonthSelectComponent} from './components/atoms/selects/a-month-select/a-month-select.component';
 import {AServiceKindSelectComponent} from './components/atoms/selects/a-service-kind-select/a-service-kind-select.component';
 import {AUserSelectComponent} from './components/atoms/selects/a-user-select/a-user-select.component';
@@ -23,6 +22,7 @@ import {ASpinnerComponent} from './components/atoms/a-spinner/a-spinner.componen
 import {ButtonsModule} from './components/atoms/buttons/buttons.module';
 import {ADashboardSelectComponent} from './components/atoms/selects/a-dashboard-select/a-dashboard-select.component';
 import {ABusinessSelectComponent} from './components/atoms/selects/a-business-select/a-business-select.component';
+import { AInvoiceStatusSelectComponent } from './components/atoms/selects/a-invoice-status-select/a-invoice-status-select.component';
 
 const components = [
     AToggleComponent,
@@ -32,7 +32,6 @@ const components = [
     ATabsComponent,
     ASpacerComponent,
     InvoiceCurrencyPipe,
-    AStatusComponent,
     AMonthSelectComponent,
     AServiceKindSelectComponent,
     AUserSelectComponent,
@@ -40,7 +39,8 @@ const components = [
     AYearSelectComponent,
     ACustomerSelectComponent,
     ADashboardSelectComponent,
-    ABusinessSelectComponent
+    ABusinessSelectComponent,
+    AInvoiceStatusSelectComponent
 ];
 
 const pipes = [OrderByPipe];

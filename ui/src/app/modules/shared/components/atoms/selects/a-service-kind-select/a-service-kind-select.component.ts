@@ -5,6 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs/internal/Observable';
 import {forkJoin} from 'rxjs/internal/observable/forkJoin';
+import {EnumOption} from '../enum-option';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -77,7 +78,3 @@ export class AServiceKindSelectComponent implements OnInit, ControlValueAccessor
     }
 }
 
-class EnumOption {
-    value: string;
-    label: string;
-}

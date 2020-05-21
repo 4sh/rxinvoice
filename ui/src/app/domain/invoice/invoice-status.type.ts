@@ -23,6 +23,19 @@ export enum InvoiceStatusEnum {
     CANCELLED = 'CANCELLED'
 }
 
+export const INVOICE_STATUS_LIST: Array<InvoiceStatusType> = [
+    InvoiceStatusEnum.DRAFT,
+    InvoiceStatusEnum.READY,
+    InvoiceStatusEnum.WAITING_VALIDATION,
+    InvoiceStatusEnum.VALIDATED,
+    InvoiceStatusEnum.SENT,
+    InvoiceStatusEnum.PAID,
+    InvoiceStatusEnum.PAYMENT_SCHEDULED,
+    InvoiceStatusEnum.LATE,
+    InvoiceStatusEnum.UNPAID,
+    InvoiceStatusEnum.CANCELLED
+];
+
 export const InvoiceStatusesWorkflow = {
 
     'DRAFT': {
