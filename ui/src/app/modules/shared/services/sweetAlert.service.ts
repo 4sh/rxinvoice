@@ -20,7 +20,7 @@ export class SweetAlertService {
         };
         if (options.text) { options.text = this.translateService.instant(options.text); }
         if (options.title) {  options.title = this.translateService.instant(options.title); }
-        return Swal.question(assign(baseOptions, options));
+        return Swal.fire(assign(baseOptions, options));
     }
 
     private alert(options: SweetAlertOptions) {
