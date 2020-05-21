@@ -10,6 +10,8 @@ import {Blob} from '../blob';
 import {DatePipe} from '@angular/common';
 import * as _ from 'lodash';
 import {VatRate} from '../common/vat-rate';
+import {Type} from 'class-transformer';
+import 'reflect-metadata';
 
 export class Invoice {
     key: string;
@@ -19,7 +21,7 @@ export class Invoice {
     dueDate: Date;
     sentDate: Date;
     status: InvoiceStatusType;
-    withVAT: boolean;
+    withVAT: Boolean = true;
     object: string;
     comment: string;
     customerInvoiceRef: string;
@@ -31,11 +33,15 @@ export class Invoice {
     vats: VatRate[];
     vatsAmount: VAT[];
     business: Business;
+    @Type(() => InvoiceLine)
     lines: InvoiceLine[];
     activities: Activity[];
     attachments: Blob[];
     statusChanges: StatusChange[];
-
+    /**
+     * Transient property
+     */
+    vatAmount: number;
     constructor() {
     }
 
@@ -51,6 +57,39 @@ export class Invoice {
         return copy;
     }
 
+    public computeGrossAmount(): number {
+        return this.lines
+            .map(line => line.grossAmount)
+            .reduce((invoiceGrossAmount, lineGrossAmount) => invoiceGrossAmount += lineGrossAmount, 0)
+    }
+
+    public computeVatAmount(): number {
+        if (!this.withVAT) {
+            return 0;
+        }
+        return this.lines
+            .map(line => {
+                if (line.vatRate && line.vatRate && line.grossAmount) {
+                    return line.vatRate.rate / 100 * line.grossAmount
+                }
+                return 0;
+            })
+            .reduce((invoiceVatAmount, lineVatAmount) => invoiceVatAmount += lineVatAmount, 0)
+    }
+
+    public computeNetAmount(): number {
+        if (!this.withVAT) {
+            return this.computeGrossAmount();
+        }
+        return this.lines
+            .map(line => {
+                if (line.vatRate && line.vatRate && line.grossAmount) {
+                    return (1 + line.vatRate.rate / 100) * line.grossAmount
+                }
+                return 0;
+            })
+            .reduce((invoiceTotalAmount, lineAmount) => invoiceTotalAmount += lineAmount, 0)
+    }
 
     generatePdfFilename(invoice) {
         let filename = '';
@@ -75,6 +114,11 @@ export class Invoice {
             filename = 'print_invoice';
         }
         return filename + '.pdf';
+    }
+
+    public removeLine(line: InvoiceLine): void {
+        this.lines.splice(this.lines.indexOf(line), 1);
+
     }
 }
 

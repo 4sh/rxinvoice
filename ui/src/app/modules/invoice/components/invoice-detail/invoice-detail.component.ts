@@ -12,7 +12,8 @@ import {AuthenticationService} from '../../../../common/services/authentication.
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import {InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
 import {CustomerService} from '../../../../common/services/customer.service';
-import {Business} from '../../../../domain/commercial-relationship/business';
+import * as Moment from 'moment';
+import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 
 @Component({
     selector: 'invoice-detail',
@@ -26,6 +27,7 @@ export class InvoiceDetailComponent implements OnInit {
     public canDelete: Boolean;
     public statuses: InvoiceStatusType[];
     public dropdownBlock: Boolean = false;
+    public newLine: InvoiceLine = new InvoiceLine();
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
 
@@ -44,6 +46,7 @@ export class InvoiceDetailComponent implements OnInit {
     ngOnInit() {
         this.route.data.subscribe(routeData => {
             this.invoice = routeData.invoice;
+            this.invoice.vatAmount = this.invoice.computeVatAmount();
             this.authService.companyEvents
                 .subscribe(companyEvent => this.seller = companyEvent)
         });
@@ -53,6 +56,12 @@ export class InvoiceDetailComponent implements OnInit {
             );
         this.repositoryService.fetchInvoiceStatus()
             .subscribe(statuses => this.statuses = statuses);
+    }
+
+    public invoiceDateChanged(invoiceDateChangeEvent: Date) {
+        if (!this.invoice.date) {
+            this.invoice.dueDate = Moment(invoiceDateChangeEvent).add(30, 'days').toDate();
+        }
     }
 
     // private invoiceReferenceAsyncValidator() {
@@ -67,6 +76,7 @@ export class InvoiceDetailComponent implements OnInit {
     //             }))
     //     };O
     // };
+
 
     public create(): void {
         // this.form.disable();
@@ -99,10 +109,6 @@ export class InvoiceDetailComponent implements OnInit {
             );
     }
 
-    public reset(): void {
-        // this.setForm();
-    }
-
     public delete(): void {
         this.alertService.confirm({title: 'alert.confirm.deletion'}).then(
             (result) => {
@@ -114,6 +120,18 @@ export class InvoiceDetailComponent implements OnInit {
                 }
             }
         );
+    }
+
+    public goBack(): void {
+        this.location.back();
+    }
+
+    public download() {
+        this.downloadService.downloadInvoice(this.invoice);
+    }
+
+    public duplicate() {
+        this.invoice = this.invoice.copy();
     }
 
     public deleteAttachment(attachmentId): void {
@@ -134,20 +152,19 @@ export class InvoiceDetailComponent implements OnInit {
         }
     }
 
-    public goBack(): void {
-        this.location.back();
-    }
-
-    public download() {
-        this.downloadService.downloadInvoice(this.invoice);
-    }
-
-    public duplicate() {
-        this.invoice = this.invoice.copy();
-    }
-
-
     public clickDropEvent() {
         this.dropdownBlock = !this.dropdownBlock;
+    }
+
+    public lineAdded(): void {
+        this.newLine =  new InvoiceLine();
+    }
+
+    public lineUpdated($event: InvoiceLine) {
+        this.invoice.grossAmount = this.invoice.computeGrossAmount();
+        if (this.invoice.withVAT) {
+            this.invoice.vatAmount = this.invoice.computeVatAmount();
+        }
+        this.invoice.netAmount = this.invoice.computeNetAmount();
     }
 }

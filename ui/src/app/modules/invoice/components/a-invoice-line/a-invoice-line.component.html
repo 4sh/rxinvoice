@@ -1,0 +1,69 @@
+<form novalidate #invoiceLineForm="ngForm">
+    <div class="grid-x grid-padding-x invoice-line">
+        <div class="cell phone-1 drag-drop-icon"><i *ngIf="reorderEnabled" class="fas fa-grip-horizontal"></i></div>
+        <div class="cell phone-11">
+            <span *ngIf="!editable">{{line?.description}}</span>
+            <input *ngIf="editable"
+                   type="text"
+                   required="true"
+                   name="description"
+                   [(ngModel)]="line.description"
+                   placeholder="{{'invoice.line.label'|translate}}">
+        </div>
+        <div class="cell phone-2">
+            <span *ngIf="!editable">{{line?.quantity | number : '1.2'}}</span>
+            <input *ngIf="editable"
+                   type="number"
+                   name="quantity"
+                   [(ngModel)]="line.quantity"
+                   (ngModelChange)="quantityUpdated($event)"
+                   placeholder="{{'invoice.line.quantity'|translate}}">
+        </div>
+        <div class="cell phone-3">
+            <span *ngIf="!editable">{{line?.unitCost | invoiceCurrency}}</span>
+            <input *ngIf="editable"
+                   type="number"
+                   name="unitCost"
+                   [min]="0"
+                   [ngModel]="line.unitCost"
+                   (ngModelChange)="unitCostUpdated($event)"
+                   placeholder="{{'invoice.line.unit.cost'|translate}}">
+        </div>
+        <div class="cell phone-3">
+            <span>{{line?.grossAmount > 0 ? (line?.grossAmount | invoiceCurrency) : ''}}</span>
+        </div>
+        <div class="cell phone-2">
+            <span *ngIf="!editable">{{line?.vatRate?.rate | number: '1.2'}} {{line?.vatRate?.rate ? ' %' : ''}}</span>
+<!--            <input *ngIf="editable"-->
+<!--                   type="text"-->
+<!--                   placeholder="{{line.vatRate?.rate | number: '1.2'}} {{line.vatRate?.rate ? ' %' : ''}}">-->
+        </div>
+        <div class="cell phone-2 grid-x align-right">
+            <button *ngIf="!editable && editActionEnabled"
+                    class="cell phone-11 action-icon edit-action"
+                    (click)="editLine()">
+                <i class="fas fa-pen"></i>
+            </button>
+            <button *ngIf="editable && validateActionEnabled"
+                    class="cell phone-11 action-icon validate-action"
+                    [class.disabled]="invoiceLineForm.invalid"
+                    [disabled]="invoiceLineForm.invalid"
+                    (click)="checkLine()">
+                <i class="fas fa-check"></i>
+            </button>
+            <button *ngIf="deleteActionEnabled"
+                    class="cell phone-11 action-icon delete-action"
+                    (click)="removeLine()">
+                <i class="far fa-trash-alt"></i>
+            </button>
+            <button *ngIf="addActionEnabled"
+                    class="cell phone-11 action-icon validate-action"
+                    [disabled]="invoiceLineForm.invalid"
+                    [class.disabled]="invoiceLineForm.invalid"
+                    (click)="addLine()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+</form>
+

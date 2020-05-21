@@ -85,58 +85,8 @@ form {
     min-height: calc(100% - 186px);
     max-height: calc(100% - 186px);
     overflow: scroll;
-
-    .invoicing-line {
-      padding: rem-calc(8px) rem-calc(15px);
-
-      &:nth-child(even) {
-        background: rgba(221, 222, 243, 0.15);
-      }
-
-      .drag-drop-icon {
-        color: $app-grey;
-        &:hover {
-          color: $app-primary;
-          cursor: move;
-        }
-      }
-    }
   }
-  .action-icon {
-    padding: 0;
-    width: rem-calc(25px);
-    height: rem-calc(25px);
-    margin-bottom: 0;
-    border-radius: 50%;
-    transition: all 0.2s;
-    color: $app-primary;
-    background-color: transparent;
-    border:  1px solid rgba($app-primary, .5);
-    margin-left: rem-calc(5px);
 
-    &.edit-action:hover {
-      background-color: $app-primary;
-      border-color: $app-primary;
-      color: white;
-      cursor: pointer;
-    }
-    &.delete-action:hover {
-      background-color: $app-error;
-      border-color: $app-error;
-      color: white;
-      cursor: pointer;
-    }
-    &.validate-action:hover {
-      background-color: $app-success;
-      border-color: $app-success;
-      color: white;
-      cursor: pointer;
-    }
-
-    i {
-      font-size: rem-calc(14px);
-    }
-  }
   .invoicing-line-footer {
     padding: rem-calc(10px) rem-calc(15px);
     background-color: rgba($app-primary_light, 0.3);

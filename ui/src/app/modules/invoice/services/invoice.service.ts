@@ -9,6 +9,7 @@ import {SalesExportParameters} from '../../../pages/analyze/sales-export-paramet
 import {InvoiceStatusEnum, InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 import {Observable} from 'rxjs/internal/Observable';
 import {throwError} from 'rxjs/internal/observable/throwError';
+import {InvoiceLine} from '../../../domain/invoice/invoice-line';
 
 @Injectable()
 export class InvoiceService {

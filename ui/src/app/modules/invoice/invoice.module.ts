@@ -17,15 +17,19 @@ import {InvoiceService} from './services/invoice.service';
 import {DownloadInvoiceService} from './services/download-invoice.service';
 import {ButtonsModule} from '../shared/components/atoms/buttons/buttons.module';
 import {InvoiceResolver} from './resolvers/invoice.resolver';
+import { AInvoiceLineComponent } from './components/a-invoice-line/a-invoice-line.component';
 
 const components = [
     InvoicesListComponent,
     InvoicesComponent,
     InvoiceDetailComponent,
-    InvoiceLinesDetailComponent,
+    AInvoiceLineComponent,
     AttachmentsDetailComponent,
-    InvoiceLineFormComponent,
-    InvoiceLineHeaderComponent];
+    ////
+     InvoiceLinesDetailComponent,
+     InvoiceLineFormComponent,
+     InvoiceLineHeaderComponent
+    ];
 
 @NgModule({
     declarations: [components],
