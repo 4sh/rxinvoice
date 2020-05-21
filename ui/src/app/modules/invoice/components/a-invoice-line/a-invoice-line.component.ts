@@ -2,7 +2,8 @@ import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angul
 import {ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Invoice} from '../../../../domain/invoice/invoice';
-import {InvoiceService} from '../../services/invoice.service';
+import {VatRate} from '../../../../domain/common/vat-rate';
+import {CustomerService} from '../../../../common/services/customer.service';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -20,6 +21,7 @@ const VALUE_ACCESSOR = {
 export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
 
     public line: InvoiceLine;
+    public vatRateList: Array<VatRate>;
 
     @Input()
     public invoice: Invoice;
@@ -38,14 +40,18 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
 
     @Output()
     public lineAddedEventEmitter: EventEmitter<void> = new EventEmitter();
+    @Output()
+    public lineRemovedEventEmitter: EventEmitter<void> = new EventEmitter();
 
     private onNgChange: (line: InvoiceLine) => void;
     private onNgTouched: () => void;
 
-    constructor(private invoiceService: InvoiceService) {
+    constructor(private customerService: CustomerService) {
     }
 
     ngOnInit(): void {
+        this.customerService.fetchCustomer(this.invoice.buyer._id)
+            .subscribe(customer => this.vatRateList = customer.commercialRelationship.vatRates);
     }
 
     public editLine(): void {
@@ -59,6 +65,7 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
 
     public removeLine(): void {
         this.invoice.removeLine(this.line);
+        this.lineRemovedEventEmitter.emit();
     }
 
     public addLine(): void {
@@ -74,6 +81,10 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     public unitCostUpdated(unitCost: number): void {
         this.line.unitCost = unitCost;
         this.line.grossAmount = this.line.computeGrossAmount();
+    }
+
+    public vatUpdated(vatRate: VatRate) {
+        this.line.vatRate = vatRate;
     }
 
     registerOnChange(fn: any): void {

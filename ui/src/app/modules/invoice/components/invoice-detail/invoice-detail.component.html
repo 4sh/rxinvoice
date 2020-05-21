@@ -82,61 +82,39 @@
             <div class="invoicing-head">
                 <div class="grid-x grid-padding-x">
                     <div class="cell phone-1"></div>
-                    <div class="cell phone-11">{{'invoice.line.label'|translate}}</div>
+                    <div class="cell phone-9">{{'invoice.line.label'|translate}}</div>
                     <div class="cell phone-2">{{'invoice.line.quantity'|translate}}</div>
                     <div class="cell phone-3">{{'invoice.line.unit.cost'|translate}}</div>
                     <div class="cell phone-3">{{'invoice.line.gross.amount'|translate}}</div>
-                    <div class="cell phone-2">{{'invoice.line.vat.rate'|translate}}</div>
+                    <div class="cell phone-4">{{'invoice.line.vat.rate'|translate}}</div>
                     <div class="cell phone-2"></div>
                 </div>
             </div>
             <div class="invoicing-line-block">
-                <ng-container *ngFor="let line of invoice.lines">
+                <ng-container *ngFor="let line of invoice.lines; index as i">
                     <a-invoice-line
-                            name="line"
+                            [name]="'line' + i"
                             [ngModel]="line"
-                            (ngModelChange)="lineUpdated($event)"
+                            (ngModelChange)="lineUpdated()"
                             [invoice]="invoice"
                             [reorderEnabled]="true"
                             [editActionEnabled]="true"
                             [validateActionEnabled]="true"
-                            [deleteActionEnabled]="true">
+                            [deleteActionEnabled]="true"
+                            (lineRemovedEventEmitter)="lineRemoved()">
                     </a-invoice-line>
                 </ng-container>
             </div>
             <div class="invoicing-line-footer">
-                <!--            <a-invoice-line-->
-                <!--                    class="invoicing-line"-->
-                <!--                    [editable]="true"-->
-                <!--                    [invoice]="invoice"s-->
-                <!--                    [ngModel]="newLine"-->
-                <!--                    [addActionEnabled]="true"-->
-                <!--                    (lineAddedEventEmitter)="lineAdded()">-->
-                <!--            </a-invoice-line>-->
+                <a-invoice-line
+                        name="newLine"
+                        [editable]="true"
+                        [invoice]="invoice"
+                        [ngModel]="newLine"
+                        [addActionEnabled]="true"
+                        (lineAddedEventEmitter)="lineAdded()">
 
-                <!--            <div class="grid-x grid-padding-x align-middle">-->
-                <!--                <div class="cell phone-1"></div>-->
-                <!--                <div class="cell phone-11">-->
-                <!--                    <input type="text" [(ngModel)]="newLine.description" placeholder="{{'invoice.line.label'|translate}}">-->
-                <!--                </div>-->
-                <!--                <div class="cell phone-2">-->
-                <!--                    <input type="number" [(ngModel)]="newLine.quantity" placeholder="{{'invoice.line.quantity'|translate}}">-->
-                <!--                </div>-->
-                <!--                <div class="cell phone-3">-->
-                <!--                    <input type="number" [(ngModel)]="newLine.unitCost" placeholder="{{'invoice.line.unit.cost'|translate}}">-->
-                <!--                </div>-->
-                <!--                <div class="cell phone-3">-->
-                <!--                    <input type="number" [(ngModel)]="newLine.grossAmount" placeholder="{{'invoice.line.gross.amount'|translate}}">-->
-                <!--                </div>-->
-                <!--                <div class="cell phone-2">-->
-                <!--                    &lt;!&ndash; todo &ndash;&gt;-->
-                <!--                </div>-->
-                <!--                <div class="cell phone-2 grid-x align-right">-->
-                <!--                    <button class="cell phone-11 action-icon validate-action" (click)="addLine()">-->
-                <!--                        <i class="fas fa-plus"></i>-->
-                <!--                    </button>-->
-                <!--                </div>-->
-                <!--            </div>-->
+                </a-invoice-line>
             </div>
             <div class="totaux-line">
                 <div class="grid-x grid-padding-x align-middle">

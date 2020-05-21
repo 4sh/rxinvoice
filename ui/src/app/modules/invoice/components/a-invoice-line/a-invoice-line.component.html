@@ -1,9 +1,9 @@
 <form novalidate #invoiceLineForm="ngForm">
     <div class="grid-x grid-padding-x invoice-line">
         <div class="cell phone-1 drag-drop-icon"><i *ngIf="reorderEnabled" class="fas fa-grip-horizontal"></i></div>
-        <div class="cell phone-11">
+        <div class="cell phone-9">
             <span *ngIf="!editable">{{line?.description}}</span>
-            <input *ngIf="editable"
+            <input *ngIf="editable && line"
                    type="text"
                    required="true"
                    name="description"
@@ -12,7 +12,7 @@
         </div>
         <div class="cell phone-2">
             <span *ngIf="!editable">{{line?.quantity | number : '1.2'}}</span>
-            <input *ngIf="editable"
+            <input *ngIf="editable && line"
                    type="number"
                    name="quantity"
                    [(ngModel)]="line.quantity"
@@ -21,7 +21,7 @@
         </div>
         <div class="cell phone-3">
             <span *ngIf="!editable">{{line?.unitCost | invoiceCurrency}}</span>
-            <input *ngIf="editable"
+            <input *ngIf="editable && line"
                    type="number"
                    name="unitCost"
                    [min]="0"
@@ -32,11 +32,16 @@
         <div class="cell phone-3">
             <span>{{line?.grossAmount > 0 ? (line?.grossAmount | invoiceCurrency) : ''}}</span>
         </div>
-        <div class="cell phone-2">
-            <span *ngIf="!editable">{{line?.vatRate?.rate | number: '1.2'}} {{line?.vatRate?.rate ? ' %' : ''}}</span>
-<!--            <input *ngIf="editable"-->
-<!--                   type="text"-->
-<!--                   placeholder="{{line.vatRate?.rate | number: '1.2'}} {{line.vatRate?.rate ? ' %' : ''}}">-->
+        <div class="cell phone-4">
+            <span *ngIf="!editable && invoice.withVAT">{{line?.vatRate?.rate | number: '1.2'}} {{line?.vatRate?.rate ? ' %' : ''}}</span>
+            <a-vat-select
+                    *ngIf="editable && invoice.withVAT && line"
+                    name="vatRate"
+                    [vatRateList]="vatRateList"
+                    [required]="invoice.withVAT && line.quantity > 0"
+                    [ngModel]="line.vatRate"
+                    (ngModelChange)="vatUpdated($event)">
+            </a-vat-select>
         </div>
         <div class="cell phone-2 grid-x align-right">
             <button *ngIf="!editable && editActionEnabled"

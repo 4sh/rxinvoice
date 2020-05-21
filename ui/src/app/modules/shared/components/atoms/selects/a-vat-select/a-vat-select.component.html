@@ -1,10 +1,10 @@
 <ng-select
-           [items]="vatModelList"
-           [bindLabel]="'rate'"
-           [clearable]="false"
+           [items]="vatRateList"
+           [bindLabel]="'label'"
+           [clearable]="true"
            [searchable]="false"
            [disabled]="disabled"
            [ngModel]="selectedVat"
-           placeholder="'vat'"
+           placeholder="{{'vat.rate.select.placeholder' | translate}}"
            (ngModelChange)="onChange($event)">
 </ng-select>

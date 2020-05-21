@@ -156,15 +156,24 @@ export class InvoiceDetailComponent implements OnInit {
         this.dropdownBlock = !this.dropdownBlock;
     }
 
-    public lineAdded(): void {
-        this.newLine =  new InvoiceLine();
-    }
-
-    public lineUpdated($event: InvoiceLine) {
+    private computeTotalAmounts() {
         this.invoice.grossAmount = this.invoice.computeGrossAmount();
         if (this.invoice.withVAT) {
             this.invoice.vatAmount = this.invoice.computeVatAmount();
         }
         this.invoice.netAmount = this.invoice.computeNetAmount();
+    }
+
+    public lineAdded(): void {
+        this.newLine = new InvoiceLine();
+        this.computeTotalAmounts()
+    }
+
+    public lineRemoved() {
+        this.computeTotalAmounts()
+    }
+
+    public lineUpdated() {
+        this.computeTotalAmounts();
     }
 }
