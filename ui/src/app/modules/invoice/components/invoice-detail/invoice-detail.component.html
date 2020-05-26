@@ -6,10 +6,10 @@
             </a-button-default>
             <h2 class="cell phone-16">{{invoice.buyer.name}}</h2>
             <div class="cell auto grid-x align-right">
-              <a-invoice-status-select
-                      [ngModel]="invoice.status"
-                      name="status">
-              </a-invoice-status-select>
+                <a-invoice-status-select
+                        [ngModel]="invoice.status"
+                        name="status">
+                </a-invoice-status-select>
             </div>
         </div>
 
@@ -132,59 +132,7 @@
         </div>
 
         <div class="cell shrink footer-container">
-
-            <div class="footer-invoice grid-x grid-padding-x" [ngClass]="dropdownBlock ? 'open' : 'close'">
-                <button (click)="clickDropEvent()" class="dropdownBlock-button">
-                    <div *ngIf="!dropdownBlock">
-                        <i class="fas fa-sort-up"></i>
-                    </div>
-                    <div *ngIf="dropdownBlock">
-                        <i class="fas fa-sort-down"></i>
-                    </div>
-                </button>
-                <div class="cell phone-8">
-                    <label>Notes</label>
-                    <textarea type="text"
-                              rows="3" cols="20">
-                        </textarea>
-                </div>
-                <div class="cell phone-8">
-                    <label>Pièces jointes</label>
-                    <div class="import-files-invoice grid-x align-center">
-                        <p><i class="fas fa-cloud-upload-alt"></i>Glissez-déposez vos fichiers ou</p>
-                        <a-button-default visibility="MEDIUM" size="SMALL">
-                            Sélectionnez en un
-                        </a-button-default>
-                    </div>
-                </div>
-                <div class="cell phone-8 list-files">
-                    <label>Fichiers</label>
-                    <ul>
-                        <li>
-                            <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
-                            <i class="far fa-trash-alt"></i>
-                        </li>
-                        <li>
-                            <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
-                            <i class="far fa-trash-alt"></i>
-                        </li>
-                        <li>
-                            <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
-                            <i class="far fa-trash-alt"></i>
-                        </li>
-                        <li>
-                            <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
-                            <i class="far fa-trash-alt"></i>
-                        </li>
-                        <li>
-                            <span><i class="fas fa-paperclip"></i> Log de temps - Mars 2020.pdf</span>
-                            <i class="far fa-trash-alt"></i>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-
+            <attachments-detail [invoice]="invoice"></attachments-detail>
             <div class="control-bar grid-x">
                 <div class="cell phone-12">
                     <a-button-cancel (click)="delete()">

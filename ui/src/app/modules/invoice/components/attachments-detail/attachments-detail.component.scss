@@ -1,0 +1,114 @@
+@import 'src/styles/base-component';
+
+.footer-invoice {
+  padding: rem-calc(15px);
+  margin-top: rem-calc(16px);
+  width: 100%;
+  background-color: rgb(246, 249, 251);
+  border-radius: 0 0 rem-calc(5px) rem-calc(5px);
+  position: absolute;
+  bottom: 65px;
+
+
+  .import-files-invoice {
+    border: 2px dashed rgba($app-primary, 0.4);
+    background-color: rgba($app-primary_light, 0.5);
+    text-align: center;
+    border-radius: 5px;
+    height: 80px;
+
+    &.nv-file-over { border: dotted 3px red; }
+
+    p {
+      color: $app-primary;
+      margin-top: rem-calc(10px);
+      margin-bottom: rem-calc(5px);
+      display: block;
+      width: 100%;
+    }
+
+    i {
+      font-size: 12px;
+      margin-right: rem-calc(8px);
+    }
+  }
+
+  .list-files {
+
+    ul {
+      height: 50px;
+      overflow: scroll;
+
+      li {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px;
+        border-bottom: 1px solid #cacaca9c;
+
+        span {
+          color: rgba(black, 0.6);
+
+          i {
+            margin-right: 5px;
+          }
+        }
+
+        .fa-trash-alt {
+          color: $app-primary;
+        }
+      }
+    }
+  }
+
+  &.close {
+    height: 28px;
+    padding: 4px;
+
+    textarea, .import-files-invoice, .list-files ul {
+      display: none;
+    }
+
+    label {
+      color: $app-primary;
+    }
+
+    .dropdownBlock-button {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      background-color: #62636524;
+      border-radius: 3px;
+      padding: 5px 7px;
+      color: #626365;
+      display: flex;
+      align-items: center;
+
+      i {
+        height: 10px;
+        line-height: 23px;
+      }
+    }
+  }
+
+  &.open {
+    box-shadow: 0 -7px 16px 4px #8080802e;
+
+    .dropdownBlock-button {
+      position: absolute;
+      right: 0px;
+      bottom: 125px;
+      background-color: #62636524;
+      border-radius: 3px;
+      padding: 2px 7px;
+      color: #626365;
+      display: flex;
+      align-items: center;
+
+      i {
+        height: 18px;
+      }
+    }
+  }
+}

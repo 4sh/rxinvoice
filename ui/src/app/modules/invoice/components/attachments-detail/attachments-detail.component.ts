@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Blob} from '../../../../domain/blob';
-import { FileUploader} from 'ng2-file-upload';
+import {FileUploader} from 'ng2-file-upload';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
+import {Invoice} from '../../../../domain/invoice/invoice';
+import {installTempPackage} from '@angular/cli/tasks/install-package';
 
 @Component({
     selector: 'attachments-detail',
@@ -10,14 +12,24 @@ import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
 })
 export class AttachmentsDetailComponent implements OnInit {
 
-    @Input() invoiceId: string;
-    @Input() attachments: Blob[];
-    @Input() editMode = false;
-    @Output() attachmentsChange: EventEmitter<null> = new EventEmitter();
-    @Output() deleteFile: EventEmitter<string> = new EventEmitter();
-    url: string;
-
+    public dropdownBlock: boolean;
+    public url: string;
     public uploader: FileUploader;
+    public hasBaseDropZoneOver: boolean;
+
+    @ViewChild('inputFile')
+    public inputFile: ElementRef;
+
+    @Input()
+    public invoice: Invoice;
+    @Input()
+    public attachments: Blob[];
+    @Input()
+    public editMode: boolean;
+    @Output()
+    public attachmentsChange: EventEmitter<null> = new EventEmitter();
+    @Output()
+    public deleteFile: EventEmitter<string> = new EventEmitter();
 
     constructor(private alertService: SweetAlertService) {
     }
@@ -26,30 +38,37 @@ export class AttachmentsDetailComponent implements OnInit {
         if (!this.attachments) {
             this.attachments = [];
         }
-        this.url = '/api/invoices/' + this.invoiceId + '/attachments';
-        this.uploader = new FileUploader({ autoUpload: false, url: this.url});
+        this.url = '/api/invoices/' + this.invoice._id + '/attachments';
+        this.uploader = new FileUploader({autoUpload: false, url: this.url})
     }
 
-    filesChange() {
+    public clickDropEvent(): void {
+        this.dropdownBlock = !this.dropdownBlock;
+    }
+
+    public filesChange(): void {
         this.uploadAttachments();
     }
 
     uploadAttachments() {
-            this.uploader.uploadAll();
-            this.uploader.onCompleteAll = ( ) => {
-                this.attachmentsChange.emit();
-            };
+        this.uploader.uploadAll();
     }
 
-    delete(fileToRemove) {
-        this.alertService.confirm({title: 'alert.confirm.deletion'}).then(
-            (accept) => {
+    public delete(fileToRemove): void {
+        this.alertService
+            .confirm({title: 'alert.confirm.deletion'})
+            .then((accept) => {
                 if (accept.value) {
                     this.deleteFile.emit(fileToRemove._id);
                 }
-
-            }
-        );
+            });
     }
 
+    public fileOverBase(e: boolean): void {
+        this.hasBaseDropZoneOver = e;
+    }
+
+    public openFileBrowser() {
+        this.inputFile.nativeElement.click();
+    }
 }

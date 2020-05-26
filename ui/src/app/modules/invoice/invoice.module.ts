@@ -3,10 +3,7 @@ import {CommonModule} from '@angular/common';
 import {InvoicesListComponent} from './components/invoices-list/invoices-list.component';
 import {InvoicesComponent} from './components/invoices/invoices.component';
 import {InvoiceDetailComponent} from './components/invoice-detail/invoice-detail.component';
-import {InvoiceLinesDetailComponent} from './components/invoice-lines-detail/invoice-lines-detail.component';
 import {AttachmentsDetailComponent} from './components/attachments-detail/attachments-detail.component';
-import {InvoiceLineFormComponent} from './components/invoice-lines-detail/invoice-line-form/invoice-line-form.component';
-import {InvoiceLineHeaderComponent} from './components/invoice-lines-detail/invoice-line-header/invoice-line-header.component';
 import {RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -17,19 +14,14 @@ import {InvoiceService} from './services/invoice.service';
 import {DownloadInvoiceService} from './services/download-invoice.service';
 import {ButtonsModule} from '../shared/components/atoms/buttons/buttons.module';
 import {InvoiceResolver} from './resolvers/invoice.resolver';
-import { AInvoiceLineComponent } from './components/a-invoice-line/a-invoice-line.component';
+import {AInvoiceLineComponent} from './components/a-invoice-line/a-invoice-line.component';
 
 const components = [
     InvoicesListComponent,
     InvoicesComponent,
     InvoiceDetailComponent,
     AInvoiceLineComponent,
-    AttachmentsDetailComponent,
-    ////
-     InvoiceLinesDetailComponent,
-     InvoiceLineFormComponent,
-     InvoiceLineHeaderComponent
-    ];
+    AttachmentsDetailComponent];
 
 @NgModule({
     declarations: [components],

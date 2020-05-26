@@ -4,13 +4,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CompanyService} from '../../../../common/services/company.service';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {InvoiceService} from '../../services/invoice.service';
-import {RepositoryService} from '../../../../common/services/repository.service';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
 import {AttachmentsDetailComponent} from '../attachments-detail/attachments-detail.component';
 import {Location} from '@angular/common';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
-import {InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
 import {CustomerService} from '../../../../common/services/customer.service';
 import * as Moment from 'moment';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
@@ -25,15 +23,12 @@ export class InvoiceDetailComponent implements OnInit {
     public seller: Company;
     public invoice: Invoice;
     public canDelete: Boolean;
-    public statuses: InvoiceStatusType[];
-    public dropdownBlock: Boolean = false;
     public newLine: InvoiceLine = new InvoiceLine();
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
 
     constructor(private companyService: CompanyService,
                 private customerService: CustomerService,
-                private repositoryService: RepositoryService,
                 private invoiceService: InvoiceService,
                 private route: ActivatedRoute,
                 private router: Router,
@@ -54,8 +49,6 @@ export class InvoiceDetailComponent implements OnInit {
             .subscribe(currentUser =>
                 this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0
             );
-        this.repositoryService.fetchInvoiceStatus()
-            .subscribe(statuses => this.statuses = statuses);
     }
 
     public invoiceDateChanged(invoiceDateChangeEvent: Date) {
@@ -79,7 +72,6 @@ export class InvoiceDetailComponent implements OnInit {
 
 
     public create(): void {
-        // this.form.disable();
         if (!this.invoice) {
             this.invoice = new Invoice();
         }
@@ -144,10 +136,6 @@ export class InvoiceDetailComponent implements OnInit {
         if (status) {
             return status.timestamp;
         }
-    }
-
-    public clickDropEvent() {
-        this.dropdownBlock = !this.dropdownBlock;
     }
 
     private computeTotalAmounts() {
