@@ -19,7 +19,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule, CurrencyPipe, DatePipe} from '@angular/common';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {RepositoryService} from './common/services/repository.service';
 import {CompanyService} from './common/services/company.service';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 import {AuthenticationService} from './common/services/authentication.service';
@@ -95,7 +94,6 @@ export function createTranslateLoader(http: HttpClient) {
     ],
     providers: [
         TranslateService,
-        RepositoryService,
         CompanyService,
         CustomerService,
         LoggedInGuard,

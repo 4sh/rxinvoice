@@ -1,7 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Modal} from '../modal/modal.models/modal.model';
-import {RepositoryService} from '../../services/repository.service';
-import {InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 import {Invoice} from '../../../domain/invoice/invoice';
 import {InvoiceService} from '../../../modules/invoice/services/invoice.service';
 
@@ -10,19 +8,12 @@ import {InvoiceService} from '../../../modules/invoice/services/invoice.service'
     templateUrl: './invoice-edition-popup.html',
     styleUrls: ['./invoice-edition-popup.scss']
 })
-export class InvoiceEditionPopupComponent extends Modal implements OnInit {
+export class InvoiceEditionPopupComponent extends Modal  {
 
     public invoice: Invoice;
-    public statuses: InvoiceStatusType[];
 
-    constructor(private repositoryService: RepositoryService,
-                private invoiceService: InvoiceService) {
+    constructor(private invoiceService: InvoiceService) {
         super();
-    }
-
-    ngOnInit() {
-        this.repositoryService.fetchInvoiceStatus()
-            .subscribe(statuses => this.statuses = statuses);
     }
 
     onInjectInputs(invoice): void {

@@ -51,12 +51,8 @@
 
         <div class="row quick-status-panel-content">
             <div class="columns small-24">
-                <select [(ngModel)]="invoice.status">
-                    <option value="">{{'invoice.status.all' | translate}}</option>
-                    <option *ngFor="let status of statuses" [ngValue]="status">
-                        {{'invoice.status.' + status | translate}}
-                    </option>
-                </select>
+                <a-invoice-status-select
+                    [(ngModel)]="invoice.status"></a-invoice-status-select>
             </div>
 
             <div class="columns small-24">

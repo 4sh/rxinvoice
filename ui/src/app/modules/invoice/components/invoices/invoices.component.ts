@@ -1,10 +1,7 @@
 import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
-import {InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
-import {ServiceKind} from '../../../../domain/common/service.kind';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {InvoiceService} from '../../services/invoice.service';
-import {RepositoryService} from '../../../../common/services/repository.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CurrencyPipe} from '@angular/common';
 import * as moment from 'moment';
@@ -20,14 +17,11 @@ export class InvoicesComponent implements OnInit {
     public searchForm: FormGroup;
 
     public invoices: Invoice[];
-    public statusTypes: InvoiceStatusType[];
-    public kinds: ServiceKind[];
     public filterString = 'reference';
     public isPending = true;
 
     constructor(private fb: FormBuilder,
-                private invoiceService: InvoiceService,
-                private repositoryService: RepositoryService) {
+                private invoiceService: InvoiceService) {
         this.searchForm = fb.group({
             query: '',
             startDate: moment().subtract(7, 'days').toDate(),
@@ -42,16 +36,12 @@ export class InvoicesComponent implements OnInit {
         if (this.invoiceService.invoiceSearchFilter) {
             this.searchForm.patchValue(this.invoiceService.invoiceSearchFilter);
         }
-        this.repositoryService.fetchInvoiceStatus()
-            .subscribe(statuses => this.statusTypes = statuses);
-        this.kinds = this.repositoryService.fetchInvoiceKind();
         this.searchForm.valueChanges.pipe(
             debounceTime(250),
             distinctUntilChanged())
             .subscribe(() => {
                 this.research();
             });
-        this.research();
     }
 
     toggleFilter(string) {
