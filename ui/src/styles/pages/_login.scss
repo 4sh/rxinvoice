@@ -5,105 +5,149 @@
 // ==== Login View
 
 .login-view {
-  &:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background: linear-gradient(135deg, #4779ad 0%, #2d5b84 50%, #919faf 100%);
-    content: '';
-    z-index: -1;
-  }
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background: linear-gradient(135deg, #4779ad 0%, #2d5b84 50%, #919faf 100%);
+        content: '';
+        z-index: -1;
+    }
 }
 
 
 // ==== Login Content Form
 
 .login-container {
-  position: relative;
-  display: flex;
-  height: 100%;
-  padding-bottom: rem-calc(80px);
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  background : $app-gradient;
-
-  .logo-app {
-    text-align: center;
-    margin-bottom: 24px;
-    font-weight: bold;
-    color: white;
-    font-size: 16px;
-
-    img {
-      display: block;
-      margin: 16px auto;
-      width: rem-calc(180px);
-    }
-  }
-
-  form {
+    position: relative;
+    display: flex;
+    height: 100%;
+    padding-bottom: rem-calc(80px);
+    flex-direction: column;
+    align-content: center;
     justify-content: center;
-  }
+    background: white;
 
-  .card-login {
-    display: block;
-    margin: 0 auto;
-    max-width: rem-calc(400px);
-    padding: rem-calc(16px) !important;
-    background: transparent;
-    border: none;
+    .logo-app {
+        text-align: center;
+        margin-bottom: 24px;
+        font-weight: bold;
+        color: white;
+        font-size: 16px;
 
-    hr { opacity: 0.5;}
-    .title { color: white;}
-    .form-group { color: white;}
-
-    .card-footer {
-      padding: 0 10px;
+        img {
+            position: absolute;
+            top: 64px;
+            left: 67px;
+            width: rem-calc(110px);
+        }
     }
-  }
+
+    form {
+        justify-content: center;
+    }
+
+    .card-login {
+        display: block;
+        margin: 0 auto;
+        max-width: rem-calc(500px);
+        padding-bottom: rem-calc(16px) !important;
+        background: transparent;
+        border: none;
+
+        hr {
+            opacity: 0.5;
+        }
+
+        .title {
+            color: $app-primary;
+            font-weight: bold;
+            font-size: rem-calc(50px);
+            padding: 0;
+
+            span {
+                color: $app-tertiary;
+                font-size: rem-calc(50px);
+            }
+        }
+
+        .subTitle {
+            font-weight: initial;
+            color: $app-primary;
+            margin-bottom: rem-calc(24px);
+        }
+
+        .form-group {
+            color: $app-grey;
+            font-size: rem-calc(14px);
+
+            input {
+                padding-left: rem-calc(60px);
+                margin-top: rem-calc(4px);
+            }
+
+            i {
+                display: flex;
+                align-items: center;
+                color: rgba($app-primary, 0.3);
+                font-size: rem-calc(18px);
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    border: 1px solid rgba($app-primary, 0.3);
+                    height: rem-calc(22px);
+                    left: rem-calc(33px);
+                }
+            }
+        }
+
+        .card-footer {
+            padding: 0 10px;
+
+            button {
+                width: 100%;
+            }
+        }
+    }
 }
 
 // ==== Login Content Intro
 
 .login-intro-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  height: 100%;
-  padding: 0 5% 10% 5%;
-  background-image: url($path-jpg + 'bg-login.jpg');
-  background-size: cover;
-  background-position: center center;
-
-  * { color: white;}
-
-  img {
     position: relative;
-    left: rem-calc(-5px);
-    margin-top: rem-calc(24px);
-  }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+    padding: 16% 5% 10% 5%;
+    background: $app-gradient;
 
-  .title {
-    font-weight: bold;
-  }
+    * {
+        color: white;
+    }
 
-  .mention {
-    position: absolute;
-    bottom: 5%;
-    left: 8%;
-    opacity: 0.8;
-  }
+    .title {
+        font-weight: bold;
+        font-size: rem-calc(60px);
+        line-height: rem-calc(65px);
+    }
 
-  .network {
-    position: absolute;
-    bottom: 34px;
-    right: 8%;
-    opacity: 0.8;
-    font-size: 34px;
-  }
+    .mention {
+        position: absolute;
+        bottom: 5%;
+        left: 8%;
+        opacity: 0.8;
+    }
+
+    .network {
+        position: absolute;
+        bottom: 34px;
+        right: 8%;
+        opacity: 0.8;
+        font-size: 34px;
+    }
 }
