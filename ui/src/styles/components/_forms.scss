@@ -163,6 +163,109 @@ select, .ng-control {
 
 
 }
+
+.invoice-detail-status .DRAFT {
+    .ng-select-container {
+        color: $status-draft-color;
+        border: 1px solid $status-draft-color;
+        background-color: rgba($status-draft-color, 0.05);
+        .ng-arrow {
+            border-color: $status-draft-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .READY {
+    .ng-select-container {
+        color: $status-ready-color;
+        border: 1px solid $status-ready-color;
+        background-color: rgba($status-ready-color, 0.05);
+        .ng-arrow {
+            border-color: $status-ready-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .WAITING_VALIDATION {
+    .ng-select-container {
+        color: $status-waiting-validation-color;
+        border: 1px solid $status-waiting-validation-color;
+        background-color: rgba($status-waiting-validation-color, 0.05);
+        .ng-arrow {
+            border-color: $status-waiting-validation-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .VALIDATED {
+    .ng-select-container {
+        color: $status-validated-color;
+        border: 1px solid $status-validated-color;
+        background-color: rgba($status-validated-color, 0.05);
+        .ng-arrow {
+            border-color: $status-validated-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .SENT {
+    .ng-select-container {
+        color: $status-sent-color;
+        border: 1px solid $status-sent-color;
+        background-color: rgba($status-sent-color, 0.05);
+        .ng-arrow {
+            border-color: $status-sent-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .PAID {
+    .ng-select-container {
+        color: $status-paid-color;
+        border: 1px solid $status-paid-color;
+        background-color: rgba($status-paid-color, 0.05);
+        .ng-arrow {
+            border-color: $status-paid-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .PAYMENT_SCHEDULED {
+    .ng-select-container {
+        color: $status-payment-scheduled-color;
+        border: 1px solid $status-payment-scheduled-color;
+        background-color: rgba($status-payment-scheduled-color, 0.05);
+        .ng-arrow {
+            border-color: $status-payment-scheduled-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .LATE {
+    .ng-select-container {
+        color: $status-late-color;
+        border: 1px solid $status-late-color;
+        background-color: rgba($status-late-color, 0.05);
+        .ng-arrow {
+            border-color: $status-late-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .UNPAID {
+    .ng-select-container {
+        color: $status-unpaid-color;
+        border: 1px solid $status-unpaid-color;
+        background-color: rgba($status-unpaid-color, 0.05);
+        .ng-arrow {
+            border-color: $status-unpaid-color transparent transparent;
+        }
+    }
+}
+.invoice-detail-status .CANCELLED {
+    .ng-select-container {
+        color: $status-cancelled-color;
+        border: 1px solid $status-cancelled-color;
+        background-color: rgba($status-cancelled-color, 0.05);
+        .ng-arrow {
+            border-color: $status-cancelled-color transparent transparent;
+        }
+    }
+}
+
+
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
     color: $app-primary;
     background-color: rgba($app-primary_light, .3);
@@ -194,5 +297,4 @@ textarea {
         background: $app-secondary;
     }
 }
-
 

@@ -5,6 +5,7 @@
     position: relative;
     display: block;
     width: 100%;
+    height: 100%;
     padding: rem-calc(16px);
 }
 
@@ -47,7 +48,51 @@
 // ---- Invoice List Table
 
 @include new('invoiceList') {
-    margin-top: rem-calc(12px);
+    height: 100%;
+
+    .invoiceList-head {
+        display: block;
+        background: $app-primary_light;
+        color: rgba($app-primary, 0.7);
+        font-size: rem-calc(12px);
+        border-radius: 8px 8px 0 0;
+        border: none;
+        font-weight: 600;
+        padding: rem-calc(15px) 0;
+    }
+    .invoiceList-line {
+        height: 100%;
+        overflow: scroll;
+        box-shadow: inset 0 10px 23px -21px rgb(181, 181, 181);
+
+        .line-block {
+            width: auto;
+            padding: rem-calc(15px) 0;
+
+            &:nth-child(even) {
+                background: $table-line
+            }
+            &:hover {
+                background: $table-line-hover;
+            }
+        }
+
+        .cell {
+            padding: rem-calc(8px 10px);
+
+            &.ref-cell, &.client-cell, &.business-cell, &.object-cell, &.amount-cell, &.date-cell {
+                span {
+                    color: $body-dark-font-color;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .object-cell {
+            height: 55px;
+            overflow: hidden;
+        }
+    }
 
     @include has('status') {
         border-radius: rem-calc(50px);
@@ -204,6 +249,15 @@
         }
     }
 }
+.actions-cell {
+    width: 147px;
+}
+.status-cell {
+    width: 185px;
+}
+.date-cell, .amount-cell {
+    width: 140px;
+}
 
 .invoiceList-launch {
     font-weight: 700;
@@ -215,11 +269,15 @@
     border: 1px solid rgba($app-primary, .3);
     color: rgba($app-primary, .7);
     margin-right: 10px;
+    visibility: hidden;
 
     &:hover {
         background-color: $app-primary;
         color: white;
         border-color: $app-primary;
+    }
+    &.visibility {
+        visibility: visible;
     }
 }
 

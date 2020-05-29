@@ -3,7 +3,7 @@
 .footer-invoice {
   padding: rem-calc(15px);
   margin-top: rem-calc(16px);
-  width: 100%;
+  width: calc(100% - 32px);
   background-color: rgb(246, 249, 251);
   border-radius: 0 0 rem-calc(5px) rem-calc(5px);
   position: absolute;

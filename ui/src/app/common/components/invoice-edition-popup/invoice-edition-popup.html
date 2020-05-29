@@ -10,10 +10,10 @@
                 <th width="100px" *ngIf="invoice.reference">{{'invoice.list.column.reference'|translate}}</th>
                 <th width="150px">{{'invoice.list.column.buyer'|translate}}</th>
                 <th width="150px">{{'invoice.list.column.business'|translate}}</th>
-                <th width="400px">{{'invoice.list.column.object'|translate}}</th>
+                <th width="380px">{{'invoice.list.column.object'|translate}}</th>
                 <th width="150px" class="text-right">{{'invoice.list.column.gross.amount'|translate}}</th>
                 <th width="130px">{{'invoice.list.column.date'|translate}}</th>
-                <th width="230px">{{'invoice.list.column.status'|translate}}</th>
+                <th width="270px">{{'invoice.list.column.status'|translate}}</th>
             </tr>
             </thead>
 
@@ -30,7 +30,7 @@
                 <td  width="150px" class="text-click">
                     <span class="invoiceList-value">{{invoice.business.name}}</span>
                 </td>
-                <td  width="400px" class="text-click">
+                <td  width="380px" class="text-click">
                     <span class="invoiceList-value">{{invoice.object}}</span>
                 </td>
                 <td  width="150px" class="text-click text-right">
@@ -39,7 +39,7 @@
                 <td  width="150px" class="text-click">
                     <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
                 </td>
-                <td  width="230px">
+                <td  width="270px">
                     <span class="invoiceList-status text-right" [ngClass]="invoice.status">
                         {{ 'invoice.status.' + invoice.status | translate}}
                     </span>
@@ -49,30 +49,31 @@
         </table>
 
 
-        <div class="row quick-status-panel-content">
-            <div class="columns small-24">
-                <a-invoice-status-select
-                    [(ngModel)]="invoice.status"></a-invoice-status-select>
-            </div>
-
-            <div class="columns small-24">
-                <h6 class="column small-8"> {{'invoice.date' | translate}}</h6>
-                <div class="column">
-                    <date-picker [(ngModel)]="invoice.date"></date-picker>
+        <div class="quick-status-panel-content grid-y grid-padding-y">
+            <div class="grid-x grid-padding-x cell shrink">
+                <div class="cell phone-12">
+                    <p class="title-section"> {{'invoice.status' | translate}}</p>
+                    <a-invoice-status-select
+                        [(ngModel)]="invoice.status"></a-invoice-status-select>
                 </div>
-                <h6 class="column small-8"> {{'invoice.reference' | translate}}</h6>
-                <div class="column">
+                <div class="cell phone-6">
+                    <p class="title-section"> {{'invoice.date' | translate}}</p>
+                    <a-date-picker name="invoiceDate" [ngModel]="invoice.date"></a-date-picker>
+                </div>
+                <div class="cell phone-6">
+                    <p class="title-section"> {{'invoice.reference' | translate}}</p>
                     <input type="text" [(ngModel)]="invoice.reference">
                 </div>
             </div>
-
-            <div class="columns small-24">
-                {{'dashboard.quickEdition.comment'|translate}}
-                <textarea [(ngModel)]="invoice.comment"
-                          rows="10" cols="50">
-                </textarea>
+            <div class="grid-x grid-padding-x cell shrink">
+                <div class="cell phone-24">
+                    <p class="title-section">{{'dashboard.quickEdition.comment'|translate}}</p>
+                    <textarea [(ngModel)]="invoice.comment"
+                              rows="10" cols="50">
+                    </textarea>
+                </div>
             </div>
-            <div class="columns small-24 align-right grid-x">
+            <div class="cell shrink align-right grid-x">
                 <a-button-cancel size="DEFAULT" visibility="MEDIUM" (click)="cancel()">
                     <i class="fas fa-times"></i>{{ 'dashboard.quickEdition.cancel' | translate}}
                 </a-button-cancel>

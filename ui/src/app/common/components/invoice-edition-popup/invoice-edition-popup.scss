@@ -21,6 +21,10 @@
     @include breakpoint(large) {
       width: 1000px;
     }
+    @include new('title-section') {
+      font-size: rem-calc(14px);
+      margin-bottom: rem-calc(4px);
+    }
 
     &-close {
       display: flex;

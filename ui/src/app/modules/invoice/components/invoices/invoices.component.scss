@@ -3,11 +3,13 @@
 :host {
     display: block;
     position: relative;
-   
+    height: 100%;
     background-color: white;
     border-radius: $content-radius;
 }
-
+.invoiceListContainer {
+    height: 100%;
+}
 form {
     padding: rem-calc(16px);
 }

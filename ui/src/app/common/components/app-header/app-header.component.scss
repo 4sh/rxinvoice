@@ -25,6 +25,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      justify-content: flex-end;
 
       .menu-tag {
         position: relative;
@@ -32,7 +33,6 @@
         justify-content: center;
         align-items: center;
         background-color: $app-grey_light;
-        margin-right: rem-calc(18px);
         width: rem-calc(40px);
         height: rem-calc(40px);
         border-radius: rem-calc(20px);
@@ -49,15 +49,18 @@
       .menu-user {
         display: flex;
         flex-direction: column;
+        margin-right: rem-calc(18px);
 
         .user-name {
           font-weight: 600;
           color: $app-primary_medium;
+          text-align: right;
         }
         .user-role {
           font-size: rem-calc(13px);
           color: $app-grey;
           font-weight: 500;
+          text-align: right;
         }
       }
     }

@@ -37,23 +37,23 @@ export class SweetAlertService {
     }
 
     confirm(options: SweetAlertOptions) {
-        return this.question(assign({type: 'question'}, options));
+        return this.question(assign({type: 'question', icon: 'question'}, options));
     }
 
     success(options: SweetAlertOptions) {
-        return this.alert(assign({type: 'success'}, options));
+        return this.alert(assign({type: 'success', icon: 'success'}, options));
     }
 
     error(options: SweetAlertOptions) {
-        return this.alert(assign({type: 'error'}, options));
+        return this.alert(assign({type: 'error', icon: 'error'}, options));
     }
 
     warning(options: SweetAlertOptions) {
-        return this.alert(assign({type: 'warning'}, options));
+        return this.alert(assign({type: 'warning', icon: 'warning'}, options));
     }
 
     info(options: SweetAlertOptions) {
-        return this.alert(assign({type: 'info'}, options));
+        return this.alert(assign({type: 'info', icon: 'info'}, options));
     }
 }
 

@@ -1,12 +1,12 @@
-<div class="invoiceListHome">
-    <div class="invoiceListHome-header">
+<div class="invoiceListHome grid-y">
+    <div class="invoiceListHome-header cell shrink">
         <a-dashboard-select *ngIf="dashboards.length > 1"
                           [(ngModel)]="currentDashboard"
                           [dashboards]="dashboards">
         </a-dashboard-select>
     </div>
 
-    <div class="invoiceListHome-dashboard">
+    <div class="invoiceListHome-dashboard cell auto">
         <div class="row dashboard" [ngClass]="{'fullHeight' : dashboards.length < 2}">
             <dashboard-column [class]="'column-width-' + currentDashboard.columnConfigurations.length"
                               *ngFor="let columnConfiguration of currentDashboard.columnConfigurations"

@@ -1,6 +1,7 @@
 @import 'src/styles/base-component';
 
 .invoiceListHome {
+  height: 100%;
   &-header {
     height: rem-calc(58px);
     display: flex;
@@ -16,15 +17,11 @@
   }
 
   &-dashboard {
-    padding: rem-calc(10px);
+    padding: rem-calc(10px 10px 20px);
 
     .dashboard {
-      height: calc(100vh - 230px);
+      height: 100%;
       overflow-x: scroll;
-
-      &.fullHeight {
-        height: calc(100vh - 170px)!important;
-      }
 
       .column-width- {
         &2 {

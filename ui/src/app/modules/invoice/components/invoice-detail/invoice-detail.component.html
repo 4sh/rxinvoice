@@ -1,5 +1,5 @@
-<div class="grid-y invoice-detail-container">
-    <form novalidate #invoiceForm="ngForm">
+<div class="invoice-detail-container">
+    <form novalidate #invoiceForm="ngForm" class="grid-y">
         <div class="invoice-header cell shrink grid-x">
             <a-button-default size="SMALL" visibility="LOW" (click)="goBack()" class="cell shrink">
                 <i class="ion-arrow-left-c"></i> {{'button.label.back' | translate}}
@@ -7,6 +7,7 @@
             <h2 class="cell phone-16">{{invoice.buyer.name}}</h2>
             <div class="cell auto grid-x align-right">
                 <a-invoice-status-select
+                        class="invoice-detail-status"
                         [ngModel]="invoice.status"
                         name="status">
                 </a-invoice-status-select>
@@ -81,10 +82,10 @@
                 <div class="grid-x grid-padding-x">
                     <div class="cell phone-1"></div>
                     <div class="cell phone-9">{{'invoice.line.label'|translate}}</div>
-                    <div class="cell phone-2">{{'invoice.line.quantity'|translate}}</div>
-                    <div class="cell phone-3">{{'invoice.line.unit.cost'|translate}}</div>
-                    <div class="cell phone-3">{{'invoice.line.gross.amount'|translate}}</div>
-                    <div class="cell phone-4">{{'invoice.line.vat.rate'|translate}}</div>
+                    <div class="cell phone-2 grid-x align-center">{{'invoice.line.quantity'|translate}}</div>
+                    <div class="cell phone-3 grid-x align-right">{{'invoice.line.unit.cost'|translate}}</div>
+                    <div class="cell phone-3 grid-x align-right">{{'invoice.line.gross.amount'|translate}}</div>
+                    <div class="cell phone-4 grid-x align-right">{{'invoice.line.vat.rate'|translate}}</div>
                     <div class="cell phone-2"></div>
                 </div>
             </div>
@@ -114,19 +115,22 @@
 
                 </a-invoice-line>
             </div>
-            <div class="totaux-line">
+            <div class="total-line">
                 <div class="grid-x grid-padding-x align-middle">
-                    <div class="cell phone-17 grid-x align-right">
-                        <span>{{'invoice.line.total.gross.amount'|translate}}</span>
-                        <span>{{'invoice.line.total.vat'|translate}}</span>
-                        <span>{{'invoice.line.total.net.amount'|translate}}</span>
+                    <div class="cell phone-12"></div>
+                    <div class="cell phone-6 grid-x">
+                        <div class="cell phone-12 grid-x grid-padding-x align-right title-total">
+                            <span>{{'invoice.line.total.gross.amount'|translate}}</span>
+                            <span>{{'invoice.line.total.vat'|translate}}</span>
+                            <span>{{'invoice.line.total.net.amount'|translate}}</span>
+                        </div>
+                        <div class="cell phone-12 grid-x align-right amount-line">
+                            <span>{{invoice.grossAmount | invoiceCurrency}}</span>
+                            <span>{{invoice.vatAmount | invoiceCurrency}}</span>
+                            <span>{{invoice.netAmount | invoiceCurrency}}</span>
+                        </div>
                     </div>
-                    <div class="cell phone-3 grid-x align-right">
-                        <span>{{invoice.grossAmount | invoiceCurrency}}</span>
-                        <span>{{invoice.vatAmount | invoiceCurrency}}</span>
-                        <span>{{invoice.netAmount | invoiceCurrency}}</span>
-                    </div>
-                    <div class="cell phone-4"></div>
+                    <div class="cell phone-6"></div>
                 </div>
             </div>
         </div>
@@ -150,8 +154,10 @@
                         <i class="fas fa-copy"></i>
                         {{'button.label.copy' | translate}}
                     </a-button-default>
+                    <a-spacer [sizeX]="10"></a-spacer>
                     <a-button-default (click)="save()"
-                                      [disabled]="invoiceForm.invalid">
+                                      [disabled]="invoiceForm.invalid"
+                                      visibility="HIGH">
                         <i class="fas fa-save"></i>
                         {{'button.label.save' | translate}}
                     </a-button-default>

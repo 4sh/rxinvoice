@@ -10,7 +10,7 @@
                    [(ngModel)]="line.description"
                    placeholder="{{'invoice.line.label'|translate}}">
         </div>
-        <div class="cell phone-2">
+        <div class="cell phone-2 grid-x align-center">
             <span *ngIf="!editable">{{line?.quantity | number : '1.2'}}</span>
             <input *ngIf="editable && line"
                    type="number"
@@ -19,7 +19,7 @@
                    (ngModelChange)="quantityUpdated($event)"
                    placeholder="{{'invoice.line.quantity'|translate}}">
         </div>
-        <div class="cell phone-3">
+        <div class="cell phone-3 grid-x align-right">
             <span *ngIf="!editable">{{line?.unitCost | invoiceCurrency}}</span>
             <input *ngIf="editable && line"
                    type="number"
@@ -29,10 +29,10 @@
                    (ngModelChange)="unitCostUpdated($event)"
                    placeholder="{{'invoice.line.unit.cost'|translate}}">
         </div>
-        <div class="cell phone-3">
+        <div class="cell phone-3 grid-x align-right">
             <span>{{line?.grossAmount > 0 ? (line?.grossAmount | invoiceCurrency) : ''}}</span>
         </div>
-        <div class="cell phone-4">
+        <div class="cell phone-4 grid-x align-right">
             <span *ngIf="!editable && invoice.withVAT">{{line?.vatRate?.rate | number: '1.2'}} {{line?.vatRate?.rate ? ' %' : ''}}</span>
             <a-vat-select
                     *ngIf="editable && invoice.withVAT && line"
@@ -43,7 +43,7 @@
                     (ngModelChange)="vatUpdated($event)">
             </a-vat-select>
         </div>
-        <div class="cell phone-2 grid-x align-right">
+        <div class="cell phone-2 grid-x align-right align-middle">
             <button *ngIf="!editable && editActionEnabled"
                     class="cell phone-11 action-icon edit-action"
                     (click)="editLine()">
