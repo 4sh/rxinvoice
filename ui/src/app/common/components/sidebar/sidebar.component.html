@@ -5,26 +5,26 @@
 
     <nav class="sidebar-menu">
         <a routerLink="/app/dashboard" [routerLinkActive]="['isActive']" class="sidebar-menu-item toto">
-            <i class="fas fa-th-large"></i><span>{{'nav.home' | translate}}</span>
+            <i class="fas fa-th-large"></i><span>{{'navigation.menu.home' | translate}}</span>
         </a>
         <a routerLink="/app/customers" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="fas fa-users"></i><span>{{'nav.customers' | translate}}</span>
+            <i class="fas fa-users"></i><span>{{'navigation.menu.customers' | translate}}</span>
         </a>
         <a routerLink="/app/invoices" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="fas fa-file-invoice"></i><span>{{'nav.invoices' | translate}}</span>
+            <i class="fas fa-file-invoice"></i><span>{{'navigation.menu.invoices' | translate}}</span>
         </a>
         <a routerLink="/app/analyze" [routerLinkActive]="['isActive']" class="sidebar-menu-item">
-            <i class="fas fa-chart-bar"></i><span>{{'nav.analyze' | translate}}</span>
+            <i class="fas fa-chart-bar"></i><span>{{'navigation.menu.analyze' | translate}}</span>
         </a>
         <a routerLink="/app/seller-settings"
            [routerLinkActive]="['isActive']"
            class="sidebar-menu-item">
-            <i class="fas fa-cogs"></i><span>{{'nav.seller.settings' | translate}}</span>
+            <i class="fas fa-cogs"></i><span>{{'navigation.menu.seller.settings' | translate}}</span>
         </a>
         <a routerLink="/app/drafts" *ngIf="draftMenuVisible"
            [routerLinkActive]="['isActive']"
            class="sidebar-menu-item">
-            <i class="fas fa-file-alt"></i><span>{{'nav.drafts' | translate}}</span>
+            <i class="fas fa-file-alt"></i><span>{{'navigation.menu.drafts' | translate}}</span>
         </a>
     </nav>
 </div>
