@@ -4,7 +4,7 @@
             <a-button-default size="SMALL" visibility="LOW" (click)="goBack()" class="cell shrink">
                 <i class="ion-arrow-left-c"></i> {{'button.label.back' | translate}}
             </a-button-default>
-            <h2 class="cell phone-16">{{invoice.buyer.name}}</h2>
+            <h2 class="cell phone-16">{{invoice.buyer?.name}}</h2>
             <div class="cell auto grid-x align-right">
                 <a-invoice-status-select
                         class="invoice-detail-status"
@@ -20,7 +20,7 @@
                     <div class="grid-x grid-padding-x">
                         <div class="cell phone-12">
                             <label>{{'invoice.detail.customer' | translate}}</label>
-                            <a-customer-select name="customer" [ngModel]="invoice.buyer._id"></a-customer-select>
+                            <a-customer-select name="customer" [ngModel]="invoice.buyer?._id"></a-customer-select>
                         </div>
                         <div class="cell phone-12">
                             <label>{{'invoice.detail.customer.reference'|translate}}</label>
@@ -31,7 +31,7 @@
                         <div class="cell phone-12">
                             <label>{{'invoice.detail.business' | translate}}</label>
                             <a-business-select name="business"
-                                               [customerRef]="invoice.buyer._id"
+                                               [customerRef]="invoice.buyer?._id"
                                                [(ngModel)]="invoice.business">
                             </a-business-select>
                         </div>

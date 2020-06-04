@@ -5,6 +5,7 @@ import {InvoiceService} from '../../services/invoice.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CurrencyPipe} from '@angular/common';
 import * as moment from 'moment';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'invoices',
@@ -20,6 +21,7 @@ export class InvoicesComponent implements OnInit {
     public isPending = true;
 
     constructor(private fb: FormBuilder,
+                private router: Router,
                 private invoiceService: InvoiceService) {
         this.searchForm = fb.group({
             query: '',
@@ -73,5 +75,9 @@ export class InvoicesComponent implements OnInit {
 
     public exportInvoices(): string {
        return this.invoiceService.exportInvoices();
+    }
+
+    public newInvoice(): void {
+        this.router.navigateByUrl('invoices/detail/new')
     }
 }
