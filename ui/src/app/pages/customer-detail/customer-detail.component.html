@@ -1,207 +1,188 @@
-<div class="newCustomer full-height">
-    <div class="row align-middle newCustomerHeader">
-        <div class="columns shrink">
-            <a class="button small white ripple"
-              (click)="goBack()"><i class="ion-arrow-left-c"></i></a>
+<div class="invoice-detail-container">
+    <form class="grid-y">
+        <div class="customer-header cell shrink grid-x">
+            <a-button-default size="SMALL" visibility="LOW" (click)="goBack()" class="cell shrink">
+                <i class="ion-arrow-left-c"></i> {{'button.label.back' | translate}}
+            </a-button-default>
+            <h2 class="cell phone-16">450 SAS</h2>
         </div>
 
-        <div class="columns shrink newCustomerHeader-name">
-            {{ (customer && customer._id) ? customer.name : 'customers.label.back' | translate }}
-        </div>
-    </div>
-
-    <div class="row newCustomerDetail" [ngClass]="{'mode-edit': editMode}">
-        <form #customerForm="ngForm" (submit)="save()" novalidate class="column small-10">
-
-            <div class="column row newCustomerDetail-container dark caInfos">
-                <span class="caInfos-period">{{'ca.fiscal.year' | translate}} {{companyFiscalYearBounds}}</span>
-                <div class="column small-24">
-                    <div class="row align-middle newCustomerDetail-container-labelNumber">
-                        <h6 class="column small-12 no-border">{{'newCustomer.label.caInvoiced' | translate}}</h6>
-                        <h6 class="column small-12 no-border">{{'newCustomer.label.caFixed' | translate}}</h6>
-                    </div>
+        <div class="statistic-container">
+            <h2>Statistiques commerciales</h2>
+            <div class="grid-x statistic-container-numbers">
+                <div class="column">
+                    <label>{{'newCustomer.label.caInvoiced' | translate}} (mai 2020 - mars 2021)</label>
+                    <div class="bloc primary">0,00<span>€</span></div>
                 </div>
+                <div class="column">
+                    <label>{{'newCustomer.label.caFixed' | translate}} (mai 2020 - mars 2021)</label>
+                    <div class="bloc primary_medium">0,00<span>€</span></div>
+                </div>
+                <div class="column">
+                    <label>{{'newCustomer.label.totalInvoiced' | translate}}</label>
+                    <div class="bloc secondary">0,00<span>€</span></div>
+                </div>
+                <div class="column statistic-container-numbers">
+                    <label>Total CA ferme</label>
+                    <div class="bloc secondary_dark">0,00<span>€</span></div>
+                </div>
+            </div>
+            <img src="assets/images/png/statistic-bg.png">
+        </div>
 
-                <div class="column small-24">
-                    <div class="row align-middle newCustomerDetail-container-valueNumber">
-                        <h3 class="column small-12 highlight-text-bold">
-                            {{currentYearTurnover | invoiceCurrency }}
-                        </h3>
-                        <h3 class="column small-12 highlight-text-bold">
-                            {{currentYearTurnoverExpected  | invoiceCurrency }}
-                        </h3>
+        <div>
+            <div class="grid-x selectMenu">
+                <div class="grid-x select selectMenu-container">
+                    <div class="selectMenu-round"></div>
+                    <h2>Information<br>société</h2>
+                </div>
+                <div class="grid-x selectMenu-container">
+                    <div class="selectMenu-round"></div>
+                    <h2>Relation<br>commerciale</h2>
+                </div>
+            </div>
+
+            <div class="step">
+                <h2 class="step-title">
+                    <span>1</span>
+                    Informations légales de la société
+                </h2>
+                <div class="grid-y step-form">
+                    <div class="grid-x step-form_line">
+                        <div class="column small-8">
+                            <label>Nom du client</label>
+                            <input type="text">
+                        </div>
+                        <div class="column small-8">
+                            <label>Numéro de SIREN</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="grid-x">
+                        <div class="column small-8">
+                            <label>Adresse</label>
+                            <input type="text">
+                        </div>
+                        <div class="column small-8">
+                            <label>Ville</label>
+                            <input type="text">
+                        </div>
+                        <div class="column small-8">
+                            <label>Code postal</label>
+                            <input type="text">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="column newCustomerDetail-container dark space-bottom-20">
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'company.name' | translate}} *</h6>
-                    <div class="column">
-                        <input type="text" class="form-control"
-                               [disabled]='!editMode' [(ngModel)]="customer.name" name="name" required>
-                    </div>
-                </div>
+            <div class="step">
+                <h2 class="step-title">
+                    <span>2</span>
+                    Informations sur la relation commerciale
+                </h2>
 
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'company.accountant.reference' | translate}} *</h6>
-                    <div class="column">
-                        <input type="text" class="form-control"
-                               [disabled]='!editMode' *ngIf="customer.commercialRelationship"
-                               [(ngModel)]="customer.commercialRelationship.accountantReference"
-                               name="accountantReference" required>
-                    </div>
-                </div>
-
-                 <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'newCustomer.label.siren' | translate}} *</h6>
-                    <div class="column">
-                        <input type="text" class="form-control"
-                               [disabled]='isSirenDisabled()' [(ngModel)]="customer.siren" name="siren" required>
-                    </div>
-                </div>
-
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'newCustomer.label.mail' | translate}} *</h6>
-                    <div class="column">
-                        <input type="email" pattern="[^ @]*@[^ @]*" class="form-control"
-                               [disabled]='!editMode' [(ngModel)]="customer.emailAddress" name="emailAddress" required>
-                    </div>
-                </div>
-
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'newCustomer.label.address' | translate}}</h6>
-                    <div class="column">
-                        <address-input name="address"
-                                       [(ngModel)]="customer.address"
-                                       [editMode]="editMode">
-                        </address-input>
-                    </div>
-                </div>
-
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'newCustomer.manager' | translate}}</h6>
-                    <div class="column">
-                        <user-select name="customerManager" *ngIf="customer && customer.commercialRelationship"
-                                [(ngModel)]="customer.commercialRelationship.customerManagerRef"></user-select>
-                    </div>
-                </div>
-
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'newCustomer.label.lastSent' | translate}}</h6>
-                    <div class="column">
-                        {{customer?.commercialRelationship?.lastSendDate | date: 'dd MMM. yyyy'}}
-                    </div>
-                </div>
-
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'newCustomer.label.lastPayment' | translate}}</h6>
-                    <div class="column">
-                        {{customer?.commercialRelationship?.lastPaymentDate | date: 'dd MMM. yyyy'}}
-                    </div>
-                </div>
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'newCustomer.label.legalNotice' | translate}}</h6>
-                    <div class="column small-16">
-                        <textarea type="text" class="form-control" *ngIf="customer.commercialRelationship"
-                                  rows="10" cols="50"
-                                  [(ngModel)]="customer.commercialRelationship.legalNotice"
-                                  [disabled]='!editMode' name="legalNotice">
-                        </textarea>
-                    </div>
-                </div>
-                <div class="row align-middle newCustomerDetail-container-label">
-                    <h6 class="column small-8"> {{'newCustomer.label.detail' | translate}}</h6>
-                    <div class="column small-16">
-                        <textarea type="text" class="form-control" *ngIf="customer.commercialRelationship"
-                                  rows="10" cols="50"
-                                  [disabled]='!editMode'
-                                  [(ngModel)]="customer.commercialRelationship.detail"
-                                  name="detail">
-                        </textarea>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="column shrink space-left-24"></div>
-
-        <div class="column auto" *ngIf="customer && customer.commercialRelationship">
-            <business-detail class="newCustomerDetail-container"
-                             [businessList]="customer.commercialRelationship.businessList"
-                             [editMode]="editMode"></business-detail>
-            <vat-detail class="newCustomerDetail-container"
-                        [(vats)]="customer.commercialRelationship.vatRates"
-                        [editMode]="editMode">
-            </vat-detail>
-        </div>
-    </div>
-
-    <footer class="row newCustomerAction">
-        <span class="overlay-state-edit" *ngIf="editMode">
-        <i class="fas fa-pencil-alt"></i>
-        </span>
-        <div class="column small-24">
-            <div class="row newCustomerAction-container align-middle">
-                <div class="column small-12">
-                    <div class="row">
-                        <div class="columns shrink">
-                            <button *ngIf="editMode"
-                                    class="button medium green ripple"
-                                    type="submit"
-                                    (click)="customer && customer._id  ? save() : create()"
-                                    [disabled]="customerForm.invalid || customerForm.pending">
-                                <i class="ion-checkmark-round"></i>
-                                {{( !customer ? 'button.label.create' : 'button.label.save') |
-                                translate}}
-                            </button>
-                            <button *ngIf="!editMode"
-                                    (click)="editMode = true"
-                                    class="button medium green ripple">
-                                <i class="fas fa-pencil-alt"></i>
-                                {{'button.label.update'|translate}}
-                            </button>
+                <div class="grid-y step-form">
+                    <div class="grid-x step-form_line">
+                        <div class="column small-8">
+                            <label>Mail du contact</label>
+                            <input type="text">
                         </div>
-
-                        <div class="columns shrink">
-                            <button *ngIf="canDelete && customer && customer._id"
-                                    class="button medium grey ripple"
-                                    type="button"
-                                    (click)="delete()">
-                                <i class="ion-trash-a"></i>{{'button.label.delete' | translate}}
-                            </button>
-                        </div>
-
-                        <div class="columns shrink">
-                            <button *ngIf="editMode"
-                                    class="button medium grey ripple"
-                                    type="button"
-                                    (click)="reset()">
-                                <i class="ion-arrow-return-left"></i>{{'button.label.cancel' | translate}}
-                            </button>
+                        <div class="column small-8">
+                            <label>Responsable client</label>
+                            <input type="text">
                         </div>
                     </div>
                 </div>
 
-                <div class="total">
-                    <div class="row newCustomerAction-container-number full-height" *ngIf="customer">
-                        <div class="column">
-                            <div class="row align-right newCustomerAction-container-number-label total-value">
-                                <h6 class="column auto"><i class="ion-android-checkmark-circle"></i>{{'newCustomer.label.totalInvoiced'
-                                    | translate}} :</h6>
-                                <span class="total-nb">{{(customer?.commercialRelationship?.companyMetrics?.global?.invoiced
-                                    + customer?.commercialRelationship?.companyMetrics?.global?.paid
-                                    + customer?.commercialRelationship?.companyMetrics?.global?.expired)| invoiceCurrency}}</span>
+                <div class="step-business">
+                    <h3 class="step-business-title">
+                        Liste des affaires
+                    </h3>
 
-                            </div>
-                            <div class="row align-middle newCustomerAction-container-number-label total-value">
-                                <h6 class="column auto"><i class="ion-arrow-graph-down-right"></i>{{'newCustomer.label.totalDebt' | translate}} :</h6>
-                                <span class="total-nb">{{customer?.commercialRelationship?.companyMetrics?.global?.expired | invoiceCurrency}}</span>
+                    <div class="detailAction cell">
+                        <div class="detailAction-head">
+                            <div class="grid-x grid-padding-x">
+                                <div class="cell phone-9">Responsable projet</div>
+                                <div class="cell phone-12">Désignation</div>
+                                <div class="cell phone-1">Actions</div>
                             </div>
                         </div>
+                        <div class="detailAction-line-block">
+                            <ng-container>
+                                <a-invoice-line
+                                        [reorderEnabled]="true"
+                                        [editActionEnabled]="true"
+                                        [validateActionEnabled]="true"
+                                        [deleteActionEnabled]="true">
+                                </a-invoice-line>
+                            </ng-container>
+                        </div>
+                        <div class="detailAction-line-footer">
+                            <a-invoice-line
+                                    name="newLine"
+                                    [editable]="true"
+                                    [addActionEnabled]="true">
+                            </a-invoice-line>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-business margin-top-40">
+                    <h3 class="step-business-title">
+                        Liste des taux de TVA
+                    </h3>
+
+                    <div class="detailAction cell">
+                        <div class="detailAction-head">
+                            <div class="grid-x grid-padding-x">
+                                <div class="cell phone-21">Libellé</div>
+                                <div class="cell phone-1">Actions</div>
+                            </div>
+                        </div>
+                        <div class="detailAction-line-block">
+                            <ng-container>
+                                <a-invoice-line
+                                        [reorderEnabled]="true"
+                                        [editActionEnabled]="true"
+                                        [validateActionEnabled]="true"
+                                        [deleteActionEnabled]="true">
+                                </a-invoice-line>
+                            </ng-container>
+                        </div>
+                        <div class="detailAction-line-footer">
+                            <a-invoice-line
+                                    name="newLine"
+                                    [editable]="true"
+                                    [addActionEnabled]="true">
+                            </a-invoice-line>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </form>
+
+    <div class="cell shrink footer-container">
+        <div class="control-bar grid-x">
+            <div class="cell phone-12">
+                <a-button-cancel (click)="delete()">
+                    <i class="far fa-trash-alt"></i>
+                    {{'button.label.delete' | translate}}
+                </a-button-cancel>
+            </div>
+            <div class="cell phone-12 grid-x align-right">
+                <a-spacer [sizeX]="10"></a-spacer>
+                <a-button-cancel>
+                    <i class="fas fa-times"></i>
+                    {{'button.label.cancel' | translate}}
+                </a-button-cancel>
+                <a-spacer [sizeX]="10"></a-spacer>
+                <a-button-default (click)="save()"
+                                  visibility="HIGH">
+                    <i class="fas fa-save"></i>
+                    {{'button.label.save' | translate}}
+                </a-button-default>
+            </div>
+        </div>
+    </div>
 </div>

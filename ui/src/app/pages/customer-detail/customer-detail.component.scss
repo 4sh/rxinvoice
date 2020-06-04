@@ -1,193 +1,223 @@
-@import '../../../styles/base-component';
+@import 'src/styles/base-component';
 
 :host {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.caInfos {
-  position: relative;
-  margin-top: rem-calc(38px) !important;
-  padding: rem-calc(12px 16px 0 16px) !important;
-
-  &-period {
-    position: absolute;
-    top: rem-calc(-26px);
-    left: 0;
-    padding: rem-calc(4px 16px);
-    background-color: darken($app-secondary, 15%);
-    font-weight: bold;
-    border-radius: rem-calc(16px 4px 0 0);
-  }
-}
-
-@include new('newCustomer') {
-  background-color: $app-body-fontColor;
-
-  @include new('newCustomerHeader') {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: $height-newCustomerHeader;
-    background-color: $app-primary_medium;
-    padding: rem-calc(8px);
-    z-index: 999;
-
-    @include has('name') {
-      color: white;
-      font-weight: bold;
-      font-size: rem-calc(18px);
-    }
-  }
-
-  @include new('newCustomerDetail') {
     position: relative;
     width: 100%;
-    height: calc(100vh - 64px - 175px);
-    padding: 0 8px;
-    top: rem-calc(80px);
-    overflow-y: auto;
-
-    @include has('container') {
-      margin-top: rem-calc(12px);
-      box-shadow: 0 1px 5px $app-grey;
-      background-color: white;
-      border-radius: $global-radius;
-
-      @include when('dark') {
-        background-image: url('../../' + $path-png + 'patern-login.png');
-        background-size: cover;
-        background-position: center center;
-        background-color: darken($app-secondary, 15%);
-        padding: rem-calc(24px);
-        color: white;
-
-       h6 {
-         position: relative;
-         color: white;
-
-         &:after {
-           position: absolute;
-           bottom: -10px;
-           left: 0;
-           width: 100%;
-           height: rem-calc(1px);
-           background: linear-gradient(135deg, rgba(255,255,255,1) 0%,rgba(125,185,232,0) 100%);
-           content: '';
-           opacity: 0.3;
-         }
-
-         &.no-border {
-           &:after { display: none;}
-         }
-       }
-      }
-
-      @include has('labelNumber') {
-        display: flex;
-      }
-
-      @include has('valueNumber') {
-        display: flex;
-      }
-
-      @include has('label') {
-        display: flex;
-        margin: rem-calc(16px 0);
-      }
-
-      @include has('content') {
-        margin: rem-calc(16px 0);
-
-        button {
-          margin-left: rem-calc(8px);
-          cursor: pointer;
-        }
-      }
-    }
-  }
-
-  @include new('newCustomerAction') {
-    right: 0;
-    height: $height-newCustomerAction;
-    width: calc(100% - #{$sidebar-width-sm});
-
-    @include breakpoint(large only) {
-      width: calc(100% - #{$sidebar-width-sm});
-    }
-
-    @include has('number') {
-      position: absolute;
-
-    }
-
-    @include has('container') {
-      padding: rem-calc(24px 12px);
-      border: 1px solid $app-grey_light;
-      box-shadow: 0 1px 5px $app-grey;
-      background-color: white;
-
-      button {
-        margin-right: rem-calc(8px);
-      }
-
-      .total {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        height: 100%;
-        transform: translate(0, -50%);
-
-        .total-value {
-          display: flex;
-          align-items: center;
-          height: 50%;
-          padding: rem-calc(0 16px 0 12px);
-
-          &:first-child { background: $app-secondary;}
-          &:last-child { background: $app-primary;}
-
-          h6 {
-            position: relative;
-            top: rem-calc(4px);
-            font-size: rem-calc(14px);
-            color: white !important;
-          }
-
-          .total-nb {
-            float: right;
-            top: rem-calc(-4px);
-            font-size: rem-calc(16px);
-            font-weight: bold;
-            color: white;
-          }
-
-
-          i {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: rem-calc(8px);
-            font-size: rem-calc(24px);
-          }
-        }
-      }
-
-      @include has('label') {
-        display: flex;
-        margin: rem-calc(16px 0);
-      }
-
-      @include has('content') {
-        button {
-          margin-left: rem-calc(8px);
-          cursor: pointer;
-        }
-      }
-    }
-  }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow-y: scroll;
 }
 
+.customer-header {
+    padding: rem-calc(16px);
 
+    h2 {
+        line-height: rem-calc(30px);
+        margin-left: rem-calc(12px);
+        color: $app-primary;
+        font-size: rem-calc(15px);
+    }
+}
+
+form {
+    border-radius: 8px;
+    padding: 0 rem-calc(16px);
+}
+
+.statistic-container {
+    position: relative;
+    background: $app-primary_light;
+    padding: rem-calc(16px);
+    border-radius: rem-calc(8px);
+    margin-top: rem-calc(16px);
+    overflow: hidden;
+
+    &-numbers {
+        z-index: 2;
+    }
+
+    h2 {
+        color: $app-primary;
+        margin-bottom: rem-calc(16px);
+        padding-left: rem-calc(5px);
+    }
+
+    label {
+        color: $app-primary;
+        font-weight: normal;
+        margin-bottom: rem-calc(2px);
+    }
+
+    .bloc {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: rem-calc(4px 16px);
+        margin-right: rem-calc(8px);
+        border-radius: rem-calc(8px);
+        color: white;
+        font-weight: bold;
+        font-size: rem-calc(20px);
+
+        span {
+            opacity: 0.4;
+        }
+
+        &.primary {
+            background: $app-primary;
+        }
+
+        &.primary_medium {
+            background: $app-primary_medium
+        }
+
+        &.secondary {
+            background: $app-secondary
+        }
+
+        &.secondary_dark {
+            background: darken($app-secondary, 10%)
+        }
+    }
+
+    img {
+        position: absolute;
+        top: rem-calc(15px);
+        right: rem-calc(-18px);
+        width: 14%;
+        opacity: 0.4;
+    }
+}
+
+.selectMenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: rem-calc(32px 0 48px 0);
+
+    .select {
+        .selectMenu-round{
+            background: $app-tertiary;
+        }
+    }
+
+    &-container {
+        cursor: pointer;
+        margin: rem-calc(0 32px);
+    }
+
+    &-round {
+        height: rem-calc(64px);
+        width: rem-calc(64px);
+        border-radius: 100%;
+        background: $app-grey_light;
+    }
+
+    h2 {
+        display: flex;
+        align-items: center;
+        color: $app-primary;
+        margin-left: rem-calc(8px);
+        line-height: rem-calc(18px);
+    }
+}
+
+.step {
+    margin-top: rem-calc(32px);
+
+    &-title {
+        display: flex;
+        align-items: center;
+        color: $app-primary;
+        margin-bottom: rem-calc(16px);
+
+        span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: rem-calc(32px);
+            width: rem-calc(32px);
+            padding: rem-calc(20px);
+            margin-right: rem-calc(8px);
+            background: $app-primary;
+            border-radius: 100%;
+            color: white;
+        }
+    }
+
+    &-form {
+        margin-left: rem-calc(44px);
+
+        &_line {
+            margin-bottom: rem-calc(8px);
+        }
+    }
+
+    &-business {
+        h3 {
+            position: relative;
+            font-size: rem-calc(14px);
+            color: $app-primary;
+            margin: rem-calc(16px 0 0 60px);
+            z-index: 1;
+
+            &:before {
+                content: '';
+                position: absolute;
+                left: rem-calc(-14px);
+                top: rem-calc(-5px);
+                height: rem-calc(32px);
+                width: rem-calc(32px);
+                border-radius: 100%;
+                background: $app-tertiary;
+                opacity: 0.3;
+                z-index: -2;
+            }
+        }
+
+        &.margin-top-40 {
+            margin-top: rem-calc(40px);
+        }
+    }
+}
+
+.detailAction {
+    padding: rem-calc(16px) rem-calc(16px) 0;
+    min-height: 36%;
+    margin-left: rem-calc(44px);
+    width: auto;
+
+    .detailAction-head {
+        display: block;
+        background: $app-primary_light;
+        color: rgba($app-primary, 0.7);
+        font-size: rem-calc(12px);
+        border-radius: 8px 8px 0 0;
+        border: none;
+        font-weight: 600;
+        padding: rem-calc(15px);
+    }
+    .detailAction-line-block {
+        min-height: calc(100% - 186px);
+        max-height: calc(100% - 186px);
+        overflow: scroll;
+    }
+
+    .detailAction-line-footer {
+        background-color: rgba($app-primary_light, 0.3);
+        border-radius: 0 0 rem-calc(5px) rem-calc(5px);
+    }
+}
+
+.footer-container {
+    margin-top: rem-calc(60px);
+}
+
+.control-bar {
+    display: flex;
+    align-items: center;
+    padding: 1.6rem;
+    border-top: 1px solid #dddff3;
+}
