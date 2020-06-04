@@ -1,41 +1,41 @@
-
 <div class="row full-height">
     <div class="columns small-13 login-intro-container">
-        <h1 class="title">Bienvenue sur RxInvoice</h1>
+        <h1 class="title">{{'login.title'|translate}}</h1>
         <img src="assets/images/png/login-illustration.png">
         <small class="mention">2018 - Made by 4SH</small>
-        <a class="network" href="https://github.com/4sh/rxinvoice" target="_blank"><i class="ion-social-github"></i></a>
     </div>
     <div class="columns small-11 login-container">
         <span class="logo-app">
             <img src="assets/images/svg/4sh_logo.svg">
         </span>
 
-        <form class="row" #f="ngForm"  (submit)="login(f.value)">
+        <form class="row" #f="ngForm" (submit)="login(f.value)">
             <div class="columns small-16 card card-login">
                 <div class="card-section">
-                    <h4 class="cell small-24 title"><span>Connectez</span>-vous !</h4>
-                    <h5 class="subTitle">Systéme de gestion de facturation</h5>
+                    <h4 class="cell small-24 title"><span>{{'login.title.message.1'|translate}}</span>{{'login.title.message.2' | translate}}</h4>
+                    <h5 class="subTitle">{{'login.subtitle' | translate}}</h5>
 
                     <div class="grid-x">
                         <div class="medium-24 cell">
-                            <label class="form-group">{{'loginform.login' | translate}}
-                                <input class="form-control has-icon-left" type="text" placeholder=" {{'loginform.login.placeholder' | translate}}"
+                            <label class="form-group">{{'login.login' | translate}}
+                                <input class="form-control has-icon-left" type="text"
+                                       placeholder=" {{'login.login.placeholder' | translate}}"
                                        ngModel name="name" required>
                                 <i class="fas fa-user"></i>
                             </label>
                             <div *ngIf="f.controls.name && f.controls.name.dirty && f.controls.name.hasError('required')">
-                                {{'loginform.login.required' | translate}}
+                                {{'login.login.required' | translate}}
                             </div>
                         </div>
                         <div class="medium-24 cell space-top-15">
-                            <label class="form-group">{{'loginform.password' | translate}}
-                                <input class="form-control has-icon-left" type="password" placeholder="{{'loginform.password.placeholder' | translate}}"
+                            <label class="form-group">{{'login.password' | translate}}
+                                <input class="form-control has-icon-left" type="password"
+                                       placeholder="{{'login.password.placeholder' | translate}}"
                                        ngModel name="password" required>
                                 <i class="fas fa-lock"></i>
                             </label>
                             <div *ngIf="f.controls.password && f.controls.password.dirty && f.controls.password.hasError('required')">
-                                {{'loginform.password.required' | translate}}
+                                {{'login.password.required' | translate}}
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <button type="submit"
                                 class="button btn medium primary has-icon-right"
                                 [disabled]="f.invalid">
-                            {{'loginform.connect' | translate}}<i class="ion-log-in"></i>
+                            {{'login.connect' | translate}}<i class="ion-log-in"></i>
                         </button>
                     </div>
                 </div>
