@@ -3,7 +3,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgModule} from '@angular/core';
 import {DebounceDirective} from './common/directives/debounce.directive';
 import {AppComponent} from './app/app.component';
-import {SidebarComponent} from './common/components/sidebar/sidebar.component';
 import {AppHeaderComponent} from './common/components/app-header/app-header.component';
 import {CustomerDetailComponent} from './pages/customer-detail/customer-detail.component';
 import {CustomersComponent} from './pages/customers/customers.component';
@@ -52,7 +51,6 @@ export function createTranslateLoader(http: HttpClient) {
         DebounceDirective,
         // Components
         AppComponent,
-        SidebarComponent,
         AppHeaderComponent,
         CustomerDetailComponent,
         CustomersComponent,

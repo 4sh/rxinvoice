@@ -92,16 +92,16 @@ $app-body-bgColor :                               #eee !default;
 
 
 /**
- * SIDEBAR
+ * NAVIGATION MENU
  * **************************************************************************************** >
  */
-$sidebar-width-lg :                                190px !default;
-$sidebar-width-md :                                296px !default;
-$sidebar-width-sm :                                64px !default;
-$sidebar-bg-color :                                $app-gradient !default;
-$sidebar-item-color :                              rgba(white, 0.5) !default;
-$sidebar-item-active-bg-color :                    rgba(white, 0.5) !default;
-$sidebar-item-bg-color :                           $app-secondary !default;
+$navigation-menu-width-lg:                                190px !default;
+$navigation-menu-width-md:                                296px !default;
+$navigation-menu-width-sm:                                64px !default;
+$navigation-menu-bg-color:                                $app-gradient !default;
+$navigation-menu-item-color:                              rgba(white, 0.5) !default;
+$navigation-menu-item-active-bg-color:                    rgba(white, 0.5) !default;
+$navigation-menu-item-bg-color:                           $app-secondary !default;
 
 
 

@@ -3,7 +3,7 @@
 @include new('appHeader') {
   position: fixed;
   top: 0;
-  width: calc(100% - #{$sidebar-width-sm});
+  width: calc(100% - #{$navigation-menu-width-sm});
   display: flex;
   height: rem-calc($appHeader-height);
   background-color: $appHeader-bg-color;
@@ -11,7 +11,7 @@
   z-index: 999999;
 
   @include breakpoint(large only) {
-    width: calc(100% - #{$sidebar-width-sm});
+    width: calc(100% - #{$navigation-menu-width-sm});
   }
 
   @include has('menu') {

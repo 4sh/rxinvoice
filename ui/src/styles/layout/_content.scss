@@ -16,10 +16,10 @@
 
 .container {
   height: 100vh;
-  padding-left: $sidebar-width-sm;
+  padding-left: $navigation-menu-width-sm;
 
   @include breakpoint(large only) {
-    padding-left: rem-calc($sidebar-width-sm);
+    padding-left: rem-calc($navigation-menu-width-sm);
   }
 }
 
