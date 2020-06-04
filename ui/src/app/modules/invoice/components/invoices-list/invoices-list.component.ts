@@ -24,7 +24,7 @@ export class InvoicesListComponent {
     }
 
     public goToDetail(invoice) {
-        this.router.navigate(['/app/invoices/detail/' + invoice._id]);
+        this.router.navigate(['/invoices/detail/' + invoice._id]);
     }
 
     public downloadInvoice(invoice): void {

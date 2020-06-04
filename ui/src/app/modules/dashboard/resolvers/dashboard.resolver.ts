@@ -19,6 +19,6 @@ export class DashboardResolver implements Resolve<Array<DashboardConfiguration>>
         return this.authenticationService.fetchCurrent()
             .pipe(
                 switchMap(connectedUser => this.dashboardService.fetchDashboardConfigurations(connectedUser.companyRef)),
-                catchError(errorResponse => { this.router.navigate(['/app/invoices']); return of(null); }));
+                catchError(errorResponse => { this.router.navigate(['/invoices']); return of(null); }));
     }
 }

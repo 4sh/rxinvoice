@@ -56,13 +56,13 @@ export class AppHeaderComponent implements OnInit {
         switch (activity.objectType) {
             case 'Invoice': {
                 if (activity.type !== 'DELETE') {
-                    return '/app/invoices/detail/' + activity.objectKey;
+                    return '/invoices/detail/' + activity.objectKey;
                 }
                 break;
             }
             case 'Company': {
                if (activity.type !== 'DELETE') {
-                   return '/app/companies/detail/' + activity.objectKey;
+                   return '/companies/detail/' + activity.objectKey;
                }
                 break;
             }

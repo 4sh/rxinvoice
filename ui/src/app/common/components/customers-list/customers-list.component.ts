@@ -18,7 +18,7 @@ export class CustomersListComponent implements OnInit {
   }
 
     public goToDetail(customer) {
-        this.router.navigate(['/app/customers/detail/' + customer._id]);
+        this.router.navigate(['/customers/detail/' + customer._id]);
     }
 
 }
