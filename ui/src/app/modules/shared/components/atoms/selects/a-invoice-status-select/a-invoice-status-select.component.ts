@@ -25,10 +25,10 @@ export class AInvoiceStatusSelectComponent implements OnInit, ControlValueAccess
     public invoiceStatusList: Array<InvoiceStatusType>;
     public invoiceStatus: InvoiceStatusType;
     public items: Array<EnumOption>;
+    public selectedItem: EnumOption;
 
     private onNgChange: (invoiceStatus: InvoiceStatusType) => void;
     private onNgTouched: () => void;
-    private selectedItem: EnumOption;
 
     constructor(private translateService: TranslateService) {
     }

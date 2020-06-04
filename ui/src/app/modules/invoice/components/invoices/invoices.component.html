@@ -27,11 +27,14 @@
         </div>
 
         <div class="cell phone-9 grid-x list-action">
-            <a-button-default size="LARGE" visibility="MEDIUM" class="cell phone-15 text-right">
+            <a [href]="exportInvoices()"
+                              class="cell phone-15 text-right">
                 <i class="far fa-file-excel"></i>
                 {{'invoice.list.action.export' | translate}}
-            </a-button-default>
-            <a-button-default size="LARGE" visibility="HIGH" class="cell phone-9 text-right">
+            </a>
+            <a-button-default size="LARGE"
+                              visibility="HIGH"
+                              class="cell phone-9 text-right">
                 <i class="fas fa-plus"></i>
                 {{'invoice.list.action.new' | translate}}
             </a-button-default>

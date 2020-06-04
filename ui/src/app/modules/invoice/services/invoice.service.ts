@@ -122,6 +122,10 @@ export class InvoiceService {
         return this.saveInvoice(invoice);
     }
 
+    public exportInvoices(): string {
+        return `/api/exports/invoices?${SearchParams.toHttpParams(this.invoiceSearchFilter).toString()}`;
+    }
+
     public exportSales(salesExportParameters: SalesExportParameters) {
         return `/api/exports/sales?${SearchParams.toHttpParams(
             {

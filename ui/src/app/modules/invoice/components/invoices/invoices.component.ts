@@ -5,7 +5,6 @@ import {InvoiceService} from '../../services/invoice.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CurrencyPipe} from '@angular/common';
 import * as moment from 'moment';
-import {SearchParams} from '../../../../domain/search-params';
 
 @Component({
     selector: 'invoices',
@@ -72,7 +71,7 @@ export class InvoicesComponent implements OnInit {
         }
     }
 
-    public buildUri(): string {
-        return '/api/exports/invoices?' + SearchParams.toHttpParams(this.searchForm.value).toString();
+    public exportInvoices(): string {
+       return this.invoiceService.exportInvoices();
     }
 }

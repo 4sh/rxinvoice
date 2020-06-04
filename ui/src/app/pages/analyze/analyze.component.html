@@ -58,10 +58,10 @@
             </div>
 
             <div class="column">
-                <a-button-default size="DEFAULT" visibility="HIGH" (click)="exportSales()">
+                <a [href]="exportSales()">
                     <i class="far fa-file-excel"></i>
                     {{'analyze.sales.export' | translate}}
-                </a-button-default>
+                </a>
             </div>
         </div>
     </div>
