@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../../services/authentication.service';
+import {AuthenticationService} from '../../../../common/services/authentication.service';
 
 @Component({
-    selector: 'sidebar',
-    templateUrl: './sidebar.component.html',
-    styleUrls: ['./sidebar.component.scss']
+    selector: 'navigation-menu',
+    templateUrl: './navigation-menu.component.html',
+    styleUrls: ['./navigation-menu.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class NavigationMenuComponent implements OnInit {
     draftMenuVisible: Boolean;
 
     constructor(private authenticationService: AuthenticationService) {

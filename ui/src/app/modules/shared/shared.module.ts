@@ -22,7 +22,10 @@ import {ASpinnerComponent} from './components/atoms/a-spinner/a-spinner.componen
 import {ButtonsModule} from './components/atoms/buttons/buttons.module';
 import {ADashboardSelectComponent} from './components/atoms/selects/a-dashboard-select/a-dashboard-select.component';
 import {ABusinessSelectComponent} from './components/atoms/selects/a-business-select/a-business-select.component';
-import { AInvoiceStatusSelectComponent } from './components/atoms/selects/a-invoice-status-select/a-invoice-status-select.component';
+import {AInvoiceStatusSelectComponent} from './components/atoms/selects/a-invoice-status-select/a-invoice-status-select.component';
+import {NavigationMenuComponent} from './components/navigation-menu/navigation-menu.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule} from '@angular/router';
 
 const components = [
     AToggleComponent,
@@ -40,7 +43,8 @@ const components = [
     ACustomerSelectComponent,
     ADashboardSelectComponent,
     ABusinessSelectComponent,
-    AInvoiceStatusSelectComponent
+    AInvoiceStatusSelectComponent,
+    NavigationMenuComponent
 ];
 
 const pipes = [OrderByPipe];
@@ -49,6 +53,7 @@ const pipes = [OrderByPipe];
     imports: [
         CommonModule,
         FormsModule,
+        RouterModule,
         TranslateModule,
         DpDatePickerModule,
         NgSelectModule,

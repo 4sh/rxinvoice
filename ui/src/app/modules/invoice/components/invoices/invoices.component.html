@@ -27,19 +27,20 @@
         </div>
 
         <div class="cell phone-9 grid-x list-action">
-            <a-button-default size="LARGE" visibility="MEDIUM" class="cell phone-15 text-right">
+            <a [href]="exportInvoices()"
+                              class="cell phone-15 text-right">
                 <i class="far fa-file-excel"></i>
-                {{'analyze.sales.export' | translate}}
-            </a-button-default>
-            <a-button-default size="LARGE" visibility="HIGH" class="cell phone-9 text-right">
+                {{'invoice.list.action.export' | translate}}
+            </a>
+            <a-button-default size="LARGE"
+                              visibility="HIGH"
+                              class="cell phone-9 text-right"
+                              (click)="newInvoice()">
                 <i class="fas fa-plus"></i>
-                {{'invoices.newInvoice' | translate}}
+                {{'invoice.list.action.new' | translate}}
             </a-button-default>
         </div>
     </form>
-    <!--<button class="round medium buttonContainer-green">-->
-    <!--    <i class="fas fa-file-excel"></i>-->
-    <!--</button>-->
 
     <div class="cell phone-22">
         <invoices-list [invoices]="invoices | orderBy: filterString"

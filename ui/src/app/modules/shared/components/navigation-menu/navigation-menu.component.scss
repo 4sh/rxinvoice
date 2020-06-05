@@ -1,15 +1,15 @@
-@import '../../../../styles/base-component';
+@import 'src/styles/base-component';
 
-@include new('sidebar') {
+@include new('navigation') {
   position: fixed;
   left: 0;
   display: flex;
   flex-direction: column;
-  width: rem-calc($sidebar-width-sm);
+  width: rem-calc($navigation-menu-width-sm);
   min-height: 100vh;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.4);
   z-index: 1000000;
-  background: $sidebar-bg-color;
+  background: $navigation-menu-bg-color;
 
   @include has('logo') {
     display: flex;
@@ -32,7 +32,7 @@
       align-items: center;
       position: relative;
       text-transform: uppercase;
-      color: $sidebar-item-color;
+      color: $navigation-menu-item-color;
       cursor: pointer;
       margin: rem-calc(10px);
       height: rem-calc(44px);
@@ -41,7 +41,7 @@
       @extend %rippleEffect;
 
       span {
-        display: none!important;
+        display: none !important;
       }
 
       &:hover,
@@ -62,8 +62,8 @@
       }
 
       @include when('isActive') {
-          color: white;
-          background-color: rgba($app-primary_medium, 0.5);
+        color: white;
+        background-color: rgba($app-primary_medium, 0.5);
 
       }
 
@@ -82,7 +82,7 @@
         font-weight: bold;
         line-height: rem-calc(17px);
         color: white;
-        background-color: $app-error ;
+        background-color: $app-error;
         cursor: pointer;
         animation: pulse 1s infinite;
       }
@@ -97,21 +97,21 @@
   }
 
   &:hover {
-    width: rem-calc($sidebar-width-md);
+    width: rem-calc($navigation-menu-width-md);
 
     @include breakpoint(large only) {
-      width: rem-calc($sidebar-width-lg);
+      width: rem-calc($navigation-menu-width-lg);
     }
 
-    .sidebar-logo {
+    .navigation-menu-logo {
 
     }
 
-    .sidebar-menu {
+    .navigation-menu {
 
-      .sidebar-menu-item {
+      .navigation-menu-item {
         span {
-          display: inline-block!important;
+          display: inline-block !important;
           font-size: 14px;
           text-transform: capitalize;
           font-weight: 500;
@@ -121,11 +121,11 @@
 
     }
 
-    .sidebar-logout {
+    .navigation-menu-logout {
 
       .logout-button {
         span {
-          display: inline-block!important;
+          display: inline-block !important;
         }
       }
     }

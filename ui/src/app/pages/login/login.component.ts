@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         const user = this.authService.getCurrentUser();
         if (user) {
-            this.router.navigate(['/app/dashboard']);
+            this.router.navigate(['/dashboard']);
         } else {
             this.authService.fetchCurrent()
                 .subscribe((fetchUser) => {
                     if (fetchUser !== undefined && fetchUser !== null) {
-                        this.router.navigate(['/app/dashboard']);
+                        this.router.navigate(['/dashboard']);
                     }
                 });
         }
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         this.authService.authenticate(value)
             .subscribe((user) => {
                 if (user) {
-                    this.router.navigate(['/app/dashboard']);
+                    this.router.navigate(['/dashboard']);
                 } else {
                     this.alertService.error({
                         text: 'login.alert.check',

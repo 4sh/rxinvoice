@@ -12,7 +12,7 @@
               <i class="ion-android-more-horizontal"></i>
             </button>
             <button class="action-button" *ngIf="isDraftInvoice()"
-                    [routerLink]="['/app/invoices/detail/' + invoice._id]">
+                    [routerLink]="['/invoices/detail/' + invoice._id]">
                 <i class="fas fa-pencil-alt"></i>
             </button>
             <button class="action-button" *ngIf="!isDraftInvoice()" (click)="downloadInvoice(invoice)">

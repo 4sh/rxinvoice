@@ -9,7 +9,6 @@ import {SalesExportParameters} from '../../../pages/analyze/sales-export-paramet
 import {InvoiceStatusEnum, InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 import {Observable} from 'rxjs/internal/Observable';
 import {throwError} from 'rxjs/internal/observable/throwError';
-import {InvoiceLine} from '../../../domain/invoice/invoice-line';
 
 @Injectable()
 export class InvoiceService {
@@ -120,6 +119,10 @@ export class InvoiceService {
     public updateInvoiceStatus(invoice: Invoice, newStatus: InvoiceStatusType): Observable<Invoice> {
         invoice.status = newStatus;
         return this.saveInvoice(invoice);
+    }
+
+    public exportInvoices(): string {
+        return `/api/exports/invoices?${SearchParams.toHttpParams(this.invoiceSearchFilter).toString()}`;
     }
 
     public exportSales(salesExportParameters: SalesExportParameters) {

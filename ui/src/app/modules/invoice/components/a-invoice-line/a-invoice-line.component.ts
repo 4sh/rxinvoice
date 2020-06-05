@@ -53,8 +53,10 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     }
 
     ngOnInit(): void {
-        this.customerService.fetchCustomer(this.invoice.buyer._id)
-            .subscribe(customer => this.vatRateList = customer.commercialRelationship.vatRates);
+        if (this.invoice.buyer) {
+            this.customerService.fetchCustomer(this.invoice.buyer._id)
+                .subscribe(customer => this.vatRateList = customer.commercialRelationship.vatRates);
+        }
     }
 
     public editLine(): void {

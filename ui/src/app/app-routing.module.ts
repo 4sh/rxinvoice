@@ -9,45 +9,55 @@ import {AnalyzeComponent} from './pages/analyze/analyze.component';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
 
 const routes: Routes = [
-    {path: 'login', pathMatch: 'full', component: LoginComponent},
     {
-        path: 'app',
-        canActivate: [LoggedInGuard],
-        component: AppContentComponent,
+        path: 'login', pathMatch: 'full', component: LoginComponent
+    },
+    {
+        path: '', canActivate: [LoggedInGuard], component: AppContentComponent,
         children: [
             {
                 path: 'dashboard',
-                loadChildren: () => import('./modules/dashboard/dashboard-routing.module')
-                    .then(m => m.DashboardRoutingModule),
-                data: {title: 'nav.home'}
+                data: {title: 'navigation.menu.home'},
+                loadChildren: () => import('./modules/dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule)
             },
             {
                 path: 'invoices',
-                loadChildren: () => import('./modules/invoice/invoice-routing.module')
-                    .then(m => m.InvoiceRoutingModule),
-                data: {title: 'nav.invoices'}
+                data: {title: 'navigation.menu.invoices'},
+                loadChildren: () => import('./modules/invoice/invoice-routing.module').then(m => m.InvoiceRoutingModule)
             },
             {
                 path: 'drafts',
-                loadChildren: () => import('./modules/draft/draft-routing.module')
-                    .then(m => m.DraftRoutingModule),
-                data: {title: 'nav.drafts'}
+                data: {title: 'navigation.menu.drafts'},
+                loadChildren: () => import('./modules/draft/draft-routing.module').then(m => m.DraftRoutingModule)
             },
-            {path: 'customers', component: CustomersComponent, data: {title: 'nav.customers'}},
-            {path: 'customers/new', component: CustomerDetailComponent},
-            {path: 'customers/detail/:id', component: CustomerDetailComponent},
-            {path: 'analyze', component: AnalyzeComponent, data: {title: 'nav.analyze'}},
             {
-                path: 'seller-settings', loadChildren: () => import('./modules/referential/referential-routing.module')
-                    .then(m => m.ReferentialRoutingModule),
-                data: {title: 'nav.seller.settings'}
+                path: 'customers', component: CustomersComponent, data: {title: 'navigation.menu.customers'}
             },
-            {path: '**', redirectTo: '/app/dashboard'}
-
+            {
+                path: 'customers/new', component: CustomerDetailComponent
+            },
+            {
+                path: 'customers/detail/:id', component: CustomerDetailComponent
+            },
+            {
+                path: 'analyze', component: AnalyzeComponent, data: {title: 'navigation.menu.analyze'}
+            },
+            {
+                path: 'seller-settings',
+                data: {title: 'navigation.menu.seller.settings'},
+                loadChildren: () => import('./modules/referential/referential-routing.module').then(m => m.ReferentialRoutingModule)
+            },
+            {
+                path: '**', redirectTo: '/dashboard'
+            }
         ]
     },
-    {path: '', redirectTo: '/app/dashboard', pathMatch: 'full'},
-    {path: 'style', children: GuideRoutes}
+    {
+        path: '', redirectTo: '/dashboard', pathMatch: 'full'
+    },
+    {
+        path: 'style', children: GuideRoutes
+    }
 ];
 
 @NgModule({

@@ -9,14 +9,14 @@ button, .button {
   &._cancel {
     transition: all 0.2s;
     background-color: transparent;
-    color: $app-cancel;
-    border: 0.1rem solid $app-primary_light;
+    color: $app-primary;
+    border: 0.1rem solid $app-primary;
 
     &:hover {
-      background-color: $app-cancel;
+      background-color: $app-primary;
       color: white;
       transition: all 0.2s;
-      border: 0.1rem solid $app-cancel;
+      border: 0.1rem solid $app-primary;
 
       i {
         color: white;
