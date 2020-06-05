@@ -1,10 +1,11 @@
 <!-- [CUSTOMER LIST] -->
 <a-spinner [hidden]="!isPending"></a-spinner>
 
+<!--
 <table class="customerList selectable">
 <tbody class="customerList-row" *ngFor="let customer of companies"
 (click)="goToDetail(customer)">
-    <!-- Table Column 1 -->
+    &lt;!&ndash; Table Column 1 &ndash;&gt;
     <tr>
         <td width="400">
             <div class="customerList-item-label">{{'customers.label.name' | translate}}:</div>
@@ -30,7 +31,7 @@
         </td>
     </tr>
 
-    <!-- Table Column 2 -->
+    &lt;!&ndash; Table Column 2 &ndash;&gt;
     <tr>
         <td rowspan="4">
             <div class="customerList-item-value">
@@ -58,7 +59,7 @@
         </td>
     </tr>
 
-    <!-- Table Column 3 -->
+    &lt;!&ndash; Table Column 3 &ndash;&gt;
     <tr>
         <td>
             <span class="customerList-item-label">{{'customers.label.nextFinancialYear' | translate}}:</span>
@@ -73,3 +74,50 @@
     </tr>
 </tbody>
 </table>
+-->
+
+
+<div class="customerList cell auto">
+    <div class="customerList-head">
+        <div class="grid-x grid-padding-x">
+            <div class="cell phone-4">{{'customers.label.name' | translate}}</div>
+            <div class="cell phone-3">{{'newCustomer.label.siren' | translate}}</div>
+            <div class="cell phone-4">{{'customers.label.contact' | translate}}</div>
+            <div class="cell phone-3">{{'newCustomer.label.caInvoiced' | translate}}</div>
+            <div class="cell phone-4">{{'newCustomer.label.manager' | translate}}</div>
+            <div class="cell phone-3">{{'newCustomer.label.lastSent' | translate}}</div>
+            <div class="cell phone-3">{{'newCustomer.label.lastPayment' | translate}}</div>
+        </div>
+    </div>
+
+    <div class="customerList-line">
+        <div class="grid-x grid-padding-x line-block align-middle" *ngFor="let customer of companies" (click)="goToDetail(customer)">
+            <div class="cell phone-4">
+                <span class="customerList-value">{{customer.name}}</span>
+            </div>
+            <div class="text-click cell phone-3">
+                <span class="customerList-value">{{customer.siren}}</span>
+            </div>
+            <div class="text-click cell phone-4">
+                <span class="customerList-value">{{customer.emailAddress}}</span>
+            </div>
+            <div class="text-click cell phone-3">
+                <span class="customerList-value">{{customer.commercialRelationship.companyMetrics.currentYear.invoiced}}</span>
+            </div>
+            <div class="text-click cell phone-4">
+                <span class="customerList-value">{{customer.commercialRelationship.customerManagerRef}}</span>
+            </div>
+            <div class="text-click cell phone-3">
+                <span class="customerList-value">{{customer?.commercialRelationship?.lastSendDate | date: 'dd MMM. yyyy'}}</span>
+            </div>
+            <div class="cell phone-3">
+                <span class="customerList-value">{{customer?.commercialRelationship?.lastPaymentDate | date: 'dd MMM. yyyy'}}</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

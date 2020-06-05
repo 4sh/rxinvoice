@@ -1,62 +1,62 @@
-<div class="customerFilter">
-    <div class="row">
-        <div class="columns shrink">
-            <div class="row align-middle">
-                <div class="columns shrink">
-                    <h6>{{'customers.filter.title' | translate}}</h6>
-                </div>
-
-                <div class="columns">
-                    <button type="button" (click)="toggleFilter('name')"
-                            [ngClass]="{'isActive green': filterString ===  'name'}"
-                            class="round large listFilter-item">
-                        {{'customers.filter.az' | translate}}
-                    </button>
-                </div>
-
-                <div class="columns">
-                    <button type="button" (click)="toggleFilter('lastSendDate')"
-                            [ngClass]="{'isActive green': filterString ===  'lastSendDate'}"
-                            class="round large listFilter-item">
-                        {{'customers.filter.date' | translate}}
-                    </button>
-                </div>
-
-                <div class="columns">
-                    <button type="button" (click)="toggleFilter('lastPaymentDate')"
-                            [ngClass]="{'isActive green': filterString ===  'lastPaymentDate'}"
-                            class="round large listFilter-item">
-                        {{'customers.filters.ca' | translate}}
-                    </button>
-                </div>
-            </div>
+<div class="grid-y grid-padding-y customerListContainer">
+    <div class="grid-x cell phone-2 align-middle grid-padding-x customerFilter">
+        <div class="cell shrink">
+            <h6>{{'customers.filter.title' | translate}}</h6>
         </div>
 
-        <div class="columns shrink">
+        <div class="cell shrink">
+            <button type="button" (click)="toggleFilter('name')"
+                    [ngClass]="{'isActive green': filterString ===  'name'}"
+                    class="round large listFilter-item">
+                {{'customers.filter.az' | translate}}
+            </button>
+        </div>
+
+        <div class="cell shrink">
+            <button type="button" (click)="toggleFilter('lastSendDate')"
+                    [ngClass]="{'isActive green': filterString ===  'lastSendDate'}"
+                    class="round large listFilter-item">
+                {{'customers.filter.date' | translate}}
+            </button>
+        </div>
+
+        <div class="cell shrink">
+            <button type="button" (click)="toggleFilter('lastPaymentDate')"
+                    [ngClass]="{'isActive green': filterString ===  'lastPaymentDate'}"
+                    class="round large listFilter-item">
+                {{'customers.filters.ca' | translate}}
+            </button>
+        </div>
+
+        <div class="cell shrink">
             <input class="input search small" type="text" placeholder="Recherche un client par nom"
                    name="search"
                    [(ngModel)]="query" debounce (func)="search()">
         </div>
+
+
+            <!-- Invoice number -->
+
+        <div class="cell auto grid-x align-right align-middle">
+            <div class="customerDetail cell shrink">
+                <strong>{{companies?.length}}</strong>  {{'customers.total.client' | translate}}
+                    <strong>{{getNumberOfBusiness()}}</strong> {{'customers.total.deal' | translate}}
+            </div>
+            <a-spacer [sizeX]="10"></a-spacer>
+            <div class="cell shrink align-right grid-x">
+                <a-button-default size="DEFAULT" visibility="HIGH" routerLink="/app/customers/new">
+                    <i class="fas fa-plus"></i>{{'customers.filter.client' | translate}}
+                </a-button-default>
+            </div>
+        </div>
     </div>
+    <div class="cell phone-22">
+        <customers-list [companies]="companies | orderBy: filterString: isReverse"  [isPending]="isPending"></customers-list>
 
-    <!-- Invoice number -->
-
-    <div class="row">
-        <div class="customerDetail inner-space-top-20">
-            <h6> <strong class="nb">{{companies?.length}}</strong>  {{'customers.total.client' | translate}}
-                <strong class="nb">{{getNumberOfBusiness()}}</strong> {{'customers.total.deal' | translate}}</h6>
-        </div>
-
-        <div class="columns auto align-right grid-x">
-            <a-button-default size="DEFAULT" visibility="HIGH" routerLink="/app/customers/new">
-                <i class="fas fa-plus"></i>{{'customers.filter.client' | translate}}
-            </a-button-default>
-        </div>
     </div>
 </div>
 
 <!-- [END HEADER] -->
 
-<customers-list [companies]="companies | orderBy: filterString: isReverse"  [isPending]="isPending"></customers-list>
 
 

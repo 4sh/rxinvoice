@@ -3,33 +3,21 @@
 :host {
   display: block;
   position: relative;
-  width: 100%;
-  height: calc(100vh - 105px);
-  overflow-x: scroll;
-}
-
-customers-list {
-  display: inline-block;
-  width: 100%;
-  height: calc(100vh - #{$height-customerFilter} - #{$appHeader-height} - 6px);
-  margin-top: $height-customerFilter;
-  overflow-y: auto;
-}
-
-// ---- Customer List Filter
-
-@include new('customerFilter') {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: rem-calc($height-customerFilter);
-  padding: rem-calc(12px 12px 0 12px);
+  height: 100%;
   background-color: white;
-  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
-  z-index: 999;
+  border-radius: $content-radius;
+}
+.customerListContainer {
+  height: 100%;
+}
+.customerFilter {
+  padding: rem-calc(16px);
+}
+.customerDetail {
+  color: $app-grey_dark;
+  font-size: rem-calc(15px);
 
-  input {
-    margin: rem-calc(5px 0 0 30px);
+  strong {
+    color: $app-primary;
   }
 }
