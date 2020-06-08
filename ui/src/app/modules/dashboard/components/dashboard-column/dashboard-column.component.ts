@@ -10,6 +10,8 @@ import {InvoiceEditionPopupComponent} from '../../../../common/components/invoic
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {InvoiceStatusesWorkflow, InvoiceStatusType} from '../../../../domain/invoice/invoice-status.type';
 import {InvoiceSearchFilter} from '../../../../domain/invoice/invoice-search-filter';
+import {DashboardConfiguration} from "../../../../domain/company/dashboard/dashboard-configuration";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'dashboard-column',
@@ -20,18 +22,28 @@ export class DashboardColumnComponent implements OnInit, DashboardColumnObserver
 
     @Input()
     public columnConfiguration: DashboardColumnConfiguration;
+    public currentDashboard: DashboardConfiguration;
+    public dashboards: Array<DashboardConfiguration> = [];
 
     public invoiceList: Array<Invoice> = [];
 
     constructor(private invoiceService: InvoiceService,
                 private modalService: ModalService,
-                private dashboardEventBusService: DashboardEventBusService) {
+                private dashboardEventBusService: DashboardEventBusService,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.dashboardEventBusService.register(this);
         this.loadInvoices();
+
+        this.route.data.subscribe(data => {
+            this.dashboards = data.dashboards;
+            this.currentDashboard = data.dashboards[0];
+        });
     }
+
+
 
     public loadInvoices() {
         const invoiceSearchFilter = new InvoiceSearchFilter();

@@ -13,13 +13,23 @@
   }
 
   .title-container {
+    position: fixed;
+    z-index: 1;
+    margin-top: rem-calc(-6px);
     display: block;
-    background-color: rgba($app-primary_light, 0.2);
+    background-color: #f8f9fc;
     color: $app-grey;
     font-size: 1.2rem;
     border-radius: 8px 8px 0 0;
     border: none;
     padding: 5px 13px;
+
+    &.title-width-5 {
+      width: calc(100% / 5 - 38px);
+    }
+    &.title-width-3 {
+      width: calc(100% / 3 - 54px);
+    }
 
     .title-column {
       text-transform: uppercase;
@@ -38,6 +48,7 @@
   .content {
     background-color: rgba($app-primary_light, 0.2);
     padding: rem-calc(1px);
+    padding-top: rem-calc(53px);
   }
 
   &.dndDragover {
