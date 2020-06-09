@@ -1,5 +1,17 @@
 @import '../../../styles/base-component';
 
+.analyzeContainer {
+    padding: rem-calc(16px);
+    height: 100%;
+
+    .illustration-analyze {
+        max-height: 100%;
+        padding: rem-calc(35px) 0 rem-calc(50px);
+    }
+}
+
+
+
 @include new('title') {
     padding: rem-calc(0px 32px 24px 32px);
     font-weight: bold;
@@ -21,7 +33,11 @@
     box-shadow: 0px 1px 16px 0px rgba(230, 230, 230, 0.75);
 
     @include has('wrapper') {
-        height: rem-calc(250px);
+        height: 100%;
+        padding: rem-calc(16px);
+        background-color: white;
+        border: 0.1rem solid #ececec;
+        border-radius: rem-calc(5px);
 
         @include has('title') {
             display: flex;
@@ -44,18 +60,18 @@
                 }
 
                 &.green {
-                    color: $app-success;
+                    color: #11f083;
 
                     &:after {
-                        background: rgba($app-success, 0.2);
+                        background: rgba(#11f083, 0.2);
                     }
                 }
 
                 &.orange {
-                    color: $app-warning;
+                    color: #c65447;
 
                     &:after {
-                        background: rgba($app-warning, 0.2);
+                        background: rgba(#c65447, 0.2);
                     }
                 }
 
@@ -78,6 +94,11 @@
             align-items: center;
             text-align: center;
             height: 100%;
+            justify-content: center;
+
+            img {
+                width: rem-calc(300px);
+            }
 
             .nb {
                 font-size: rem-calc(30px);
@@ -101,9 +122,4 @@
     color: inherit;
     padding: rem-calc(32px 0 0 0);
 
-}
-
-h5 {
-    font-weight: bold;
-    margin: rem-calc(16px 0);
 }

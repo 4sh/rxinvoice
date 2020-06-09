@@ -14,16 +14,22 @@
     padding: rem-calc(16px);
 
     h2 {
-        line-height: rem-calc(30px);
+        line-height: rem-calc(25px);
         margin-left: rem-calc(12px);
-        color: $app-primary;
-        font-size: rem-calc(15px);
+        color: white;
+        font-size: rem-calc(13px);
+        background-color: $app-primary;
+        width: auto;
+        padding: rem-calc(3px) rem-calc(15px);
+        border-radius: rem-calc(5px);
+        text-transform: uppercase;
+        height: rem-calc(30px);
     }
 }
 
 form {
     border-radius: 8px;
-    padding: 0 rem-calc(16px);
+    padding: 0 rem-calc(16px) rem-calc(90px);
 }
 
 .statistic-container {
@@ -212,12 +218,16 @@ form {
 }
 
 .footer-container {
-    margin-top: rem-calc(60px);
+    position: fixed;
+    bottom: rem-calc(20px);
+    width: calc(100% - 103px);
+    background-color: white;
+    z-index: 1;
+    box-shadow: 0px -6px 12px -9px #0003;
 }
 
 .control-bar {
     display: flex;
     align-items: center;
     padding: 1.6rem;
-    border-top: 1px solid #dddff3;
 }

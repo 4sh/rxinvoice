@@ -1,7 +1,7 @@
 <div class="column dashboard-column" [class.disable]="columnConfiguration.disabled"
      [dndDropzone]="getDropAllowedTypes()"
      (dndDrop)="onDrop($event)">
-    <div class="title-container" [class]="'title-width-' + currentDashboard.columnConfigurations.length">
+    <div class="title-container" [class]="'title-width-' + totalColumnNumber">
         <div class="title-column">{{columnConfiguration.title | translate}} ({{invoiceList?.length}})</div>
         <div class="title-column-amount">{{getAmount() | invoiceCurrency}}</div>
     </div>

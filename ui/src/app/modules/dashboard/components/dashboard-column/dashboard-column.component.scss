@@ -15,7 +15,8 @@
   .title-container {
     position: fixed;
     z-index: 1;
-    margin-top: rem-calc(-6px);
+    margin-top: rem-calc(-53px);
+    height: rem-calc(53px);
     display: block;
     background-color: #f8f9fc;
     color: $app-grey;
@@ -48,7 +49,7 @@
   .content {
     background-color: rgba($app-primary_light, 0.2);
     padding: rem-calc(1px);
-    padding-top: rem-calc(53px);
+    margin-top: rem-calc(53px);
   }
 
   &.dndDragover {

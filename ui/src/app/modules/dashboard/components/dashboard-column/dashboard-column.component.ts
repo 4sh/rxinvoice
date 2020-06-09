@@ -22,25 +22,20 @@ export class DashboardColumnComponent implements OnInit, DashboardColumnObserver
 
     @Input()
     public columnConfiguration: DashboardColumnConfiguration;
-    public currentDashboard: DashboardConfiguration;
-    public dashboards: Array<DashboardConfiguration> = [];
+
+    @Input()
+    public totalColumnNumber: number;
 
     public invoiceList: Array<Invoice> = [];
 
     constructor(private invoiceService: InvoiceService,
                 private modalService: ModalService,
-                private dashboardEventBusService: DashboardEventBusService,
-                private route: ActivatedRoute) {
+                private dashboardEventBusService: DashboardEventBusService) {
     }
 
     ngOnInit() {
         this.dashboardEventBusService.register(this);
         this.loadInvoices();
-
-        this.route.data.subscribe(data => {
-            this.dashboards = data.dashboards;
-            this.currentDashboard = data.dashboards[0];
-        });
     }
 
 

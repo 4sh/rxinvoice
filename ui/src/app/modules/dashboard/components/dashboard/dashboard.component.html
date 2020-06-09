@@ -10,7 +10,8 @@
         <div class="row dashboard" [ngClass]="{'fullHeight' : dashboards.length < 2}">
             <dashboard-column [class]="'column-width-' + currentDashboard.columnConfigurations.length"
                               *ngFor="let columnConfiguration of currentDashboard.columnConfigurations"
-                              [columnConfiguration]="columnConfiguration">
+                              [columnConfiguration]="columnConfiguration"
+                              [totalColumnNumber]="currentDashboard.columnConfigurations.length">
             </dashboard-column>
         </div>
     </div>

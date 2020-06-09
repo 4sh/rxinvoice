@@ -112,6 +112,7 @@ $breakpoint-sizes : (
         'tablet-portrait': 600px,
         'tablet-landscape': 900px,
         'desktop': 1200px,
+        'medium-desktop': 1440px,
         'big-desktop': 1800px
 );
 
@@ -124,6 +125,7 @@ $breakpoints: (
         tablet-portrait: map_get($breakpoint-sizes, "tablet-portrait"),
         tablet-landscape: map_get($breakpoint-sizes, "tablet-landscape"),
         desktop: map_get($breakpoint-sizes, "desktop"),
+        medium-desktop: map_get($breakpoint-sizes, "medium-desktop"),
         big-desktop: map_get($breakpoint-sizes, "big-desktop"),
 
         /*
@@ -133,7 +135,8 @@ $breakpoints: (
         medium: map_get($breakpoint-sizes, "tablet-portrait"),
         large: map_get($breakpoint-sizes, "tablet-landscape"),
         xlarge: map_get($breakpoint-sizes, "desktop"),
-        xxlarge: map_get($breakpoint-sizes, "big-desktop")
+        xxlarge: map_get($breakpoint-sizes, "medium-desktop"),
+        xxxlarge: map_get($breakpoint-sizes, "big-desktop")
 );
 
 $breakpoints-hidpi: (
@@ -149,7 +152,7 @@ $print-breakpoint: large;
 /*
  * Add big-desktop in $breakpoint-classes if you need support for big desktop (width > 1800px)
  */
-$breakpoint-classes: (phone tablet-portrait tablet-landscape desktop big-desktop);
+$breakpoint-classes: (phone tablet-portrait tablet-landscape desktop medium-desktop big-desktop);
 
 // 3. The Grid
 // -----------

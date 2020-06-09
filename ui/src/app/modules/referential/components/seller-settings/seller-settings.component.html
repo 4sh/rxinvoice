@@ -1,125 +1,121 @@
 <form novalidate *ngIf="sellerSettingsModel" #sellerSettingsForm="ngForm">
-    <div class="headerContainer">
-        <div class="row">
-            <div class="column small-12">
-                <div class="listTab leftTab">
-                    <div class="row align-middle subtitleContainer">
-                        <div class="columns">
-                            <h5>{{'seller.settings.vat.title' | translate}}</h5>
-                        </div>
-                        <div class="columns align-right grid-x">
-                            <a-button-default size="DEFAULT" visibility="HIGH"
-                                              (click)="addVatRate()">
-                                <i class="fas fa-plus"></i>{{'seller.settings.vat.button.add.tva' | translate}}
-                            </a-button-default>
-                        </div>
+    <div class="seller-settings-container grid-y grid-padding-y">
+        <div class="cell auto">
+            <img src="assets/images/svg/configuration-illustration.svg" class="illustration-config">
+        </div>
+        <div class="cell auto grid-x grid-padding-x table-container">
+            <div class="cell phone-12 grid-y grid-padding-y left-settings">
+                <div class="cell shrink grid-x">
+                    <h5 class="cell phone-12">{{'seller.settings.vat.title' | translate}}</h5>
+                    <div class="cell phone-12 align-right grid-x">
+                        <a-button-default size="DEFAULT" visibility="HIGH"
+                                          (click)="addVatRate()">
+                            <i class="fas fa-plus"></i>{{'seller.settings.vat.button.add.tva' | translate}}
+                        </a-button-default>
                     </div>
-                    <div>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th width="250px">{{'seller.settings.vat.table.label'|translate}}</th>
-                                <th width="250px">{{'seller.settings.vat.table.rate'|translate}}</th>
-                                <th width="250px">{{'seller.settings.vat.table.account.number'|translate}}</th>
-                                <th width="100px">{{'seller.settings.vat.table.actions'|translate}}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr *ngFor="let vatRate of sellerSettingsModel.vatRates; index as i">
-                                <td width="250px">
+                </div>
+                <div class="cell auto">
+                    <div class="settingsList cell auto">
+                        <div class="settingsList-head">
+                            <div class="grid-x grid-padding-x">
+                                <div class="cell phone-7">{{'seller.settings.vat.table.label'|translate}}</div>
+                                <div class="cell phone-7">{{'seller.settings.vat.table.rate'|translate}}</div>
+                                <div class="cell phone-7">{{'seller.settings.vat.table.account.number'|translate}}</div>
+                                <div class="cell phone-3 grid-x align-right">{{'seller.settings.vat.table.actions'|translate}}</div>
+                            </div>
+                        </div>
+
+                        <div class="settingsList-line">
+                            <div class="grid-x grid-padding-x line-block align-middle" *ngFor="let vatRate of sellerSettingsModel.vatRates; index as i">
+                                <div class="cell phone-7">
                                     <input [(ngModel)]="vatRate.label" type="text" required
                                            [name]="'label' + i"/>
-                                </td>
-                                <td width="250px">
+                                </div>
+                                <div class="cell phone-7">
                                     <input [(ngModel)]="vatRate.rate" type="number" step="0.1" required min="0"
                                            class="text-right"
                                            [name]="'rate' + i"/>
-                                </td>
-                                <td width="250px">
+                                </div>
+                                <div class="cell phone-7">
                                     <input [(ngModel)]="vatRate.accountNumber" type="text" required
                                            class="text-right"
                                            [name]="'vatAccountNumber' + i">
-                                </td>
-                                <td width="100px">
-                                    <button class="round medium red ripple" (click)="deleteVatRate(i)">
+                                </div>
+                                <div class="cell phone-3 grid-x align-right">
+                                    <a-button-icon size="DEFAULT" visibility="HIGH"
+                                                   (click)="deleteVatRate(i)">
                                         <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                    </a-button-icon>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="column small-12">
-                <div class="listTab rightTab">
-                    <div class="row align-middle subtitleContainer">
-                        <div class="columns">
-                            <h5>{{'seller.settings.accountant.reference'|translate}}</h5>
-                        </div>
-                        <div class="columns align-right grid-x">
-                            <a-button-default size="DEFAULT" visibility="HIGH"
-                                              (click)="addServiceReference(selectedServiceKind)">
-                                <i class="fas fa-plus"></i>{{'seller.settings.vat.button.add.ref' | translate}}
-                            </a-button-default>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <a-service-kind-select class="columns small-10"
-                                             [ngModel]="selectedServiceKind"
-                                             name="serviceref"
-                                             (ngModelChange)="selectServiceKind($event)">
+            <div class="cell phone-12 grid-y grid-padding-y right-settings">
+                <div class="cell shrink grid-x">
+                    <h5 class="cell shrink">{{'seller.settings.accountant.reference'|translate}}</h5>
+                    <div class="cell auto align-right grid-x">
+                        <a-service-kind-select [ngModel]="selectedServiceKind"
+                                               class="service-select"
+                                               name="serviceref"
+                                               (ngModelChange)="selectServiceKind($event)">
                         </a-service-kind-select>
+                        <a-button-default size="DEFAULT" visibility="HIGH"
+                                          (click)="addServiceReference(selectedServiceKind)">
+                            <i class="fas fa-plus"></i>{{'seller.settings.vat.button.add.ref' | translate}}
+                        </a-button-default>
                     </div>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th width="350px">{{'seller.settings.accountant.reference.vat'|translate}}</th>
-                            <th width="350px">{{'seller.settings.accountant.reference.accountant.number'|translate}}</th>
-                            <th width="100px">{{'seller.settings.accountant.reference.actions'|translate}}</th>
-                        </tr>
-                        </thead>
+                </div>
+                <div class="cell auto">
+                    <div class="settingsList cell auto">
+                        <div class="settingsList-head">
+                            <div class="grid-x grid-padding-x">
+                                <div class="cell phone-11">{{'seller.settings.accountant.reference.vat'|translate}}</div>
+                                <div class="cell phone-11">{{'seller.settings.accountant.reference.accountant.number'|translate}}</div>
+                                <div class="cell phone-2 grid-x align-right">{{'seller.settings.accountant.reference.actions'|translate}}</div>
+                            </div>
+                        </div>
 
-                        <tbody>
-                        <tr *ngFor="let serviceReference of getServiceReferences(selectedServiceKind);index as k">
-                            <td width="350px">
-                                <span>
-                                   <accountant-vat-select [name]="'vatRate' + k"
-                                                          [accountantVatRateList]="sellerSettingsModel.vatRates"
-                                                          [ngModel]="serviceReference.vatRate"
-                                                          (ngModelChange)="vatRateChanged($event, serviceReference)">
-                                   </accountant-vat-select>
-                                </span>
-                            </td>
-                            <td width="350px">
-                                <input [(ngModel)]="serviceReference.accountNumber" type="text"
-                                       required
-                                       class="text-right"
-                                       [name]="'accountNumber' + k"/>
-                            </td>
-                            <td width="100px">
-                                <button class="round medium red ripple"
-                                        (click)="deleteServiceReference(serviceReference)">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <div class="settingsList-line">
+                            <div class="grid-x grid-padding-x line-block align-middle"
+                                 *ngFor="let serviceReference of getServiceReferences(selectedServiceKind);index as k">
+                                <div class="cell phone-11">
+                                    <accountant-vat-select [name]="'vatRate' + k"
+                                                           [accountantVatRateList]="sellerSettingsModel.vatRates"
+                                                           [ngModel]="serviceReference.vatRate"
+                                                           (ngModelChange)="vatRateChanged($event, serviceReference)">
+                                    </accountant-vat-select>
+                                </div>
+                                <div class="cell phone-11">
+                                    <input [(ngModel)]="serviceReference.accountNumber" type="text"
+                                           required
+                                           class="text-right"
+                                           [name]="'accountNumber' + k"/>
+                                </div>
+                                <div class="cell phone-2 grid-x align-right">
+                                    <a-button-icon size="DEFAULT" visibility="HIGH"
+                                                   (click)="deleteServiceReference(serviceReference)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a-button-icon>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="cell shrink control-bar grid-x grid-padding-x align-right">
+            <a-button-cancel size="LARGE" visibility="MEDIUM" (click)="cancel()" class="cell shrink">
+                <i class="fas fa-times"></i>{{ 'dashboard.quickEdition.cancel' | translate}}
+            </a-button-cancel>
+            <a-button-default size="LARGE" visibility="MEDIUM" (click)="save()" [disabled]="sellerSettingsForm.form.invalid" class="cell shrink">
+                <i class="fas fa-check"></i>{{ 'dashboard.quickEdition.save' | translate}}
+            </a-button-default>
+        </div>
     </div>
 
-    <div class="columns small-24 align-right grid-x">
-        <a-spacer [sizeX]="10"></a-spacer>
-        <a-button-cancel size="LARGE" visibility="MEDIUM" (click)="cancel()">
-            <i class="fas fa-times"></i>{{ 'dashboard.quickEdition.cancel' | translate}}
-        </a-button-cancel>
-        <a-spacer [sizeX]="10"></a-spacer>
-        <a-button-default size="LARGE" visibility="MEDIUM" (click)="save()" [disabled]="sellerSettingsForm.form.invalid">
-            <i class="fas fa-check"></i>{{ 'dashboard.quickEdition.save' | translate}}
-        </a-button-default>
-    </div>
 </form>

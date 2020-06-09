@@ -1,67 +1,70 @@
-<div>
-    <div class="graphContainer">
-        <h4 class="title">Graphs</h4>
-        <div class="row graphContainer-wrapper">
-            <div class="small-24 column">
-                <div class="row">
-                    <div class="small-8 column">
-                        <div class="block-container graphContainer-wrapper">
-                            <div class="graphContainer-wrapper-title">
-                                <i class="ion-ios-pie orange"></i>
-                                <h6 class="title-section">{{'dashboard.chart.division' | translate}}</h6>
-                            </div>
-                        </div>
+<div class="grid-padding-y grid-y analyzeContainer">
+    <div class="cell auto">
+        <img src="assets/images/svg/analyze-illustration.svg" class="illustration-analyze">
+    </div>
+    <div class="cell auto grid-x grid-padding-x">
+        <div class="cell phone-8">
+            <div class="graphContainer-wrapper">
+                <div class="graphContainer-wrapper-title">
+                    <i class="ion-ios-pie orange"></i>
+                    <h6 class="title-section">{{'dashboard.chart.division' | translate}}</h6>
+                </div>
+                <div class="graphContainer-wrapper-content">
+                    <img src="assets/images/svg/graph-illu-1.svg" class="graph-illu-1">
+                </div>
+            </div>
+        </div>
+        <div class="cell phone-8">
+            <div class="graphContainer-wrapper">
+                <div class="graphContainer-wrapper-title">
+                    <i class="ion-social-euro green"></i>
+                    <h6 class="title-section">{{'dashboard.chart.chiffreA' | translate}}</h6>
+                </div>
+                <div class="row graphContainer-wrapper-content">
+                    <div class="small-24 column">
+                        <span class="nb">{{ '00000'  | invoiceCurrency}}</span>
+                        <h6 class="title-section">{{'newCustomer.label.caInvoiced' | translate}}</h6>
                     </div>
-
-                    <div class="small-8 column">
-                        <div class="block-container graphContainer-wrapper">
-                            <div class="graphContainer-wrapper-title">
-                                <i class="ion-social-euro green"></i>
-                                <h6 class="title-section">{{'dashboard.chart.chiffreA' | translate}}</h6>
-                            </div>
-                            <div class="row graphContainer-wrapper-content">
-                                <div class="small-24 column">
-                                    <span class="nb">{{ '00000'  | invoiceCurrency}}</span>
-                                    <h6 class="title-section">{{'newCustomer.label.caInvoiced' | translate}}</h6>
-                                </div>
-                                <div class="small-24 column">
-                                    <span class="nb">{{ '00000'  | invoiceCurrency}}</span>
-                                    <h6 class="title-section">{{'newCustomer.label.caFixed' | translate}}</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="small-8 column">
-                        <div class="block-container graphContainer-wrapper">
-                            <div class="graphContainer-wrapper-title">
-                                <i class="ion-stats-bars pink"></i>
-                                <h6 class="title-section">{{'dashboard.chart.turnover' | translate}}</h6>
-                            </div>
-                        </div>
+                    <div class="small-24 column">
+                        <span class="nb">{{ '00000'  | invoiceCurrency}}</span>
+                        <h6 class="title-section">{{'newCustomer.label.caFixed' | translate}}</h6>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="cell phone-8">
+            <div class="graphContainer-wrapper">
+                <div class="graphContainer-wrapper-title">
+                    <i class="ion-stats-bars pink"></i>
+                    <h6 class="title-section">{{'dashboard.chart.turnover' | translate}}</h6>
+                </div>
+                <div class="graphContainer-wrapper-content">
+                    <img src="assets/images/svg/graph-illu-2.svg" class="graph-illu-2">
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="wrapper">
-        <h4 class="title">Extractions</h4>
-        <h5>Ventes mensuelles</h5>
-        <div class="row">
-            <div class="column">
+    <div class="cell phone-4 grid-y grid-padding-y">
+        <h5 class="cell shrink">Extractions - Ventes mensuelles</h5>
+        <div class="cell auto grid-x grid-padding-x">
+            <div class="cell phone-8">
                 <a-month-select [(ngModel)]="salesExportParameters.month" name="month"></a-month-select>
             </div>
 
-            <div class="column">
+            <div class="cell phone-8">
                 <a-year-select [(ngModel)]="salesExportParameters.year" name="year"></a-year-select>
             </div>
 
-            <div class="column">
-                <a [href]="exportSales()">
+            <div class="cell phone-8">
+                <a-link-default [href]="exportSales()"
+                                size="LARGE"
+                                class="text-right">
                     <i class="far fa-file-excel"></i>
                     {{'analyze.sales.export' | translate}}
-                </a>
+                </a-link-default>
             </div>
         </div>
     </div>

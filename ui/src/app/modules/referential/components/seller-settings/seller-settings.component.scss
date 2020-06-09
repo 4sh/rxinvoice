@@ -1,6 +1,6 @@
 @import 'src/styles/base-component';
 
-@include new('title') {
+/*@include new('title') {
     padding: rem-calc(0px 32px 24px 32px);
     font-weight: bold;
     color: white;
@@ -70,3 +70,84 @@ tbody {
         }
     }
 }
+*/
+form {
+    padding: rem-calc(16px);
+    height: 100%;
+
+    .seller-settings-container {
+        height: 100%;
+
+        .illustration-config {
+            max-height: 100%;
+            padding: rem-calc(35px) 0 rem-calc(50px);
+        }
+
+        .table-container {
+            padding-bottom: rem-calc(40px);
+        }
+
+        .left-settings {
+            padding-right: rem-calc(16px);
+        }
+        .right-settings {
+            padding-left: rem-calc(16px);
+
+            .service-select {
+                max-height: rem-calc(32px);
+                display: flex;
+                align-items: center;
+                margin-right: rem-calc(10px);
+                width: rem-calc(130px);
+            }
+        }
+
+        .control-bar {
+            padding-top: rem-calc(16px);
+            border-top: 1px solid #dddff3;
+        }
+
+        @include new('settingsList') {
+            height: 100%;
+
+            .settingsList-head {
+                display: block;
+                background: $app-primary_light;
+                color: rgba($app-primary, 0.7);
+                font-size: rem-calc(12px);
+                border-radius: 8px 8px 0 0;
+                border: none;
+                font-weight: 600;
+                padding: rem-calc(15px);
+            }
+            .settingsList-line {
+                height: 85%;
+                border: 1px solid #f9f9fc;
+                border-radius: 0 0 8px 8px;
+                overflow: scroll;
+                box-shadow: inset 0 10px 23px -21px rgb(181, 181, 181);
+
+                .line-block {
+                    width: auto;
+                    padding: rem-calc(5px) rem-calc(15px);
+
+                    &:nth-child(even) {
+                        background: $table-line
+                    }
+                    &:hover {
+                        background: $table-line-hover;
+                    }
+                }
+
+                .cell {
+                    padding: rem-calc(8px 10px);
+                }
+
+            }
+
+        }
+    }
+}
+
+
+

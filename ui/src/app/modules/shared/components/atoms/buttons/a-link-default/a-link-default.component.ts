@@ -14,6 +14,9 @@ export class ALinkDefaultComponent {
     public disabled: boolean = false;
 
     @Input()
+    public href: string;
+
+    @Input()
     public visibility: Visibility = 'MEDIUM';
 
     @Input()

@@ -25,10 +25,16 @@
   padding: rem-calc(16px);
 
   h2 {
-    line-height: rem-calc(30px);
+    line-height: rem-calc(25px);
     margin-left: rem-calc(12px);
-    color: $app-primary;
-    font-size: rem-calc(15px);
+    color: white;
+    font-size: rem-calc(13px);
+    background-color: $app-primary;
+    width: auto;
+    padding: rem-calc(3px) rem-calc(15px);
+    border-radius: rem-calc(5px);
+    text-transform: uppercase;
+    height: rem-calc(30px);
   }
 
   select {
