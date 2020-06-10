@@ -58,17 +58,18 @@ form {
 
     .bloc {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         padding: rem-calc(4px 16px);
         margin-right: rem-calc(8px);
         border-radius: rem-calc(8px);
         color: white;
-        font-weight: bold;
-        font-size: rem-calc(20px);
+        font-weight: 500;
+        font-size: rem-calc(18px);
 
         span {
             opacity: 0.4;
+            margin-left: rem-calc(5px);
         }
 
         &.primary {
@@ -192,7 +193,7 @@ form {
 .detailAction {
     padding: rem-calc(16px) rem-calc(16px) 0;
     min-height: 36%;
-    margin-left: rem-calc(44px);
+    margin: 0 rem-calc(44px);
     width: auto;
 
     .detailAction-head {

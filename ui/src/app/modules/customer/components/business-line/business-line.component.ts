@@ -11,7 +11,7 @@ const VALUE_ACCESSOR = {
 @Component({
     selector: 'a-business-line',
     templateUrl: './business-line.component.html',
-    styleUrls: ['./business-line.component.sass'],
+    styleUrls: ['./business-line.component.scss'],
     viewProviders: [{provide: ControlContainer, useExisting: NgForm}],
     providers: [VALUE_ACCESSOR]
 })

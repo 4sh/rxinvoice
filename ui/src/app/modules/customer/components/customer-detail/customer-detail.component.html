@@ -12,20 +12,20 @@
             <div class="grid-x statistic-container-numbers">
                 <div class="column">
                     <label>{{'newCustomer.label.caInvoiced' | translate}} {{companyFiscalYearBounds}}</label>
-                    <div class="bloc primary">{{currentYearTurnover | invoiceCurrency}}<span>€</span></div>
+                    <div class="bloc primary">{{currentYearTurnover | invoiceCurrency}}</div>
                 </div>
                 <div class="column">
                     <label>{{'newCustomer.label.caFixed' | translate}} {{companyFiscalYearBounds}}</label>
-                    <div class="bloc primary_medium">{{currentYearTurnoverExpected | invoiceCurrency}}<span>€</span></div>
+                    <div class="bloc primary_medium">{{currentYearTurnoverExpected | invoiceCurrency}}</div>
                 </div>
                 <div class="column">
                     <label>{{'newCustomer.label.totalInvoiced' | translate}}</label>
                     <div class="bloc secondary">{{(customer?.commercialRelationship?.companyMetrics?.global?.invoiced + customer?.commercialRelationship?.companyMetrics?.global?.paid
-                        + customer?.commercialRelationship?.companyMetrics?.global?.expired)| invoiceCurrency}}<span>€</span></div>
+                        + customer?.commercialRelationship?.companyMetrics?.global?.expired)| invoiceCurrency}}</div>
                 </div>
                 <div class="column statistic-container-numbers">
                     <label>Total CA ferme</label>
-                    <div class="bloc secondary_dark">0,00<span>€</span></div>
+                    <div class="bloc secondary_dark">0,00 €</div>
                 </div>
             </div>
             <img src="../../../../../assets/images/png/statistic-bg.png">
@@ -48,43 +48,48 @@
                     <span>1</span>
                     Informations légales
                 </h2>
-                <div class="grid-y step-form">
-                    <div class="grid-x step-form_line">
-                        <div class="column small-8">
-                            <label>Nom du client *</label>
-                            <input type="text" [(ngModel)]="customer.name" name="name" required>
+                <div class="grid-x">
+                    <div class="cell phone-4"></div>
+                    <div class="cell phone-16 grid-y step-form grid-padding-y">
+                        <div class="grid-x step-form_line grid-padding-x">
+                            <div class="cell phone-12">
+                                <label>Nom du client *</label>
+                                <input type="text" [(ngModel)]="customer.name" name="name" required>
+                            </div>
+                            <div class="cell phone-12">
+                                <label>Numéro de SIREN *</label>
+                                <input type="text" [disabled]='isSirenDisabled()' [(ngModel)]="customer.siren" name="siren" required>
+                            </div>
                         </div>
-                        <div class="column small-8">
-                            <label>Numéro de SIREN *</label>
-                            <input type="text" [disabled]='isSirenDisabled()' [(ngModel)]="customer.siren" name="siren" required>
-                        </div>
-                    </div>
-                    <div class="grid-x">
-                        <div class="column small-16">
-                            <label>Adresse *</label>
-                            <textarea rows="3"
-                                   [(ngModel)]="customer.address.body" name="body"  required>
+                        <div class="grid-x grid-padding-x">
+                            <div class="cell phone-24">
+                                <label>Adresse *</label>
+                                <textarea rows="3"
+                                          [(ngModel)]="customer.address.body" name="body"  required>
                             </textarea>
+                            </div>
+                        </div>
+                        <div class="grid-x grid-padding-x">
+                            <div class="cell phone-4">
+                                <label>Code postal *</label>
+                                <input type="text"
+                                       [(ngModel)]="customer.address.zipCode" name="zipCode" required>
+                            </div>
+                            <div class="cell phone-8">
+                                <label>Ville *</label>
+                                <input type="text"
+                                       [(ngModel)]="customer.address.city" name="city" required>
+                            </div>
+                            <div class="cell phone-12">
+                                <label>Pays *</label>
+                                <input type="text"
+                                       [(ngModel)]="customer.address.country" name="country"  required>
+                            </div>
                         </div>
                     </div>
-                    <div class="grid-x">
-                        <div class="column small-3">
-                            <label>Code postal *</label>
-                            <input type="text"
-                                   [(ngModel)]="customer.address.zipCode" name="zipCode" required>
-                        </div>
-                        <div class="column small-5">
-                            <label>Ville *</label>
-                            <input type="text"
-                                   [(ngModel)]="customer.address.city" name="city" required>
-                        </div>
-                        <div class="column small-8">
-                            <label>Pays *</label>
-                            <input type="text"
-                                   [(ngModel)]="customer.address.country" name="country"  required>
-                        </div>
-                    </div>
+                    <div class="cell phone-4"></div>
                 </div>
+
             </div>
 
             <div *ngIf="currentTabIndex == 2" class="step">
@@ -119,7 +124,7 @@
                             <div class="grid-x grid-padding-x">
                                 <div class="cell phone-9">Responsable projet</div>
                                 <div class="cell phone-12">Désignation</div>
-                                <div class="cell phone-1">Actions</div>
+                                <div class="cell phone-3">Actions</div>
                             </div>
                         </div>
                         <div class="detailAction-line-block">
@@ -157,7 +162,7 @@
                         <div class="detailAction-head">
                             <div class="grid-x grid-padding-x">
                                 <div class="cell phone-21">Libellé</div>
-                                <div class="cell phone-1">Actions</div>
+                                <div class="cell phone-3">Actions</div>
                             </div>
                         </div>
                         <div class="detailAction-line-block">

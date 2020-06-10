@@ -15,6 +15,7 @@ import {DownloadInvoiceService} from './services/download-invoice.service';
 import {ButtonsModule} from '../shared/components/atoms/buttons/buttons.module';
 import {InvoiceResolver} from './resolvers/invoice.resolver';
 import {AInvoiceLineComponent} from './components/a-invoice-line/a-invoice-line.component';
+import {CustomerModule} from "../customer/customer.module";
 
 const components = [
     InvoicesListComponent,
@@ -40,7 +41,8 @@ const components = [
         NgSelectModule,
         FileUploadModule,
         SharedModule,
-        ButtonsModule
+        ButtonsModule,
+        CustomerModule
     ]
 })
 export class InvoiceModule {
