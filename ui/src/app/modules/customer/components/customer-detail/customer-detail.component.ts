@@ -10,6 +10,7 @@ import {AuthenticationService} from '../../../../common/services/authentication.
 import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {Business} from '../../../../domain/commercial-relationship/business';
+import {VatRate} from '../../../../domain/common/vat-rate';
 
 @Component({
     selector: 'customer-detail',
@@ -27,8 +28,10 @@ export class CustomerDetailComponent implements OnInit {
     public totalTurnover = 0;
     public companyFiscalYearBounds: string;
     public newBusiness: Business = new Business();
+    public newVat: VatRate;
 
     public currentTabIndex = 1;
+    public availableVatRates: Array<VatRate>;
 
     constructor(private companyService: CompanyService,
                 private route: ActivatedRoute,
@@ -48,7 +51,11 @@ export class CustomerDetailComponent implements OnInit {
                     this.seller = companyEvent;
                     this.buildCompanyFiscalYearBounds(this.seller);
                     this.fillCustomerMetrics(this.customer);
+                    this.availableVatRates = this.seller.sellerSettings.vatRates
+                        .filter(value => this.customer.commercialRelationship.vatRates.map(vat => vat.rate).indexOf(value.rate) < 0);
+                    this.newVat = this.availableVatRates[0];
                 });
+
             this.authService.userEvents
                 .subscribe(currentUser =>
                     this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0
@@ -151,6 +158,25 @@ export class CustomerDetailComponent implements OnInit {
 
     public businessAdded(): void {
         this.newBusiness = new Business();
+    }
+
+    public vatAdded(vatRate: VatRate): void {
+        this.customer.commercialRelationship.vatRates.push(vatRate);
+        this.updateAvailableRates();
+    }
+
+    private updateAvailableRates() {
+        this.availableVatRates = this.seller.sellerSettings.vatRates
+            .filter(value => this.customer.commercialRelationship.vatRates.map(vat => vat.rate).indexOf(value.rate) < 0);
+        if (this.availableVatRates.length > 0) {
+            this.newVat = this.availableVatRates[0];
+        } else {
+            this.newVat = null;
+        }
+    }
+
+    public vatDeleted(): void {
+        this.updateAvailableRates();
     }
 
     public showGeneralInformationTab(): void {

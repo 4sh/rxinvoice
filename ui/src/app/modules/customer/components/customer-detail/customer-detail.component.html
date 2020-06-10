@@ -4,7 +4,7 @@
             <a-button-default size="SMALL" visibility="LOW" (click)="goBack()" class="cell shrink">
                 <i class="ion-arrow-left-c"></i> {{'button.label.back' | translate}}
             </a-button-default>
-            <h2 class="cell phone-16">450 SAS</h2>
+            <h2 class="cell phone-16">{{customer.name}}</h2>
         </div>
 
         <div class="statistic-container">
@@ -133,7 +133,6 @@
                                         [name]="'business' + i"
                                         [ngModel]="business"
                                         [businessList]="customer.commercialRelationship.businessList"
-                                        [reorderEnabled]="true"
                                         [editActionEnabled]="true"
                                         [validateActionEnabled]="true"
                                         [deleteActionEnabled]="!business.reference">
@@ -142,7 +141,7 @@
                         </div>
                         <div class="detailAction-line-footer">
                             <a-business-line
-                                    [name]="newBusiness"
+                                    name="newBusiness"
                                     [editable]="true"
                                     [ngModel]="newBusiness"
                                     [businessList]="customer.commercialRelationship.businessList"
@@ -161,24 +160,31 @@
                     <div class="detailAction cell">
                         <div class="detailAction-head">
                             <div class="grid-x grid-padding-x">
-                                <div class="cell phone-21">Libellé</div>
+                                <div class="cell phone-16">Libellé</div>
+                                <div class="cell phone-5">Taux de TVA</div>
                                 <div class="cell phone-3">Actions</div>
                             </div>
                         </div>
                         <div class="detailAction-line-block">
-                            <ng-container  *ngFor="let vatRate of customer.commercialRelationship.vatRates; index as i" >
-                                <a-business-line
-                                        [name]="newBusiness"
-                                        [editable]="true"
-                                        [ngModel]="newBusiness"
-                                        [businessList]="customer.commercialRelationship.businessList"
-                                        [addActionEnabled]="true"
-                                        (lineAddedEventEmitter)="businessAdded()">
-                                </a-business-line>
+                            <ng-container *ngFor="let vatRate of customer.commercialRelationship.vatRates" >
+                                <a-vat-line
+                                        [name]="'vatRate' + vatRate.rate"
+                                        [ngModel]="vatRate"
+                                        [vatRates]="customer.commercialRelationship.vatRates"
+                                        [deleteActionEnabled]="true"
+                                        (lineRemovedEventEmitter)="vatDeleted()">
+                                </a-vat-line>
                             </ng-container>
                         </div>
                         <div class="detailAction-line-footer">
-
+                            <a-vat-line
+                                    name="newVat"
+                                    [editable]="true"
+                                    [ngModel]="newVat"
+                                    [vatRates]="availableVatRates"
+                                    [addActionEnabled]="true"
+                                    (lineAddedEventEmitter)="vatAdded($event)">
+                            </a-vat-line>
                         </div>
                     </div>
                 </div>
