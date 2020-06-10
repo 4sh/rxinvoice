@@ -16,4 +16,10 @@ export class CommercialRelationship {
     lastPaymentDate?: Date;
 
     accountantReference: string;
+
+    constructor() {
+        this.companyMetrics = new CompanyMetrics();
+        this.vatRates = [];
+        this.businessList = [];
+    }
 }

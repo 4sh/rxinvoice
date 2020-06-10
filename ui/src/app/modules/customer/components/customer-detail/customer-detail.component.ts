@@ -110,29 +110,23 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     public save() {
-        if (!this.customer) {
-            this.customer = new Company();
+        if (this.customer._id) {
+            this.companyService.updateCompany(this.customer).subscribe((company) => {
+                    this.customer = company;
+                    this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
+                },
+                () => {
+                    this.alertService.error({title: 'alert.update.error', customClass: 'swal2-for-edit'});
+                });
+        } else {
+            this.companyService.createCompany(this.customer).subscribe((company) => {
+                    this.customer = company;
+                    this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
+                },
+                () => {
+                    this.alertService.error({title: 'alert.creation.error', customClass: 'swal2-for-edit'});
+                });
         }
-        this.companyService.updateCompany(this.customer).subscribe((company) => {
-                this.customer = company;
-                this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
-            },
-            () => {
-                this.alertService.error({title: 'alert.update.error', customClass: 'swal2-for-edit'});
-            });
-    }
-
-    public create() {
-        if (!this.customer) {
-            this.customer = new Company();
-        }
-        this.companyService.createCompany(this.customer).subscribe((company) => {
-                this.customer = company;
-                this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
-            },
-            () => {
-                this.alertService.error({title: 'alert.creation.error', customClass: 'swal2-for-edit'});
-            });
     }
 
     public delete() {

@@ -19,5 +19,8 @@ export class Company {
     commercialRelationship?: CommercialRelationship;
 
     constructor() {
+        this.address = new Address();
+        this.sellerSettings =  new SellerSettings();
+        this.commercialRelationship =  new CommercialRelationship();
     }
 }
