@@ -20,7 +20,7 @@
                     <div class="grid-x grid-padding-x">
                         <div class="cell phone-12">
                             <label>{{'invoice.detail.customer' | translate}}</label>
-                            <a-customer-select name="customer" [ngModel]="invoice.buyer?._id"></a-customer-select>
+                            <a-customer-select name="customer" [(ngModel)]="invoice.buyer"></a-customer-select>
                         </div>
                         <div class="cell phone-12">
                             <label>{{'invoice.detail.customer.reference'|translate}}</label>

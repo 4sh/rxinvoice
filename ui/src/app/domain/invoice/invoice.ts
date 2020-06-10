@@ -34,7 +34,7 @@ export class Invoice {
     vatsAmount: VAT[];
     business: Business;
     @Type(() => InvoiceLine)
-    lines: InvoiceLine[];
+    lines: InvoiceLine[] = [];
     activities: Activity[];
     attachments: Blob[];
     statusChanges: StatusChange[];

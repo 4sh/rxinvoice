@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Business} from '../../../../../../domain/commercial-relationship/business';
 import {CustomerService} from '../../../../../customer/services/customer.service';
@@ -15,7 +15,7 @@ const VALUE_ACCESSOR = {
     styleUrls: ['./a-business-select.component.sass'],
     providers: [VALUE_ACCESSOR]
 })
-export class ABusinessSelectComponent implements OnInit, ControlValueAccessor {
+export class ABusinessSelectComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     @Input()
     public customerRef: string;
@@ -30,11 +30,13 @@ export class ABusinessSelectComponent implements OnInit, ControlValueAccessor {
     }
 
     ngOnInit(): void {
-        this.customerService.fetchCustomer(this.customerRef)
-            .subscribe(customer => {
-                this.businessList = customer.commercialRelationship.businessList;
-                this.writeValue(this.business);
-            });
+        if (this.customerRef) {
+            this.customerService.fetchCustomer(this.customerRef)
+                .subscribe(customer => {
+                    this.businessList = customer.commercialRelationship.businessList;
+                    this.writeValue(this.business);
+                });
+        }
     }
 
     registerOnChange(fn: any): void {
@@ -56,5 +58,15 @@ export class ABusinessSelectComponent implements OnInit, ControlValueAccessor {
     onChange(business: Business): void {
         this.business = business;
         this.onNgChange(business);
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.customerRef && changes.customerRef.currentValue) {
+            this.customerService.fetchCustomer(changes.customerRef.currentValue)
+                .subscribe(customer => {
+                    this.businessList = customer.commercialRelationship.businessList;
+                    this.writeValue(this.business);
+                });
+        }
     }
 }

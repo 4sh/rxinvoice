@@ -1,6 +1,6 @@
-import {Component, forwardRef, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {AccountantVatRate, VatRate} from '../../../../../../domain/common/vat-rate';
+import {VatRate} from '../../../../../../domain/common/vat-rate';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

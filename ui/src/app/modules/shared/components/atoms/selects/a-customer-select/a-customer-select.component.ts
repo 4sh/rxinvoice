@@ -24,8 +24,7 @@ export class ACustomerSelectComponent implements OnInit, ControlValueAccessor {
     public company: Company;
     public disabled: boolean;
 
-    private companyRef: string;
-    private onNgChange: (companyRef: string) => void;
+    private onNgChange: (company: Company) => void;
     private onNgTouched: () => void;
 
     constructor(private companyService: CompanyService) {
@@ -35,9 +34,9 @@ export class ACustomerSelectComponent implements OnInit, ControlValueAccessor {
         this.companyService.fetchCompanies()
             .subscribe(companies => {
                 this.companies = companies;
-                this.writeValue(this.companyRef);
+                this.writeValue(this.company);
             });
-    }s
+    }
 
     registerOnChange(fn: any): void {
         this.onNgChange = fn;
@@ -47,13 +46,8 @@ export class ACustomerSelectComponent implements OnInit, ControlValueAccessor {
         this.onNgTouched = fn;
     }
 
-    writeValue(companyRef: string): void {
-        this.companyRef = companyRef;
-        if (companyRef) {
-            this.company = this.findById(companyRef);
-        } else {
-            this.company = null;
-        }
+    writeValue(company: Company): void {
+        this.company = company;
     }
 
     setDisabledState(isDisabled: boolean): void {
@@ -62,11 +56,6 @@ export class ACustomerSelectComponent implements OnInit, ControlValueAccessor {
 
     onChange(company: Company): void {
         this.company = company;
-        this.companyRef = company._id;
-        this.onNgChange(company._id);
-    }
-
-    private findById(companyRef: string): Company {
-        return this.companies.find(company => company._id === companyRef);
+        this.onNgChange(company);
     }
 }
