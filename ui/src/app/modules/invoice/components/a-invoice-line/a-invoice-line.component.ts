@@ -3,7 +3,7 @@ import {ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from 
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {VatRate} from '../../../../domain/common/vat-rate';
-import {CustomerService} from '../../../../common/services/customer.service';
+import {CustomerService} from '../../../customer/services/customer.service';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

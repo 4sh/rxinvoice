@@ -1,0 +1,48 @@
+<!-- [CUSTOMER LIST] -->
+<a-spinner [hidden]="!isPending"></a-spinner>
+
+<div class="customerList cell auto">
+    <div class="customerList-head">
+        <div class="grid-x grid-padding-x">
+            <div class="cell phone-4">{{'customers.label.name' | translate}}</div>
+            <div class="cell phone-3">{{'newCustomer.label.siren' | translate}}</div>
+            <div class="cell phone-5">{{'customers.label.contact' | translate}}</div>
+            <div class="cell phone-4">{{'newCustomer.label.manager' | translate}}</div>
+            <div class="cell phone-2 text-right">{{'newCustomer.label.caInvoiced' | translate}}</div>
+            <div class="cell phone-3 text-center">{{'newCustomer.label.lastSent' | translate}}</div>
+            <div class="cell phone-3 text-center">{{'newCustomer.label.lastPayment' | translate}}</div>
+        </div>
+    </div>
+
+    <div class="customerList-line">
+        <div class="grid-x grid-padding-x line-block align-middle" *ngFor="let customer of companies"
+             (click)="goToDetail(customer)">
+            <div class="cell phone-4">
+                <span class="customerList-value">{{customer.name}}</span>
+            </div>
+            <div class="text-click cell phone-3">
+                <span class="customerList-value">{{customer.siren}}</span>
+            </div>
+            <div class="text-click cell phone-5">
+                <span class="customerList-value">{{customer.emailAddress}}</span>
+            </div>
+            <div class="text-click cell phone-4">
+                <span class="customerList-value">{{customer.commercialRelationship.customerManagerRef}}</span>
+            </div>
+            <div class="text-click cell phone-2 text-right">
+                <span class="customerList-value">{{customer.commercialRelationship.companyMetrics.currentYear.invoiced | invoiceCurrency}}</span>
+            </div>
+            <div class="text-click cell phone-3 text-center">
+                <span class="customerList-value">{{customer?.commercialRelationship?.lastSendDate | date: 'dd MMM. yyyy'}}</span>
+            </div>
+            <div class="cell phone-3 text-center">
+                <span class="customerList-value">{{customer?.commercialRelationship?.lastPaymentDate | date: 'dd MMM. yyyy'}}</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

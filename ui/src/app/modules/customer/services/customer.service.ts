@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {Company} from '../../domain/company/company';
+import {Company} from '../../../domain/company/company';
 import {catchError, map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {throwError} from 'rxjs/internal/observable/throwError';

@@ -9,7 +9,7 @@ import {AttachmentsDetailComponent} from '../attachments-detail/attachments-deta
 import {Location} from '@angular/common';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
-import {CustomerService} from '../../../../common/services/customer.service';
+import {CustomerService} from '../../../customer/services/customer.service';
 import * as Moment from 'moment';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 

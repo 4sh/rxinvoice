@@ -1,0 +1,47 @@
+<form novalidate #businessForm="ngForm">
+    <div class="grid-x grid-padding-x invoice-line">
+        <div class="cell phone-9">
+            <span *ngIf="!editable">{{business?.name}}</span>
+            <input *ngIf="editable && business"
+                   type="text"
+                   required="true"
+                   name="name"
+                   [(ngModel)]="business.name"
+                   placeholder="{{'TODO'|translate}}">
+        </div>
+        <div class="cell phone-12 grid-x align-right">
+            <a-user-select name="businessManagerRef"
+                           *ngIf="business"
+                           [disabled]="!editable"
+                           [(ngModel)]="business.businessManagerRef">
+            </a-user-select>
+        </div>
+        <div class="cell phone-1 grid-x align-right align-middle">
+            <button *ngIf="!editable && editActionEnabled"
+                    class="cell phone-11 action-icon edit-action"
+                    (click)="editLine()">
+                <i class="fas fa-pen"></i>
+            </button>
+            <button *ngIf="editable && validateActionEnabled"
+                    class="cell phone-11 action-icon validate-action"
+                    [class.disabled]="businessForm.invalid"
+                    [disabled]="businessForm.invalid"
+                    (click)="checkLine()">
+                <i class="fas fa-check"></i>
+            </button>
+            <button *ngIf="deleteActionEnabled"
+                    class="cell phone-11 action-icon delete-action"
+                    (click)="removeLine()">
+                <i class="far fa-trash-alt"></i>
+            </button>
+            <button *ngIf="addActionEnabled"
+                    class="cell phone-11 action-icon validate-action"
+                    [disabled]="businessForm.invalid"
+                    [class.disabled]="businessForm.invalid"
+                    (click)="addLine()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+</form>
+

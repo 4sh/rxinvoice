@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Company} from '../../../domain/company/company';
+import {Company} from '../../../../domain/company/company';
 import {Router} from '@angular/router';
 
 @Component({

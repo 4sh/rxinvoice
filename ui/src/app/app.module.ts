@@ -1,17 +1,10 @@
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgModule} from '@angular/core';
-import {DebounceDirective} from './common/directives/debounce.directive';
 import {AppComponent} from './app/app.component';
 import {AppHeaderComponent} from './common/components/app-header/app-header.component';
-import {CustomerDetailComponent} from './pages/customer-detail/customer-detail.component';
-import {CustomersComponent} from './pages/customers/customers.component';
 import {LoginComponent} from './pages/login/login.component';
 import {AppContentComponent} from './app-content/app-content.component';
-import {CustomersListComponent} from './common/components/customers-list/customers-list.component';
-import {AddressInputComponent} from './common/components/address-input/address-input.component';
-import {BusinessDetailComponent} from './common/components/business-detail/business-detail.component';
-import {VatDetailComponent} from './common/components/vat-detail/vat-detail.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserModule} from '@angular/platform-browser';
@@ -37,7 +30,6 @@ import {ButtonsModule} from './modules/shared/components/atoms/buttons/buttons.m
 import {InvoiceModule} from './modules/invoice/invoice.module';
 import {DraftModule} from './modules/draft/draft.module';
 import {DpDatePickerModule} from 'ng2-date-picker';
-import {CustomerService} from './common/services/customer.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/i18n/', 'labels.json');
@@ -45,22 +37,11 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
     declarations: [
-        // Pipes
-
-        // Directives
-        DebounceDirective,
         // Components
         AppComponent,
         AppHeaderComponent,
-        CustomerDetailComponent,
-        CustomersComponent,
         LoginComponent,
         AppContentComponent,
-        CustomersListComponent,
-        AddressInputComponent,
-        BusinessDetailComponent,
-        VatDetailComponent,
-        CustomerDetailComponent,
         ActivityPanelComponent,
         AnalyzeComponent,
         ModalContainerComponent,
@@ -93,7 +74,6 @@ export function createTranslateLoader(http: HttpClient) {
     providers: [
         TranslateService,
         CompanyService,
-        CustomerService,
         LoggedInGuard,
         AuthenticationService,
         ActivityService,

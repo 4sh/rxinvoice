@@ -11,71 +11,83 @@
             <h2>Statistiques commerciales</h2>
             <div class="grid-x statistic-container-numbers">
                 <div class="column">
-                    <label>{{'newCustomer.label.caInvoiced' | translate}} (mai 2020 - mars 2021)</label>
-                    <div class="bloc primary">0,00<span>€</span></div>
+                    <label>{{'newCustomer.label.caInvoiced' | translate}} {{companyFiscalYearBounds}}</label>
+                    <div class="bloc primary">{{currentYearTurnover | invoiceCurrency}}<span>€</span></div>
                 </div>
                 <div class="column">
-                    <label>{{'newCustomer.label.caFixed' | translate}} (mai 2020 - mars 2021)</label>
-                    <div class="bloc primary_medium">0,00<span>€</span></div>
+                    <label>{{'newCustomer.label.caFixed' | translate}} {{companyFiscalYearBounds}}</label>
+                    <div class="bloc primary_medium">{{currentYearTurnoverExpected | invoiceCurrency}}<span>€</span></div>
                 </div>
                 <div class="column">
                     <label>{{'newCustomer.label.totalInvoiced' | translate}}</label>
-                    <div class="bloc secondary">0,00<span>€</span></div>
+                    <div class="bloc secondary">{{(customer?.commercialRelationship?.companyMetrics?.global?.invoiced + customer?.commercialRelationship?.companyMetrics?.global?.paid
+                        + customer?.commercialRelationship?.companyMetrics?.global?.expired)| invoiceCurrency}}<span>€</span></div>
                 </div>
                 <div class="column statistic-container-numbers">
                     <label>Total CA ferme</label>
                     <div class="bloc secondary_dark">0,00<span>€</span></div>
                 </div>
             </div>
-            <img src="assets/images/png/statistic-bg.png">
+            <img src="../../../../../assets/images/png/statistic-bg.png">
         </div>
 
         <div>
             <div class="grid-x selectMenu">
-                <div class="grid-x select selectMenu-container">
+                <div class="grid-x select selectMenu-container" (click)="showGeneralInformationTab()">
                     <div class="selectMenu-round"></div>
                     <h2>Information<br>société</h2>
                 </div>
-                <div class="grid-x selectMenu-container">
+                <div class="grid-x selectMenu-container" (click)="showCommercialRelationTab()">
                     <div class="selectMenu-round"></div>
                     <h2>Relation<br>commerciale</h2>
                 </div>
             </div>
 
-            <div class="step">
+            <div *ngIf="currentTabIndex == 1" class="step">
                 <h2 class="step-title">
                     <span>1</span>
-                    Informations légales de la société
+                    Informations légales
                 </h2>
                 <div class="grid-y step-form">
                     <div class="grid-x step-form_line">
                         <div class="column small-8">
-                            <label>Nom du client</label>
-                            <input type="text">
+                            <label>Nom du client *</label>
+                            <input type="text" [(ngModel)]="customer.name" name="name" required>
                         </div>
                         <div class="column small-8">
-                            <label>Numéro de SIREN</label>
-                            <input type="text">
+                            <label>Numéro de SIREN *</label>
+                            <input type="text" [disabled]='isSirenDisabled()' [(ngModel)]="customer.siren" name="siren" required>
                         </div>
                     </div>
                     <div class="grid-x">
-                        <div class="column small-8">
-                            <label>Adresse</label>
-                            <input type="text">
+                        <div class="column small-16">
+                            <label>Adresse *</label>
+                            <textarea rows="3"
+                                   [(ngModel)]="customer.address.body" name="body"  required>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="grid-x">
+                        <div class="column small-3">
+                            <label>Code postal *</label>
+                            <input type="text"
+                                   [(ngModel)]="customer.address.zipCode" name="zipCode" required>
+                        </div>
+                        <div class="column small-5">
+                            <label>Ville *</label>
+                            <input type="text"
+                                   [(ngModel)]="customer.address.city" name="city" required>
                         </div>
                         <div class="column small-8">
-                            <label>Ville</label>
-                            <input type="text">
-                        </div>
-                        <div class="column small-8">
-                            <label>Code postal</label>
-                            <input type="text">
+                            <label>Pays *</label>
+                            <input type="text"
+                                   [(ngModel)]="customer.address.country" name="country"  required>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="step">
+            <div *ngIf="currentTabIndex == 2" class="step">
                 <h2 class="step-title">
                     <span>2</span>
                     Informations sur la relation commerciale
@@ -84,12 +96,15 @@
                 <div class="grid-y step-form">
                     <div class="grid-x step-form_line">
                         <div class="column small-8">
-                            <label>Mail du contact</label>
-                            <input type="text">
+                            <label>Mail du contact *</label>
+                            <input type="text" pattern="[^ @]*@[^ @]*"
+                                   [(ngModel)]="customer.emailAddress" name="emailAddress" required>
                         </div>
                         <div class="column small-8">
                             <label>Responsable client</label>
-                            <input type="text">
+                            <a-user-select name="businessManagerRef"
+                                         [(ngModel)]="customer.commercialRelationship.customerManagerRef">
+                            </a-user-select>
                         </div>
                     </div>
                 </div>
@@ -108,21 +123,27 @@
                             </div>
                         </div>
                         <div class="detailAction-line-block">
-                            <ng-container>
-                                <a-invoice-line
+                            <ng-container *ngFor="let business of customer.commercialRelationship.businessList; index as i">
+                                <a-business-line
+                                        [name]="'business' + i"
+                                        [ngModel]="business"
+                                        [businessList]="customer.commercialRelationship.businessList"
                                         [reorderEnabled]="true"
                                         [editActionEnabled]="true"
                                         [validateActionEnabled]="true"
-                                        [deleteActionEnabled]="true">
-                                </a-invoice-line>
+                                        [deleteActionEnabled]="!business.reference">
+                                </a-business-line>
                             </ng-container>
                         </div>
                         <div class="detailAction-line-footer">
-                            <a-invoice-line
-                                    name="newLine"
+                            <a-business-line
+                                    [name]="newBusiness"
                                     [editable]="true"
-                                    [addActionEnabled]="true">
-                            </a-invoice-line>
+                                    [ngModel]="newBusiness"
+                                    [businessList]="customer.commercialRelationship.businessList"
+                                    [addActionEnabled]="true"
+                                    (lineAddedEventEmitter)="businessAdded()">
+                            </a-business-line>
                         </div>
                     </div>
                 </div>
@@ -140,21 +161,19 @@
                             </div>
                         </div>
                         <div class="detailAction-line-block">
-                            <ng-container>
-                                <a-invoice-line
-                                        [reorderEnabled]="true"
-                                        [editActionEnabled]="true"
-                                        [validateActionEnabled]="true"
-                                        [deleteActionEnabled]="true">
-                                </a-invoice-line>
+                            <ng-container  *ngFor="let vatRate of customer.commercialRelationship.vatRates; index as i" >
+                                <a-business-line
+                                        [name]="newBusiness"
+                                        [editable]="true"
+                                        [ngModel]="newBusiness"
+                                        [businessList]="customer.commercialRelationship.businessList"
+                                        [addActionEnabled]="true"
+                                        (lineAddedEventEmitter)="businessAdded()">
+                                </a-business-line>
                             </ng-container>
                         </div>
                         <div class="detailAction-line-footer">
-                            <a-invoice-line
-                                    name="newLine"
-                                    [editable]="true"
-                                    [addActionEnabled]="true">
-                            </a-invoice-line>
+
                         </div>
                     </div>
                 </div>

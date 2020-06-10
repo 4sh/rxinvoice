@@ -1,7 +1,7 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Business} from '../../../../../../domain/commercial-relationship/business';
-import {CustomerService} from '../../../../../../common/services/customer.service';
+import {CustomerService} from '../../../../../customer/services/customer.service';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

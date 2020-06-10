@@ -21,8 +21,8 @@
         </div>
 
         <div class="cell shrink">
-            <button type="button" (click)="toggleFilter('lastPaymentDate')"
-                    [ngClass]="{'isActive green': filterString ===  'lastPaymentDate'}"
+            <button type="button" (click)="toggleFilter('commercialRelationship.companyMetrics.currentYear.invoiced')"
+                    [ngClass]="{'isActive green': filterString ===  'commercialRelationship.companyMetrics.currentYear.invoiced'}"
                     class="round large listFilter-item">
                 {{'customers.filters.ca' | translate}}
             </button>
@@ -52,7 +52,6 @@
     </div>
     <div class="cell phone-22">
         <customers-list [companies]="companies | orderBy: filterString: isReverse"  [isPending]="isPending"></customers-list>
-
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyService} from '../../common/services/company.service';
-import {Company} from '../../domain/company/company';
+import {CompanyService} from '../../../../common/services/company.service';
+import {Company} from '../../../../domain/company/company';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -45,7 +45,7 @@ export class CustomersComponent implements OnInit {
     }
 
     public toggleFilter(string): void {
-        this.isReverse = string === 'lastSendDate' ||  string === 'lastPaymentDate';
+        this.isReverse = string === 'lastSendDate' ||  string === 'lastPaymentDate' ||  string === 'commercialRelationship.companyMetrics.currentYear.invoiced';
             this.filterString = string;
     }
 

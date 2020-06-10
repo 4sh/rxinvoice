@@ -1,9 +1,7 @@
 import {Routes, RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {CustomersComponent} from './pages/customers/customers.component';
 import {LoginComponent} from './pages/login/login.component';
 import {AppContentComponent} from './app-content/app-content.component';
-import {CustomerDetailComponent} from './pages/customer-detail/customer-detail.component';
 import {GuideRoutes} from './style-guide-module/guide.routes';
 import {AnalyzeComponent} from './pages/analyze/analyze.component';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
@@ -31,13 +29,9 @@ const routes: Routes = [
                 loadChildren: () => import('./modules/draft/draft-routing.module').then(m => m.DraftRoutingModule)
             },
             {
-                path: 'customers', component: CustomersComponent, data: {title: 'navigation.menu.customers'}
-            },
-            {
-                path: 'customers/new', component: CustomerDetailComponent
-            },
-            {
-                path: 'customers/detail/:id', component: CustomerDetailComponent
+                path: 'customers',
+                data: {title: 'navigation.menu.customers'},
+                loadChildren: () => import('./modules/customer/customer-routing.module').then(m => m.CustomerRoutingModule)
             },
             {
                 path: 'analyze', component: AnalyzeComponent, data: {title: 'navigation.menu.analyze'}

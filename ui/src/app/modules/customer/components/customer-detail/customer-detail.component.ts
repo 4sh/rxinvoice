@@ -1,14 +1,15 @@
 import {filter} from 'rxjs/operators';
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Company} from '../../domain/company/company';
+import {Company} from '../../../../domain/company/company';
 import {FormGroup} from '@angular/forms';
-import {CompanyService} from '../../common/services/company.service';
+import {CompanyService} from '../../../../common/services/company.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as Moment from 'moment';
-import {SweetAlertService} from '../../modules/shared/services/sweetAlert.service';
-import {AuthenticationService} from '../../common/services/authentication.service';
+import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
+import {AuthenticationService} from '../../../../common/services/authentication.service';
 import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
+import {Business} from '../../../../domain/commercial-relationship/business';
 
 @Component({
     selector: 'customer-detail',
@@ -19,14 +20,15 @@ export class CustomerDetailComponent implements OnInit {
 
     public seller: Company;
     public customer = new Company();
-    public editMode = false;
-    public companyId: string;
     public canDelete: boolean;
     @ViewChild('customerForm', {static: true}) form: FormGroup;
     public currentYearTurnover = 0;
     public currentYearTurnoverExpected = 0;
     public totalTurnover = 0;
     public companyFiscalYearBounds: string;
+    public newBusiness: Business = new Business();
+
+    public currentTabIndex = 1;
 
     constructor(private companyService: CompanyService,
                 private route: ActivatedRoute,
@@ -38,48 +40,40 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.fetchCustomer();
-        const currentUser = this.authService.getCurrentUser();
-        this.authService.companyEvents.pipe(filter(company => !!company)).subscribe(company => {
-            this.seller = company;
-            this.buildCompanyFiscalYearBounds(this.seller);
-        });
 
-        this.canDelete = currentUser.roles.filter(role => role === 'admin').length > 0;
+        this.route.data.subscribe(routeData => {
+            this.customer = routeData.customer;
+            this.authService.companyEvents
+                .subscribe(companyEvent => {
+                    this.seller = companyEvent;
+                    this.buildCompanyFiscalYearBounds(this.seller);
+                    this.fillCustomerMetrics(this.customer);
+                });
+            this.authService.userEvents
+                .subscribe(currentUser =>
+                    this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0
+                );
+        });
     }
 
+    private fillCustomerMetrics(customer: Company) {
+        if (customer && customer.commercialRelationship && customer.commercialRelationship.companyMetrics.currentYear) {
+            const companyMetrics = customer.commercialRelationship.companyMetrics;
 
-    public fetchCustomer() {
-        this.route.params.subscribe(params => {
-            if (!this.companyId) {
-                this.companyId = params['id'];
-            }
-            if (this.companyId) {
-                this.companyService.fetchCompany(this.companyId)
-                    .subscribe((company: Company) => {
-                        this.customer = company;
-                        if (company && company.commercialRelationship && company.commercialRelationship.companyMetrics.currentYear) {
-                            const companyMetrics = company.commercialRelationship.companyMetrics;
+            this.currentYearTurnover =
+                companyMetrics.currentYear.invoiced +
+                companyMetrics.currentYear.paid +
+                companyMetrics.currentYear.expired;
 
-                            this.currentYearTurnover =
-                                companyMetrics.currentYear.invoiced +
-                                companyMetrics.currentYear.paid +
-                                companyMetrics.currentYear.expired;
+            this.currentYearTurnoverExpected =
+                this.currentYearTurnover +
+                companyMetrics.currentYear.expected;
 
-                            this.currentYearTurnoverExpected =
-                                this.currentYearTurnover +
-                                companyMetrics.currentYear.expected;
-
-                            this.totalTurnover =
-                                companyMetrics.global.invoiced +
-                                companyMetrics.global.paid +
-                                companyMetrics.global.expired;
-                        }
-                    });
-            } else {
-                this.editMode = true;
-            }
-        });
+            this.totalTurnover =
+                companyMetrics.global.invoiced +
+                companyMetrics.global.paid +
+                companyMetrics.global.expired;
+        }
     }
 
     private buildCompanyFiscalYearBounds(company: Company) {
@@ -114,7 +108,6 @@ export class CustomerDetailComponent implements OnInit {
         }
         this.companyService.updateCompany(this.customer).subscribe((company) => {
                 this.customer = company;
-                this.editMode = false;
                 this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
             },
             () => {
@@ -128,16 +121,11 @@ export class CustomerDetailComponent implements OnInit {
         }
         this.companyService.createCompany(this.customer).subscribe((company) => {
                 this.customer = company;
-                this.editMode = false;
                 this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
             },
             () => {
                 this.alertService.error({title: 'alert.creation.error', customClass: 'swal2-for-edit'});
             });
-    }
-
-    public reset() {
-        this.editMode = false;
     }
 
     public delete() {
@@ -158,7 +146,18 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     public isSirenDisabled(): boolean {
-        return !this.editMode || !!this.customer._id;
+        return !!this.customer._id && !!this.customer.siren;
     }
 
+    public businessAdded(): void {
+        this.newBusiness = new Business();
+    }
+
+    public showGeneralInformationTab(): void {
+        this.currentTabIndex = 1;
+    }
+
+    public showCommercialRelationTab(): void {
+        this.currentTabIndex = 2;
+    }
 }
