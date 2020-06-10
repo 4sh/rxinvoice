@@ -64,7 +64,10 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     private fillCustomerMetrics(customer: Company) {
-        if (customer && customer.commercialRelationship && customer.commercialRelationship.companyMetrics.currentYear) {
+        if (customer
+            && customer.commercialRelationship
+            && customer.commercialRelationship.companyMetrics
+            && customer.commercialRelationship.companyMetrics.currentYear) {
             const companyMetrics = customer.commercialRelationship.companyMetrics;
 
             this.currentYearTurnover =

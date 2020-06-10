@@ -20,12 +20,13 @@
                 </div>
                 <div class="column">
                     <label>{{'company.statistics.total.invoiced' | translate}}</label>
-                    <div class="bloc secondary">{{(customer?.commercialRelationship?.companyMetrics?.global?.invoiced + customer?.commercialRelationship?.companyMetrics?.global?.paid
+                    <div class="bloc secondary">{{(customer?.commercialRelationship?.companyMetrics?.global?.invoiced
+                        + customer?.commercialRelationship?.companyMetrics?.global?.paid
                         + customer?.commercialRelationship?.companyMetrics?.global?.expired)| invoiceCurrency}}</div>
                 </div>
                 <div class="column statistic-container-numbers">
-                    <label>{{'company.statistics.total.invoiced.fixed' | translate}}</label>
-                    <div class="bloc secondary_dark">0,00 €</div>
+                    <label>{{'company.statistics.total.debts' | translate}}</label>
+                    <div class="bloc secondary_dark">{{(customer?.commercialRelationship?.companyMetrics?.global?.expired || 0)  | invoiceCurrency}}</div>
                 </div>
             </div>
             <img src="../../../../../assets/images/png/statistic-bg.png">
@@ -33,11 +34,13 @@
 
         <div>
             <div class="grid-x selectMenu">
-                <div class="grid-x select selectMenu-container" (click)="showGeneralInformationTab()">
+                <div class="grid-x selectMenu-container" [class.select]="currentTabIndex == 1"
+                     (click)="showGeneralInformationTab()">
                     <div class="selectMenu-round"></div>
                     <h2>{{'company.general.title' | translate}}</h2>
                 </div>
-                <div class="grid-x selectMenu-container" (click)="showCommercialRelationTab()">
+                <div class="grid-x selectMenu-container" [class.select]="currentTabIndex == 2"
+                     (click)="showCommercialRelationTab()">
                     <div class="selectMenu-round"></div>
                     <h2>{{'commercial.relationship.title' | translate}}</h2>
                 </div>
