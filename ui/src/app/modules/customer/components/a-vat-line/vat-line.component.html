@@ -1,0 +1,30 @@
+<form novalidate #vatRateForm="ngForm">
+    <div class="grid-x grid-padding-x invoice-line">
+        <div class="cell phone-16">
+            <span *ngIf="!editable">{{vatRate?.label}}</span>
+            <a-vat-select name="vat"
+                          [vatRateList]="vatRates"
+                          *ngIf="editable"
+                          [(ngModel)]="vatRate">
+            </a-vat-select>
+        </div>
+        <div class="cell phone-5 grid-x align-right">
+            <span *ngIf="!editable">{{vatRate?.rate | number}}</span>
+        </div>
+        <div class="cell phone-3 grid-x align-right align-middle">
+            <button *ngIf="deleteActionEnabled"
+                    class="cell phone-11 action-icon delete-action"
+                    (click)="removeLine()">
+                <i class="far fa-trash-alt"></i>
+            </button>
+            <button *ngIf="addActionEnabled"
+                    class="cell phone-1 action-icon validate-action"
+                    [disabled]="vatRateForm.invalid"
+                    [class.disabled]="vatRateForm.invalid"
+                    (click)="addLine()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
