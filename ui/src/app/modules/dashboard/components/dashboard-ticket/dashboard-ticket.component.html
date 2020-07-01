@@ -13,7 +13,7 @@
             </button>
             <button class="action-button" *ngIf="isDraftInvoice()"
                     [routerLink]="['/invoices/detail/' + invoice._id]">
-                <i class="fas fa-pencil-alt"></i>
+                <i class="fas fa-pencil-alt icon-pencil"></i>
             </button>
             <button class="action-button" *ngIf="!isDraftInvoice()" (click)="downloadInvoice(invoice)">
               <i class="ion-document"></i>
