@@ -2,11 +2,15 @@ var user_AGA = {
     name: "AGA",
     email: "amandine.guerra@4sh.fr",
     roles: ["seller"],
+    companyRef: "53c535a5c8d11a14c7269436" ,
+    companyRole: "ADMINISTRATIVE"
 };
 var user_CRT = {
     name: "CRT",
     email: "camille.renault@4sh.fr",
-    roles: ["seller"]
+    roles: ["seller"],
+    companyRef: "53c535a5c8d11a14c7269436",
+    companyRole: "ADMINISTRATIVE"
 };
 
 db.getCollection('users').save(user_AGA);
