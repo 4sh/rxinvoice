@@ -7,7 +7,7 @@
   flex-direction: column;
   width: rem-calc($navigation-menu-width-sm);
   min-height: 100vh;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.4);
+  box-shadow: rem-calc(2px) 0 rem-calc(8px) rgba(0, 0, 0, 0.4);
   z-index: 1000000;
   background: $navigation-menu-bg-color;
 
@@ -112,10 +112,10 @@
       .navigation-menu-item {
         span {
           display: inline-block !important;
-          font-size: 14px;
+          font-size: rem-calc(14px);
           text-transform: capitalize;
           font-weight: 500;
-          letter-spacing: 0.5px;
+          letter-spacing: rem-calc(0.5px);
         }
       }
 

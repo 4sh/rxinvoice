@@ -5,7 +5,7 @@
      [dndType]="invoice.status">
     <div class="row">
         <div class="column small-15" *ngIf="!isDraftInvoice()">
-            <span class="date">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
+            <a-invoice-date [invoiceDate]="invoice.date" [statusDate]="statusClass"></a-invoice-date>
         </div>
         <div class="column small-9 text-right invoice-actions">
             <button class="action-button" (click)="openPopup()">
@@ -30,7 +30,10 @@
             <p class="invoice-price">{{invoice.grossAmount | invoiceCurrency}}</p>
         </div>
         <div class="column small-9 invoice-button">
-            <button class="button" (click)="quickAction()" *ngIf="quickActionVisible">{{quickActionLabel | translate}}</button>
+            <a-button-launch (click)="quickAction()"
+                             [launchStyle]="'TICKET'"
+                             [launchLabel]="quickActionLabel"
+                             *ngIf="quickActionVisible"></a-button-launch>
         </div>
     </div>
     <div class="label-draft" *ngIf="isDraftInvoice()">

@@ -1,0 +1,24 @@
+@import '../../../../../../../styles/base-component';
+
+button.buttonLaunch {
+  padding: rem-calc(6px);
+  font-size: rem-calc(10px);
+  font-weight: 700;
+  text-transform: uppercase;
+
+  &._ticket {
+    background-color: rgba($app-grey, .15);
+    color: rgba($app-primary, .5);
+  }
+
+  &._invoice {
+    background-color: transparent;
+    border: 1px solid rgba(92, 96, 197, 0.3);
+    color: rgba(92, 96, 197, 0.7);
+  }
+
+  &:hover {
+    background-color: $app-primary_light;
+    color: $app-primary;
+  }
+}

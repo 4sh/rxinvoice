@@ -9,6 +9,7 @@ import {ALinkIconComponent} from './a-link-icon/a-link-icon.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
+import {AButtonLaunchComponent} from "./a-button-launch/a-button-launch.component";
 
 
 const components = [
@@ -18,7 +19,8 @@ const components = [
     AButtonIconComponent,
     ALinkCancelComponent,
     ALinkDefaultComponent,
-    ALinkIconComponent
+    ALinkIconComponent,
+    AButtonLaunchComponent
 ];
 
 @NgModule({

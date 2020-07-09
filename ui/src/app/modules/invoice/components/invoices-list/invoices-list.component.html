@@ -17,9 +17,7 @@
     <div class="invoiceList-line">
             <div class="grid-x grid-padding-x line-block align-middle" *ngFor="let invoice of invoices">
                 <div *ngIf="referenceNumberColumnDisplayed" class="cell phone-2 ref-cell">
-                    <span>
-                         N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
-                    </span>
+                    <span>N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}</span>
                 </div>
                 <div (click)="goToDetail(invoice)" class="text-click cell phone-3 client-cell">
                     <span class="invoiceList-value">{{invoice.buyer.name}}</span>
@@ -37,16 +35,14 @@
                     <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
                 </div>
                 <div class=" cell status-cell">
-                    <span class="invoiceList-status text-right" [ngClass]="invoice.status">
-                        {{ 'invoice.status.' + invoice.status | translate}}
-                    </span>
+                    <a-status [statusLabel]="invoice.status"></a-status>
                 </div>
                 <div class="grid-x align-right align-middle cell actions-cell">
-                    <button class="invoiceList-launch" (click)="launchInvoice(invoice)"
-                            [ngClass]="{'visibility': isLaunchButtonVisible(invoice)}">
-                        {{ 'invoice.list.column.launch' | translate}}
-                    </button>
-
+                    <a-button-launch (click)="launchInvoice(invoice)"
+                                     *ngIf="isLaunchButtonVisible(invoice)"
+                                     [launchStyle]="'INVOICE'"
+                                     [launchLabel]="'invoice.list.column.launch'"></a-button-launch>
+                    <a-spacer [sizeX]="10"></a-spacer>
                     <a-button-icon size="DEFAULT" visibility="HIGH" (click)="downloadInvoice(invoice)">
                         <i class="far fa-file-pdf"></i>
                     </a-button-icon>

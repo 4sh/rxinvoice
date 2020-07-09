@@ -225,20 +225,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-
-    button {
-      padding: rem-calc(6px);
-      font-size: rem-calc(10px);
-      font-weight: 700;
-      background-color: rgba($app-grey, .15);
-      color: rgba($app-primary, .5);
-      text-transform: uppercase;
-
-      &:hover {
-        background-color: $app-primary_light;
-        color: $app-primary;
-      }
-    }
   }
 
   &.draft-invoice {

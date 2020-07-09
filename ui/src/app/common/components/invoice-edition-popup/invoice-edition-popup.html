@@ -40,9 +40,7 @@
                     <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
                 </td>
                 <td  width="270px">
-                    <span class="invoiceList-status text-right" [ngClass]="invoice.status">
-                        {{ 'invoice.status.' + invoice.status | translate}}
-                    </span>
+                    <a-invoice-status [statusLabel]="invoice.status"></a-invoice-status>
                 </td>
             </tr>
             </tbody>

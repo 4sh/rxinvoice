@@ -1,0 +1,127 @@
+@import 'src/styles/base-component';
+
+.statusLabel {
+  border-radius: rem-calc(50px);
+  padding: rem-calc(4px 16px);
+  font-weight: bold;
+
+  &.DRAFT {
+    background: rgba($status-draft-color, 0.1) !important;
+    color: $status-draft-color !important;
+
+    &:before {
+      content: "\f12c";
+      font-family: Ionicons;
+      color: $status-draft-color;
+      opacity: 0.7;
+  }
+}
+
+  &.READY {
+    background: rgba($status-ready-color, 0.1) !important;
+    color: $status-ready-color !important;
+
+    &:before {
+      content: "\f36e";
+      font-family: Ionicons;
+      color: $status-ready-color;
+      opacity: 0.7;
+  }
+}
+
+  &.WAITING_VALIDATION {
+    background: rgba($status-waiting-validation-color, 0.1) !important;
+    color: $status-waiting-validation-color !important;
+
+    &:before {
+      content: "\f3b3";
+      font-family: Ionicons;
+      color: $status-waiting-validation-color;
+      opacity: 0.7;
+  }
+}
+
+  &.VALIDATED {
+    background: rgba($status-validated-color, 0.1) !important;
+    color: $status-validated-color !important;
+
+    &:before {
+      content: "\f120";
+      font-family: Ionicons;
+      color: $status-validated-color;
+      opacity: 0.7;
+  }
+}
+
+  &.SENT {
+    background: rgba($status-sent-color, 0.1) !important;
+    color: $status-sent-color !important;
+
+    &:before {
+      content: "\f474";
+      font-family: Ionicons;
+      color: $status-sent-color;
+      opacity: 0.7;
+  }
+}
+
+  &.PAID {
+    background: rgba($status-paid-color, 0.1) !important;
+    color: $status-paid-color !important;
+
+    &:before {
+      content: "\f119";
+      font-family: Ionicons;
+      color: $status-paid-color;
+      opacity: 0.7;
+  }
+}
+
+  &.PAYMENT_SCHEDULED {
+    background: rgba($status-payment-scheduled-color, 0.1) !important;
+    color: $status-payment-scheduled-color !important;
+
+    &:before {
+      content: "\f119";
+      font-family: Ionicons;
+      color: $status-payment-scheduled-color;
+      opacity: 0.7;
+  }
+}
+
+  &.LATE {
+    background: rgba($status-late-color, 0.1) !important;
+    color: $status-late-color !important;
+
+    &:before {
+      content: "\f36e";
+      font-family: Ionicons;
+      color: $status-late-color;
+      opacity: 0.7;
+  }
+}
+
+  &.UNPAID {
+    background: rgba($status-unpaid-color, 0.1) !important;
+    color: $status-unpaid-color !important;
+
+    &:before {
+      content: "\f119";
+      font-family: Ionicons;
+      color: $status-unpaid-color;
+      opacity: 0.7;
+  }
+}
+
+  &.CANCELLED {
+    background: rgba($status-cancelled-color, 0.1) !important;
+    color: $status-cancelled-color !important;
+
+    &:before {
+      content: "\f36e";
+      font-family: Ionicons;
+      color: $status-cancelled-color;
+      opacity: 0.7;
+  }
+}
+}

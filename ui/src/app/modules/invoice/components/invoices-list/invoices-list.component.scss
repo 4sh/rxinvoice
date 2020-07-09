@@ -1,6 +1,5 @@
 @import 'src/styles/base-component';
 
-
 :host {
     position: relative;
     display: block;
@@ -9,43 +8,7 @@
     padding: rem-calc(16px);
 }
 
-@include new('invoiceFilter') {
-    padding: rem-calc(20px 20px 0 12px);
-
-    @include has('search') {
-        margin-left: rem-calc(50px);
-
-        &:focus {
-            transition: 0.30s ease;
-            color: $input-border-color;
-        }
-    }
-}
-
-@include new('invoiceNumber') {
-    margin: rem-calc(35px 0 0 0);
-    padding-left: 8px;
-}
-
-// ---- Customer Button
-
-@include new('invoiceNewButton') {
-    display: flex;
-    margin-right: rem-calc(8px);
-}
-
-
-// ---- Invoice Select Table
-
-@include new('invoiceSelect') {
-    cursor: pointer;
-
-    @include has('item') {
-        cursor: pointer;
-    }
-}
-
-// ---- Invoice List Table
+// ---- Invoice List
 
 @include new('invoiceList') {
     height: 100%;
@@ -93,162 +56,8 @@
             overflow: hidden;
         }
     }
-
-    @include has('status') {
-        border-radius: rem-calc(50px);
-        padding: rem-calc(4px 16px);
-        font-weight: bold;
-
-        &.DRAFT {
-            background: rgba($status-draft-color, 0.1) !important;
-            color: $status-draft-color;
-
-            &:before {
-                content: "\f12c";
-                font-family: Ionicons;
-                color: $status-draft-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.READY {
-            background: rgba($status-ready-color, 0.1) !important;
-            color: $status-ready-color;
-
-            &:before {
-                content: "\f36e";
-                font-family: Ionicons;
-                color: $status-ready-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.WAITING_VALIDATION {
-            background: rgba($status-waiting-validation-color, 0.1) !important;
-            color: $status-waiting-validation-color;
-
-            &:before {
-                content: "\f3b3";
-                font-family: Ionicons;
-                color: $status-waiting-validation-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.VALIDATED {
-            background: rgba($status-validated-color, 0.1) !important;
-            color: $status-validated-color;
-
-            &:before {
-                content: "\f120";
-                font-family: Ionicons;
-                color: $status-validated-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.SENT {
-            background: rgba($status-sent-color, 0.1) !important;
-            color: $status-sent-color;
-
-            &:before {
-                content: "\f474";
-                font-family: Ionicons;
-                color: $status-sent-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.PAID {
-            background: rgba($status-paid-color, 0.1) !important;
-            color: $status-paid-color;
-
-            &:before {
-                content: "\f119";
-                font-family: Ionicons;
-                color: $status-paid-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.PAYMENT_SCHEDULED {
-            background: rgba($status-payment-scheduled-color, 0.1) !important;
-            color: $status-payment-scheduled-color;
-
-            &:before {
-                content: "\f119";
-                font-family: Ionicons;
-                color: $status-payment-scheduled-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.LATE {
-            background: rgba($status-late-color, 0.1) !important;
-            color: $status-late-color;
-
-            &:before {
-                content: "\f36e";
-                font-family: Ionicons;
-                color: $status-late-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.UNPAID {
-            background: rgba($status-unpaid-color, 0.1) !important;
-            color: $status-unpaid-color;
-
-            &:before {
-                content: "\f119";
-                font-family: Ionicons;
-                color: $status-unpaid-color;
-                opacity: 0.7;
-            }
-        }
-
-        &.CANCELLED {
-            background: rgba($status-cancelled-color, 0.1) !important;
-            color: $status-cancelled-color;
-
-            &:before {
-                content: "\f36e";
-                font-family: Ionicons;
-                color: $status-cancelled-color;
-                opacity: 0.7;
-            }
-        }
-    }
-
-    @include has('download') {
-        background: rgba($app-secondary, 0.2);
-        color: $app-secondary;
-        cursor: pointer;
-        border: transparent;
-
-        &:hover {
-            background: $app-primary;
-            color: white;
-        }
-    }
 }
 
-@include new('buttonContainer') {
-    display: flex;
-
-    @include has('green') {
-        border: 2px solid $app-secondary;
-        background: white;
-        color: $app-secondary;
-        margin-left: rem-calc(8px);
-
-        &:hover {
-            border: 2px solid $app-primary;
-            background: $app-primary;
-            color: white;
-        }
-    }
-}
 .actions-cell {
     width: 147px;
 }
@@ -258,28 +67,5 @@
 .date-cell, .amount-cell {
     width: 140px;
 }
-
-.invoiceList-launch {
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 0.6rem 1rem;
-    height: 25px;
-    font-size: 10px;
-    background-color: transparent;
-    border: 1px solid rgba($app-primary, .3);
-    color: rgba($app-primary, .7);
-    margin-right: 10px;
-    visibility: hidden;
-
-    &:hover {
-        background-color: $app-primary;
-        color: white;
-        border-color: $app-primary;
-    }
-    &.visibility {
-        visibility: visible;
-    }
-}
-
 
 

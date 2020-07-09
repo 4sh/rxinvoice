@@ -1,0 +1,52 @@
+@import 'src/styles/base-component';
+
+.date {
+  font-size: rem-calc(11px);
+  padding: rem-calc(8px) rem-calc(16px);
+  border-radius: rem-calc(20px);
+  font-weight: 600;
+  display: block;
+  margin-bottom: rem-calc(10px);
+  width: rem-calc(100px);
+
+  &.status-waiting_validation {
+    background-color: rgba($status-waiting-validation-color, 0.1);
+    color: $status-waiting-validation-color;
+  }
+
+  &.status-validated {
+    background-color: rgba($status-validated-color, 0.1);
+    color: $status-validated-color;
+  }
+
+  &.status-sent {
+    background-color: rgba($status-sent-color, 0.1);
+    color: $status-sent-color;
+  }
+
+  &.status-paid {
+    background-color: rgba($status-paid-color, 0.1);
+    color: $status-paid-color;
+  }
+
+  &.status-payment_scheduled {
+    background-color: rgba($status-payment-scheduled-color, 0.1);
+    color: $status-payment-scheduled-color;
+  }
+
+  &.status-late {
+    background-color: rgba($status-late-color, 0.1);
+    color: $status-late-color;
+  }
+
+  &.status-unpaid {
+    background-color: rgba($status-unpaid-color, 0.1);
+    color: $status-unpaid-color;
+  }
+
+  &.status-cancelled {
+    background-color: rgba($status-cancelled-color, 0.1);
+    color: $status-cancelled-color;
+  }
+
+}

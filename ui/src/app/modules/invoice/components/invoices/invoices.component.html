@@ -1,13 +1,13 @@
 <div class="grid-y grid-padding-y invoiceListContainer">
 
     <form class="grid-x cell phone-2" [formGroup]="searchForm">
-        <div class="cell phone-8">
+        <div class="cell auto">
             <p class="title-section">Recherche</p>
             <input class="input search" type="text" placeholder="{{'invoice.search.name' | translate}}"
                    formControlName="query">
         </div>
 
-        <div class="cell phone-7 grid-x">
+        <div class="cell phone-8 grid-x">
             <div class="cell phone-12 date-picker-block">
                 <p class="title-section">Entre</p>
                 <div class="date-picker columns shrink">
@@ -18,7 +18,7 @@
             </div>
             <div class="cell phone-12 date-picker-block">
                 <p class="title-section">Et</p>
-                <div class="date-picker columns shrink">
+                <div class="date-picker columns shrink space-right-10">
                     <div class="invoiceSelect-date">
                         <a-date-picker formControlName="endDate"></a-date-picker>
                     </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="cell phone-9 grid-x align-right list-action">
+        <div class="cell shrink grid-x align-right list-action">
             <a-link-default [href]="exportInvoices()"
                             size="LARGE"
                               class="text-right">

@@ -26,6 +26,8 @@ import {AInvoiceStatusSelectComponent} from './components/atoms/selects/a-invoic
 import {NavigationMenuComponent} from './components/navigation-menu/navigation-menu.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
+import { AInvoiceStatusComponent } from './components/atoms/invoice/a-invoice-status/a-invoice-status.component';
+import { AInvoiceDateComponent } from './components/atoms/invoice/a-invoice-date/a-invoice-date.component';
 
 const components = [
     AToggleComponent,
@@ -59,8 +61,8 @@ const pipes = [OrderByPipe];
         NgSelectModule,
         ButtonsModule
     ],
-    declarations: [components, pipes],
-    exports: [components, pipes],
+    declarations: [components, pipes, AInvoiceStatusComponent, AInvoiceDateComponent],
+    exports: [components, pipes, AInvoiceStatusComponent, AInvoiceDateComponent],
 
     providers: [
         TranslateService,
