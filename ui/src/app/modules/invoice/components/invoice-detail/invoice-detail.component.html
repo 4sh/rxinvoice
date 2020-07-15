@@ -127,9 +127,9 @@
                             <span>{{'invoice.line.total.net.amount'|translate}}</span>
                         </div>
                         <div class="cell phone-12 grid-x align-right amount-line">
-                            <span>{{invoice.grossAmount | invoiceCurrency}}</span>
-                            <span *ngIf="invoice.withVAT">{{invoice.vatAmount | invoiceCurrency}}</span>
-                            <span>{{invoice.netAmount | invoiceCurrency}}</span>
+                            <span>{{(invoice.grossAmount ? invoice.grossAmount : 0)  | invoiceCurrency}}</span>
+                            <span *ngIf="invoice.withVAT">{{(invoice.vatAmount ? invoice.vatAmount : 0)  | invoiceCurrency}}</span>
+                            <span>{{(invoice.netAmount ? invoice.netAmount : 0)  | invoiceCurrency}}</span>
                         </div>
                     </div>
                     <div class="cell phone-6"></div>
