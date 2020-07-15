@@ -61,7 +61,8 @@ var accountantReferences =
         "Simatix": "CSIMATIX",
         "La Charente Libre": "CCHARLIBRE",
         "IN'COM": "CINCOM",
-        "Pyrénnées Presse": "CPYRPRESSE"
+        "Pyrénnées Presse": "CPYRPRESSE",
+        "GIE FILHET ALLARD": "CGIEFILHET"
     };
 
 for (var key of Object.keys(accountantReferences)) {

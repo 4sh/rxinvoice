@@ -2,6 +2,23 @@ var quatreSHComp = db.getCollection('companies').findOne({name: "4SH"});
 
 if (quatreSHComp) {
     quatreSHComp.sellerSettings = {
+        vatRates : [
+            {
+                "label" : "Taux normal",
+                "rate" : 2000,
+                "accountNumber" : "445711"
+            },
+            {
+                "label" : "Taux réduit",
+                "rate" : 850,
+                "accountNumber" : "445712"
+            },
+            {
+                "label" : "Taux Hors UE",
+                "rate" : 0,
+                "accountNumber" : "0"
+            }
+        ],
         serviceReferenceList: [
             {
                 kind: "SERVICE",
@@ -25,7 +42,11 @@ if (quatreSHComp) {
             },
             {
                 kind: "SERVICE",
-                accountNumber: "706951"
+                accountNumber: "706951",
+                vatRate: {
+                    rate: 0,
+                    accountNumber: "0"
+                }
             },
             {
                 kind: "FEE",
