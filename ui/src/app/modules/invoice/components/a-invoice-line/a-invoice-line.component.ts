@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Invoice} from '../../../../domain/invoice/invoice';
@@ -19,7 +19,7 @@ const VALUE_ACCESSOR = {
     viewProviders: [{provide: ControlContainer, useExisting: NgForm}],
     providers: [VALUE_ACCESSOR]
 })
-export class AInvoiceLineComponent implements ControlValueAccessor {
+export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
 
     @ViewChild('invoiceLineForm')
     public invoiceLineForm: NgForm;
@@ -42,19 +42,6 @@ export class AInvoiceLineComponent implements ControlValueAccessor {
     public deleteActionEnabled: boolean;
     @Input()
     public editable: boolean;
-    @Input()
-    public get buyer(): Company {
-        return this._buyer;
-    }
-
-    public set buyer(buyer: Company) {
-        this._buyer = buyer;
-        if (this._buyer && this._buyer._id) {
-            this.customerService.fetchCustomer(this.invoice.buyer._id)
-                .subscribe(customer => this.vatRateList = customer.commercialRelationship.vatRates);
-        }
-    }
-
 
     @Output()
     public lineAddedEventEmitter: EventEmitter<void> = new EventEmitter();
@@ -65,6 +52,27 @@ export class AInvoiceLineComponent implements ControlValueAccessor {
     private onNgTouched: () => void;
 
     constructor(private customerService: CustomerService) {
+    }
+
+    @Input()
+    public get buyer(): Company {
+        return this._buyer;
+    }
+
+    public set buyer(buyer: Company) {
+        this._buyer = buyer;
+        if (this._buyer && this._buyer._id) {
+            this.customerService.fetchCustomer(this.invoice.buyer._id)
+                .subscribe(customer => {
+                    if (customer.commercialRelationship.vatRates && customer.commercialRelationship.vatRates.length > 0) {
+                        this.vatRateList = customer.commercialRelationship.vatRates
+                    }
+                });
+        }
+    }
+
+    ngOnInit(): void {
+        this.vatRateList = this.invoice.seller.sellerSettings.vatRates;
     }
 
     public editLine(): void {

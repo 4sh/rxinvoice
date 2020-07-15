@@ -9,6 +9,7 @@ import {SalesExportParameters} from '../../../pages/analyze/sales-export-paramet
 import {InvoiceStatusEnum, InvoiceStatusType} from '../../../domain/invoice/invoice-status.type';
 import {Observable} from 'rxjs/internal/Observable';
 import {throwError} from 'rxjs/internal/observable/throwError';
+import {AuthenticationService} from '../../../common/services/authentication.service';
 
 @Injectable()
 export class InvoiceService {
@@ -17,7 +18,14 @@ export class InvoiceService {
 
     private baseUrl = '/api/invoices';
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private authenticationService: AuthenticationService) {
+    }
+
+    public buildInvoice() {
+        const invoice = new Invoice();
+        invoice.seller = this.authenticationService.getCurrentCompany();
+        return invoice;
     }
 
     public fetchInvoiceList(invoiceSearchModel: InvoiceSearchFilter): Observable<Invoice[]> {

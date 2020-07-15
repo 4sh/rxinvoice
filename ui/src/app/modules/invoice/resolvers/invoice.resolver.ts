@@ -14,7 +14,7 @@ export class InvoiceResolver implements Resolve<Invoice> {
     resolve(route: ActivatedRouteSnapshot): Observable<Invoice> {
         const invoiceId = route.paramMap.get('invoiceId');
         if (invoiceId === 'new') {
-            return of(new Invoice());
+            return of(this.invoiceService.buildInvoice());
         }
         return this.invoiceService.fetchInvoice(invoiceId)
     }
