@@ -140,8 +140,8 @@
         <div class="cell shrink footer-container">
             <attachments-detail [invoice]="invoice"></attachments-detail>
             <div class="control-bar grid-x">
-                <div class="cell phone-12">
-                    <a-button-cancel (click)="delete()">
+                <div class="cell phone-12" >
+                    <a-button-cancel (click)="delete()" *ngIf="invoice._id">
                         <i class="far fa-trash-alt"></i>
                         {{'button.label.delete' | translate}}
                     </a-button-cancel>
