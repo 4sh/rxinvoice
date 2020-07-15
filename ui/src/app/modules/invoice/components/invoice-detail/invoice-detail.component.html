@@ -41,7 +41,8 @@
                         </div>
                         <div class="cell phone-3 vat-block">
                             <label>{{'invoice.detail.with.vat'|translate}}</label>
-                            <a-toggle name="withVat" [(ngModel)]="invoice.withVAT"></a-toggle>
+                            <a-toggle name="withVat" [ngModel]="invoice.withVAT"
+                            (ngModelChange)="withVATChanged($event)"></a-toggle>
                         </div>
                     </div>
                     <div>
@@ -122,12 +123,12 @@
                     <div class="cell phone-6 grid-x">
                         <div class="cell phone-12 grid-x grid-padding-x align-right title-total">
                             <span>{{'invoice.line.total.gross.amount'|translate}}</span>
-                            <span>{{'invoice.line.total.vat'|translate}}</span>
+                            <span *ngIf="invoice.withVAT">{{'invoice.line.total.vat'|translate}}</span>
                             <span>{{'invoice.line.total.net.amount'|translate}}</span>
                         </div>
                         <div class="cell phone-12 grid-x align-right amount-line">
                             <span>{{invoice.grossAmount | invoiceCurrency}}</span>
-                            <span>{{invoice.vatAmount | invoiceCurrency}}</span>
+                            <span *ngIf="invoice.withVAT">{{invoice.vatAmount | invoiceCurrency}}</span>
                             <span>{{invoice.netAmount | invoiceCurrency}}</span>
                         </div>
                     </div>

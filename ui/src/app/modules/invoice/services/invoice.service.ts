@@ -118,7 +118,7 @@ export class InvoiceService {
 
     public updateInvoiceStatus(invoice: Invoice, newStatus: InvoiceStatusType): Observable<Invoice> {
         invoice.status = newStatus;
-        return this.saveInvoice(invoice);
+        return this.updateInvoice(invoice);
     }
 
     public exportInvoices(): string {

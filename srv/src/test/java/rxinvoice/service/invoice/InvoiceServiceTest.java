@@ -2,6 +2,7 @@ package rxinvoice.service.invoice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import restx.factory.Factory;
 import restx.factory.Name;
@@ -13,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -107,5 +107,17 @@ class InvoiceServiceTest {
         assertThat(invoice.getVatRates().get(0).getLabel(), is(equalTo(rate_20.getLabel())));
         assertThat(invoice.getVatRates().get(1).getRate(), is(equalTo(rate_8_5.getRate())));
         assertThat(invoice.getVatRates().get(1).getLabel(), is(equalTo(rate_8_5.getLabel())));
+    }
+
+    @Test
+    void should_clean_vat_rates() {
+        Invoice invoice = new Invoice().setLines(Lists.newArrayList(
+                new Line().setVatRate(rate_20),
+                new Line().setVatRate(null),
+                new Line().setVatRate(rate_8_5)))
+                .setVatRates(Lists.newArrayList(new VATRate().setRate(BigDecimal.valueOf(20)), new VATRate().setRate(BigDecimal.valueOf(8.5))));
+        this.invoiceService.cleanVatRates(invoice);
+        assertThat(invoice.getVatRates().size(), is(0));
+        assertThat(invoice.getLines().get(0).getVatRate(), CoreMatchers.nullValue());
     }
 }

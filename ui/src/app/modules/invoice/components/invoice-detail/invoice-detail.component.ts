@@ -160,4 +160,9 @@ export class InvoiceDetailComponent implements OnInit {
     public lineUpdated() {
         this.computeTotalAmounts();
     }
+
+    public withVATChanged(withVAT: boolean) {
+        this.invoice.withVAT = withVAT;
+        this.computeTotalAmounts();
+    }
 }

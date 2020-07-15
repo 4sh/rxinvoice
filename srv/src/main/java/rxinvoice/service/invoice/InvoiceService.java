@@ -85,9 +85,7 @@ public class InvoiceService {
                 throw new WebException(String.format("Invoice reference %s is already used.", invoice.getReference()));
             }
         }
-        if (invoice.isWithVAT()) {
-            updateVatRates(invoice);
-        }
+        updateInvoiceVat(invoice);
         updateAmounts(invoice);
         this.invoiceDao.create(invoice);
         if (null != eventBus) {
@@ -95,6 +93,14 @@ public class InvoiceService {
             eventBus.post(rxinvoice.domain.Activity.newCreate(invoice, AppModule.currentUser()));
         }
         return invoice;
+    }
+
+    private void updateInvoiceVat(Invoice invoice) {
+        if (invoice.isWithVAT()) {
+            updateVatRates(invoice);
+        } else {
+            cleanVatRates(invoice);
+        }
     }
 
 
@@ -119,9 +125,7 @@ public class InvoiceService {
             }
         }
 
-        if (invoice.isWithVAT()) {
-            updateVatRates(invoice);
-        }
+        updateInvoiceVat(invoice);
         updateAmounts(invoice);
 
         if (invoice.getStatus() != invoiceFromDB.getStatus()) {
@@ -140,6 +144,13 @@ public class InvoiceService {
             handleStatusChange(invoice);
         }
         return invoice;
+    }
+
+    void cleanVatRates(Invoice invoice) {
+        invoice.getVatRates().clear();
+        invoice.getLines().forEach(line -> {
+            line.setVatRate(null);
+        });
     }
 
     void updateVatRates(Invoice invoice) {
