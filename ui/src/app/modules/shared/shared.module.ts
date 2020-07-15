@@ -24,8 +24,8 @@ import {ADashboardSelectComponent} from './components/atoms/selects/a-dashboard-
 import {ABusinessSelectComponent} from './components/atoms/selects/a-business-select/a-business-select.component';
 import {AInvoiceStatusSelectComponent} from './components/atoms/selects/a-invoice-status-select/a-invoice-status-select.component';
 import {NavigationMenuComponent} from './components/navigation-menu/navigation-menu.component';
-import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
+import {InvoiceDatePipe} from './pipes/invoice-date.pipe';
 import { AInvoiceStatusComponent } from './components/atoms/invoice/a-invoice-status/a-invoice-status.component';
 import { AInvoiceDateComponent } from './components/atoms/invoice/a-invoice-date/a-invoice-date.component';
 
@@ -49,7 +49,7 @@ const components = [
     NavigationMenuComponent
 ];
 
-const pipes = [OrderByPipe];
+const pipes = [OrderByPipe, InvoiceCurrencyPipe, InvoiceDatePipe];
 
 @NgModule({
     imports: [

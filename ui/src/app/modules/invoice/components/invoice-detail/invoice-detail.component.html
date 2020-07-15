@@ -64,9 +64,7 @@
                         </div>
                         <div class="cell phone-24">
                             <label>{{'invoice.detail.sent.date'|translate}}</label>
-                            <span>{{invoice.sentDate ? (invoice.sentDate | date) : 'N/A'}}</span>
-<!--                            <a-date-picker name="sentDate" [(ngModel)]="invoice.sentDate"-->
-<!--                                           [disabled]="true"></a-date-picker>-->
+                            <span>{{invoice.sentDate ? (invoice.sentDate | invoiceDate) : 'N/A'}}</span>
                         </div>
                         <div class="cell phone-24">
                             <label>{{'invoice.detail.due.date'|translate}}</label>
