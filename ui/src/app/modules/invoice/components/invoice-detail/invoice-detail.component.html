@@ -99,6 +99,7 @@
                             [editActionEnabled]="true"
                             [validateActionEnabled]="true"
                             [deleteActionEnabled]="true"
+                            [buyer]="invoice.buyer"
                             (lineRemovedEventEmitter)="lineRemoved()">
                     </a-invoice-line>
                 </ng-container>
@@ -110,6 +111,7 @@
                         [invoice]="invoice"
                         [ngModel]="newLine"
                         [addActionEnabled]="true"
+                        [buyer]="invoice.buyer"
                         (lineAddedEventEmitter)="lineAdded()">
 
                 </a-invoice-line>

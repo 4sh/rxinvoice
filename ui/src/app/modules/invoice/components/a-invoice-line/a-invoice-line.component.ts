@@ -1,9 +1,10 @@
-import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, Output, ViewChild} from '@angular/core';
 import {ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {VatRate} from '../../../../domain/common/vat-rate';
 import {CustomerService} from '../../../customer/services/customer.service';
+import {Company} from '../../../../domain/company/company';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -18,13 +19,14 @@ const VALUE_ACCESSOR = {
     viewProviders: [{provide: ControlContainer, useExisting: NgForm}],
     providers: [VALUE_ACCESSOR]
 })
-export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
+export class AInvoiceLineComponent implements ControlValueAccessor {
 
     @ViewChild('invoiceLineForm')
     public invoiceLineForm: NgForm;
 
     public line: InvoiceLine;
     public vatRateList: Array<VatRate>;
+    public _buyer: Company;
 
     @Input()
     public invoice: Invoice;
@@ -40,6 +42,19 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     public deleteActionEnabled: boolean;
     @Input()
     public editable: boolean;
+    @Input()
+    public get buyer(): Company {
+        return this._buyer;
+    }
+
+    public set buyer(buyer: Company) {
+        this._buyer = buyer;
+        if (this._buyer && this._buyer._id) {
+            this.customerService.fetchCustomer(this.invoice.buyer._id)
+                .subscribe(customer => this.vatRateList = customer.commercialRelationship.vatRates);
+        }
+    }
+
 
     @Output()
     public lineAddedEventEmitter: EventEmitter<void> = new EventEmitter();
@@ -50,13 +65,6 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     private onNgTouched: () => void;
 
     constructor(private customerService: CustomerService) {
-    }
-
-    ngOnInit(): void {
-        if (this.invoice.buyer && this.invoice.buyer._id) {
-            this.customerService.fetchCustomer(this.invoice.buyer._id)
-                .subscribe(customer => this.vatRateList = customer.commercialRelationship.vatRates);
-        }
     }
 
     public editLine(): void {
