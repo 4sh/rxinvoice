@@ -372,7 +372,7 @@ public class InvoiceService {
             }
 
             // Update net amount
-            invoiceNetAmount = invoiceNetAmount.add(invoiceGrossAmount).add(lineVATAmount);
+            invoiceNetAmount = invoiceNetAmount.add(lineGrossAmount).add(lineVATAmount);
         }
         invoice.setGrossAmount(invoiceGrossAmount.setScale(2, RoundingMode.HALF_UP));
         invoice.setVatsAmount(new ArrayList<>(invoiceVATAmounts.values()));
