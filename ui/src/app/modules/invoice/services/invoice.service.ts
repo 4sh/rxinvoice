@@ -70,7 +70,7 @@ export class InvoiceService {
                 })));
     }
 
-    public saveInvoice(invoice): Observable<Invoice> {
+    public updateInvoice(invoice): Observable<Invoice> {
         return this.http
             .put(`${this.baseUrl}/${invoice._id}`, invoice).pipe(
                 map((result: any) => plainToClass(Invoice, result as Object)),

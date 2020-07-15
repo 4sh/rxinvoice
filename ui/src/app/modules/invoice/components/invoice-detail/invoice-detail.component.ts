@@ -11,6 +11,7 @@ import {AuthenticationService} from '../../../../common/services/authentication.
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import * as Moment from 'moment';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
+import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
     selector: 'invoice-detail',
@@ -69,28 +70,31 @@ export class InvoiceDetailComponent implements OnInit {
     // };
 
 
-    public create(): void {
-        if (!this.invoice) {
-            this.invoice = new Invoice();
+    public save(): void {
+        if (!this.invoice._id) {
+            this.handleInvoiceSave(this.invoiceService.createInvoice(this.invoice), true);
+        } else {
+            this.handleInvoiceSave(this.invoiceService.updateInvoice(this.invoice), false);
         }
-        this.invoiceService.createInvoice(this.invoice).subscribe((invoice) => {
-                this.invoice = invoice;
-                this.invoice._id = invoice._id;
-                this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
-            },
-            () => {
-                this.alertService.error({title: 'alert.creation.error', customClass: 'swal2-for-edit'});
-            });
     }
 
-    public save(): void {
-        this.invoiceService.saveInvoice(this.invoice)
-            .subscribe(() => {
+    private handleInvoiceSave(observable: Observable<Invoice>, creation: boolean): void {
+        observable.subscribe(
+            (invoice) => {
+                this.invoice = invoice;
+                if (creation) {
+                    this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
+                } else {
                     this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
-                },
-                () => {
+                }
+            },
+            () => {
+                if (creation) {
+                    this.alertService.error({title: 'alert.creation.error', customClass: 'swal2-for-edit'});
+                } else {
                     this.alertService.error({title: 'alert.update.error', customClass: 'swal2-for-edit'});
-                });
+                }
+            });
     }
 
     public delete(): void {
