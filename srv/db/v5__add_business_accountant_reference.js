@@ -10,6 +10,7 @@ var accountantReferences =
         "ARKHÉ INTERNATIONAL": "CARKHE",
         "ARRG": "CARRG",
         "ASTREE CONSULTANT": "CASTREE",
+        "ASTREE AVOCAT": "CASTREE",
         "BeCLM": "CBECLM",
         "BP2R": "CBP2R",
         "BRAMBLES": "CCHEPUSA",
