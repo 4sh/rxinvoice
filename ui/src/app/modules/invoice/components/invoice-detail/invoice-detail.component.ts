@@ -12,6 +12,7 @@ import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import * as Moment from 'moment';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Observable} from 'rxjs/internal/Observable';
+import {DndDropEvent, DropEffect} from 'ngx-drag-drop';
 
 @Component({
     selector: 'invoice-detail',
@@ -164,5 +165,10 @@ export class InvoiceDetailComponent implements OnInit {
     public withVATChanged(withVAT: boolean) {
         this.invoice.withVAT = withVAT;
         this.computeTotalAmounts();
+    }
+
+    onDrop(event: DndDropEvent) {
+        let index = event.index === undefined ? this.invoice.lines.length : event.index;
+        this.invoice.lines = this.invoice.lines.splice(index, 0, new InvoiceLine(event.data)).slice();
     }
 }

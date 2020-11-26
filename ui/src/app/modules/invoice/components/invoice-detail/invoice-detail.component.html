@@ -89,9 +89,16 @@
                     <div class="cell phone-2"></div>
                 </div>
             </div>
-            <div class="invoicing-line-block">
+            <div class="invoicing-line-block" dndDropzone
+                 dndEffectAllowed="copyMove"
+                 (dndDrop)="onDrop($event)">
+                <div class="lineDragging"
+                     dndPlaceholderRef>
+                </div>
+                {{invoice.lines | json}}
                 <ng-container *ngFor="let line of invoice.lines; index as i">
                     <a-invoice-line
+                            class="lineDragging"
                             [name]="'line' + i"
                             [ngModel]="line"
                             (ngModelChange)="lineUpdated()"

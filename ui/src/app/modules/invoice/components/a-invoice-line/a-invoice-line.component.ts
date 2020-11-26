@@ -5,6 +5,8 @@ import {Invoice} from '../../../../domain/invoice/invoice';
 import {VatRate} from '../../../../domain/common/vat-rate';
 import {CustomerService} from '../../../customer/services/customer.service';
 import {Company} from '../../../../domain/company/company';
+import {DropEffect} from 'ngx-drag-drop';
+import {$e} from 'codelyzer/angular/styles/chars';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -123,5 +125,12 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
 
     writeValue(line: InvoiceLine): void {
         this.line = line;
+    }
+
+    onMoved($event: DragEvent, line: InvoiceLine, lines: InvoiceLine[]) {
+        if ($event.dataTransfer.dropEffect === 'move') {
+            const index = lines.indexOf(line);
+            lines.splice(index, 1);
+        }
     }
 }

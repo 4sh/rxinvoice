@@ -147,3 +147,17 @@ form {
 }
 /**/
 /**/
+
+.invoicing-line-block {
+  &.dndDragover {
+    border: 1.5px dashed $app-primary;
+    background-color: rgba($app-primary, 0.1);
+
+    .lineDragging {
+      display: block;
+      min-height: rem-calc(41px);
+      border: 1.5px dashed $app-primary;
+      margin: 8px;
+    }
+  }
+}
