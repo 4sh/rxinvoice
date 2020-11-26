@@ -27,7 +27,7 @@ export class AttachmentsDetailComponent implements OnInit {
     @Input()
     public editMode: boolean;
     @Output()
-    public attachmentsChange: EventEmitter<null> = new EventEmitter();
+    public attachmentsChange: EventEmitter<void> = new EventEmitter();
     @Output()
     public deleteFile: EventEmitter<string> = new EventEmitter();
 
@@ -40,6 +40,7 @@ export class AttachmentsDetailComponent implements OnInit {
         }
         this.url = '/api/invoices/' + this.invoice._id + '/attachments';
         this.uploader = new FileUploader({autoUpload: false, url: this.url})
+        this.uploader.response.subscribe( () => this.attachmentsChange.next());
     }
 
     public clickDropEvent(): void {

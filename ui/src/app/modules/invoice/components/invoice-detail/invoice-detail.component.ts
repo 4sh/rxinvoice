@@ -12,6 +12,7 @@ import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import * as Moment from 'moment';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Observable} from 'rxjs/internal/Observable';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'invoice-detail',
@@ -164,5 +165,21 @@ export class InvoiceDetailComponent implements OnInit {
     public withVATChanged(withVAT: boolean) {
         this.invoice.withVAT = withVAT;
         this.computeTotalAmounts();
+    }
+
+    attachmentsChanged() {
+        this.invoiceService.fetchInvoice(this.invoice._id).subscribe((invoice) => {
+            this.invoice = invoice;
+        })
+    }
+
+    deleteFile(fileId: string) {
+        this.invoiceService.deleteAttachment(this.invoice._id, fileId)
+            .pipe(
+                switchMap(() => this.invoiceService.fetchInvoice(this.invoice._id))
+            )
+            .subscribe((invoice: Invoice) => {
+                this.invoice = invoice;
+            })
     }
 }
