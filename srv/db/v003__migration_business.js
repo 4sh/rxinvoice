@@ -18,22 +18,24 @@ db.getCollection('companies').find().forEach(function (company) {
         lastPaidInvoice: company.lastPaidInvoice,
         companyMetrics: {
             global: company.metrics,
-            previousYear: companyMetrics.buyerCompaniesMetrics[company._id + ""].previousYear,
-            currentYear: companyMetrics.buyerCompaniesMetrics[company._id + ""].currentYear,
-            nextYear: companyMetrics.buyerCompaniesMetrics[company._id + ""].nextYear
+            previousYear: companyMetrics.buyerCompaniesMetrics[company._id + ""]? companyMetrics.buyerCompaniesMetrics[company._id + ""].previousYear: null,
+            currentYear: companyMetrics.buyerCompaniesMetrics[company._id + ""]?companyMetrics.buyerCompaniesMetrics[company._id + ""].currentYear:null,
+            nextYear: companyMetrics.buyerCompaniesMetrics[company._id + ""]?companyMetrics.buyerCompaniesMetrics[company._id + ""].nextYear:null
         },
         businessList: company.business,
         vatRates: []
     };
 
-    company.vats.forEach(function (vat) {
-        commercialRelationship.vatRates.push(
-            {
-                rate: vat.amount,
-                label: vat.vat
-            }
-        );
-    });
+    if (company.vats) {
+        company.vats.forEach(function (vat) {
+            commercialRelationship.vatRates.push(
+                {
+                    rate: vat.amount,
+                    label: vat.vat
+                }
+            );
+        });
+    }
     db.getCollection('commercialRelationships').save(commercialRelationship);
 });
 
