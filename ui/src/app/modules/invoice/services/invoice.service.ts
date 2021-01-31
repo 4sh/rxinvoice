@@ -10,6 +10,7 @@ import {InvoiceStatusEnum, InvoiceStatusType} from '../../../domain/invoice/invo
 import {Observable} from 'rxjs/internal/Observable';
 import {throwError} from 'rxjs/internal/observable/throwError';
 import {AuthenticationService} from '../../../common/services/authentication.service';
+import {FileItem} from 'ng2-file-upload';
 
 @Injectable()
 export class InvoiceService {
@@ -108,9 +109,9 @@ export class InvoiceService {
                 })));
     }
 
-    public deleteAttachment(invoiceId, attachmentId): Observable<Invoice> {
+    public deleteAttachment(invoiceId, attachmentIds: string[]): Observable<Invoice> {
         return this.http
-            .delete(this.baseUrl + '/' + invoiceId + '/attachments/' + attachmentId).pipe(
+            .delete(this.baseUrl + '/' + invoiceId + '/attachments/' + attachmentIds.join(',')).pipe(
                 map((result: any) => plainToClass(Invoice, result as Object)),
                 catchError((response: Response) => throwError({
                     message: 'Unable to delete attachment from invoice',
@@ -139,5 +140,11 @@ export class InvoiceService {
                 year: salesExportParameters.year,
                 month: salesExportParameters.month
             }).toString()}`;
+    }
+
+    public uploadDocuments(invoiceId: string, fileItems: FileItem[]): Observable<void> {
+        const formData = new FormData();
+        fileItems.map(item => formData.append(item.alias, item._file, item.file.name));
+        return this.http.post<void>(`/api/invoices/${invoiceId}/attachments`, formData);
     }
 }

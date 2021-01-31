@@ -123,8 +123,11 @@ public class InvoiceResource {
     }
 
     @RolesAllowed({ADMIN, SELLER})
-    @DELETE("/invoices/{invoiceId}/attachments/{attachmentId}")
-    public void deleteInvoiceAttachment(String invoiceId, String attachmentId) {
-        invoiceService.deleteInvoiceAttachment(invoiceId, attachmentId);
+    @DELETE("/invoices/{invoiceId}/attachments/{attachmentIds}")
+    public void deleteInvoiceAttachment(String invoiceId, String attachmentIds) {
+        List<String> attachments = Arrays.asList(attachmentIds.split(","));
+        for (String attachmentId: attachments) {
+            invoiceService.deleteInvoiceAttachment(invoiceId, attachmentId);
+        }
     }
 }

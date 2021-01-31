@@ -3,44 +3,42 @@ import {Blob} from '../../../../domain/blob';
 import {FileUploader} from 'ng2-file-upload';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
 import {Invoice} from '../../../../domain/invoice/invoice';
-import {installTempPackage} from '@angular/cli/tasks/install-package';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'attachments-detail',
     templateUrl: './attachments-detail.component.html',
     styleUrls: ['./attachments-detail.component.scss']
 })
-export class AttachmentsDetailComponent implements OnInit {
+export class AttachmentsDetailComponent {
 
     public dropdownBlock: boolean;
     public url: string;
-    public uploader: FileUploader;
     public hasBaseDropZoneOver: boolean;
+    public _invoice: Invoice;
+    public attachmentsToRemove: string[] = [];
 
     @ViewChild('inputFile')
     public inputFile: ElementRef;
 
     @Input()
-    public invoice: Invoice;
+    public get invoice(): Invoice {
+        return this._invoice;
+    };
+    public set invoice(invoice: Invoice) {
+        this._invoice = invoice;
+        this.attachments = invoice.attachments ? _.cloneDeep(invoice.attachments) : [];
+    }
     @Input()
     public attachments: Blob[];
     @Input()
     public editMode: boolean;
+    @Input()
+    public uploader: FileUploader;
     @Output()
-    public attachmentsChange: EventEmitter<void> = new EventEmitter();
-    @Output()
-    public deleteFile: EventEmitter<string> = new EventEmitter();
+    public deleteFiles: EventEmitter<string[]> = new EventEmitter();
 
     constructor(private alertService: SweetAlertService) {
-    }
-
-    ngOnInit() {
-        if (!this.attachments) {
-            this.attachments = [];
-        }
-        this.url = '/api/invoices/' + this.invoice._id + '/attachments';
-        this.uploader = new FileUploader({autoUpload: false, url: this.url})
-        this.uploader.response.subscribe( () => this.attachmentsChange.next());
     }
 
     public clickDropEvent(): void {
@@ -48,21 +46,25 @@ export class AttachmentsDetailComponent implements OnInit {
     }
 
     public filesChange(): void {
-        this.uploadAttachments();
-    }
-
-    uploadAttachments() {
-        this.uploader.uploadAll();
+        this.uploader.queue.map((fileItem) => {
+            this.attachments.push({
+                _id: '',
+                comments: '',
+                fileName: fileItem._file.name,
+                mimeType: fileItem._file.type,
+                number: fileItem._file.lastModified,
+                sizeInBytes: fileItem._file.size
+            });
+        });
     }
 
     public delete(fileToRemove): void {
-        this.alertService
-            .confirm({title: 'alert.confirm.deletion'})
-            .then((accept) => {
-                if (accept.value) {
-                    this.deleteFile.emit(fileToRemove._id);
-                }
-            });
+        const blob = this.attachments.filter((blob) => blob.fileName === fileToRemove.fileName)[0];
+        this.attachments.splice(this.attachments.indexOf(blob), 1);
+        if (fileToRemove._id) {
+            this.attachmentsToRemove.push(fileToRemove._id);
+            this.deleteFiles.emit(this.attachmentsToRemove);
+        }
     }
 
     public fileOverBase(e: boolean): void {
