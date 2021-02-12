@@ -107,6 +107,7 @@ export class InvoiceDetailComponent implements OnInit {
                 this.invoice = invoice;
                 if (creation) {
                     this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
+                    this.router.navigate(['/invoices/detail/' + invoice._id]);
                 } else {
                     this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
                 }
