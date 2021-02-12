@@ -134,6 +134,9 @@ public class InvoiceService {
             invoice.addStatusChange(invoiceFromDB.getStatus(), user, invoice.getComment());
         }
 
+        if (invoice.getStatus() == WAITING_VALIDATION) {
+            waitingInvoice(invoice);
+        }
         this.invoiceDao.update(invoice);
         if (null != eventBus) {
             eventBus.post(new InvoiceUpdatedEvent(invoice));
@@ -192,6 +195,10 @@ public class InvoiceService {
                 .setLastSentInvoice(new InvoiceInfo(invoice));
         this.commercialRelationshipService.updateLastInvoiceSend(commercialRelationship);
         this.invoiceDao.updateSendDate(invoice, DateTime.now().toDate());
+    }
+
+    private void waitingInvoice(Invoice invoice) {
+        invoice.setReference(invoiceDao.findNextReference());
     }
 
     public Iterable<Invoice> findInvoices(InvoiceSearchFilter invoiceSearchFilter) {

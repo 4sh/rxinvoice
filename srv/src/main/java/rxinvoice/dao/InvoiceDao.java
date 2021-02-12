@@ -1,13 +1,13 @@
 package rxinvoice.dao;
 
 import org.bson.types.ObjectId;
-import org.joda.time.DateTime;
 import org.jongo.Find;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import restx.factory.Component;
 import restx.jongo.JongoCollection;
 import rxinvoice.domain.Blob;
+import rxinvoice.domain.Counter;
 import rxinvoice.domain.invoice.Invoice;
 
 import javax.inject.Named;
@@ -24,9 +24,12 @@ public class InvoiceDao {
     private static final Logger logger = LoggerFactory.getLogger(InvoiceDao.class);
 
     private final JongoCollection invoices;
+    private final JongoCollection counters;
 
-    public InvoiceDao(@Named("invoices") JongoCollection invoices) {
+    public InvoiceDao(@Named("invoices") JongoCollection invoices,
+                      @Named("counters") JongoCollection counters) {
         this.invoices = invoices;
+        this.counters = counters;
     }
 
     public void create(Invoice invoice) {
@@ -117,4 +120,15 @@ public class InvoiceDao {
         }
         return find.as(Invoice.class);
     }
+
+    public String findNextReference() {
+        logger.debug("Find next invoice reference and increment it");
+        Counter as = this.counters.get()
+                .findAndModify("{name: \"invoiceReference\" }")
+                .with("{ $inc: { sequence_value: 1 } }")
+                .returnNew()
+                .as(Counter.class);
+        return as.getSequenceValue().toString();
+    }
+
 }
