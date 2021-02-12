@@ -72,7 +72,7 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     }
 
     ngOnInit(): void {
-        this.vatRateList = this.invoice.seller.sellerSettings.vatRates;
+        this.vatRateList = this.invoice.seller.sellerSettings ? this.invoice.seller.sellerSettings?.vatRates : [];
     }
 
     public editLine(): void {
@@ -124,4 +124,11 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     writeValue(line: InvoiceLine): void {
         this.line = line;
     }
+
+    // onMoved($event: DragEvent, line: InvoiceLine, lines: InvoiceLine[]) {
+    //     if ($event.dataTransfer.dropEffect === 'move') {
+    //         const index = lines.indexOf(line);
+    //         lines.splice(index, 1);
+    //     }
+    // }
 }

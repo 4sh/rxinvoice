@@ -15,7 +15,8 @@ import {DownloadInvoiceService} from './services/download-invoice.service';
 import {ButtonsModule} from '../shared/components/atoms/buttons/buttons.module';
 import {InvoiceResolver} from './resolvers/invoice.resolver';
 import {AInvoiceLineComponent} from './components/a-invoice-line/a-invoice-line.component';
-import {CustomerModule} from "../customer/customer.module";
+import {CustomerModule} from '../customer/customer.module';
+import {DndModule} from 'ngx-drag-drop';
 
 const components = [
     InvoicesListComponent,
@@ -42,7 +43,8 @@ const components = [
         FileUploadModule,
         SharedModule,
         ButtonsModule,
-        CustomerModule
+        CustomerModule,
+        DndModule
     ]
 })
 export class InvoiceModule {
