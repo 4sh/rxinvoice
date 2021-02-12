@@ -24,6 +24,7 @@ export class InvoiceService {
 
     public buildInvoice() {
         const invoice = new Invoice();
+        invoice.status = InvoiceStatusEnum.DRAFT;
         invoice.seller = this.authenticationService.getCurrentCompany();
         return invoice;
     }
