@@ -140,6 +140,7 @@
         <div class="cell shrink footer-container">
             <attachments-detail [invoice]="invoice"
                                 [uploader]="uploader"
+                                [attachmentsToRemove]="filesToDelete"
                                 (deleteFiles)="deleteFiles($event)">
             </attachments-detail>
             <div class="control-bar grid-x">

@@ -183,6 +183,5 @@ export class InvoiceDetailComponent implements OnInit {
 
     public deleteFiles(files: string[]) {
         this.filesToDelete = files;
-        console.log(files);
     }
 }

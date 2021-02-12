@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Blob} from '../../../../domain/blob';
-import {FileUploader} from 'ng2-file-upload';
+import {FileItem, FileUploader} from 'ng2-file-upload';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import * as _ from 'lodash';
@@ -16,7 +16,6 @@ export class AttachmentsDetailComponent {
     public url: string;
     public hasBaseDropZoneOver: boolean;
     public _invoice: Invoice;
-    public attachmentsToRemove: string[] = [];
 
     @ViewChild('inputFile')
     public inputFile: ElementRef;
@@ -35,6 +34,8 @@ export class AttachmentsDetailComponent {
     public editMode: boolean;
     @Input()
     public uploader: FileUploader;
+    @Input()
+    public attachmentsToRemove: string[] = [];
     @Output()
     public deleteFiles: EventEmitter<string[]> = new EventEmitter();
 
@@ -46,6 +47,7 @@ export class AttachmentsDetailComponent {
     }
 
     public filesChange(): void {
+        this.attachments = this.invoice.attachments ? _.cloneDeep(this.invoice.attachments) : [];
         this.uploader.queue.map((fileItem) => {
             this.attachments.push({
                 _id: '',
@@ -58,12 +60,15 @@ export class AttachmentsDetailComponent {
         });
     }
 
-    public delete(fileToRemove): void {
+    public delete(fileToRemove: Blob): void {
         const blob = this.attachments.filter((blob) => blob.fileName === fileToRemove.fileName)[0];
         this.attachments.splice(this.attachments.indexOf(blob), 1);
         if (fileToRemove._id) {
             this.attachmentsToRemove.push(fileToRemove._id);
             this.deleteFiles.emit(this.attachmentsToRemove);
+        } else {
+            const fileItemToRemove = this.uploader.queue.filter((fileItem: FileItem) => fileItem._file.name === fileToRemove.fileName)[0];
+            this.uploader.queue.splice(this.uploader.queue.indexOf(fileItemToRemove), 1);
         }
     }
 
