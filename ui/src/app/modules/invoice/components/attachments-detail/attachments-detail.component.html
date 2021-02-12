@@ -38,8 +38,8 @@
         </div>
         <div class="cell phone-8 list-files">
             <label>{{'invoice.detail.attachments.files'|translate}}</label>
-            <ul *ngFor="let file of invoice.attachments">
-                <li>
+            <ul>
+                <li *ngFor="let file of attachments">
                     <span><i class="fas fa-paperclip"></i>
                          <a href="/api/download/{{file._id}}" target="_blank">{{file.fileName}}</a>
                     </span>

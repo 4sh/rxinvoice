@@ -30,7 +30,7 @@ export class AMonthSelectComponent implements OnInit, ControlValueAccessor {
         for (let i = 1; i <= 12; i++) {
             this.monthsList.push(new MonthItem(i, this.translateService.instant(`month.${i}`)));
         }
-        this.onChange(new Date().getMonth())
+        this.writeValue(new Date().getMonth() + 1)
     }
 
     registerOnChange(fn: any): void {
@@ -47,7 +47,7 @@ export class AMonthSelectComponent implements OnInit, ControlValueAccessor {
 
     onChange(month: number) {
         this.month = month;
-        this.writeValue(month);
+        this.onNgChange(month);
     }
 
 }

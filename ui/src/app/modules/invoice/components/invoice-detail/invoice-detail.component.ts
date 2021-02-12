@@ -13,6 +13,9 @@ import * as Moment from 'moment';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Observable} from 'rxjs/internal/Observable';
 import {DndDropEvent } from 'ngx-drag-drop';
+import {FileUploader} from 'ng2-file-upload';
+import {switchMap, tap} from 'rxjs/operators';
+import {of} from 'rxjs/internal/observable/of';
 
 @Component({
     selector: 'invoice-detail',
@@ -25,6 +28,9 @@ export class InvoiceDetailComponent implements OnInit {
     public invoice: Invoice;
     public canDelete: Boolean;
     public newLine: InvoiceLine = new InvoiceLine();
+    public uploader: FileUploader;
+    public filesToDelete: string[] = [];
+
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
 
@@ -49,6 +55,8 @@ export class InvoiceDetailComponent implements OnInit {
             .subscribe(currentUser =>
                 this.canDelete = currentUser.roles.filter(role => role === 'admin' || role === 'seller').length > 0
             );
+
+        this.uploader = new FileUploader({autoUpload: false});
     }
 
     public invoiceDateChanged(invoiceDateChangeEvent: Date) {
@@ -80,13 +88,28 @@ export class InvoiceDetailComponent implements OnInit {
     }
 
     private handleInvoiceSave(observable: Observable<Invoice>, creation: boolean): void {
-        observable.subscribe(
-            (invoice) => {
+        observable.pipe(
+                tap((invoice: Invoice) => this.invoice._id = invoice._id),
+                switchMap(() => {
+                    return this.invoiceService.uploadDocuments(this.invoice._id, this.uploader.queue)
+                }),
+                tap(() => this.uploader =  new FileUploader({autoUpload: false})),
+                switchMap(() => {
+                    if (this.filesToDelete.length > 0) {
+                        return this.invoiceService.deleteAttachment(this.invoice._id, this.filesToDelete);
+                    }
+                    return of(true);
+                }),
+                tap(() => {
+                    this.filesToDelete = [];
+                }),
+                switchMap(() => this.invoiceService.fetchInvoice(this.invoice._id))
+            ).subscribe((invoice: Invoice) => {
                 this.invoice = invoice;
                 this.invoice.vatAmount = this.invoice.computeVatAmount();
                 if (creation) {
                     this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
-                    this.router.navigate(['/invoices/detail', this.invoice._id]);
+                    this.router.navigate(['/invoices/detail/' + invoice._id]);
                 } else {
                     this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
                 }
@@ -123,14 +146,6 @@ export class InvoiceDetailComponent implements OnInit {
 
     public duplicate() {
         this.invoice = this.invoice.copy();
-    }
-
-    public deleteAttachment(attachmentId): void {
-        this.invoiceService.deleteAttachment(this.invoice._id, attachmentId)
-            .subscribe(() => {
-                this.invoice.attachments =
-                    this.invoice.attachments.filter(file => file._id !== attachmentId);
-            });
     }
 
     public getSentDate() {
@@ -185,5 +200,8 @@ export class InvoiceDetailComponent implements OnInit {
 
     trackByLineCode(index: number, line: InvoiceLine): string {
         return line.description;
+    
+      public deleteFiles(files: string[]) {
+        this.filesToDelete = files;
     }
 }
