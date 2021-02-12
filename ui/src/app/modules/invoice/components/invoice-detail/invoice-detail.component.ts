@@ -200,8 +200,9 @@ export class InvoiceDetailComponent implements OnInit {
 
     trackByLineCode(index: number, line: InvoiceLine): string {
         return line.description;
-    
-      public deleteFiles(files: string[]) {
+    }
+
+    public deleteFiles(files: string[]) {
         this.filesToDelete = files;
     }
 }
