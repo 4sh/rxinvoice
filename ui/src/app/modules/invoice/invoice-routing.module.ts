@@ -4,6 +4,7 @@ import {InvoicesComponent} from './components/invoices/invoices.component';
 import {InvoiceDetailComponent} from './components/invoice-detail/invoice-detail.component';
 import {InvoiceModule} from './invoice.module';
 import {InvoiceResolver} from './resolvers/invoice.resolver';
+import {DndDraggableDirective} from 'ngx-drag-drop';
 
 @NgModule({
     imports: [
@@ -19,6 +20,9 @@ import {InvoiceResolver} from './resolvers/invoice.resolver';
                 }
             ]
         )
+    ],
+    providers: [
+        DndDraggableDirective
     ]
 })
 export class InvoiceRoutingModule {

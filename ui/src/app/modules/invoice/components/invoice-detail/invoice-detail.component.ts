@@ -12,7 +12,7 @@ import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import * as Moment from 'moment';
 import {InvoiceLine} from '../../../../domain/invoice/invoice-line';
 import {Observable} from 'rxjs/internal/Observable';
-import {DndDropEvent, DropEffect} from 'ngx-drag-drop';
+import {DndDropEvent } from 'ngx-drag-drop';
 
 @Component({
     selector: 'invoice-detail',
@@ -83,8 +83,10 @@ export class InvoiceDetailComponent implements OnInit {
         observable.subscribe(
             (invoice) => {
                 this.invoice = invoice;
+                this.invoice.vatAmount = this.invoice.computeVatAmount();
                 if (creation) {
                     this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
+                    this.router.navigate(['/invoices/detail', this.invoice._id]);
                 } else {
                     this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
                 }
@@ -168,7 +170,20 @@ export class InvoiceDetailComponent implements OnInit {
     }
 
     onDrop(event: DndDropEvent) {
-        let index = event.index === undefined ? this.invoice.lines.length : event.index;
-        this.invoice.lines = this.invoice.lines.splice(index, 0, new InvoiceLine(event.data)).slice();
+        const draggedIndex = this.invoice.lines.indexOf(new InvoiceLine(event.data));
+        this.invoice.lines.splice(draggedIndex, 1);
+        const dropIndex = event.index === undefined ? this.invoice.lines.length : event.index;
+        this.invoice.lines.splice(dropIndex, 0, new InvoiceLine(event.data));
+    }
+
+    onMoved($event: DragEvent, line: InvoiceLine) {
+        if ($event.dataTransfer.dropEffect === 'move') {
+            const index = this.invoice.lines.indexOf(line);
+            this.invoice.lines.splice(index, 1);
+        }
+    }
+
+    trackByLineCode(index: number, line: InvoiceLine): string {
+        return line.description;
     }
 }

@@ -1,10 +1,4 @@
-<form novalidate #invoiceLineForm="ngForm"
-      [dndDraggable]="line"
-      [dndEffectAllowed]="'copyMove'"
-      (dndMoved)="onMoved($event, line, invoice.lines)"
-      (dndCopied)="onMoved($event, line, invoice.lines)"
-      (dndLinked)="onMoved($event, line, invoice.lines)"
-      (dndCanceled)="onMoved($event, line, invoice.lines)">
+<form novalidate #invoiceLineForm="ngForm">
     <div class="grid-x grid-padding-x invoice-line">
         <div class="cell phone-1 drag-drop-icon" dndHandle><i *ngIf="reorderEnabled" class="fas fa-grip-horizontal"></i></div>
         <div class="cell phone-9">

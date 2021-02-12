@@ -95,8 +95,7 @@
                 <div class="lineDragging"
                      dndPlaceholderRef>
                 </div>
-                {{invoice.lines | json}}
-                <ng-container *ngFor="let line of invoice.lines; index as i">
+                <ng-container *ngFor="let line of invoice.lines; index as i; trackBy:trackByLineCode">
                     <a-invoice-line
                             class="lineDragging"
                             [name]="'line' + i"
@@ -108,7 +107,10 @@
                             [validateActionEnabled]="true"
                             [deleteActionEnabled]="true"
                             [buyer]="invoice.buyer"
-                            (lineRemovedEventEmitter)="lineRemoved()">
+                            (lineRemovedEventEmitter)="lineRemoved()"
+                            [dndDraggable]="line"
+                            [dndEffectAllowed]="'copyMove'"
+                            >
                     </a-invoice-line>
                 </ng-container>
             </div>
