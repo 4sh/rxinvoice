@@ -1,0 +1,52 @@
+steps:
+  - name: 'gcr.io/synechis/build-init'
+    args: ['$BUILD_ID']
+  - id: 'restore-cache'
+    name: 'gcr.io/synechis/restore_cache'
+    volumes:
+      - name: 'gradle'
+        path: '/gradle'
+    args:
+      - '--bucket=gs://${_CACHE_BUCKET}'
+      - '--key=gradle'
+    waitFor: ['-']
+  - id: 'build'
+    name: 'gcr.io/synechis/openjdk-slack:8-jdk-slim'
+    volumes:
+      - name: 'gradle'
+        path: '/gradle'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        set -x
+        export STEP_NAME="Release server"
+        ./gradlew --build-cache \
+           :srv:build \
+           $_REPO_SETTINGS --gradle-user-home=/gradle
+    waitFor: ['restore-cache']
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: 'srv/application'
+    args: [
+        'build',
+        '--build-arg', 'tag_name=$TAG_NAME',
+        '--tag=europe-docker.pkg.dev/quatreapp/4sh-invoice/app-core:$TAG_NAME',
+        '-f', 'Dockerfile', '.']
+    waitFor: ['build']
+images:
+  - 'europe-docker.pkg.dev/quatreapp/4sh-invoice/app-core:$TAG_NAME'
+options:
+  machineType: 'N1_HIGHCPU_8'
+  env:
+    - 'PROJECT_NAME=4SH Invoice'
+    - 'BUILD_ID=$BUILD_ID'
+    - 'BRANCH_NAME=$TAG_NAME'
+    - 'SLACK_WEBHOOK_URL=$_SLACK_WEBHOOK_URL'
+tags: ['release', 'server', '$TAG_NAME']
+logsBucket: 'gs://synechis_logs/4sh-invoice'
+
+timeout: 600s
+substitutions:
+  _CACHE_BUCKET: '4sh-invoice-cicd_cache'
+  # _SLACK_WEBHOOK_URL: '' # https://hooks.slack.com/services/<...>/<...>''
+  # _REPO_SETTINGS: '-Prepo4shUrl=http://repo.4sh.fr/artifactory -Prepo4shUser=chef -Prepo4shPassword=<..>'

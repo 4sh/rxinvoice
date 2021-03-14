@@ -1,0 +1,5 @@
+steps:
+  - name: 'gcr.io/synechis/k8s-release-update-version-gh-ar'
+    args: ['4sh-invoice-k8s','master','$TAG_NAME']
+tags: ['release', 'k8s', 'trigger', '$TAG_NAME']
+logsBucket: 'gs://synechis_logs/4sh-invoice'
