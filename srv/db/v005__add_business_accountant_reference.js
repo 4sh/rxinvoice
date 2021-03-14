@@ -20,6 +20,7 @@ var accountantReferences =
         "CARGO INFORMATION NETWORK FRANCE": "CCARGOINFO",
         "CHEP USA": "CCHEPUSA",
         "CHIESI SAS": "CCHIESI",
+        "Calypse Consulting": "CCAPLYPSE",
         "COOLS Environnement et Développement": "CCOOLS",
         "DAM'S": "CDAM",
         "DIANA TRANS": "CDIANA",
