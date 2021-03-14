@@ -5,6 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
+    "ci": "ng build --source-map=false",
+    "release": "ng build --prod",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
