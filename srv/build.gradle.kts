@@ -1,15 +1,24 @@
+import Versions.restx
+
 plugins {
     war
     kotlin("jvm")
-    id("maven-publish")
+    kotlin("kapt")
 }
 
 kotlinProject()
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 dependencies {
 
+    kapt("io.restx:restx-core-annotation-processor:${Versions.restx}")
+
     "implementation"("io.restx:restx-core:${Versions.restx}")
-    "implementation"("io.restx:restx-core-annotation-processor:${Versions.restx}")
     "implementation"("io.restx:restx-factory:${Versions.restx}")
     "implementation"("io.restx:restx-i18n:${Versions.restx}")
     "implementation"("io.restx:restx-core-java8:${Versions.restx}")
