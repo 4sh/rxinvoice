@@ -12,7 +12,7 @@ COPY . /code
 
 ARG BUILD_TARGET="release"
 
-RUN yarn build $BUILD_TARGET
+RUN yarn $BUILD_TARGET
 
 FROM nginx:1.13-alpine
 
