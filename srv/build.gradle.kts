@@ -14,6 +14,10 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     }
 }
 
+tasks.withType<War> {
+    archiveFileName.set("4sh-invoice.war")
+}
+
 dependencies {
 
     kapt("io.restx:restx-core-annotation-processor:${Versions.restx}")
