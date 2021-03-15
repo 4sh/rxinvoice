@@ -29,11 +29,11 @@ steps:
     dir: 'ui'
     args: [
         'build',
-        '--tag=europe-docker.pkg.dev/quatreapp/4sh-invoice/ui-core:$TAG_NAME',
+        '--tag=europe-docker.pkg.dev/quatreapp/qsh-invoice/ui-core:$TAG_NAME',
         '-f', 'Dockerfile', '.']
     waitFor: ['build']
 images:
-  - 'europe-docker.pkg.dev/quatreapp/4sh-invoice/ui-core:$TAG_NAME'
+  - 'europe-docker.pkg.dev/quatreapp/qsh-invoice/ui-core:$TAG_NAME'
 options:
   machineType: 'N1_HIGHCPU_8'
   env:

@@ -30,11 +30,11 @@ steps:
     args: [
         'build',
         '--build-arg', 'tag_name=$TAG_NAME',
-        '--tag=europe-docker.pkg.dev/quatreapp/4sh-invoice/app-core:$TAG_NAME',
+        '--tag=europe-docker.pkg.dev/quatreapp/qsh-invoice/app-core:$TAG_NAME',
         '-f', 'Dockerfile', '.']
     waitFor: ['build']
 images:
-  - 'europe-docker.pkg.dev/quatreapp/4sh-invoice/app-core:$TAG_NAME'
+  - 'europe-docker.pkg.dev/quatreapp/qsh-invoice/app-core:$TAG_NAME'
 options:
   machineType: 'N1_HIGHCPU_8'
   env:
