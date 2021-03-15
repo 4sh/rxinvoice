@@ -46,6 +46,6 @@ logsBucket: 'gs://synechis_logs/4sh-invoice'
 
 timeout: 600s
 substitutions:
-  _CACHE_BUCKET: '4sh-invoice-cicd_cache'
+  _CACHE_BUCKET: 'qsh-invoice-cicd_cache'
   # _SLACK_WEBHOOK_URL: '' # https://hooks.slack.com/services/<...>/<...>''
   # _REPO_SETTINGS: '-Prepo4shUrl=http://repo.4sh.fr/artifactory -Prepo4shUser=chef -Prepo4shPassword=<..>'
