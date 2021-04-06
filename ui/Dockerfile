@@ -19,7 +19,7 @@ RUN yarn $BUILD_TARGET
 FROM nginx:1.13-alpine
 RUN rm /etc/nginx/conf.d/default.conf
 COPY .docker/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /code/dist/ /usr/share/nginx/html
+COPY --from=build /code/dist/ui/ /usr/share/nginx/html
 
 STOPSIGNAL SIGTERM
 EXPOSE 80
