@@ -15,5 +15,6 @@ ARG BUILD_TARGET="release"
 RUN yarn $BUILD_TARGET
 
 FROM nginx:1.13-alpine
-
-COPY --from=build /code/dist /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ui/.docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /code/www/ /usr/share/nginx/html
