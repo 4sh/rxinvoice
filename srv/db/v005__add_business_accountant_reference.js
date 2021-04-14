@@ -64,7 +64,10 @@ var accountantReferences =
         "La Charente Libre": "CCHARLIBRE",
         "IN'COM": "CINCOM",
         "Pyrénnées Presse": "CPYRPRESSE",
-        "GIE FILHET ALLARD": "CGIEFILHET"
+        "GIE FILHET ALLARD": "CGIEFILHET",
+        "SAMBOX": "CSAMBOX",
+        "CVIGIE": "VIGIE",
+        "OPCO 2i - 2i Nouvelle Aquitaine": "COPCO2I"
     };
 
 for (var key of Object.keys(accountantReferences)) {
