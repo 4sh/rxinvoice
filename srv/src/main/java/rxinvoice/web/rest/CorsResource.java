@@ -65,7 +65,6 @@ public class CorsResource {
         Business business = null;
         if (businessName != null) {
             Company customerCompany = companies.get().findOne(new ObjectId(companyId)).as(Company.class);
-            // TODO : Remove after having modified 4pm
             Company sellerCompany = companies.get().findOne("{name: #}", "4SH").as(Company.class);
             if (null != customerCompany && null != sellerCompany) {
                 CommercialRelationship commercialRelationship = this.commercialRelationService.findByCustomer(companyId);
@@ -78,7 +77,7 @@ public class CorsResource {
                             .setName(businessName)
                             .setReference(UUID.randomUUID().toString());
                     commercialRelationship.getBusinessList().add(business);
-                    companies.get().save(customerCompany);
+                    commercialRelationService.update(commercialRelationship);
                 }
             }
         }

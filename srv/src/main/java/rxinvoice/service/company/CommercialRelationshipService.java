@@ -31,7 +31,7 @@ public class CommercialRelationshipService {
 
     public CommercialRelationship update(CommercialRelationship commercialRelationship) {
         logger.info("Update company relationship between seller {} and customer {}",
-                AppModule.currentUser().getCompanyRef(), commercialRelationship.getCustomerRef());
+                commercialRelationship.getSellerRef(), commercialRelationship.getCustomerRef());
         this.commercialRelationshipDao.updateGeneralData(commercialRelationship.getSellerRef(),
                 commercialRelationship.getCustomerRef(),
                 commercialRelationship.getBusinessList(),
