@@ -10,7 +10,7 @@ export class CommercialRelationship {
     showLegalNoticeForeignBuyer?: boolean;
     vatRates: Array<VatRate>;
     businessList: Array<Business>;
-    companyMetrics: CompanyMetrics;
+    companyMetrics?: CompanyMetrics;
 
     lastSendDate?: Date;
     lastPaymentDate?: Date;

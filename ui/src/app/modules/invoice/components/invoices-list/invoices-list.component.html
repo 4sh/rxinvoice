@@ -20,7 +20,7 @@
                     <span>N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}</span>
                 </div>
                 <div (click)="goToDetail(invoice)" class="text-click cell phone-3 client-cell">
-                    <span class="invoiceList-value">{{invoice.buyer?.name}}</span>
+                    <span class="invoiceList-value">{{invoice.customer?.name}}</span>
                 </div>
                 <div (click)="goToDetail(invoice)" class="text-click cell phone-3 business-cell">
                     <span class="invoiceList-value">{{invoice.business?.name}}</span>

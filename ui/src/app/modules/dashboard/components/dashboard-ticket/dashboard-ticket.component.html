@@ -25,7 +25,7 @@
                  N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}
               </span>
             </p>
-            <p class="buyer-name">{{invoice.buyer?.name}}</p>
+            <p class="buyer-name">{{invoice.customer?.name}}</p>
             <p class="business-name">{{invoice.business?.name}}</p>
             <p class="invoice-price">{{invoice.grossAmount | invoiceCurrency}}</p>
         </div>

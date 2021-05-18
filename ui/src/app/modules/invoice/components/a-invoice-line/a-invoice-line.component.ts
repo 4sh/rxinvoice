@@ -62,7 +62,7 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     public set buyer(buyer: Company) {
         this._buyer = buyer;
         if (this._buyer && this._buyer._id) {
-            this.customerService.fetchCustomer(this.invoice.buyer._id)
+            this.customerService.fetchCustomer(this.invoice.customer._id)
                 .subscribe(customer => {
                     if (customer.commercialRelationship.vatRates && customer.commercialRelationship.vatRates.length > 0) {
                         this.vatRateList = customer.commercialRelationship.vatRates
@@ -72,7 +72,7 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
     }
 
     ngOnInit(): void {
-        this.vatRateList = this.invoice.seller.sellerSettings ? this.invoice.seller.sellerSettings?.vatRates : [];
+        this.vatRateList = this.invoice.vendor.sellerSettings ? this.invoice.vendor.sellerSettings?.vatRates : [];
     }
 
     public editLine(): void {

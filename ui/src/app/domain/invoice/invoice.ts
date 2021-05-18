@@ -26,8 +26,8 @@ export class Invoice {
     comment: string;
     customerInvoiceRef: string;
     kind: ServiceKind;
-    seller: Company;
-    buyer: Company;
+    vendor: Company;
+    customer: Company;
     grossAmount: {
         value: number,
         currency: string
