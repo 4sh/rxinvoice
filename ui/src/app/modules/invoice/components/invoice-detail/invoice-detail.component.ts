@@ -47,7 +47,7 @@ export class InvoiceDetailComponent implements OnInit {
     ngOnInit() {
         this.route.data.subscribe(routeData => {
             this.invoice = routeData.invoice;
-            this.invoice.vatAmount = this.invoice.computeVatAmount();
+            // this.invoice.vatAmount = this.invoice.computeVatAmount();
             this.authService.companyEvents
                 .subscribe(companyEvent => this.seller = companyEvent)
         });
@@ -106,7 +106,7 @@ export class InvoiceDetailComponent implements OnInit {
                 switchMap(() => this.invoiceService.fetchInvoice(this.invoice._id))
             ).subscribe((invoice: Invoice) => {
                 this.invoice = invoice;
-                this.invoice.vatAmount = this.invoice.computeVatAmount();
+                // this.invoice.vatAmount = this.invoice.computeVatAmount();
                 if (creation) {
                     this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
                     this.router.navigate(['/invoices/detail/' + invoice._id]);
@@ -159,11 +159,11 @@ export class InvoiceDetailComponent implements OnInit {
     }
 
     private computeTotalAmounts() {
-        this.invoice.grossAmount = this.invoice.computeGrossAmount();
-        if (this.invoice.withVAT) {
-            this.invoice.vatAmount = this.invoice.computeVatAmount();
-        }
-        this.invoice.netAmount = this.invoice.computeNetAmount();
+        // this.invoice.grossAmount = this.invoice.computeGrossAmount();
+        // if (this.invoice.withVAT) {
+        //     this.invoice.vatAmount = this.invoice.computeVatAmount();
+        // }
+        // this.invoice.netAmount = this.invoice.computeNetAmount();
     }
 
     public lineAdded(): void {

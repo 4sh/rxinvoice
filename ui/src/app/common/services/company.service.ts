@@ -10,7 +10,7 @@ import {throwError} from 'rxjs/internal/observable/throwError';
 @Injectable()
 export class CompanyService {
 
-    private baseUrl = '/api/companies';
+    private baseUrl = '/api/v1/customers';
 
     constructor(private http: HttpClient) {
     }

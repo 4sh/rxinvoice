@@ -22,14 +22,24 @@ export class Invoice {
     sentDate: Date;
     status: InvoiceStatusType;
     withVAT: Boolean = true;
-    object: string;
+    subject: string;
     comment: string;
     customerInvoiceRef: string;
     kind: ServiceKind;
     seller: Company;
     buyer: Company;
-    grossAmount: number;
-    netAmount: number;
+    grossAmount: {
+        value: number,
+        currency: string
+    };
+    netAmount: {
+        value: number,
+        currency: string
+    };
+    vatAmount: {
+        value: number,
+        currency: string
+    };
     vats: VatRate[];
     vatsAmount: VAT[];
     business: Business;
@@ -41,7 +51,7 @@ export class Invoice {
     /**
      * Transient property
      */
-    vatAmount: number;
+
     constructor() {
     }
 
@@ -57,39 +67,39 @@ export class Invoice {
         return copy;
     }
 
-    public computeGrossAmount(): number {
-        return this.lines
-            .map(line => line.grossAmount)
-            .reduce((invoiceGrossAmount, lineGrossAmount) => invoiceGrossAmount += lineGrossAmount, 0)
-    }
+    // public computeGrossAmount(): number {
+    //     return this.lines
+    //         .map(line => line.grossAmount)
+    //         .reduce((invoiceGrossAmount, lineGrossAmount) => invoiceGrossAmount += lineGrossAmount, 0)
+    // }
 
-    public computeVatAmount(): number {
-        if (!this.withVAT) {
-            return 0;
-        }
-        return this.lines
-            .map(line => {
-                if (line.vatRate && line.vatRate && line.grossAmount) {
-                    return line.vatRate.rate / 100 * line.grossAmount
-                }
-                return 0;
-            })
-            .reduce((invoiceVatAmount, lineVatAmount) => invoiceVatAmount += lineVatAmount, 0)
-    }
+    // public computeVatAmount(): number {
+    //     if (!this.withVAT) {
+    //         return 0;
+    //     }
+    //     return this.lines
+    //         .map(line => {
+    //             if (line.vatRate && line.vatRate && line.grossAmount) {
+    //                 return line.vatRate.rate / 100 * line.grossAmount
+    //             }
+    //             return 0;
+    //         })
+    //         .reduce((invoiceVatAmount, lineVatAmount) => invoiceVatAmount += lineVatAmount, 0)
+    // }
 
-    public computeNetAmount(): number {
-        if (!this.withVAT) {
-            return this.computeGrossAmount();
-        }
-        return this.lines
-            .map(line => {
-                if (line.vatRate && line.vatRate && line.grossAmount) {
-                    return (1 + line.vatRate.rate / 100) * line.grossAmount
-                }
-                return 0;
-            })
-            .reduce((invoiceTotalAmount, lineAmount) => invoiceTotalAmount += lineAmount, 0)
-    }
+    // public computeNetAmount(): number {
+    //     if (!this.withVAT) {
+    //         return this.computeGrossAmount();
+    //     }
+    //     return this.lines
+    //         .map(line => {
+    //             if (line.vatRate && line.vatRate && line.grossAmount) {
+    //                 return (1 + line.vatRate.rate / 100) * line.grossAmount
+    //             }
+    //             return 0;
+    //         })
+    //         .reduce((invoiceTotalAmount, lineAmount) => invoiceTotalAmount += lineAmount, 0)
+    // }
 
     generatePdfFilename(invoice) {
         let filename = '';

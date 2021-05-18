@@ -101,12 +101,12 @@ export class AInvoiceLineComponent implements OnInit, ControlValueAccessor {
 
     public quantityUpdated(quantity: number): void {
         this.line.quantity = quantity;
-        this.line.grossAmount = this.line.computeGrossAmount();
+        // this.line.grossAmount = this.line.computeGrossAmount();
     }
 
     public unitCostUpdated(unitCost: number): void {
-        this.line.unitCost = unitCost;
-        this.line.grossAmount = this.line.computeGrossAmount();
+        this.line.unitCost.value = unitCost;
+        // this.line.grossAmount = this.line.computeGrossAmount();
     }
 
     public vatUpdated(vatRate: VatRate) {

@@ -11,7 +11,7 @@
                    placeholder="{{'invoice.line.label'|translate}}">
         </div>
         <div class="cell phone-2 grid-x align-center">
-            <span *ngIf="!editable">{{line?.quantity | number : '1.2'}}</span>
+            <span *ngIf="!editable">{{line?.quantity != 0 ? (line?.quantity | number : '1.2') : ''}}</span>
             <input *ngIf="editable && line"
                    type="number"
                    name="quantity"
@@ -20,7 +20,7 @@
                    placeholder="{{'invoice.line.quantity'|translate}}">
         </div>
         <div class="cell phone-3 grid-x align-right">
-            <span *ngIf="!editable">{{line?.unitCost | invoiceCurrency}}</span>
+            <span *ngIf="!editable">{{line?.unitCost.value && line?.unitCost.value != 0 ? (line?.unitCost | invoiceCurrency) : ''}}</span>
             <input *ngIf="editable && line"
                    type="number"
                    name="unitCost"
@@ -30,10 +30,10 @@
                    placeholder="{{'invoice.line.unit.cost'|translate}}">
         </div>
         <div class="cell phone-3 grid-x align-right">
-            <span>{{line?.grossAmount > 0 ? (line?.grossAmount | invoiceCurrency) : ''}}</span>
+            <span>{{line?.grossAmount && line?.grossAmount.value > 0 ? (line?.grossAmount | invoiceCurrency) : ''}}</span>
         </div>
         <div class="cell phone-4 grid-x align-right">
-            <span *ngIf="!editable && invoice.withVAT">{{line?.vatRate?.rate | number: '1.2'}} {{line?.vatRate?.rate ? ' %' : ''}}</span>
+            <span *ngIf="!editable && invoice.withVAT">{{line?.vatRate ? (line?.vatRate | number: '1.2') : ''}} {{line?.vatRate ? ' %' : ''}}</span>
             <a-vat-select
                     *ngIf="editable && invoice.withVAT && line"
                     name="vatRate"

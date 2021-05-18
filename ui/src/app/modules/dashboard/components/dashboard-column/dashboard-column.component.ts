@@ -52,7 +52,7 @@ export class DashboardColumnComponent implements OnInit, DashboardColumnObserver
             return this.invoiceList
                 .filter(invoice => isNumber(invoice.grossAmount))
                 .map(invoice => invoice.grossAmount)
-                .reduce((a, b) => a + b, 0);
+                .reduce((a, b) => a + b.value, 0);
         }
     }
 

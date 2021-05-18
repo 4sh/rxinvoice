@@ -8,6 +8,8 @@ import {CurrencyPipe} from '@angular/common';
 export class InvoiceCurrencyPipe extends CurrencyPipe {
 
     transform(value: any) {
-        return super.transform(value, 'EUR', 'symbol', '1.2-2', 'fr');
+        if (value)
+            return super.transform(value.value, value.currency, 'symbol', '1.2-2', 'fr');
+        return ''
     }
 }

@@ -66,7 +66,7 @@ export class InvoicesComponent implements OnInit {
             const amount = this.invoices
                 .filter(invoices => invoices.grossAmount)
                 .map(invoice => invoice.grossAmount)
-                .reduce((a, b) => a + b, 0);
+                .reduce((a, b) => a + b.value, 0);
             return (new CurrencyPipe('en')).transform(`${amount}`, 'EUR', 'symbol', '.2-2', 'fr');
         } else {
             return 0;

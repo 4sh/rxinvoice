@@ -26,7 +26,7 @@
                     <span class="invoiceList-value">{{invoice.business?.name}}</span>
                 </div>
                 <div (click)="goToDetail(invoice)" class="text-click cell auto object-cell grid-x align-middle">
-                    <span class="invoiceList-value">{{invoice.object}}</span>
+                    <span class="invoiceList-value">{{invoice.subject}}</span>
                 </div>
                 <div (click)="goToDetail(invoice)" class="text-click cell amount-cell">
                     <span class="invoiceList-value">{{invoice.grossAmount | invoiceCurrency}}</span>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="grid-x align-right align-middle cell actions-cell">
                     <a-button-launch (click)="launchInvoice(invoice)"
-                                     *ngIf="isLaunchButtonVisible(invoice)"
+                                     *ngIf="true"
                                      [launchStyle]="'INVOICE'"
                                      [launchLabel]="'invoice.list.column.launch'"></a-button-launch>
                     <a-spacer [sizeX]="10"></a-spacer>

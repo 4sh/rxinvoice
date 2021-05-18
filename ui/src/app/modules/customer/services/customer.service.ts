@@ -9,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class CustomerService {
 
-    private baseUrl = '/api/customers';
+    private baseUrl = '/api/v1/customers';
 
     constructor(private http: HttpClient) {
     }

@@ -5,8 +5,22 @@ import {VatRate} from '../common/vat-rate';
 export class InvoiceLine {
     description: string;
     quantity?: number;
-    unitCost?: number;
-    grossAmount?: number;
+    unitCost?: {
+        value: number,
+        currency: string
+    };
+    grossAmount: {
+        value: number,
+        currency: string
+    };
+    netAmount: {
+        value: number,
+        currency: string
+    };
+    vatAmount: {
+        value: number,
+        currency: string
+    };
     vatRate?: VatRate;
 
     /**
@@ -25,12 +39,12 @@ export class InvoiceLine {
         }
     }
 
-    public computeGrossAmount(): number {
-        if (this.quantity && this.unitCost) {
-            return this.quantity * this.unitCost;
-        }
-        return 0;
-    }
+    // public computeGrossAmount(): {} {
+    //     if (this.quantity && this.unitCost) {
+    //         return this.quantity * this.unitCost.value;
+    //     }
+    //     return this.grossAmount;
+    // }
 }
 
 

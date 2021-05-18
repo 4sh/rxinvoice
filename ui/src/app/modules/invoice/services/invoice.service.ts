@@ -17,7 +17,7 @@ export class InvoiceService {
 
     public invoiceSearchFilter: InvoiceSearchFilter;
 
-    private baseUrl = '/api/invoices';
+    private baseUrl = '/api/v1/invoices';
 
     constructor(private http: HttpClient,
                 private authenticationService: AuthenticationService) {

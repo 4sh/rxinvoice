@@ -11,7 +11,7 @@ const routes: Routes = [
         path: 'login', pathMatch: 'full', component: LoginComponent
     },
     {
-        path: '', canActivate: [LoggedInGuard], component: AppContentComponent,
+        path: '', canActivate: [/*LoggedInGuard*/], component: AppContentComponent,
         children: [
             {
                 path: 'dashboard',

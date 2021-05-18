@@ -32,7 +32,7 @@ import {DraftModule} from './modules/draft/draft.module';
 import {DpDatePickerModule} from 'ng2-date-picker';
 
 export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, '/api/i18n/', 'labels.json');
+    return new TranslateHttpLoader(http, '/api/v1/i18n/', 'labels.json');
 }
 
 @NgModule({
