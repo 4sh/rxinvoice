@@ -13,7 +13,7 @@ import {plainToClass} from 'class-transformer';
 @Injectable()
 export class AuthenticationService {
 
-    private baseUrl = '/api/sessions';
+    private baseUrl = '/api/v1/user';
 
     public userEvents: BehaviorSubject<User> = new BehaviorSubject<User>(undefined);
     public companyEvents: BehaviorSubject<Company> = new BehaviorSubject<Company>(undefined);
@@ -41,9 +41,12 @@ export class AuthenticationService {
     }
 
     public fetchCurrent(): Observable<ConnectedUser> {
-        return this.http.get(this.baseUrl + '/current', {withCredentials: true})
+        return this.http.get(this.baseUrl + '/me', {withCredentials: true})
             .pipe(
-                map((result: any) => result.principal),
+                map((result: any) => {
+                    console.log(result.principal);
+                    return result.principal
+                }),
                 map(principal => plainToClass(User, principal as Object)),
                 tap((user: User) => this.userEvents.next(user)),
                 mergeMap(user => this.companyService.fetchCompany(user.companyRef)

@@ -1,6 +1,6 @@
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppComponent} from './app/app.component';
 import {AppHeaderComponent} from './common/components/app-header/app-header.component';
 import {LoginComponent} from './pages/login/login.component';
@@ -30,9 +30,23 @@ import {ButtonsModule} from './modules/shared/components/atoms/buttons/buttons.m
 import {InvoiceModule} from './modules/invoice/invoice.module';
 import {DraftModule} from './modules/draft/draft.module';
 import {DpDatePickerModule} from 'ng2-date-picker';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 
 export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, '/api/v1/i18n/', 'labels.json');
+    return new TranslateHttpLoader(http, '/api/v1/public/i18n/', 'labels.json');
+}
+
+function initializeKeycloak(keycloak: KeycloakService) {
+    return () =>
+        keycloak.init({
+            config: {
+                url: 'http://localhost:32772/auth',
+                realm: 'simatix-invoice',
+                clientId: 'invoice-client',
+            },
+            bearerExcludedUrls: ['/api/v1/public'],
+            bearerPrefix: "Bearer"
+        });
 }
 
 @NgModule({
@@ -50,6 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
     imports: [
         AppRoutingModule,
         BrowserModule,
+        KeycloakAngularModule,
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
@@ -85,7 +100,13 @@ export function createTranslateLoader(http: HttpClient) {
             useClass: HttpInterceptorService,
             multi: true
         },
-        ModalService
+        ModalService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeKeycloak,
+            multi: true,
+            deps: [KeycloakService],
+        }
     ],
     entryComponents: [ModalContainerComponent, InvoiceEditionPopupComponent],
     bootstrap: [AppComponent]

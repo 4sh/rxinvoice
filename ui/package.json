@@ -33,6 +33,8 @@
     "core-js": "3.6.5",
     "foundation-sites": "6.6.3",
     "jquery": "3.5.0",
+    "keycloak-angular": "7.3",
+    "keycloak-js": "10.0.2",
     "lodash": "4.17.15",
     "moment": "2.24.0",
     "ng2-date-picker": "9.0.0",
