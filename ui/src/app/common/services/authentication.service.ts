@@ -9,6 +9,7 @@ import {map, mergeMap, tap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {Observable} from 'rxjs/internal/Observable';
 import {plainToClass} from 'class-transformer';
+import {KeycloakService} from "keycloak-angular";
 
 @Injectable()
 export class AuthenticationService {
@@ -20,7 +21,8 @@ export class AuthenticationService {
 
     constructor(private router: Router,
                 private companyService: CompanyService,
-                private http: HttpClient) {
+                private http: HttpClient,
+                private keycloak: KeycloakService) {
     }
 
     public authenticate(login: { name: string, password: string }): Observable<User> {
@@ -62,10 +64,12 @@ export class AuthenticationService {
     }
 
     public logout(): void {
-        this.http.delete(this.baseUrl + '/current').subscribe(() => {
-            this.userEvents.next(undefined);
-            this.companyEvents.next(undefined);
-            this.router.navigate(['/login']);
-        });
+        // this.http.delete(this.baseUrl + '/current').subscribe(() => {
+        //     this.userEvents.next(undefined);
+        //     this.companyEvents.next(undefined);
+        //     this.router.navigate(['/login']);
+        // });
+
+        this.keycloak.logout()
     }
 }
