@@ -43,10 +43,7 @@ export class AuthenticationService {
     public fetchCurrent(): Observable<ConnectedUser> {
         return this.http.get(this.baseUrl + '/me', {withCredentials: true})
             .pipe(
-                map((result: any) => {
-                    console.log(result.principal);
-                    return result.principal
-                }),
+                map((result: any) => result.principal),
                 map(principal => plainToClass(User, principal as Object)),
                 tap((user: User) => this.userEvents.next(user)),
                 mergeMap(user => this.companyService.fetchCompany(user.companyRef)
