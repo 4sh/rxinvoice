@@ -44,6 +44,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
                 realm: 'simatix-invoice',
                 clientId: 'invoice-client',
             },
+            initOptions: {
+                onLoad: 'check-sso',
+                silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
+            },
             bearerExcludedUrls: ['/api/v1/public'],
             bearerPrefix: "Bearer"
         });

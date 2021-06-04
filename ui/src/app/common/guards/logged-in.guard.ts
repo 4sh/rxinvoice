@@ -36,6 +36,6 @@ export class LoggedInGuard extends KeycloakAuthGuard {
             });
         }
 
-        return true;
+        return this.authenticated;
     }
 }
