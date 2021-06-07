@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {catchError, tap} from "rxjs/operators";
-import {throwError} from "rxjs/internal/observable/throwError";
 
 @Injectable()
 export class DownloadInvoiceService {
@@ -21,15 +19,7 @@ export class DownloadInvoiceService {
         const url = this.baseUrl + '?invoiceId=' + invoice._id;
         const url2 = '&filename=' + invoice.generatePdfFilename(invoice);
 
-        this.http.get(url + url2, {responseType: "arraybuffer", observe: "response"}).pipe(
-            tap((response) => {
-                let file = new Blob([response.body], {type: 'application/pdf'});
-                window.open(URL.createObjectURL(file), '_blank');
-            }),
-            catchError((response: Response) => throwError({
-                message: 'Unable to download pdf',
-                response: response
-            }))).toPromise()
+        window.location.href = url + url2;
     }
 
 }
