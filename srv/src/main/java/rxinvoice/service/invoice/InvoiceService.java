@@ -71,8 +71,9 @@ public class InvoiceService {
     }
 
     public Invoice createInvoice(Invoice invoice) {
+        User user = null;
         if (invoice.getSeller() == null) {
-            User user = AppModule.currentUser();
+             user = AppModule.currentUser();
             if (user.getPrincipalRoles().contains(SELLER)) {
                 invoice.setSeller(this.companyDao.getByKey(user.getCompanyRef()));
             }
@@ -85,6 +86,14 @@ public class InvoiceService {
                 throw new WebException(String.format("Invoice reference %s is already used.", invoice.getReference()));
             }
         }
+
+        // Special check for 4P
+        if (user != null && "4PM".equals(user.getName())) {
+            CommercialRelationship commercialRelationship = this.commercialRelationshipService.findByCustomer(invoice.getCustomerInvoiceRef());
+            invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
+            invoice.setWithVAT(true);
+        }
+
         updateInvoiceVat(invoice);
         updateAmounts(invoice);
         this.invoiceDao.create(invoice);
