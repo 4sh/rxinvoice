@@ -92,6 +92,8 @@ public class InvoiceService {
             CommercialRelationship commercialRelationship = this.commercialRelationshipService.findByCustomer(invoice.getCustomerInvoiceRef());
             invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
             invoice.setWithVAT(true);
+
+            invoice.setDate(invoice.getDate().plusDays(30));
         }
 
         updateInvoiceVat(invoice);
