@@ -6,11 +6,7 @@
             </a-button-default>
             <h2 class="cell phone-16">{{invoice.buyer?.name}}</h2>
             <div class="cell auto grid-x align-right">
-                <a-invoice-status-select
-                        class="invoice-detail-status"
-                        [ngModel]="invoice.status"
-                        name="status">
-                </a-invoice-status-select>
+                <a-invoice-status [statusLabel]="invoice.status"></a-invoice-status>
             </div>
         </div>
 
