@@ -19,8 +19,13 @@ const routes: Routes = [
                 loadChildren: () => import('./modules/dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule)
             },
             {
-                path: 'invoices',
-                data: {title: 'navigation.menu.invoices'},
+                path: 'customer-invoices',
+                data: {title: 'navigation.menu.customer-invoices', section: 'customers'},
+                loadChildren: () => import('./modules/invoice/invoice-routing.module').then(m => m.InvoiceRoutingModule)
+            },
+            {
+                path: 'vendor-invoices',
+                data: {title: 'navigation.menu.vendor-invoices', section: 'vendors'},
                 loadChildren: () => import('./modules/invoice/invoice-routing.module').then(m => m.InvoiceRoutingModule)
             },
             {

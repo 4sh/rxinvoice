@@ -12,6 +12,8 @@ import {throwError} from 'rxjs/internal/observable/throwError';
 import {AuthenticationService} from '../../../common/services/authentication.service';
 import {FileItem} from 'ng2-file-upload';
 
+type Section = 'vendors' | 'customers'
+
 @Injectable()
 export class InvoiceService {
 
@@ -41,23 +43,18 @@ export class InvoiceService {
     }
 
 
-    public fetchInvoices(params: any, save?: boolean): Observable<Invoice[]> {
+    public fetchInvoices(params: any, section?: Section, save?: boolean): Observable<Invoice[]> {
         if (save) {
             this.invoiceSearchFilter = new InvoiceSearchFilter();
             this.invoiceSearchFilter.startDate = params.startDate;
             this.invoiceSearchFilter.endDate = params.endDate;
             this.invoiceSearchFilter.query = params.query;
             this.invoiceSearchFilter.kind = params.kind;
-            this.invoiceSearchFilter.buyerRef = params.buyerRef;
+            this.invoiceSearchFilter.customerRef = params.buyerRef;
             this.invoiceSearchFilter.statuses = params.statuses;
+            this.invoiceSearchFilter.section = section;
         }
-        return this.http
-            .get(this.baseUrl, {params: SearchParams.toHttpParams(params)}).pipe(
-                map((result: any) => plainToClass(Invoice, result as Object[])),
-                catchError((response: Response) => throwError({
-                    message: 'Unable to fetch invoices',
-                    response: response
-                })));
+        return this.fetchInvoiceList(this.invoiceSearchFilter)
     }
 
     public fetchToPrepareInvoices(): Observable<Invoice[]> {

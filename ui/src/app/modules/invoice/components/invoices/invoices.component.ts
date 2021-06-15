@@ -1,11 +1,11 @@
-import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {InvoiceService} from '../../services/invoice.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CurrencyPipe} from '@angular/common';
 import * as moment from 'moment';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'invoices',
@@ -22,7 +22,8 @@ export class InvoicesComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
                 private router: Router,
-                private invoiceService: InvoiceService) {
+                private invoiceService: InvoiceService,
+                private route: ActivatedRoute) {
         this.searchForm = fb.group({
             query: '',
             startDate: moment().subtract(7, 'days').toDate(),
@@ -52,13 +53,15 @@ export class InvoicesComponent implements OnInit {
     research() {
         this.invoices = [];
         this.isPending = true;
-        this.invoiceService.fetchInvoices(this.searchForm.value, true)
-            .subscribe(
-                (invoices) => {
-                    this.invoices = invoices;
-                    this.isPending = false;
-                },
-                () => this.isPending = false);
+        this.route.data.subscribe((data) => {
+            this.invoiceService.fetchInvoices(this.searchForm.value, data.section, true)
+                .subscribe(
+                    (invoices) => {
+                        this.invoices = invoices;
+                        this.isPending = false;
+                    },
+                    () => this.isPending = false);
+        });
     }
 
     public getGrossAmount() {

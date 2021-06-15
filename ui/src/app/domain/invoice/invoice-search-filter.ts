@@ -6,8 +6,9 @@ export class InvoiceSearchFilter {
     query: string;
     startDate: Date;
     endDate: Date;
-    buyerRef: string;
+    customerRef: string;
     statuses: InvoiceStatusType[];
     kind: ServiceKind;
+    section: 'vendors' | 'customers'
 
 }

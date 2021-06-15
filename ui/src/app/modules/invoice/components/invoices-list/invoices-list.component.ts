@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Invoice} from '../../../../domain/invoice/invoice';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import {InvoiceService} from '../../services/invoice.service';
 import {InvoiceStatusEnum} from '../../../../domain/invoice/invoice-status.type';
@@ -20,11 +20,12 @@ export class InvoicesListComponent {
     constructor(private router: Router,
                 private invoiceService: InvoiceService,
                 private authenticationService: AuthenticationService,
-                private downloadService: DownloadInvoiceService) {
+                private downloadService: DownloadInvoiceService,
+                private route: ActivatedRoute) {
     }
 
     public goToDetail(invoice) {
-        this.router.navigate(['/invoices/detail/' + invoice._id]);
+        this.router.navigate(['detail/' + invoice._id], {relativeTo: this.route});
     }
 
     public downloadInvoice(invoice): void {
