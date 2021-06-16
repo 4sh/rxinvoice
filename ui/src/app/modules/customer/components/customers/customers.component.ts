@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyService} from '../../../../common/services/company.service';
-import {Company} from '../../../../domain/company/company';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Customer} from "../../../../domain/company/customer";
+import {CustomerService} from "../../services/customer.service";
 
 @Component({
     selector: 'customers',
@@ -10,14 +10,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class CustomersComponent implements OnInit {
 
-   public companies: Company[];
-   public filterString: string;
-   public isPending = true;
-   public query: string;
-   public isReverse = false;
+    public customers: Customer[];
+    public filterString: string;
+    public isPending = true;
+    public query: string;
+    public isReverse = false;
 
 
-    constructor(private companyService: CompanyService,
+    constructor(private customerService: CustomerService,
                 private router: Router,
                 private route: ActivatedRoute) {
         this.toggleFilter('name');
@@ -34,25 +34,25 @@ export class CustomersComponent implements OnInit {
     }
 
     public search(): void {
-        this.companies = [];
+        this.customers = [];
         this.isPending = true;
-        this.companyService.fetchCompanies(this.query)
-            .subscribe((companies) => {
-                this.companies = companies;
+        this.customerService.fetchCustomers(this.query)
+            .subscribe((customers) => {
+                this.customers = customers;
                 this.isPending = false;
-                this.router.navigate([], { replaceUrl: true, queryParams: {query: this.query} });
+                this.router.navigate([], {replaceUrl: true, queryParams: {query: this.query}});
             });
     }
 
     public toggleFilter(string): void {
-        this.isReverse = string === 'lastSendDate' ||  string === 'lastPaymentDate' ||  string === 'commercialRelationship.companyMetrics.currentYear.invoiced';
-            this.filterString = string;
+        this.isReverse = string === 'lastSendDate' || string === 'lastPaymentDate' || string === 'commercialRelationship.companyMetrics.currentYear.invoiced';
+        this.filterString = string;
     }
 
     public getNumberOfBusiness(): number {
-        if (this.companies && this.companies.length) {
-            return this.companies.filter(company => company.commercialRelationship.businessList)
-                .map(company => company.commercialRelationship.businessList.length)
+        if (this.customers && this.customers.length) {
+            return this.customers.filter(customer => customer.commercialRelationship.businessList)
+                .map(customer => customer.commercialRelationship.businessList.length)
                 .reduce((a, b) => a + b, 0);
         } else {
             return 0;

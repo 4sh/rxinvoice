@@ -4,6 +4,7 @@ import {CompanyService} from '../../../../../../common/services/company.service'
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {AUserSelectComponent} from '../a-user-select/a-user-select.component';
 import {User} from '../../../../../../domain/user/user';
+import {CustomerService} from "../../../../../customer/services/customer.service";
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -27,11 +28,11 @@ export class ACustomerSelectComponent implements OnInit, ControlValueAccessor {
     private onNgChange: (company: Company) => void;
     private onNgTouched: () => void;
 
-    constructor(private companyService: CompanyService) {
+    constructor(private customerService: CustomerService) {
     }
 
     ngOnInit() {
-        this.companyService.fetchCompanies()
+        this.customerService.fetchCustomers()
             .subscribe(companies => {
                 this.companies = companies;
                 this.writeValue(this.company);

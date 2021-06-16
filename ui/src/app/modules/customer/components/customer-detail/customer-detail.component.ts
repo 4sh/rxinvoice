@@ -1,8 +1,6 @@
-import {filter} from 'rxjs/operators';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Company} from '../../../../domain/company/company';
 import {FormGroup} from '@angular/forms';
-import {CompanyService} from '../../../../common/services/company.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as Moment from 'moment';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
@@ -11,6 +9,8 @@ import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {Business} from '../../../../domain/commercial-relationship/business';
 import {VatRate} from '../../../../domain/common/vat-rate';
+import {Customer} from "../../../../domain/company/customer";
+import {CustomerService} from "../../services/customer.service";
 
 @Component({
     selector: 'customer-detail',
@@ -19,8 +19,8 @@ import {VatRate} from '../../../../domain/common/vat-rate';
 })
 export class CustomerDetailComponent implements OnInit {
 
-    public seller: Company;
-    public customer = new Company();
+    public vendor: Company;
+    public customer = new Customer();
     public canDelete: boolean;
     @ViewChild('customerForm', {static: true}) form: FormGroup;
     public currentYearTurnover = 0;
@@ -33,7 +33,7 @@ export class CustomerDetailComponent implements OnInit {
     public currentTabIndex = 1;
     public availableVatRates: Array<VatRate>;
 
-    constructor(private companyService: CompanyService,
+    constructor(private customerService: CustomerService,
                 private route: ActivatedRoute,
                 private router: Router,
                 private translateService: TranslateService,
@@ -48,10 +48,10 @@ export class CustomerDetailComponent implements OnInit {
             this.customer = routeData.customer;
             this.authService.companyEvents
                 .subscribe(companyEvent => {
-                    this.seller = companyEvent;
-                    this.buildCompanyFiscalYearBounds(this.seller);
+                    this.vendor = companyEvent;
+                    this.buildCompanyFiscalYearBounds(this.vendor);
                     this.fillCustomerMetrics(this.customer);
-                    this.availableVatRates = this.seller.sellerSettings.vatRates
+                    this.availableVatRates = this.vendor.sellerSettings.vatRates
                         .filter(value => this.customer.commercialRelationship.vatRates.map(vat => vat.rate).indexOf(value.rate) < 0);
                     this.newVat = this.availableVatRates[0];
                 });
@@ -63,7 +63,7 @@ export class CustomerDetailComponent implements OnInit {
         });
     }
 
-    private fillCustomerMetrics(customer: Company) {
+    private fillCustomerMetrics(customer: Customer) {
         if (customer
             && customer.commercialRelationship
             && customer.commercialRelationship.companyMetrics
@@ -86,8 +86,8 @@ export class CustomerDetailComponent implements OnInit {
         }
     }
 
-    private buildCompanyFiscalYearBounds(company: Company) {
-        const fiscalYear = company.fiscalYear;
+    private buildCompanyFiscalYearBounds(customer: Customer) {
+        const fiscalYear = customer.fiscalYear;
         const now = Moment();
 
         const startDate = Moment(fiscalYear.start).year(now.year());
@@ -114,16 +114,16 @@ export class CustomerDetailComponent implements OnInit {
 
     public save() {
         if (this.customer._id) {
-            this.companyService.updateCompany(this.customer).subscribe((company) => {
-                    this.customer = company;
+            this.customerService.updateCustomer(this.customer).subscribe((customer) => {
+                    this.customer = customer;
                     this.alertService.success({title: 'alert.update.success', customClass: 'swal2-for-edit'});
                 },
                 () => {
                     this.alertService.error({title: 'alert.update.error', customClass: 'swal2-for-edit'});
                 });
         } else {
-            this.companyService.createCompany(this.customer).subscribe((company) => {
-                    this.customer = company;
+            this.customerService.createCustomer(this.customer).subscribe((customer) => {
+                    this.customer = customer;
                     this.alertService.success({title: 'alert.creation.success', customClass: 'swal2-for-edit'});
                 },
                 () => {
@@ -136,7 +136,7 @@ export class CustomerDetailComponent implements OnInit {
         this.alertService.confirm({title: 'alert.confirm.deletion'}).then(
             (result) => {
                 if (result.value) {
-                    this.companyService.deleteCompany(this.customer)
+                    this.customerService.deleteCustomer(this.customer)
                         .subscribe(() => {
                             this.router.navigate(['app/customers']);
                         });
@@ -163,7 +163,7 @@ export class CustomerDetailComponent implements OnInit {
     }
 
     private updateAvailableRates() {
-        this.availableVatRates = this.seller.sellerSettings.vatRates
+        this.availableVatRates = this.vendor.sellerSettings.vatRates
             .filter(value => this.customer.commercialRelationship.vatRates.map(vat => vat.rate).indexOf(value.rate) < 0);
         if (this.availableVatRates.length > 0) {
             this.newVat = this.availableVatRates[0];

@@ -39,7 +39,7 @@
 
         <div class="cell auto grid-x align-right align-middle">
             <div class="customerDetail cell auto">
-                <strong>{{companies?.length}}</strong>  {{'customers.total.client' | translate}}
+                <strong>{{customers?.length}}</strong>  {{'customers.total.client' | translate}}
                     <strong>{{getNumberOfBusiness()}}</strong> {{'customers.total.deal' | translate}}
             </div>
             <a-spacer [sizeX]="10"></a-spacer>
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="cell phone-22">
-        <customers-list [companies]="companies | orderBy: filterString: isReverse"  [isPending]="isPending"></customers-list>
+        <customers-list [customers]="customers | orderBy: filterString: isReverse" [isPending]="isPending"></customers-list>
     </div>
 </div>
 
