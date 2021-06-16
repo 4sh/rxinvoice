@@ -51,48 +51,7 @@
                     <span>1</span>
                     {{'company.general.title' | translate}}
                 </h2>
-                <div class="grid-x">
-                    <div class="cell phone-4"></div>
-                    <div class="cell phone-16 grid-y step-form grid-padding-y">
-                        <div class="grid-x step-form_line grid-padding-x">
-                            <div class="cell phone-12">
-                                <label>{{'company.general.name' | translate}}</label>
-                                <input type="text" [(ngModel)]="customer.name" name="name" required>
-                            </div>
-                            <div class="cell phone-12">
-                                <label>{{'company.general.siren.number' | translate}}</label>
-                                <input type="text" [disabled]='isSirenDisabled()' [(ngModel)]="customer.siren" name="siren" required>
-                            </div>
-                        </div>
-                        <div class="grid-x grid-padding-x">
-                            <div class="cell phone-24">
-                                <label>{{'company.general.address' | translate}} *</label>
-                                <textarea rows="3"
-                                          [(ngModel)]="customer.address.body" name="body"  required>
-                            </textarea>
-                            </div>
-                        </div>
-                        <div class="grid-x grid-padding-x">
-                            <div class="cell phone-4">
-                                <label>{{'company.general.zip.code' | translate}} *</label>
-                                <input type="text"
-                                       [(ngModel)]="customer.address.zipCode" name="zipCode" required>
-                            </div>
-                            <div class="cell phone-8">
-                                <label>{{'company.general.city' | translate}} *</label>
-                                <input type="text"
-                                       [(ngModel)]="customer.address.city" name="city" required>
-                            </div>
-                            <div class="cell phone-12">
-                                <label>{{'company.general.country' | translate}} *</label>
-                                <input type="text"
-                                       [(ngModel)]="customer.address.country" name="country"  required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cell phone-4"></div>
-                </div>
-
+                <a-company-legal-info [company]="customer"></a-company-legal-info>
             </div>
 
             <div *ngIf="currentTabIndex == 2" class="step">
@@ -100,97 +59,7 @@
                     <span>2</span>
                     {{'commercial.relationship.title' | translate}}
                 </h2>
-
-                <div class="grid-y step-form">
-                    <div class="grid-x step-form_line">
-                        <div class="column small-8">
-                            <label>{{'commercial.relationship.contact.mail' | translate}} *</label>
-                            <input type="text" pattern="[^ @]*@[^ @]*"
-                                   [(ngModel)]="customer.emailAddress" name="emailAddress" required>
-                        </div>
-                        <div class="column small-8">
-                            <label>{{'commercial.relationship.customer.manager' | translate}}</label>
-                            <a-user-select name="businessManagerRef"
-                                         [(ngModel)]="customer.commercialRelationship.managerRef">
-                            </a-user-select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step-business">
-                    <h3 class="step-business-title">
-                        {{'commercial.relationship.business.list.title' | translate}}
-                    </h3>
-
-                    <div class="detailAction cell">
-                        <div class="detailAction-head">
-                            <div class="grid-x grid-padding-x">
-                                <div class="cell phone-9">{{'commercial.relationship.business.manager' | translate}}</div>
-                                <div class="cell phone-12">{{'commercial.relationship.business.name' | translate}}</div>
-                                <div class="cell phone-3 grid-x align-right">{{'common.actions' | translate}}</div>
-                            </div>
-                        </div>
-                        <div class="detailAction-line-block">
-                            <ng-container *ngFor="let business of customer.commercialRelationship.businessList; index as i">
-                                <a-business-line
-                                        [name]="'business' + i"
-                                        [ngModel]="business"
-                                        [businessList]="customer.commercialRelationship.businessList"
-                                        [editActionEnabled]="true"
-                                        [validateActionEnabled]="true"
-                                        [deleteActionEnabled]="!business.reference">
-                                </a-business-line>
-                            </ng-container>
-                        </div>
-                        <div class="detailAction-line-footer">
-                            <a-business-line
-                                    name="newBusiness"
-                                    [editable]="true"
-                                    [ngModel]="newBusiness"
-                                    [businessList]="customer.commercialRelationship.businessList"
-                                    [addActionEnabled]="true"
-                                    (lineAddedEventEmitter)="businessAdded()">
-                            </a-business-line>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step-business margin-top-40">
-                    <h3 class="step-business-title">
-                        {{'commercial.relationship.vat.rate.list.title' | translate}}
-                    </h3>
-
-                    <div class="detailAction cell">
-                        <div class="detailAction-head">
-                            <div class="grid-x grid-padding-x">
-                                <div class="cell phone-16">{{'commercial.relationship.vat.rate.list.label'|translate}}</div>
-                                <div class="cell phone-5">{{'commercial.relationship.vat.rate.list.rate'|translate}}</div>
-                                <div class="cell phone-3 grid-x align-right">{{'common.actions'|translate}}</div>
-                            </div>
-                        </div>
-                        <div class="detailAction-line-block">
-                            <ng-container *ngFor="let vatRate of customer.commercialRelationship.vatRates" >
-                                <a-vat-line
-                                        [name]="'vatRate' + vatRate.rate"
-                                        [ngModel]="vatRate"
-                                        [vatRates]="customer.commercialRelationship.vatRates"
-                                        [deleteActionEnabled]="true"
-                                        (lineRemovedEventEmitter)="vatDeleted()">
-                                </a-vat-line>
-                            </ng-container>
-                        </div>
-                        <div class="detailAction-line-footer">
-                            <a-vat-line
-                                    name="newVat"
-                                    [editable]="true"
-                                    [ngModel]="newVat"
-                                    [vatRates]="availableVatRates"
-                                    [addActionEnabled]="true"
-                                    (lineAddedEventEmitter)="vatAdded($event)">
-                            </a-vat-line>
-                        </div>
-                    </div>
-                </div>
+                <a-commercial-relationship [company]="customer"></a-commercial-relationship>
             </div>
         </div>
     </form>
