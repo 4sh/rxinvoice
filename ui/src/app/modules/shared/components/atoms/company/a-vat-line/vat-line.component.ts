@@ -1,6 +1,6 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
-import {VatRate} from '../../../../domain/common/vat-rate';
+import {VatRate} from '../../../../../../domain/common/vat-rate';
 
 const VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,

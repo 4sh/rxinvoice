@@ -1,0 +1,41 @@
+<div class="grid-x">
+    <div class="cell phone-4"></div>
+    <div class="cell phone-16 grid-y step-form grid-padding-y">
+        <div class="grid-x step-form_line grid-padding-x">
+            <div class="cell phone-12">
+                <label>{{'company.general.name' | translate}}</label>
+                <input type="text" [(ngModel)]="company.name" name="name" required>
+            </div>
+            <div class="cell phone-12">
+                <label>{{'company.general.siren.number' | translate}}</label>
+                <input type="text" [disabled]='isSirenDisabled()' [(ngModel)]="company.siren" name="siren" required>
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="cell phone-24">
+                <label>{{'company.general.address' | translate}} *</label>
+                <textarea rows="3"
+                          [(ngModel)]="company.address.body" name="body" required>
+                            </textarea>
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="cell phone-4">
+                <label>{{'company.general.zip.code' | translate}} *</label>
+                <input type="text"
+                       [(ngModel)]="company.address.zipCode" name="zipCode" required>
+            </div>
+            <div class="cell phone-8">
+                <label>{{'company.general.city' | translate}} *</label>
+                <input type="text"
+                       [(ngModel)]="company.address.city" name="city" required>
+            </div>
+            <div class="cell phone-12">
+                <label>{{'company.general.country' | translate}} *</label>
+                <input type="text"
+                       [(ngModel)]="company.address.country" name="country" required>
+            </div>
+        </div>
+    </div>
+    <div class="cell phone-4"></div>
+</div>

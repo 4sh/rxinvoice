@@ -1,0 +1,61 @@
+<div class="grid-y grid-padding-y vendorListContainer">
+    <div class="grid-x cell phone-2 align-middle grid-padding-x vendorFilter">
+        <div class="cell shrink">
+            <h6>{{'vendors.filter.title' | translate}}</h6>
+        </div>
+
+        <div class="cell shrink">
+            <button type="button" (click)="toggleFilter('name')"
+                    [ngClass]="{'isActive green': filterString ===  'name'}"
+                    class="round large listFilter-item">
+                {{'vendors.filter.az' | translate}}
+            </button>
+        </div>
+
+        <div class="cell shrink">
+            <button type="button" (click)="toggleFilter('lastSendDate')"
+                    [ngClass]="{'isActive green': filterString ===  'lastSendDate'}"
+                    class="round large listFilter-item">
+                {{'vendors.filter.date' | translate}}
+            </button>
+        </div>
+
+        <div class="cell shrink">
+            <button type="button" (click)="toggleFilter('commercialRelationship.companyMetrics.currentYear.invoiced')"
+                    [ngClass]="{'isActive green': filterString ===  'commercialRelationship.companyMetrics.currentYear.invoiced'}"
+                    class="round large listFilter-item">
+                {{'vendors.filters.ca' | translate}}
+            </button>
+        </div>
+
+        <div class="cell shrink">
+            <input class="input search small" type="text" placeholder="Recherche un fournisseur par nom"
+                   name="search"
+                   [(ngModel)]="query" debounce (func)="search()">
+        </div>
+
+
+        <!-- Invoice number -->
+
+        <div class="cell auto grid-x align-right align-middle">
+            <div class="vendorDetail cell auto">
+                <strong>{{vendors?.length}}</strong>  {{'vendors.total.vendor' | translate}}
+                <strong>{{getNumberOfBusiness()}}</strong> {{'vendors.total.deal' | translate}}
+            </div>
+            <a-spacer [sizeX]="10"></a-spacer>
+            <div class="cell shrink align-right grid-x">
+                <a-button-default size="DEFAULT" visibility="HIGH" routerLink="/vendors/detail/new">
+                    <i class="fas fa-plus"></i>{{'vendors.filter.vendor' | translate}}
+                </a-button-default>
+            </div>
+        </div>
+    </div>
+    <div class="cell phone-22">
+        <vendors-list [vendors]="vendors | orderBy: filterString: isReverse" [isPending]="isPending"></vendors-list>
+    </div>
+</div>
+
+<!-- [END HEADER] -->
+
+
+

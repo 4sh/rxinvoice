@@ -28,6 +28,11 @@ import {RouterModule} from '@angular/router';
 import {InvoiceDatePipe} from './pipes/invoice-date.pipe';
 import { AInvoiceStatusComponent } from './components/atoms/invoice/a-invoice-status/a-invoice-status.component';
 import { AInvoiceDateComponent } from './components/atoms/invoice/a-invoice-date/a-invoice-date.component';
+import {DebounceDirective} from "./directives/debounce.directive";
+import { ACompanyLegalInfoComponent } from './components/atoms/company/a-company-legal-info/a-company-legal-info.component';
+import { ACommercialRelationshipComponent } from './components/atoms/company/a-commercial-relationship/a-commercial-relationship.component';
+import {BusinessLineComponent} from "./components/atoms/company/business-line/business-line.component";
+import {VatLineComponent} from "./components/atoms/company/a-vat-line/vat-line.component";
 
 const components = [
     AToggleComponent,
@@ -46,7 +51,10 @@ const components = [
     ADashboardSelectComponent,
     ABusinessSelectComponent,
     AInvoiceStatusSelectComponent,
-    NavigationMenuComponent
+    NavigationMenuComponent,
+    DebounceDirective,
+    BusinessLineComponent,
+    VatLineComponent
 ];
 
 const pipes = [OrderByPipe, InvoiceCurrencyPipe, InvoiceDatePipe];
@@ -61,8 +69,8 @@ const pipes = [OrderByPipe, InvoiceCurrencyPipe, InvoiceDatePipe];
         NgSelectModule,
         ButtonsModule
     ],
-    declarations: [components, pipes, AInvoiceStatusComponent, AInvoiceDateComponent],
-    exports: [components, pipes, AInvoiceStatusComponent, AInvoiceDateComponent],
+    declarations: [components, pipes, AInvoiceStatusComponent, AInvoiceDateComponent, ACompanyLegalInfoComponent, ACommercialRelationshipComponent],
+    exports: [components, pipes, AInvoiceStatusComponent, AInvoiceDateComponent, ACompanyLegalInfoComponent, ACommercialRelationshipComponent],
 
     providers: [
         TranslateService,

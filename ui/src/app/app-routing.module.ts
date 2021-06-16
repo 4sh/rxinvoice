@@ -39,6 +39,11 @@ const routes: Routes = [
                 loadChildren: () => import('./modules/customer/customer-routing.module').then(m => m.CustomerRoutingModule)
             },
             {
+                path: 'vendors',
+                data: {title: 'navigation.menu.vendors'},
+                loadChildren: () => import('./modules/vendor/vendor-routing.module').then(m => m.VendorRoutingModule)
+            },
+            {
                 path: 'analyze', component: AnalyzeComponent, data: {title: 'navigation.menu.analyze'}
             },
             {

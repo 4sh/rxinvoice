@@ -11,24 +11,15 @@ import {CustomerDetailComponent} from './components/customer-detail/customer-det
 import {CustomersListComponent} from './components/customers-list/customers-list.component';
 import {CustomerService} from './services/customer.service';
 import {CustomerResolver} from './resolvers/customer.resolver';
-import {DebounceDirective} from './directives/debounce.directive';
-import {BusinessLineComponent} from './components/business-line/business-line.component';
-import {VatLineComponent} from './components/a-vat-line/vat-line.component';
-
-const directives = [
-    DebounceDirective
-];
 
 const components = [
     CustomersComponent,
     CustomerDetailComponent,
-    CustomersListComponent,
-    BusinessLineComponent,
-    VatLineComponent
+    CustomersListComponent
 ];
 
 @NgModule({
-    declarations: [components, directives],
+    declarations: [components],
     providers: [
         CustomerService,
         CustomerResolver

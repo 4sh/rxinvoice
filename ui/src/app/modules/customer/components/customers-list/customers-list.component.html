@@ -5,12 +5,12 @@
     <div class="customerList-head">
         <div class="grid-x grid-padding-x">
             <div class="cell phone-4">{{'customers.label.name' | translate}}</div>
-            <div class="cell phone-3">{{'newCustomer.label.siren' | translate}}</div>
+            <div class="cell phone-3">{{'customers.label.siren' | translate}}</div>
             <div class="cell phone-5">{{'customers.label.contact' | translate}}</div>
-            <div class="cell phone-4">{{'newCustomer.label.manager' | translate}}</div>
-            <div class="cell phone-2 text-right">{{'newCustomer.label.caInvoiced' | translate}}</div>
-            <div class="cell phone-3 text-center">{{'newCustomer.label.lastSent' | translate}}</div>
-            <div class="cell phone-3 text-center">{{'newCustomer.label.lastPayment' | translate}}</div>
+            <div class="cell phone-4">{{'customers.label.manager' | translate}}</div>
+            <div class="cell phone-2 text-right">{{'customers.label.caInvoiced' | translate}}</div>
+            <div class="cell phone-3 text-center">{{'customers.label.lastSent' | translate}}</div>
+            <div class="cell phone-3 text-center">{{'customers.label.lastPayment' | translate}}</div>
         </div>
     </div>
 
@@ -27,7 +27,7 @@
                 <span class="customerList-value">{{customer.emailAddress}}</span>
             </div>
             <div class="text-click cell phone-4">
-                <span class="customerList-value">{{customer.commercialRelationship?.customerManagerRef}}</span>
+                <span class="customerList-value">{{customer.commercialRelationship?.managerRef}}</span>
             </div>
             <div class="text-click cell phone-2 text-right">
                 <span class="customerList-value">{{customer.commercialRelationship?.companyMetrics?.currentYear?.invoiced | invoiceCurrency}}</span>

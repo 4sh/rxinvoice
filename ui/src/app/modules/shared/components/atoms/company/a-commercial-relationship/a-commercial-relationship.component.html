@@ -1,0 +1,90 @@
+<div class="grid-y step-form">
+    <div class="grid-x step-form_line">
+        <div class="column small-8">
+            <label>{{'commercial.relationship.contact.mail' | translate}} *</label>
+            <input type="text" pattern="[^ @]*@[^ @]*"
+                   [(ngModel)]="company.emailAddress" name="emailAddress" required>
+        </div>
+        <div class="column small-8">
+            <label>{{'commercial.relationship.customer.manager' | translate}}</label>
+            <a-user-select name="businessManagerRef"
+                           [(ngModel)]="company.commercialRelationship.managerRef">
+            </a-user-select>
+        </div>
+    </div>
+</div>
+
+<div class="step-business">
+    <h3 class="step-business-title">
+        {{'commercial.relationship.business.list.title' | translate}}
+    </h3>
+
+    <div class="detailAction cell">
+        <div class="detailAction-head">
+            <div class="grid-x grid-padding-x">
+                <div class="cell phone-9">{{'commercial.relationship.business.manager' | translate}}</div>
+                <div class="cell phone-12">{{'commercial.relationship.business.name' | translate}}</div>
+                <div class="cell phone-3 grid-x align-right">{{'common.actions' | translate}}</div>
+            </div>
+        </div>
+        <div class="detailAction-line-block">
+            <ng-container *ngFor="let business of company.commercialRelationship.businessList; index as i">
+                <a-business-line
+                        [name]="'business' + i"
+                        [ngModel]="business"
+                        [businessList]="company.commercialRelationship.businessList"
+                        [editActionEnabled]="true"
+                        [validateActionEnabled]="true"
+                        [deleteActionEnabled]="!business.reference">
+                </a-business-line>
+            </ng-container>
+        </div>
+        <div class="detailAction-line-footer">
+            <a-business-line
+                    name="newBusiness"
+                    [editable]="true"
+                    [ngModel]="newBusiness"
+                    [businessList]="company.commercialRelationship.businessList"
+                    [addActionEnabled]="true"
+                    (lineAddedEventEmitter)="businessAdded()">
+            </a-business-line>
+        </div>
+    </div>
+</div>
+
+<div class="step-business margin-top-40">
+    <h3 class="step-business-title">
+        {{'commercial.relationship.vat.rate.list.title' | translate}}
+    </h3>
+
+    <div class="detailAction cell">
+        <div class="detailAction-head">
+            <div class="grid-x grid-padding-x">
+                <div class="cell phone-16">{{'commercial.relationship.vat.rate.list.label'|translate}}</div>
+                <div class="cell phone-5">{{'commercial.relationship.vat.rate.list.rate'|translate}}</div>
+                <div class="cell phone-3 grid-x align-right">{{'common.actions'|translate}}</div>
+            </div>
+        </div>
+        <div class="detailAction-line-block">
+            <ng-container *ngFor="let vatRate of company.commercialRelationship.vatRates">
+                <a-vat-line
+                        [name]="'vatRate' + vatRate.rate"
+                        [ngModel]="vatRate"
+                        [vatRates]="company.commercialRelationship.vatRates"
+                        [deleteActionEnabled]="true"
+                        (lineRemovedEventEmitter)="vatDeleted()">
+                </a-vat-line>
+            </ng-container>
+        </div>
+        <div class="detailAction-line-footer">
+            <a-vat-line
+                    name="newVat"
+                    [editable]="true"
+                    [ngModel]="newVat"
+                    [vatRates]="availableVatRates"
+                    [addActionEnabled]="true"
+                    (lineAddedEventEmitter)="vatAdded($event)">
+            </a-vat-line>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+@import 'src/styles/base-component';
+
+.step {
+  margin-top: rem-calc(32px);
+
+  &-title {
+    display: flex;
+    align-items: center;
+    color: $app-primary;
+    margin-bottom: rem-calc(16px);
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: rem-calc(32px);
+      width: rem-calc(32px);
+      padding: rem-calc(20px);
+      margin-right: rem-calc(8px);
+      background: $app-primary;
+      border-radius: 100%;
+      color: white;
+    }
+  }
+
+  &-form {
+    margin-left: rem-calc(44px);
+
+    &_line {
+      margin-bottom: rem-calc(8px);
+    }
+  }
+
+  &-business {
+    h3 {
+      position: relative;
+      font-size: rem-calc(14px);
+      color: $app-primary;
+      margin: rem-calc(16px 0 0 60px);
+      z-index: 1;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: rem-calc(-14px);
+        top: rem-calc(-5px);
+        height: rem-calc(32px);
+        width: rem-calc(32px);
+        border-radius: 100%;
+        background: $app-tertiary;
+        opacity: 0.3;
+        z-index: -2;
+      }
+    }
+
+    &.margin-top-40 {
+      margin-top: rem-calc(40px);
+    }
+  }
+}

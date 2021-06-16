@@ -12,6 +12,10 @@
             <i class="fas fa-users"></i>
             <span>{{'navigation.menu.customers' | translate}}</span>
         </a>
+        <a routerLink="/vendors" [routerLinkActive]="['isActive']" class="navigation-menu-item">
+            <i class="fas fa-users"></i>
+            <span>{{'navigation.menu.vendors' | translate}}</span>
+        </a>
         <a routerLink="/customer-invoices" [routerLinkActive]="['isActive']" class="navigation-menu-item">
             <i class="fas fa-file-invoice"></i>
             <span>{{'navigation.menu.customer-invoices' | translate}}</span>

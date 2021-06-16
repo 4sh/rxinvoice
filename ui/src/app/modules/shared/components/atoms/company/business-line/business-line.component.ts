@@ -1,6 +1,6 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
-import {Business} from '../../../../domain/commercial-relationship/business';
+import {Business} from '../../../../../../domain/commercial-relationship/business';
 
 const VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

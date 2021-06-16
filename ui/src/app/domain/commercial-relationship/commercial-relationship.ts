@@ -4,7 +4,7 @@ import {Business} from './business';
 
 export class CommercialRelationship {
     _id: string;
-    customerManagerRef?: string;
+    managerRef?: string;
     detail?: string;
     legalNotice?: string;
     showLegalNoticeForeignBuyer?: boolean;

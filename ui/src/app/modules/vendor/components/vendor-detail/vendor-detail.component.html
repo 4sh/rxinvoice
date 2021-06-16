@@ -1,0 +1,65 @@
+<div class="invoice-detail-container">
+    <form class="grid-y">
+        <div class="vendor-header cell shrink grid-x">
+            <a-button-default size="SMALL" visibility="LOW" (click)="goBack()" class="cell shrink">
+                <i class="ion-arrow-left-c"></i> {{'button.label.back' | translate}}
+            </a-button-default>
+            <h2 class="cell phone-16">{{vendor.name ? vendor.name : ('company.empty.title'|translate) }}</h2>
+        </div>
+
+        <div>
+            <div class="grid-x selectMenu">
+                <div class="grid-x selectMenu-container" [class.select]="currentTabIndex == 1"
+                     (click)="showGeneralInformationTab()">
+                    <div class="selectMenu-round"></div>
+                    <h2>{{'company.general.title' | translate}}</h2>
+                </div>
+                <div class="grid-x selectMenu-container" [class.select]="currentTabIndex == 2"
+                     (click)="showCommercialRelationTab()">
+                    <div class="selectMenu-round"></div>
+                    <h2>{{'commercial.relationship.title' | translate}}</h2>
+                </div>
+            </div>
+
+            <div *ngIf="currentTabIndex == 1" class="step">
+                <h2 class="step-title">
+                    <span>1</span>
+                    {{'company.general.title' | translate}}
+                </h2>
+                <a-company-legal-info [company]="vendor"></a-company-legal-info>
+            </div>
+
+            <div *ngIf="currentTabIndex == 2" class="step">
+                <h2 class="step-title">
+                    <span>2</span>
+                    {{'commercial.relationship.title' | translate}}
+                </h2>
+                <a-commercial-relationship [company]="vendor"></a-commercial-relationship>
+            </div>
+        </div>
+    </form>
+
+    <div class="cell shrink footer-container">
+        <div class="control-bar grid-x">
+            <div class="cell phone-12">
+                <a-button-cancel (click)="delete()">
+                    <i class="far fa-trash-alt"></i>
+                    {{'button.label.delete' | translate}}
+                </a-button-cancel>
+            </div>
+            <div class="cell phone-12 grid-x align-right">
+                <a-spacer [sizeX]="10"></a-spacer>
+                <a-button-cancel>
+                    <i class="fas fa-times"></i>
+                    {{'button.label.cancel' | translate}}
+                </a-button-cancel>
+                <a-spacer [sizeX]="10"></a-spacer>
+                <a-button-default (click)="save()"
+                                  visibility="HIGH">
+                    <i class="fas fa-save"></i>
+                    {{'button.label.save' | translate}}
+                </a-button-default>
+            </div>
+        </div>
+    </div>
+</div>

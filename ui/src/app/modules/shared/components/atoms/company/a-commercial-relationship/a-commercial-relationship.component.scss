@@ -1,0 +1,88 @@
+@import 'src/styles/base-component';
+
+.step {
+  margin-top: rem-calc(32px);
+
+  &-title {
+    display: flex;
+    align-items: center;
+    color: $app-primary;
+    margin-bottom: rem-calc(16px);
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: rem-calc(32px);
+      width: rem-calc(32px);
+      padding: rem-calc(20px);
+      margin-right: rem-calc(8px);
+      background: $app-primary;
+      border-radius: 100%;
+      color: white;
+    }
+  }
+
+  &-form {
+    margin-left: rem-calc(44px);
+
+    &_line {
+      margin-bottom: rem-calc(8px);
+    }
+  }
+
+  &-business {
+    h3 {
+      position: relative;
+      font-size: rem-calc(14px);
+      color: $app-primary;
+      margin: rem-calc(16px 0 0 60px);
+      z-index: 1;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: rem-calc(-14px);
+        top: rem-calc(-5px);
+        height: rem-calc(32px);
+        width: rem-calc(32px);
+        border-radius: 100%;
+        background: $app-tertiary;
+        opacity: 0.3;
+        z-index: -2;
+      }
+    }
+
+    &.margin-top-40 {
+      margin-top: rem-calc(40px);
+    }
+  }
+}
+
+.detailAction {
+  padding: rem-calc(16px) rem-calc(16px) 0;
+  min-height: 36%;
+  margin: 0 rem-calc(44px);
+  width: auto;
+
+  .detailAction-head {
+    display: block;
+    background: $app-primary_light;
+    color: rgba($app-primary, 0.7);
+    font-size: rem-calc(12px);
+    border-radius: 8px 8px 0 0;
+    border: none;
+    font-weight: 600;
+    padding: rem-calc(15px);
+  }
+  .detailAction-line-block {
+    min-height: calc(100% - 186px);
+    max-height: calc(100% - 186px);
+    overflow: scroll;
+  }
+
+  .detailAction-line-footer {
+    background-color: rgba($app-primary_light, 0.3);
+    border-radius: 0 0 rem-calc(5px) rem-calc(5px);
+  }
+}
