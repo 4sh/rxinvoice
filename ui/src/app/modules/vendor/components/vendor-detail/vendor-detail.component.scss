@@ -32,72 +32,6 @@ form {
   padding: 0 rem-calc(16px) rem-calc(90px);
 }
 
-.statistic-container {
-  position: relative;
-  background: $app-primary_light;
-  padding: rem-calc(16px);
-  border-radius: rem-calc(8px);
-  margin-top: rem-calc(16px);
-  overflow: hidden;
-
-  &-numbers {
-    z-index: 2;
-  }
-
-  h2 {
-    color: $app-primary;
-    margin-bottom: rem-calc(16px);
-    padding-left: rem-calc(5px);
-  }
-
-  label {
-    color: $app-primary;
-    font-weight: normal;
-    margin-bottom: rem-calc(2px);
-  }
-
-  .bloc {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: rem-calc(4px 16px);
-    margin-right: rem-calc(8px);
-    border-radius: rem-calc(8px);
-    color: white;
-    font-weight: 500;
-    font-size: rem-calc(18px);
-
-    span {
-      opacity: 0.4;
-      margin-left: rem-calc(5px);
-    }
-
-    &.primary {
-      background: $app-primary;
-    }
-
-    &.primary_medium {
-      background: $app-primary_medium
-    }
-
-    &.secondary {
-      background: $app-secondary
-    }
-
-    &.secondary_dark {
-      background: darken($app-secondary, 10%)
-    }
-  }
-
-  img {
-    position: absolute;
-    top: rem-calc(15px);
-    right: rem-calc(-18px);
-    width: 14%;
-    opacity: 0.4;
-  }
-}
-
 .selectMenu {
   display: flex;
   align-items: center;
@@ -187,34 +121,6 @@ form {
     &.margin-top-40 {
       margin-top: rem-calc(40px);
     }
-  }
-}
-
-.detailAction {
-  padding: rem-calc(16px) rem-calc(16px) 0;
-  min-height: 36%;
-  margin: 0 rem-calc(44px);
-  width: auto;
-
-  .detailAction-head {
-    display: block;
-    background: $app-primary_light;
-    color: rgba($app-primary, 0.7);
-    font-size: rem-calc(12px);
-    border-radius: 8px 8px 0 0;
-    border: none;
-    font-weight: 600;
-    padding: rem-calc(15px);
-  }
-  .detailAction-line-block {
-    min-height: calc(100% - 186px);
-    max-height: calc(100% - 186px);
-    overflow: scroll;
-  }
-
-  .detailAction-line-footer {
-    background-color: rgba($app-primary_light, 0.3);
-    border-radius: 0 0 rem-calc(5px) rem-calc(5px);
   }
 }
 

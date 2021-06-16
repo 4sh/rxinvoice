@@ -34,4 +34,24 @@ export class VendorService {
                     response: response
                 })));
     }
+
+    public createVendor(vendor): Observable<Vendor> {
+        return this.http
+            .post(this.baseUrl, vendor).pipe(
+                map((result: any) => plainToClass(Vendor, result as Object)),
+                catchError((response: Response) => throwError({
+                    message: 'Unable to create vendor',
+                    response: response
+                })));
+    }
+
+    public updateVendor(vendor): Observable<Vendor> {
+        return this.http
+            .put(this.baseUrl + '/' + vendor._id, vendor).pipe(
+                map((result: any) => plainToClass(Vendor, result as Object)),
+                catchError((response: Response) => throwError({
+                    message: 'Unable to update vendor',
+                    response: response
+                })));
+    }
 }
