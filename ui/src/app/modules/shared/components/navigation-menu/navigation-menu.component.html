@@ -8,19 +8,19 @@
             <i class="fas fa-th-large"></i>
             <span>{{'navigation.menu.home' | translate}}</span>
         </a>
-        <a routerLink="/customers" [routerLinkActive]="['isActive']" class="navigation-menu-item">
+        <a routerLink="/customers" *ngIf="isCustomer" [routerLinkActive]="['isActive']" class="navigation-menu-item">
             <i class="fas fa-users"></i>
             <span>{{'navigation.menu.customers' | translate}}</span>
         </a>
-        <a routerLink="/vendors" [routerLinkActive]="['isActive']" class="navigation-menu-item">
+        <a routerLink="/vendors" *ngIf="isVendor" [routerLinkActive]="['isActive']" class="navigation-menu-item">
             <i class="fas fa-users"></i>
             <span>{{'navigation.menu.vendors' | translate}}</span>
         </a>
-        <a routerLink="/customer-invoices" [routerLinkActive]="['isActive']" class="navigation-menu-item">
+        <a routerLink="/customer-invoices" *ngIf="isCustomer" [routerLinkActive]="['isActive']" class="navigation-menu-item">
             <i class="fas fa-file-invoice"></i>
             <span>{{'navigation.menu.customer-invoices' | translate}}</span>
         </a>
-        <a routerLink="/vendor-invoices" [routerLinkActive]="['isActive']" class="navigation-menu-item">
+        <a routerLink="/vendor-invoices" *ngIf="isVendor" [routerLinkActive]="['isActive']" class="navigation-menu-item">
             <i class="fas fa-file-invoice"></i>
             <span>{{'navigation.menu.vendor-invoices' | translate}}</span>
         </a>

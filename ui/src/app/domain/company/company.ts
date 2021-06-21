@@ -16,7 +16,10 @@ export class Company {
     creationDate?: Date;
     emailAddress: string;
     sellerSettings: SellerSettings;
-    commercialRelationship?: CommercialRelationship;
+    commercialRelationship?: CommercialRelationship; // TODO cleanup company model
+
+    customerRef?: String;
+    vendorRef?: String;
 
     constructor() {
         this.address = new Address();

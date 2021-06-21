@@ -70,6 +70,9 @@ export class AuthenticationService {
         //     this.router.navigate(['/login']);
         // });
 
-        this.keycloak.logout()
+        this.keycloak.logout().then(() => {
+            this.userEvents.next(undefined);
+            this.companyEvents.next(undefined);
+        })
     }
 }
