@@ -1,9 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Company} from '../../../../domain/company/company';
 import {FormGroup} from '@angular/forms';
-import {CompanyService} from '../../../../common/services/company.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as Moment from 'moment';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
 import {Location} from '@angular/common';
@@ -71,16 +69,16 @@ export class VendorDetailComponent implements OnInit {
     }
 
     public delete() {
-        // this.alertService.confirm({title: 'alert.confirm.deletion'}).then(
-        //     (result) => {
-        //         if (result.value) {
-        //             this.companyService.deleteCompany(this.vendor)
-        //                 .subscribe(() => {
-        //                     this.router.navigate(['app/customers']);
-        //                 });
-        //         }
-        //     }
-        // );
+        this.alertService.confirm({title: 'alert.confirm.deletion'}).then(
+            (result) => {
+                if (result.value) {
+                    this.vendorService.deleteVendor(this.vendor)
+                        .subscribe(() => {
+                            this.router.navigate(['vendors']);
+                        });
+                }
+            }
+        );
     }
 
     public goBack() {

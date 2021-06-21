@@ -54,4 +54,14 @@ export class VendorService {
                     response: response
                 })));
     }
+
+    public deleteVendor(vendor): Observable<Vendor> {
+        return this.http
+            .delete(this.baseUrl + '/' + vendor._id, vendor).pipe(
+                map((result: any) => plainToClass(Vendor, result as Object)),
+                catchError((response: Response) => throwError({
+                    message: 'Unable to delete vendor',
+                    response: response
+                })));
+    }
 }

@@ -138,7 +138,7 @@ export class CustomerDetailComponent implements OnInit {
                 if (result.value) {
                     this.customerService.deleteCustomer(this.customer)
                         .subscribe(() => {
-                            this.router.navigate(['app/customers']);
+                            this.router.navigate(['customers']);
                         });
                 }
             }
