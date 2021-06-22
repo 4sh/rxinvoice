@@ -31,6 +31,8 @@ import {InvoiceModule} from './modules/invoice/invoice.module';
 import {DraftModule} from './modules/draft/draft.module';
 import {DpDatePickerModule} from 'ng2-date-picker';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {IsCustomerGuard} from "./common/guards/is-customer.guard.service";
+import {IsVendorGuard} from "./common/guards/is-vendor.guard.service";
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/v1/public/i18n/', 'labels.json');
@@ -94,6 +96,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
         TranslateService,
         CompanyService,
         LoggedInGuard,
+        IsCustomerGuard,
+        IsVendorGuard,
         AuthenticationService,
         ActivityService,
         UserService,

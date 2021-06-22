@@ -5,6 +5,8 @@ import {AppContentComponent} from './app-content/app-content.component';
 import {GuideRoutes} from './style-guide-module/guide.routes';
 import {AnalyzeComponent} from './pages/analyze/analyze.component';
 import {LoggedInGuard} from './common/guards/logged-in.guard';
+import {IsCustomerGuard} from "./common/guards/is-customer.guard.service";
+import {IsVendorGuard} from "./common/guards/is-vendor.guard.service";
 
 const routes: Routes = [
     {
@@ -20,11 +22,13 @@ const routes: Routes = [
             },
             {
                 path: 'customer-invoices',
+                canActivate: [IsVendorGuard],
                 data: {title: 'navigation.menu.customer-invoices', section: 'customers'},
                 loadChildren: () => import('./modules/invoice/invoice-routing.module').then(m => m.InvoiceRoutingModule)
             },
             {
                 path: 'vendor-invoices',
+                canActivate: [IsCustomerGuard],
                 data: {title: 'navigation.menu.vendor-invoices', section: 'vendors'},
                 loadChildren: () => import('./modules/invoice/invoice-routing.module').then(m => m.InvoiceRoutingModule)
             },
@@ -35,11 +39,13 @@ const routes: Routes = [
             },
             {
                 path: 'customers',
+                canActivate: [IsVendorGuard],
                 data: {title: 'navigation.menu.customers'},
                 loadChildren: () => import('./modules/customer/customer-routing.module').then(m => m.CustomerRoutingModule)
             },
             {
                 path: 'vendors',
+                canActivate: [IsCustomerGuard],
                 data: {title: 'navigation.menu.vendors'},
                 loadChildren: () => import('./modules/vendor/vendor-routing.module').then(m => m.VendorRoutingModule)
             },
