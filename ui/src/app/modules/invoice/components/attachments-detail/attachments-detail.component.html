@@ -41,7 +41,7 @@
             <ul>
                 <li *ngFor="let file of attachments">
                     <span><i class="fas fa-paperclip"></i>
-                         <a href="/api/download/{{file._id}}" target="_blank">{{file.fileName}}</a>
+                         <a href="/api/v1/download/{{file._id}}" target="_blank">{{file.fileName}}</a>
                     </span>
                     <i class="far fa-trash-alt" (click)="delete(file)"></i>
                 </li>

@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Company} from '../../../../domain/company/company';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CompanyService} from '../../../../common/services/company.service';
 import {Invoice} from '../../../../domain/invoice/invoice';
 import {InvoiceService} from '../../services/invoice.service';
 import {SweetAlertService} from '../../../shared/services/sweetAlert.service';
@@ -34,8 +33,7 @@ export class InvoiceDetailComponent implements OnInit {
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
 
-    constructor(private companyService: CompanyService,
-                private invoiceService: InvoiceService,
+    constructor(private invoiceService: InvoiceService,
                 private route: ActivatedRoute,
                 private router: Router,
                 private alertService: SweetAlertService,
