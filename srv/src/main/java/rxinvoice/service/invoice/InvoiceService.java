@@ -126,7 +126,7 @@ public class InvoiceService {
         checkCanEditInvoice(invoiceFromDB, user);
 
         List<Blob> attachments = invoiceFromDB.getAttachments();
-        List<Blob> newAttachments = invoice.getAttachments();
+        List<Blob> newAttachments = invoice.getAttachments() == null ? Collections.emptyList() : invoice.getAttachments();
 
         Collection<Blob> attachmentsToRemove = Collections2.filter(attachments, Predicates.not(Predicates.in(newAttachments)));
 
