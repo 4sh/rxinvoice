@@ -88,7 +88,7 @@ public class InvoiceService {
         }
 
         // Special check for 4P
-        if (user != null && "4PM".equals(user.getName())) {
+        if (user != null && "4sh".equals(user.getName())) {
             CommercialRelationship commercialRelationship = this.commercialRelationshipService.findByCustomer(invoice.getCustomerInvoiceRef());
             invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
             invoice.setWithVAT(true);
