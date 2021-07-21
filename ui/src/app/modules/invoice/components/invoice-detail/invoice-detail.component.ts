@@ -63,21 +63,8 @@ export class InvoiceDetailComponent implements OnInit {
         if (!this.invoice.date) {
             this.invoice.dueDate = Moment(invoiceDateChangeEvent).add(30, 'days').toDate();
         }
+        this.invoice.date = invoiceDateChangeEvent
     }
-
-    // private invoiceReferenceAsyncValidator() {
-    //     return (input: FormControl) => {
-    //         if (this.invoice._id || !input.value) {
-    //             return of(null);
-    //         }
-    //         return timer(200).pipe(
-    //             switchMap(() => this.invoiceService.fetchInvoices({reference: input.value})),
-    //             map(res => {
-    //                 return res.length === 0 ? null : {referenceExist: true}
-    //             }))
-    //     };O
-    // };
-
 
     public save(): void {
         if (!this.invoice._id) {
