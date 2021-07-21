@@ -70,7 +70,7 @@ public class InvoiceService {
         this.eventBus = eventBus;
     }
 
-    public Invoice createInvoice(Invoice invoice) {
+    public Invoice createInvoice(Invoice invoice, Optional<Boolean> defaultVat) {
         User user = null;
         if (invoice.getSeller() == null) {
              user = AppModule.currentUser();
@@ -87,14 +87,14 @@ public class InvoiceService {
             }
         }
 
-        // Special check for 4P
-        if (user != null && "4sh".equals(user.getName())) {
-            CommercialRelationship commercialRelationship = this.commercialRelationshipService.findByCustomer(invoice.getCustomerInvoiceRef());
-            invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
-            invoice.setWithVAT(true);
-
-            invoice.setDate(invoice.getDate().plusDays(30));
-        }
+        defaultVat.ifPresent(defaultVatMode -> {
+            if (defaultVatMode) {
+                CommercialRelationship commercialRelationship = this.commercialRelationshipService.findByCustomer(invoice.getCustomerInvoiceRef());
+                invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
+                invoice.setWithVAT(true);
+                invoice.setDate(invoice.getDate().plusDays(30));
+            }
+        });
 
         updateInvoiceVat(invoice);
         updateAmounts(invoice);

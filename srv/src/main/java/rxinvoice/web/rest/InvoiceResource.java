@@ -37,8 +37,8 @@ public class InvoiceResource {
 
     @RolesAllowed({ADMIN, SELLER})
     @POST("/invoices")
-    public Invoice createInvoice(Invoice invoice) {
-        return invoiceService.createInvoice(invoice);
+    public Invoice createInvoice(Invoice invoice, @QueryParam("defaultVat") Optional<Boolean> defaultVat) {
+        return invoiceService.createInvoice(invoice, defaultVat);
     }
 
     @RolesAllowed({ADMIN, SELLER})
