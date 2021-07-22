@@ -114,6 +114,11 @@
                                          [(ngModel)]="customer.commercialRelationship.customerManagerRef">
                             </a-user-select>
                         </div>
+                        <div class="column small-8">
+                            <label>{{'commercial.relationship.accountantReference' | translate}}</label>
+                            <input type="text" name="accountantReference"
+                                           [(ngModel)]="customer.commercialRelationship.accountantReference">
+                        </div>
                     </div>
                 </div>
 
