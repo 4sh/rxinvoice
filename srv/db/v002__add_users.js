@@ -7,7 +7,7 @@ var user_administrative = {
 };
 
 db.getCollection('users').save(user_administrative);
-user_administrative._id = db.getCollection('users').findOne({email: user_AGA.email})._id;
+user_administrative._id = db.getCollection('users').findOne({email: user_administrative.email})._id;
 db.getCollection('userCredentials').save({
     "_id": user_administrative._id,
     "passwordHash": "$2a$10$8EiasZHADtkNkF2C2yhfx./qY75KRa1iE.hABZxqQYQ4lbjUxUjxa"
