@@ -9,7 +9,7 @@ db.getCollection('companies').find().forEach(function (company) {
         customerRef: company._id + "",
 
         detail: company.detail,
-        legalNotice: company.legalNotice,
+        legalNotice: shSeller.legalNotice,
         showLegalNoticeForeignBuyer: company.showLegalNoticeForeignBuyer,
 
         lastSendDate: company.lastSendDate,

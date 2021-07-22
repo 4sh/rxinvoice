@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import restx.factory.Component;
 import restx.i18n.Messages;
+import rxinvoice.domain.company.CommercialRelationship;
 import rxinvoice.domain.invoice.Invoice;
 import rxinvoice.service.company.CommercialRelationshipService;
 import rxinvoice.service.invoice.InvoiceService;
@@ -66,7 +67,9 @@ public class PrintServiceImpl implements PrintService {
         Invoice invoice = checkPresent(invoiceService.findInvoiceByKey(invoiceId),
                 String.format("Invoice not found for id %s", invoiceId));
 
-        invoice.getBuyer().setCommercialRelationship(commercialRelationshipService.findByCustomer(invoice.getBuyer().getKey()));
+        CommercialRelationship commercialRelationship = commercialRelationshipService.findByCustomer(invoice.getBuyer().getKey());
+        invoice.getBuyer().setCommercialRelationship(commercialRelationship);
+        invoice.getSeller().setCommercialRelationship(commercialRelationship);
         Map<String, Object> params = new HashMap<>();
         params.put("invoice", invoice.toInvoiceView(messages, Locale.FRANCE));
 
