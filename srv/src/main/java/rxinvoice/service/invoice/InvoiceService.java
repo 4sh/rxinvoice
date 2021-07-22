@@ -89,8 +89,13 @@ public class InvoiceService {
 
         defaultVat.ifPresent(defaultVatMode -> {
             if (defaultVatMode) {
-                CommercialRelationship commercialRelationship = this.commercialRelationshipService.findByCustomer(invoice.getCustomerInvoiceRef());
-                invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
+                CommercialRelationship commercialRelationship =
+                        this.commercialRelationshipService.findByCustomer(invoice.getBuyer().getKey());
+                if (commercialRelationship.getVatRates() != null && !commercialRelationship.getVatRates().isEmpty()) {
+                    invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
+                } else {
+                    logger.warn("No VAT found for commercial relationship {}", commercialRelationship);
+                }
                 invoice.setWithVAT(true);
                 invoice.setDate(invoice.getDate().plusDays(30));
             }
