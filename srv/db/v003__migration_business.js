@@ -26,7 +26,7 @@ db.getCollection('companies').find().forEach(function (company) {
         vatRates: []
     };
 
-    if (company.vats) {
+    if (company.vats && company.vats.length > 0) {
         company.vats.forEach(function (vat) {
             commercialRelationship.vatRates.push(
                 {
@@ -35,6 +35,28 @@ db.getCollection('companies').find().forEach(function (company) {
                 }
             );
         });
+    } else {
+        var normalVAT = {
+            rate: 2000,
+            label: "Taux normal"
+        };
+
+        var minoredVAT = {
+            rate: 850,
+            label: "Taux réduit"
+        };
+
+        var outsideUnionVAT = {
+            rate: 0,
+            label: "Taux Hors UE"
+        };
+        if (company.name === "Infoport") {
+            commercialRelationship.vatRates.push(minoredVAT);
+        } else if (company.name === "CHEP") {
+            commercialRelationship.vatRates.push(outsideUnionVAT);
+        } else {
+            commercialRelationship.vatRates.push(normalVAT);
+        }
     }
     db.getCollection('commercialRelationships').save(commercialRelationship);
 });

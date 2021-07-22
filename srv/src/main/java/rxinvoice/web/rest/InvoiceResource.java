@@ -43,9 +43,9 @@ public class InvoiceResource {
 
     @RolesAllowed({ADMIN, SELLER})
     @PUT("/invoices/{key}")
-    public Invoice updateInvoice(String key, Invoice invoice) {
+    public Invoice updateInvoice(String key, Invoice invoice, @QueryParam("defaultVat") Optional<Boolean> defaultVat) {
         checkEquals("key", key, "invoice.key", invoice.getKey());
-        return invoiceService.updateInvoice(invoice);
+        return invoiceService.updateInvoice(invoice, defaultVat);
     }
 
     @GET("/invoices")

@@ -87,19 +87,7 @@ public class InvoiceService {
             }
         }
 
-        defaultVat.ifPresent(defaultVatMode -> {
-            if (defaultVatMode) {
-                CommercialRelationship commercialRelationship =
-                        this.commercialRelationshipService.findByCustomer(invoice.getBuyer().getKey());
-                if (commercialRelationship.getVatRates() != null && !commercialRelationship.getVatRates().isEmpty()) {
-                    invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
-                } else {
-                    logger.warn("No VAT found for commercial relationship {}", commercialRelationship);
-                }
-                invoice.setWithVAT(true);
-                invoice.setDate(invoice.getDate().plusDays(30));
-            }
-        });
+        handleDefaultVATMode(invoice, defaultVat);
 
         updateInvoiceVat(invoice);
         updateAmounts(invoice);
@@ -111,6 +99,22 @@ public class InvoiceService {
         return invoice;
     }
 
+    private void handleDefaultVATMode(Invoice invoice, Optional<Boolean> defaultVat) {
+        defaultVat.ifPresent(defaultVatMode -> {
+            if (defaultVatMode) {
+                CommercialRelationship commercialRelationship =
+                        this.commercialRelationshipService.findByCustomer(invoice.getBuyer().getKey());
+                if (commercialRelationship.getVatRates() != null && !commercialRelationship.getVatRates().isEmpty()) {
+                    invoice.getLines().forEach(line -> line.setVatRate(commercialRelationship.getVatRates().get(0)));
+                } else {
+                    logger.warn("No VAT found for commercial relationship {}", commercialRelationship);
+                }
+                invoice.setWithVAT(true);
+                invoice.setDueDate(invoice.getDate().plusDays(30));
+            }
+        });
+    }
+
     private void updateInvoiceVat(Invoice invoice) {
         if (invoice.isWithVAT()) {
             updateVatRates(invoice);
@@ -120,7 +124,7 @@ public class InvoiceService {
     }
 
 
-    public Invoice updateInvoice(Invoice invoice) {
+    public Invoice updateInvoice(Invoice invoice, Optional<Boolean> defaultVat) {
         Optional<Invoice> invoiceByKey = findInvoiceByKey(invoice.getKey());
         if (!invoiceByKey.isPresent()) {
             throw new WebException(HttpStatus.NOT_FOUND);
@@ -141,6 +145,7 @@ public class InvoiceService {
             }
         }
 
+        handleDefaultVATMode(invoice, defaultVat);
         updateInvoiceVat(invoice);
         updateAmounts(invoice);
 
