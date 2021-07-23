@@ -164,6 +164,15 @@ select, .ng-control {
 
 }
 
+input[role=combobox] {
+  height: auto!important;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: rem-calc(14px);
+}
+
 .invoice-detail-status .DRAFT {
     .ng-select-container {
         color: $status-draft-color;
