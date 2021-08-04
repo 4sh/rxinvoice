@@ -143,6 +143,6 @@ export class InvoiceService {
     public uploadDocuments(invoiceId: string, fileItems: FileItem[]): Observable<void> {
         const formData = new FormData();
         fileItems.map(item => formData.append(item.alias, item._file, item.file.name));
-        return this.http.post<void>(`/api/invoices/${invoiceId}/attachments`, formData);
+        return this.http.post<void>(`${this.baseUrl}/${invoiceId}/attachments`, formData);
     }
 }
