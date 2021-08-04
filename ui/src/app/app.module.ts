@@ -33,26 +33,41 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {IsCustomerGuard} from "./common/guards/is-customer.guard.service";
 import {IsVendorGuard} from "./common/guards/is-vendor.guard.service";
+import {map} from "rxjs/operators";
+import {plainToClass} from "class-transformer";
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/v1/public/i18n/', 'labels.json');
 }
 
-function initializeKeycloak(keycloak: KeycloakService) {
+export class KeycloakConfig {
+    url: string;
+    realm: string;
+    clientId: string;
+}
+
+export function getKeycloakConfig(http: HttpClient) {
+    return http.get('/api/v1/public/oauth/config').pipe(
+        map((result: any) => plainToClass(KeycloakConfig, result as Object))
+    )
+}
+
+function initializeKeycloak(keycloak: KeycloakService, httpClient: HttpClient) {
     return () =>
-        keycloak.init({
-            config: {
-                url: 'http://localhost:32772/auth',
-                realm: 'simatix-invoice',
-                clientId: 'invoice-client',
-            },
-            initOptions: {
-                onLoad: 'check-sso',
-                silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
-            },
-            bearerExcludedUrls: ['/api/v1/public'],
-            bearerPrefix: "Bearer"
-        });
+        getKeycloakConfig(httpClient).toPromise().then((config) =>
+            keycloak.init({
+                config: {
+                    url: config.url,
+                    realm: config.realm,
+                    clientId: config.clientId,
+                },
+                initOptions: {
+                    onLoad: 'check-sso',
+                    silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
+                },
+                bearerExcludedUrls: ['/api/v1/public'],
+                bearerPrefix: "Bearer"
+            }));
 }
 
 @NgModule({
@@ -113,7 +128,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
             provide: APP_INITIALIZER,
             useFactory: initializeKeycloak,
             multi: true,
-            deps: [KeycloakService],
+            deps: [KeycloakService, HttpClient],
         }
     ],
     entryComponents: [ModalContainerComponent, InvoiceEditionPopupComponent],
