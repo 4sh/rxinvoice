@@ -1,0 +1,9 @@
+<div class="grid-y grid-padding-y orderListContainer">
+
+    <div class="cell phone-22">
+        <orders-list [orders]="orders | orderBy: filterString:true"
+                     [isPending]="isPending">
+        </orders-list>
+    </div>
+
+</div>

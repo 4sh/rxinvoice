@@ -33,6 +33,12 @@ const routes: Routes = [
                 loadChildren: () => import('./modules/invoice/invoice-routing.module').then(m => m.InvoiceRoutingModule)
             },
             {
+                path: 'customer-orders',
+                canActivate: [IsVendorGuard],
+                data: {title: 'navigation.menu.customer-orders'},
+                loadChildren: () => import('./modules/order/order-routing.module').then(m => m.OrderRoutingModule)
+            },
+            {
                 path: 'drafts',
                 data: {title: 'navigation.menu.drafts'},
                 loadChildren: () => import('./modules/draft/draft-routing.module').then(m => m.DraftRoutingModule)

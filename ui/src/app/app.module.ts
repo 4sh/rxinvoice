@@ -35,6 +35,7 @@ import {IsCustomerGuard} from "./common/guards/is-customer.guard.service";
 import {IsVendorGuard} from "./common/guards/is-vendor.guard.service";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
+import {OrderModule} from "./modules/order/order.module";
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/api/v1/public/i18n/', 'labels.json');
@@ -94,6 +95,7 @@ function initializeKeycloak(keycloak: KeycloakService, httpClient: HttpClient) {
         DashboardModule,
         ReferentialModule,
         InvoiceModule,
+        OrderModule,
         DraftModule,
         SharedModule,
         DpDatePickerModule,

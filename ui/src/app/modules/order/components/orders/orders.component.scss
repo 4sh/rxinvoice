@@ -1,0 +1,13 @@
+@import 'src/styles/base-component';
+
+:host {
+  display: block;
+  position: relative;
+  height: 100%;
+  background-color: white;
+  border-radius: $content-radius;
+}
+
+.orderListContainer {
+  height: 100%;
+}
