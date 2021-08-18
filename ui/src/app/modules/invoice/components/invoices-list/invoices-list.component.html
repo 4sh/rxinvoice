@@ -35,7 +35,7 @@
                     <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
                 </div>
                 <div class=" cell status-cell">
-                    <a-status [statusLabel]="invoice.status"></a-status>
+                    <a-invoice-status [statusLabel]="invoice.status"></a-invoice-status>
                 </div>
                 <div class="grid-x align-right align-middle cell actions-cell">
                     <a-button-launch (click)="launchInvoice(invoice)"
