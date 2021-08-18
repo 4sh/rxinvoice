@@ -48,7 +48,7 @@ export class InvoiceService {
             this.invoiceSearchFilter.endDate = params.endDate;
             this.invoiceSearchFilter.query = params.query;
             this.invoiceSearchFilter.kind = params.kind;
-            this.invoiceSearchFilter.buyerRef = params.buyerRef;
+            this.invoiceSearchFilter.buyerRef = params.buyer?._id;
             this.invoiceSearchFilter.statuses = params.statuses;
         }
         return this.http

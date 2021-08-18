@@ -7,7 +7,26 @@
                    formControlName="query">
         </div>
 
-        <div class="cell phone-8 grid-x">
+        <div class="cell phone-4 grid-x">
+            <div class="cell phone-12">
+                <p class="title-section">Client</p>
+                <div class="date-picker columns shrink">
+                    <div>
+                        <a-customer-select formControlName="buyerRef"></a-customer-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell phone-4 grid-x">
+            <div class="cell phone-12">
+                <p class="title-section">Statuts</p>
+                <div class="columns shrink">
+                    <a-invoice-status-select formControlName="statuses"></a-invoice-status-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="cell phone-4 grid-x">
             <div class="cell phone-12 date-picker-block">
                 <p class="title-section">Entre</p>
                 <div class="date-picker columns shrink">

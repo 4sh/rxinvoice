@@ -27,8 +27,8 @@ export class InvoicesComponent implements OnInit {
             query: '',
             startDate: moment().subtract(7, 'days').toDate(),
             endDate: '',
-            buyerRef: '',
-            statuses: '',
+            buyerRef: null,
+            statuses: null,
             kind: ''
         });
     }

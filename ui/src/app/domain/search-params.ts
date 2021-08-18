@@ -16,6 +16,8 @@ export class SearchParams {
                     value = moment(value).format('YYYY-MM-DD');
                 } else if (value.getUri) {
                     value = value.getUri();
+                } else if (value instanceof Object) {
+                    value = value._id;
                 }
                 return p.set(key, value);
             }, new HttpParams());
