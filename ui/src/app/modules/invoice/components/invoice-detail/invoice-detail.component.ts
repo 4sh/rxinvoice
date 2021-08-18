@@ -172,9 +172,17 @@ export class InvoiceDetailComponent implements OnInit {
     }
 
     onDrop(event: DndDropEvent) {
-        const draggedIndex = this.invoice.lines.indexOf(new InvoiceLine(event.data));
+        const draggedIndex = this.invoice.lines.indexOf(this.invoice.lines.find(line => {
+            return line.description === event.data.description &&
+                line.grossAmount === event.data.grossAmount &&
+                line.unitCost === event.data.unitCost &&
+                line.quantity === event.data.quantity;
+        }));
         this.invoice.lines.splice(draggedIndex, 1);
-        const dropIndex = event.index === undefined ? this.invoice.lines.length : event.index;
+        let dropIndex = event.index === undefined ? this.invoice.lines.length : event.index;
+        if (dropIndex > draggedIndex) {
+            dropIndex--;
+        }
         this.invoice.lines.splice(dropIndex, 0, new InvoiceLine(event.data));
     }
 
