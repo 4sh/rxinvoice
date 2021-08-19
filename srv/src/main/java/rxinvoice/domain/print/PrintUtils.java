@@ -1,9 +1,10 @@
 package rxinvoice.domain.print;
 
-import java.text.DateFormat;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.Currency;
 import java.util.Locale;
 
@@ -17,5 +18,5 @@ public class PrintUtils {
         NUMBER_FORMAT.setCurrency(Currency.getInstance("EUR"));
     }
 
-    public static final DateFormat DATE_FORMAT = SimpleDateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+    public static final DateTimeFormatter DATE_TIME_FORMATTER =  DateTimeFormat.forPattern("dd/MM/yy");
 }

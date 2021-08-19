@@ -40,8 +40,8 @@ public class InvoicePrint {
 
     public InvoicePrint(Invoice invoice, Messages messages, Locale locale) {
         this.key = invoice.getKey();
-        this.date = (invoice.getDate() == null) ? "" : PrintUtils.DATE_FORMAT.format(invoice.getDate().toDate());
-        this.dueDate = (invoice.getDueDate() == null) ? "" : PrintUtils.DATE_FORMAT.format(invoice.getDueDate().toDate());
+        this.date = (invoice.getDate() == null) ? "" : invoice.getDate().toString(PrintUtils.DATE_TIME_FORMATTER);
+        this.dueDate = (invoice.getDueDate() == null) ? "" : invoice.getDueDate().toString(PrintUtils.DATE_TIME_FORMATTER);
         this.withVAT = invoice.isWithVAT();
         for (VATRate vat : invoice.getVatRates()) {
             this.vats.add(vat.toVatView());
