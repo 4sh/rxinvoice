@@ -2,13 +2,16 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {Order} from "../../../domain/order/order";
-import {catchError, map, mergeMap} from "rxjs/operators";
+import {catchError, flatMap, map, mergeMap} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {throwError} from "rxjs/internal/observable/throwError";
 import {CustomerService} from "../../customer/services/customer.service";
 import {Customer} from "../../../domain/company/customer";
 import {InvoiceService} from "../../invoice/services/invoice.service";
 import {Invoice} from "../../../domain/invoice/invoice";
+import {PaymentService} from "../../payment/services/payment.service";
+import {Payment} from "../../../domain/payment/payment";
+import {forkJoin} from "rxjs/internal/observable/forkJoin";
 
 @Injectable()
 export class OrderService {
@@ -17,10 +20,11 @@ export class OrderService {
 
     constructor(private http: HttpClient,
                 private customerService: CustomerService,
-                private invoiceService: InvoiceService) {
+                private invoiceService: InvoiceService,
+                private paymentService: PaymentService) {
     }
 
-    fetchOrders(): Observable<Order[]> {
+    public fetchOrders(): Observable<Order[]> {
         return this.http.get(this.baseUrl).pipe(
             mergeMap((orders: any) => this.customerService.fetchCustomers().pipe(
                 map((customers: Customer[]) => {
@@ -40,15 +44,14 @@ export class OrderService {
                     return plainToClass(Order, orders as Object[])
                 })
             )),
-            mergeMap((orders: Order[]) => this.invoiceService.fetchInvoicesByOrders(orders.map(o => o._id)).pipe(
-                map((invoices: Invoice[]) => {
-                    orders = orders.map((order: Order) => {
-                        order.invoice = invoices.find((invoice: Invoice) => invoice.orderReference == order.reference);
+            flatMap((orders: Order[]) => {
+                return forkJoin(orders.map((order: Order) => this.paymentService.fetchPaymentsByOrder(order._id).pipe(
+                    map((payments: Payment[]) => {
+                        order.payments = payments;
                         return order;
-                    });
-                    return plainToClass(Order, orders as Object[])
-                })
-            )),
+                    })
+                )));
+            }),
             catchError((response: Response) => throwError({
                 message: 'Unable to fetch orders',
                 response: response

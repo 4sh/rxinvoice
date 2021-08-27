@@ -5,7 +5,7 @@
         <div class="grid-x grid-padding-x">
             <div class="cell phone-3 client-cell">{{'order.list.column.customer'|translate}}</div>
             <div class="cell amount-cell">{{'order.list.column.net.amount'|translate}}</div>
-            <div class="cell phone-3 ref-cell">{{'order.list.column.providerRef'|translate}}</div>
+            <div class="cell phone-4 ref-cell">{{'order.list.column.providerRef'|translate}}</div>
             <div class="cell auto object-cell">{{'order.list.column.subject'|translate}}</div>
             <div class="cell date-cell">{{'order.list.column.date'|translate}}</div>
             <div class="cell status-cell">{{'order.list.column.status'|translate}}</div>
@@ -22,8 +22,8 @@
             <div class="cell amount-cell">
                 <span class="orderList-value">{{order.netAmount | invoiceCurrency}}</span>
             </div>
-            <div class="cell phone-3 ref-cell">
-                <span class="orderList-value">{{order.providerRef}}</span>
+            <div class="cell phone-4 ref-cell">
+                <span class="orderList-value">{{ (order.payments | mapBy:'providerRef').join(',') }}</span>
             </div>
             <div class="cell auto object-cell grid-x align-middle">
                 <span class="orderList-value">{{order.subject}}</span>

@@ -33,6 +33,7 @@ import { ACompanyLegalInfoComponent } from './components/atoms/company/a-company
 import { ACommercialRelationshipComponent } from './components/atoms/company/a-commercial-relationship/a-commercial-relationship.component';
 import {BusinessLineComponent} from "./components/atoms/company/business-line/business-line.component";
 import {VatLineComponent} from "./components/atoms/company/a-vat-line/vat-line.component";
+import {MapByPipe} from "./pipes/map-by.pipe";
 
 const components = [
     AToggleComponent,
@@ -57,7 +58,7 @@ const components = [
     VatLineComponent
 ];
 
-const pipes = [OrderByPipe, InvoiceCurrencyPipe, InvoiceDatePipe];
+const pipes = [OrderByPipe, InvoiceCurrencyPipe, InvoiceDatePipe, MapByPipe];
 
 @NgModule({
     imports: [

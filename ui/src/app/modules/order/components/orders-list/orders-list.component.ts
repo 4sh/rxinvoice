@@ -9,7 +9,7 @@ import {DownloadInvoiceService} from "../../../invoice/services/download-invoice
 })
 export class OrdersListComponent implements OnInit {
 
-    @Input() orders: Array<Order>;
+    @Input() orders: Order[];
     @Input() isPending: boolean;
 
     constructor(private downloadService: DownloadInvoiceService) {

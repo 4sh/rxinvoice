@@ -5,6 +5,7 @@ import {OrderLine} from "./order-line";
 import {OrderStatusEnum} from "./order-status.type";
 import {Customer} from "../company/customer";
 import {Invoice} from "../invoice/invoice";
+import {Payment} from "../payment/payment";
 
 export class Order {
     _id: string;
@@ -22,7 +23,7 @@ export class Order {
     vendorRef: string;
     customer: Customer;
     paymentStatus: OrderStatusEnum;
-    providerRef?: string;
+    payments: Payment[];
     invoice?: Invoice;
 }
 
