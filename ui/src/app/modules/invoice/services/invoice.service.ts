@@ -77,6 +77,13 @@ export class InvoiceService {
                 })));
     }
 
+    public fetchInvoicesByOrders(orderIds: String[]): Observable<Invoice[]> {
+        return this.http
+            .get(this.baseUrl + '?orderIds[]=' + orderIds.join(",")).pipe(
+                map((result: any) => plainToClass(Invoice, result as Object[])),
+            );
+    }
+
     public updateInvoice(invoice): Observable<Invoice> {
         return this.http
             .put(`${this.baseUrl}/${invoice._id}`, invoice).pipe(

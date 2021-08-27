@@ -19,7 +19,7 @@ const components = [
 ];
 
 @NgModule({
-    declarations: [components, OrdersListComponent],
+    declarations: [components],
     exports: [components],
     providers: [
         OrderService

@@ -17,6 +17,7 @@ export class Invoice {
     key: string;
     _id: string;
     reference: string;
+    orderReference?: string;
     date: Date;
     dueDate: Date;
     sentDate: Date;

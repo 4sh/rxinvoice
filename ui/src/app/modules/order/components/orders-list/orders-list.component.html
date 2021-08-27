@@ -5,9 +5,12 @@
         <div class="grid-x grid-padding-x">
             <div class="cell phone-3 client-cell">{{'order.list.column.customer'|translate}}</div>
             <div class="cell amount-cell">{{'order.list.column.net.amount'|translate}}</div>
+            <div class="cell phone-3 ref-cell">{{'order.list.column.providerRef'|translate}}</div>
             <div class="cell auto object-cell">{{'order.list.column.subject'|translate}}</div>
             <div class="cell date-cell">{{'order.list.column.date'|translate}}</div>
             <div class="cell status-cell">{{'order.list.column.status'|translate}}</div>
+            <div class="cell phone-3 ref-cell">{{'order.list.column.invoice.reference'|translate}}</div>
+            <div class="cell actions-cell">{{'order.list.column.actions'|translate}}</div>
         </div>
     </div>
 
@@ -19,6 +22,9 @@
             <div class="cell amount-cell">
                 <span class="orderList-value">{{order.netAmount | invoiceCurrency}}</span>
             </div>
+            <div class="cell phone-3 ref-cell">
+                <span class="orderList-value">{{order.providerRef}}</span>
+            </div>
             <div class="cell auto object-cell grid-x align-middle">
                 <span class="orderList-value">{{order.subject}}</span>
             </div>
@@ -26,7 +32,17 @@
                 <span class="orderList-value">{{order.date | date: 'dd MMM. yyyy'}}</span>
             </div>
             <div class="cell status-cell">
-                <a-status [statusLabel]="order.paymentStatus">{{ ('order.status.' + order.paymentStatus) | translate }}</a-status>
+                <a-status
+                        [statusLabel]="order.paymentStatus">{{ ('order.status.' + order.paymentStatus) | translate }}</a-status>
+            </div>
+            <div class="cell phone-3 ref-cell">
+                <span class="orderList-value">{{order.invoice?.reference}}</span>
+            </div>
+            <div class="grid-x align-right align-middle cell actions-cell">
+                <a-button-icon *ngIf="order.invoice" size="DEFAULT" visibility="HIGH"
+                               (click)="downloadInvoice(order.invoice)">
+                    <i class="far fa-file-pdf"></i>
+                </a-button-icon>
             </div>
         </div>
 

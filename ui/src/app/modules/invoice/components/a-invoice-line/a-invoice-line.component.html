@@ -33,7 +33,7 @@
             <span>{{line?.grossAmount && line?.grossAmount.value > 0 ? (line?.grossAmount | invoiceCurrency) : ''}}</span>
         </div>
         <div class="cell phone-4 grid-x align-right">
-            <span *ngIf="!editable && invoice.withVAT">{{line?.vatRate ? (line?.vatRate | number: '1.2') : ''}} {{line?.vatRate ? ' %' : ''}}</span>
+            <span *ngIf="!editable && invoice.withVAT">{{line?.vatRate ? (line?.vatRate.rate | number: '1.2') : ''}} {{line?.vatRate ? ' %' : ''}}</span>
             <a-vat-select
                     *ngIf="editable && invoice.withVAT && line"
                     name="vatRate"
