@@ -88,9 +88,9 @@ public class InvoiceMetricsService {
         Metrics nextYearMetrics = computeCompanyMetrics(invoiceList, Optional.of(next));
 
         this.commercialRelationshipDao.updateCompanyGlobalMetrics(sellerCompanyKey, buyerCompanyKey, globalMetrics);
-        this.commercialRelationshipDao.updateCompanyGlobalMetrics(sellerCompanyKey, buyerCompanyKey, previousYearMetrics);
-        this.commercialRelationshipDao.updateCompanyGlobalMetrics(sellerCompanyKey, buyerCompanyKey, currentYearMetrics);
-        this.commercialRelationshipDao.updateCompanyGlobalMetrics(sellerCompanyKey, buyerCompanyKey, nextYearMetrics);
+        this.commercialRelationshipDao.updateCompanyPreviousYearMetrics(sellerCompanyKey, buyerCompanyKey, previousYearMetrics);
+        this.commercialRelationshipDao.updateCompanyCurrentYearMetrics(sellerCompanyKey, buyerCompanyKey, currentYearMetrics);
+        this.commercialRelationshipDao.updateCompanyNextYearMetrics(sellerCompanyKey, buyerCompanyKey, nextYearMetrics);
 
         logger.debug("End to compute company metrics for company {}", company.getKey());
     }
