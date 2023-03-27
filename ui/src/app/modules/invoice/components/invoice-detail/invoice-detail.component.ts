@@ -133,6 +133,7 @@ export class InvoiceDetailComponent implements OnInit {
 
     public duplicate() {
         this.invoice = this.invoice.copy();
+        this.save();
     }
 
     public getSentDate() {
