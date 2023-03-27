@@ -30,7 +30,7 @@
                    placeholder="{{'invoice.line.unit.cost'|translate}}">
         </div>
         <div class="cell phone-3 grid-x align-right">
-            <span>{{line?.grossAmount > 0 ? (line?.grossAmount | invoiceCurrency) : ''}}</span>
+            <span>{{line?.grossAmount | invoiceCurrency}}</span>
         </div>
         <div class="cell phone-4 grid-x align-right">
             <span *ngIf="!editable && invoice.withVAT">{{line?.vatRate?.rate | number: '1.2'}} {{line?.vatRate?.rate ? ' %' : ''}}</span>
