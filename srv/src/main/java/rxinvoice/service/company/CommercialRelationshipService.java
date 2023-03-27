@@ -25,7 +25,9 @@ public class CommercialRelationshipService {
         String sellerRef = AppModule.currentUser().getCompanyRef();
         CommercialRelationship commercialRelationship = new CommercialRelationship()
                 .setSellerRef(sellerRef)
-                .setCustomerRef(customer.getKey());
+                .setCustomerRef(customer.getKey())
+                .setLegalNotice(customer.getCommercialRelationship().getLegalNotice())
+                .setDetail(customer.getCommercialRelationship().getDetail());
         return this.commercialRelationshipDao.create(commercialRelationship);
     }
 

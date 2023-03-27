@@ -20,7 +20,7 @@ public class CompanyPrint {
         this.address = company.getAddress();
         this.emailAddress = company.getEmailAddress();
         this.legalNotice = company.getCommercialRelationship() == null ? "" : company.getCommercialRelationship().getLegalNotice();
-        this.detail = company.getCommercialRelationship() == null ? "" : company.getCommercialRelationship().getLegalNotice();
+        this.detail = company.getCommercialRelationship() == null ? "" : company.getCommercialRelationship().getDetail();
         this.showLegalNoticeForeignBuyer = company.getCommercialRelationship() != null && company.getCommercialRelationship().isShowLegalNoticeForeignBuyer();
     }
 

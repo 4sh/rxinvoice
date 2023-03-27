@@ -196,6 +196,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="grid-y step-form margin-top-40">
+                    <div class="grid-x step-form_line">
+                        <div class="column small-12">
+                            <label>{{'commercial.relationship.legal.notice' | translate}}</label>
+                            <textarea rows="3"
+                                      [(ngModel)]="customer.commercialRelationship.legalNotice" name="legalNotice">
+                            </textarea>
+                        </div>
+                        <div class="column small-12">
+                            <label>{{'commercial.relationship.detail' | translate}}</label>
+                            <textarea rows="3"
+                                      [(ngModel)]="customer.commercialRelationship.detail" name="detail">
+                            </textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </form>
