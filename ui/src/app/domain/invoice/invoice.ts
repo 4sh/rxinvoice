@@ -54,7 +54,6 @@ export class Invoice {
         copy.dueDate = null;
         copy.date = null;
         copy.activities = [];
-        copy.attachments = [];
         copy.statusChanges = [];
         copy.attachments = [];
         return copy;
