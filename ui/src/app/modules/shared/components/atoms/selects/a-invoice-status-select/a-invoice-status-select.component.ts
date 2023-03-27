@@ -73,6 +73,10 @@ export class AInvoiceStatusSelectComponent implements OnInit, ControlValueAccess
     }
 
     onChange(enumOption: EnumOption) {
+        if (!enumOption) {
+            this.onNgChange(null);
+            return;
+        }
         this.invoiceStatus = enumOption.value as InvoiceStatusType;
         this.selectedItem = enumOption;
         this.onNgChange(this.invoiceStatus);
