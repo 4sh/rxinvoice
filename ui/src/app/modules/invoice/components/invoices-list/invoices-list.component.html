@@ -1,9 +1,13 @@
 <a-spinner [hidden]="!isPending"></a-spinner>
 
 <div class="invoiceList cell auto">
+    <div class="invoiceList-head-total">
+        <span>Total: {{invoices?.length}}</span>
+    </div>
     <div class="invoiceList-head">
         <div class="grid-x grid-padding-x">
-            <div class="cell phone-2 ref-cell" *ngIf="referenceNumberColumnDisplayed">{{'invoice.list.column.reference'|translate}}</div>
+            <div class="cell phone-2 ref-cell"
+                 *ngIf="referenceNumberColumnDisplayed">{{'invoice.list.column.reference'|translate}}</div>
             <div class="cell phone-3 client-cell">{{'invoice.list.column.buyer'|translate}}</div>
             <div class="cell phone-3 business-cell">{{'invoice.list.column.business'|translate}}</div>
             <div class="cell auto object-cell">{{'invoice.list.column.object'|translate}}</div>
@@ -13,42 +17,41 @@
             <div class="cell actions-cell">{{'invoice.list.column.actions'|translate}}</div>
         </div>
     </div>
-
     <div class="invoiceList-line">
-            <div class="grid-x grid-padding-x line-block align-middle" *ngFor="let invoice of invoices">
-                <div *ngIf="referenceNumberColumnDisplayed" class="cell phone-2 ref-cell">
-                    <span>N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}</span>
-                </div>
-                <div (click)="goToDetail(invoice)" class="text-click cell phone-3 client-cell">
-                    <span class="invoiceList-value">{{invoice.buyer?.name}}</span>
-                </div>
-                <div (click)="goToDetail(invoice)" class="text-click cell phone-3 business-cell">
-                    <span class="invoiceList-value">{{invoice.business?.name}}</span>
-                </div>
-                <div (click)="goToDetail(invoice)" class="text-click cell auto object-cell grid-x align-middle">
-                    <span class="invoiceList-value">{{invoice.object}}</span>
-                </div>
-                <div (click)="goToDetail(invoice)" class="text-click cell amount-cell">
-                    <div class="invoiceList-value">{{invoice.grossAmount | invoiceCurrency}} HT</div>
-                    <div class="invoiceList-value">{{invoice.netAmount | invoiceCurrency}} TTC</div>
-                </div>
-                <div (click)="goToDetail(invoice)" class="text-click cell date-cell">
-                    <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
-                </div>
-                <div class=" cell status-cell">
-                    <a-invoice-status [statusLabel]="invoice.status"></a-invoice-status>
-                </div>
-                <div class="grid-x align-right align-middle cell actions-cell">
-                    <a-button-launch (click)="launchInvoice(invoice)"
-                                     *ngIf="isLaunchButtonVisible(invoice)"
-                                     [launchStyle]="'INVOICE'"
-                                     [launchLabel]="'invoice.list.column.launch'"></a-button-launch>
-                    <a-spacer [sizeX]="10"></a-spacer>
-                    <a-button-icon size="DEFAULT" visibility="HIGH" (click)="downloadInvoice(invoice)">
-                        <i class="far fa-file-pdf"></i>
-                    </a-button-icon>
-                </div>
+        <div class="grid-x grid-padding-x line-block align-middle" *ngFor="let invoice of invoices">
+            <div *ngIf="referenceNumberColumnDisplayed" class="cell phone-2 ref-cell">
+                <span>N° {{ (invoice && invoice._id) ? invoice.reference : "[" + invoice.reference + "] "}}</span>
             </div>
+            <div (click)="goToDetail(invoice)" class="text-click cell phone-3 client-cell">
+                <span class="invoiceList-value">{{invoice.buyer?.name}}</span>
+            </div>
+            <div (click)="goToDetail(invoice)" class="text-click cell phone-3 business-cell">
+                <span class="invoiceList-value">{{invoice.business?.name}}</span>
+            </div>
+            <div (click)="goToDetail(invoice)" class="text-click cell auto object-cell grid-x align-middle">
+                <span class="invoiceList-value">{{invoice.object}}</span>
+            </div>
+            <div (click)="goToDetail(invoice)" class="text-click cell amount-cell">
+                <div class="invoiceList-value">{{invoice.grossAmount | invoiceCurrency}} HT</div>
+                <div class="invoiceList-value">{{invoice.netAmount | invoiceCurrency}} TTC</div>
+            </div>
+            <div (click)="goToDetail(invoice)" class="text-click cell date-cell">
+                <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
+            </div>
+            <div class=" cell status-cell">
+                <a-invoice-status [statusLabel]="invoice.status"></a-invoice-status>
+            </div>
+            <div class="grid-x align-right align-middle cell actions-cell">
+                <a-button-launch (click)="launchInvoice(invoice)"
+                                 *ngIf="isLaunchButtonVisible(invoice)"
+                                 [launchStyle]="'INVOICE'"
+                                 [launchLabel]="'invoice.list.column.launch'"></a-button-launch>
+                <a-spacer [sizeX]="10"></a-spacer>
+                <a-button-icon size="DEFAULT" visibility="HIGH" (click)="downloadInvoice(invoice)">
+                    <i class="far fa-file-pdf"></i>
+                </a-button-icon>
+            </div>
+        </div>
 
     </div>
 </div>

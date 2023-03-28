@@ -13,6 +13,13 @@
 @include new('invoiceList') {
     height: 100%;
 
+    .invoiceList-head-total {
+        text-align: right;
+        font-size: rem-calc(14px);
+        font-weight: 600;
+        color: rgba($app-primary, 0.7);
+    }
+
     .invoiceList-head {
         display: block;
         background: $app-primary_light;
