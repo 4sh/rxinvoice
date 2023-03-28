@@ -3,19 +3,19 @@
      [dndDraggable]="invoice"
      [dndDraggingClass]="'dndDragging'"
      [dndType]="invoice.status">
-    <div class="row">
+    <div class="row" [routerLink]="['/invoices/detail/' + invoice._id]">
         <div class="column small-15" *ngIf="!isDraftInvoice()">
             <a-invoice-date [invoiceDate]="invoice.date" [statusDate]="statusClass"></a-invoice-date>
         </div>
         <div class="column small-9 text-right invoice-actions">
-            <button class="action-button" (click)="openPopup()">
+            <button class="action-button" (click)="openPopup();$event.stopPropagation()">
               <i class="ion-android-more-horizontal"></i>
             </button>
             <button class="action-button" *ngIf="isDraftInvoice()"
                     [routerLink]="['/invoices/detail/' + invoice._id]">
                 <i class="fas fa-pencil-alt icon-pencil"></i>
             </button>
-            <button class="action-button" *ngIf="!isDraftInvoice()" (click)="downloadInvoice(invoice)">
+            <button class="action-button" *ngIf="!isDraftInvoice()" (click)="downloadInvoice(invoice);$event.stopPropagation()">
               <i class="ion-document"></i>
             </button>
         </div>
@@ -30,7 +30,7 @@
             <p class="invoice-price">{{invoice.grossAmount | invoiceCurrency}}</p>
         </div>
         <div class="column small-9 invoice-button">
-            <a-button-launch (click)="quickAction()"
+            <a-button-launch (click)="quickAction();$event.stopPropagation()"
                              [launchStyle]="'TICKET'"
                              [launchLabel]="quickActionLabel"
                              *ngIf="quickActionVisible"></a-button-launch>
