@@ -1,4 +1,4 @@
-FROM node:lts AS deps
+FROM node:14 AS deps
 
 ENTRYPOINT /bin/bash
 WORKDIR /code/
