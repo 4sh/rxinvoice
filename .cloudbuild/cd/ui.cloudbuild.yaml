@@ -10,21 +10,6 @@ steps:
       - '--bucket=gs://${_CACHE_BUCKET}'
       - '--key=gradle'
     waitFor: ['-']
-  - id: 'build'
-    name: 'gcr.io/synechis/openjdk-slack:8-jdk-slim'
-    volumes:
-      - name: 'gradle'
-        path: '/gradle'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        set -x
-        export STEP_NAME="Release UI"
-        ./gradlew --build-cache \
-           :ui:build \
-           $_REPO_SETTINGS --gradle-user-home=/gradle
-    waitFor: ['restore-cache']
   - name: 'gcr.io/cloud-builders/docker'
     dir: 'ui'
     args: [
