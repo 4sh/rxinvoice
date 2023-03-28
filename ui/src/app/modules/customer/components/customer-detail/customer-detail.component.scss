@@ -160,6 +160,9 @@ form {
         &_line {
             margin-bottom: rem-calc(8px);
         }
+        &.margin-top-40 {
+            margin-top: rem-calc(40px);
+        }
     }
 
     &-business {
