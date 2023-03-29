@@ -50,6 +50,7 @@ export class InvoiceService {
             this.invoiceSearchFilter.kind = params.kind;
             this.invoiceSearchFilter.buyerRef = params.buyerRef?._id;
             this.invoiceSearchFilter.statuses = params.statuses;
+            this.invoiceSearchFilter.sortParam = params.sortParam;
         }
         return this.http
             .get(this.baseUrl, {params: SearchParams.toHttpParams(params)}).pipe(

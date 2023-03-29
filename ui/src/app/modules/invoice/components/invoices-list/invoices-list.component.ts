@@ -17,6 +17,8 @@ export class InvoicesListComponent {
     @Input() invoices: Array<Invoice>;
     @Input() isPending: false;
 
+    public sortParam = 'reference_ASC';
+
     constructor(private router: Router,
                 private invoiceService: InvoiceService,
                 private authenticationService: AuthenticationService,
@@ -39,5 +41,36 @@ export class InvoicesListComponent {
         const currentUser = this.authenticationService.getCurrentUser();
         return (currentUser.isDirector() || currentUser.isInvoicing())
             && invoice.status === InvoiceStatusEnum.DRAFT;
+    }
+
+    public sort(attribute: string) {
+        let sortParam = this.invoiceService.invoiceSearchFilter.sortParam;
+        if (sortParam?.includes(attribute)) {
+            if (sortParam.includes('ASC')) {
+                this.invoiceService.invoiceSearchFilter.sortParam = attribute + "_DESC";
+                this.sortParam = attribute + "_DESC";
+            } else if (sortParam.includes('DESC')) {
+                this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_ASC';
+                this.sortParam = attribute + "_ASC";
+            }
+        } else {
+            this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_ASC';
+            this.sortParam = attribute + "_ASC";
+        }
+        this.invoiceService.fetchInvoices(this.invoiceService.invoiceSearchFilter, true)
+            .subscribe(
+                (invoices) => {
+                    this.invoices = invoices;
+                    this.isPending = false;
+                },
+                () => this.isPending = false);
+    }
+
+    public upOrDown() {
+        if (this.sortParam.includes('ASC')) {
+            return 'up';
+        } else if (this.sortParam.includes('DESC')) {
+            return 'down';
+        }
     }
 }

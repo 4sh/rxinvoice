@@ -9,5 +9,5 @@ export class InvoiceSearchFilter {
     buyerRef: string;
     statuses: InvoiceStatusType[];
     kind: ServiceKind;
-
+    sortParam: string;
 }

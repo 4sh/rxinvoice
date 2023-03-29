@@ -29,7 +29,8 @@ export class InvoicesComponent implements OnInit {
             endDate: '',
             buyerRef: null,
             statuses: null,
-            kind: ''
+            kind: '',
+            sortParam: 'reference_ASC'
         });
     }
 
