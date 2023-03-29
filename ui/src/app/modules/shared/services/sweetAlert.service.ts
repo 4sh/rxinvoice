@@ -74,6 +74,7 @@ class SweetAlertOptions {
     reverseButtons?: boolean;
     allowOutsideClick?: boolean;
     allowEscapeKey?: boolean;
+    showConfirmButton?: boolean;
     showCloseButton?: boolean;
     customClass?: string;
 }

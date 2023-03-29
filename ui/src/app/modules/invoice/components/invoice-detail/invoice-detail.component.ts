@@ -133,6 +133,13 @@ export class InvoiceDetailComponent implements OnInit {
 
     public duplicate() {
         this.invoice = this.invoice.copy();
+        this.alertService.info({
+            title: 'alert.copy.success',
+            customClass: 'swal2-for-edit',
+            timer: 0,
+            showConfirmButton: true,
+            showCloseButton: true
+        });
     }
 
     public getSentDate() {
