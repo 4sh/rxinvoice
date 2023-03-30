@@ -23,14 +23,15 @@ export class InvoicesComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private invoiceService: InvoiceService) {
+        console.log(this.searchForm)
         this.searchForm = fb.group({
-            query: '',
-            startDate: moment().subtract(7, 'days').toDate(),
-            endDate: '',
-            buyerRef: null,
-            statuses: null,
-            kind: '',
-            sortParam: 'reference_ASC'
+            query: invoiceService.invoiceSearchFilter?.query || '',
+            startDate: invoiceService.invoiceSearchFilter?.startDate || moment().subtract(7, 'days').toDate(),
+            endDate: invoiceService.invoiceSearchFilter?.endDate || '',
+            buyerRef: invoiceService.invoiceSearchFilter?.buyerRef || null,
+            statuses: invoiceService.invoiceSearchFilter?.statuses || null,
+            kind: invoiceService.invoiceSearchFilter?.kind || '',
+            sortParam: invoiceService.invoiceSearchFilter?.sortParam || 'reference_ASC'
         });
     }
 
@@ -44,6 +45,7 @@ export class InvoicesComponent implements OnInit {
             .subscribe(() => {
                 this.research();
             });
+        this.research();
     }
 
     toggleFilter(string) {

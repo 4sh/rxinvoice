@@ -17,12 +17,13 @@ export class InvoicesListComponent {
     @Input() invoices: Array<Invoice>;
     @Input() isPending: false;
 
-    public sortParam = 'reference_ASC';
+    public sortParam: string;
 
     constructor(private router: Router,
                 private invoiceService: InvoiceService,
                 private authenticationService: AuthenticationService,
                 private downloadService: DownloadInvoiceService) {
+        this.sortParam = invoiceService.invoiceSearchFilter?.sortParam || 'reference_ASC';
     }
 
     public goToDetail(invoice) {
