@@ -40,6 +40,9 @@ export class SweetAlertService {
         return this.question(assign({type: 'question', icon: 'question'}, options));
     }
 
+    confirmCopy(options: SweetAlertOptions) {
+        return this.question(assign({type: 'question', icon: 'success'}, options));
+    }
     success(options: SweetAlertOptions) {
         return this.alert(assign({type: 'success', icon: 'success'}, options));
     }

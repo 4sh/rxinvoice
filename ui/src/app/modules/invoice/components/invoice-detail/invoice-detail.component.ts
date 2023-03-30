@@ -16,6 +16,7 @@ import {DndDropEvent } from 'ngx-drag-drop';
 import {FileUploader} from 'ng2-file-upload';
 import {switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs/internal/observable/of';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'invoice-detail',
@@ -30,6 +31,7 @@ export class InvoiceDetailComponent implements OnInit {
     public newLine: InvoiceLine = new InvoiceLine();
     public uploader: FileUploader;
     public filesToDelete: string[] = [];
+    public copy: Invoice = null;
 
 
     @ViewChild(AttachmentsDetailComponent) attachmentsComponent: AttachmentsDetailComponent;
@@ -41,7 +43,8 @@ export class InvoiceDetailComponent implements OnInit {
                 private alertService: SweetAlertService,
                 private location: Location,
                 private authService: AuthenticationService,
-                private downloadService: DownloadInvoiceService) {
+                private downloadService: DownloadInvoiceService,
+                private translateService: TranslateService) {
     }
 
     ngOnInit() {
@@ -110,6 +113,32 @@ export class InvoiceDetailComponent implements OnInit {
             });
     }
 
+    private handleInvoiceCopy(observable: Observable<Invoice>): void {
+        observable.pipe(
+            tap((invoice: Invoice) => this.copy._id = invoice._id),
+            switchMap(() => {
+                return this.invoiceService.uploadDocuments(this.copy._id, this.uploader.queue)
+            }),
+            tap(() => this.uploader =  new FileUploader({autoUpload: false})),
+            switchMap(() => {
+                if (this.filesToDelete.length > 0) {
+                    return this.invoiceService.deleteAttachment(this.copy._id, this.filesToDelete);
+                }
+                return of(true);
+            }),
+            tap(() => {
+                this.filesToDelete = [];
+            }),
+            switchMap(() => this.invoiceService.fetchInvoice(this.copy._id))
+        ).subscribe((invoice: Invoice) => {
+                this.copy = invoice;
+                this.copy.vatAmount = this.copy.computeVatAmount();
+            },
+            () => {
+                this.alertService.error({title: 'alert.creation.error', customClass: 'swal2-for-edit'});
+            });
+    }
+
     public delete(): void {
         this.alertService.confirm({title: 'alert.confirm.deletion'}).then(
             (result) => {
@@ -132,14 +161,21 @@ export class InvoiceDetailComponent implements OnInit {
     }
 
     public duplicate() {
-        this.invoice = this.invoice.copy();
-        this.alertService.info({
+        this.copy = this.invoice.copy();
+        this.handleInvoiceCopy(this.invoiceService.createInvoice(this.copy));
+
+        this.alertService.confirmCopy({
             title: 'alert.copy.success',
-            customClass: 'swal2-for-edit',
             timer: 0,
-            showConfirmButton: true,
-            showCloseButton: true
-        });
+            showCloseButton: true,
+            confirmButtonText: this.translateService.instant('alert.copy.new'),
+            cancelButtonText: this.translateService.instant('alert.copy.stay')
+        }).then(
+            (result) => {
+                if (result.value) {
+                    this.router.navigate(['/invoices/detail/' + this.copy._id]);
+                }
+            });
     }
 
     public getSentDate() {
