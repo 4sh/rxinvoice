@@ -41,7 +41,6 @@ export class InvoicesComponent implements OnInit {
             .subscribe(() => {
                 this.research();
             });
-        this.research();
     }
 
     toggleFilter(string) {
