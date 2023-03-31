@@ -23,7 +23,6 @@ export class InvoicesComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private invoiceService: InvoiceService) {
-        console.log(this.searchForm)
         this.searchForm = fb.group({
             query: invoiceService.invoiceSearchFilter?.query || '',
             startDate: invoiceService.invoiceSearchFilter?.startDate || moment().subtract(7, 'days').toDate(),
@@ -36,9 +35,6 @@ export class InvoicesComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.invoiceService.invoiceSearchFilter) {
-            this.searchForm.patchValue(this.invoiceService.invoiceSearchFilter);
-        }
         this.searchForm.valueChanges.pipe(
             debounceTime(250),
             distinctUntilChanged())
