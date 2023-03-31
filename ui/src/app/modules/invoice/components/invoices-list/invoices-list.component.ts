@@ -5,6 +5,7 @@ import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import {InvoiceService} from '../../services/invoice.service';
 import {InvoiceStatusEnum} from '../../../../domain/invoice/invoice-status.type';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
+import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 
 @Component({
     selector: 'invoices-list',
@@ -52,12 +53,11 @@ export class InvoicesListComponent {
                 this.sortParam = attribute + "_DESC";
             } else if (sortParam.includes('DESC')) {
                 this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_ASC';
-                this.sortParam = attribute + "_ASC";
             }
         } else {
             this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_ASC';
-            this.sortParam = attribute + "_ASC";
         }
+        this.sortParam = this.invoiceService.invoiceSearchFilter.sortParam;
         this.invoiceService.fetchInvoices(this.invoiceService.invoiceSearchFilter, true)
             .subscribe(
                 (invoices) => {
