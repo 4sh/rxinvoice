@@ -5,6 +5,7 @@ import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import {InvoiceService} from '../../services/invoice.service';
 import {InvoiceStatusEnum} from '../../../../domain/invoice/invoice-status.type';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
+import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 
 @Component({
     selector: 'invoices-list',
@@ -17,12 +18,13 @@ export class InvoicesListComponent {
     @Input() invoices: Array<Invoice>;
     @Input() isPending: false;
 
-    public sortParam = 'reference_ASC';
+    public sortParam: string;
 
     constructor(private router: Router,
                 private invoiceService: InvoiceService,
                 private authenticationService: AuthenticationService,
                 private downloadService: DownloadInvoiceService) {
+        this.sortParam = invoiceService.invoiceSearchFilter?.sortParam || 'reference_ASC';
     }
 
     public goToDetail(invoice) {
@@ -51,12 +53,11 @@ export class InvoicesListComponent {
                 this.sortParam = attribute + "_DESC";
             } else if (sortParam.includes('DESC')) {
                 this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_ASC';
-                this.sortParam = attribute + "_ASC";
             }
         } else {
             this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_ASC';
-            this.sortParam = attribute + "_ASC";
         }
+        this.sortParam = this.invoiceService.invoiceSearchFilter.sortParam;
         this.invoiceService.fetchInvoices(this.invoiceService.invoiceSearchFilter, true)
             .subscribe(
                 (invoices) => {
