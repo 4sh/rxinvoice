@@ -33,7 +33,10 @@ import rxinvoice.utils.SortCriteriaUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -228,7 +231,15 @@ public class InvoiceService {
         }
 
         if (invoiceSearchFilter.getStartDate().isPresent()) {
-            Date start = LocalDate.parse(invoiceSearchFilter.getStartDate().get()).toDateTime(LocalTime.MIDNIGHT).toDate();
+            Date start;
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            formatter.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
+
+            try {
+                start = formatter.parse(invoiceSearchFilter.getStartDate().get());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
 
             builder.and("date").greaterThanEquals(start);
         }
