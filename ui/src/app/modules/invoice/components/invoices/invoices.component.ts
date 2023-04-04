@@ -24,19 +24,17 @@ export class InvoicesComponent implements OnInit {
                 private router: Router,
                 private invoiceService: InvoiceService) {
         this.searchForm = fb.group({
-            query: '',
-            startDate: moment().subtract(7, 'days').toDate(),
-            endDate: '',
-            buyerRef: null,
-            statuses: null,
-            kind: ''
+            query: invoiceService.invoiceSearchFilter?.query || '',
+            startDate: invoiceService.invoiceSearchFilter?.startDate || moment().subtract(7, 'days').toDate(),
+            endDate: invoiceService.invoiceSearchFilter?.endDate || '',
+            buyerRef: invoiceService.invoiceSearchFilter?.buyerRef || null,
+            statuses: invoiceService.invoiceSearchFilter?.statuses || null,
+            kind: invoiceService.invoiceSearchFilter?.kind || '',
+            sortParam: invoiceService.invoiceSearchFilter?.sortParam || 'reference_ASC'
         });
     }
 
     ngOnInit() {
-        if (this.invoiceService.invoiceSearchFilter) {
-            this.searchForm.patchValue(this.invoiceService.invoiceSearchFilter);
-        }
         this.searchForm.valueChanges.pipe(
             debounceTime(250),
             distinctUntilChanged())

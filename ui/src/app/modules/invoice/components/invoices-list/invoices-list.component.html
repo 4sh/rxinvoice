@@ -7,14 +7,37 @@
     <div class="invoiceList-head">
         <div class="grid-x grid-padding-x">
             <div class="cell phone-2 ref-cell"
-                 *ngIf="referenceNumberColumnDisplayed">{{'invoice.list.column.reference'|translate}}</div>
-            <div class="cell phone-3 client-cell">{{'invoice.list.column.buyer'|translate}}</div>
-            <div class="cell phone-3 business-cell">{{'invoice.list.column.business'|translate}}</div>
-            <div class="cell auto object-cell">{{'invoice.list.column.object'|translate}}</div>
-            <div class="cell amount-cell">{{'invoice.list.column.gross.amount'|translate}}</div>
-            <div class="cell date-cell">{{'invoice.list.column.date'|translate}}</div>
-            <div class="cell status-cell">{{'invoice.list.column.status'|translate}}</div>
-            <div class="cell actions-cell">{{'invoice.list.column.actions'|translate}}</div>
+                 *ngIf="referenceNumberColumnDisplayed" (click)="sort('reference')">
+                {{'invoice.list.column.reference'|translate}}
+                <span *ngIf="sortParam?.includes('reference')" class="arrow {{upOrDown()}}"></span>
+            </div>
+            <div class="cell phone-3 client-cell" (click)="sort('buyer')">
+                {{'invoice.list.column.buyer'|translate}}
+                <span *ngIf="sortParam?.includes('buyer')" class="arrow {{upOrDown()}}"></span>
+            </div>
+            <div class="cell phone-3 business-cell" (click)="sort('business')">
+                {{'invoice.list.column.business'|translate}}
+                <span *ngIf="sortParam?.includes('business')" class="arrow {{upOrDown()}}"></span>
+            </div>
+            <div class="cell auto object-cell" (click)="sort('object')">
+                {{'invoice.list.column.object'|translate}}
+                <span *ngIf="sortParam?.includes('object')" class="arrow {{upOrDown()}}"></span>
+            </div>
+            <div class="cell amount-cell" (click)="sort('grossAmount')">
+                {{'invoice.list.column.gross.amount'|translate}}
+                <span *ngIf="sortParam?.includes('grossAmount')" class="arrow {{upOrDown()}}"></span>
+            </div>
+            <div class="cell date-cell" (click)="sort('date')">
+                {{'invoice.list.column.date'|translate}}
+                <span *ngIf="sortParam?.includes('date')" class="arrow {{upOrDown()}}"></span>
+            </div>
+            <div class="cell status-cell" (click)="sort('status')">
+                {{'invoice.list.column.status'|translate}}
+                <span *ngIf="sortParam?.includes('status')" class="arrow {{upOrDown()}}"></span>
+            </div>
+            <div class="cell actions-cell">
+                {{'invoice.list.column.actions'|translate}}
+            </div>
         </div>
     </div>
     <div class="invoiceList-line">
