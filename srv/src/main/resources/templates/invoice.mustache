@@ -454,7 +454,8 @@
                         <thead>
                         <tr style=" border-bottom: 2px solid #dadbdd;">
                             <th style="text-align: left; padding: 10px 0;">Désignation</th>
-                            <th></th>
+                            <th>Quantité</th>
+                            <th>Prix unitaire</th>
                             <th class="currency" style="padding: 10px 0;">Montant HT</th>
                         </tr>
                         </thead>
@@ -463,7 +464,8 @@
                         {{#invoice.lines}}
                             <tr>
                                 <td>{{description}}</td>
-                                <td></td>
+                                <td>{{quantity}}</td>
+                                <td>{{unitCost}}</td>
                                 <td class="currency">{{grossAmount}}</td>
                             </tr>
                         {{/invoice.lines}}
