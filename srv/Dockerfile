@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y mongodb-org-shell
 
 LABEL maintainer="ops@4sh.fr"
 
+COPY ./tomcat/server.xml /usr/local/tomcat/conf/
+
 ADD db/ /var/lib/db/
 RUN rm -rf /usr/local/tomcat/webapps/*
 ADD build/libs/4sh-invoice.war /usr/local/tomcat/webapps/ROOT.war
