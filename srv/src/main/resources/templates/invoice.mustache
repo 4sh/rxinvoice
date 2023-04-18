@@ -258,6 +258,7 @@
             tbody tr .currency {
                 padding: 8px 16px;
                 text-align: right;
+                white-space: nowrap;
             }
 
             .col-sep td {
@@ -273,10 +274,16 @@
                 padding: 12px 0;
             }
 
+            th.label {
+                /*width: 100%;*/
+                text-align: left;
+                white-space: nowrap;
+            }
+
             th.currency {
-                width: 20%;
                 text-align: right;
-                padding-right: 0;
+                padding: 10px 0;
+                white-space: nowrap;
             }
 
             td.currency {
@@ -304,6 +311,7 @@
                 font-weight: normal;
                 border-bottom: 1px solid #dadbdd;
                 text-align: right;
+                white-space: nowrap;
             }
 
             /* FOOTER */
@@ -453,19 +461,19 @@
                     <table>
                         <thead>
                         <tr style=" border-bottom: 2px solid #dadbdd;">
-                            <th style="text-align: left; padding: 10px 0;">Désignation</th>
-                            <th>Quantité</th>
-                            <th>Prix unitaire</th>
-                            <th class="currency" style="padding: 10px 0;">Montant HT</th>
+                            <th class="label">Désignation</th>
+                            <th class="currency">Quantité</th>
+                            <th class="currency">Prix unitaire</th>
+                            <th class="currency">Montant HT</th>
                         </tr>
                         </thead>
 
                         <tbody>
                         {{#invoice.lines}}
                             <tr>
-                                <td>{{description}}</td>
-                                <td>{{quantity}}</td>
-                                <td>{{unitCost}}</td>
+                                <td >{{description}}</td>
+                                <td class="currency">{{quantity}}</td>
+                                <td class="currency">{{unitCost}}</td>
                                 <td class="currency">{{grossAmount}}</td>
                             </tr>
                         {{/invoice.lines}}
@@ -480,7 +488,7 @@
                         <tfoot class="totalAmount-container">
                         <tr>
                             <td></td>
-                            <td class="totalLabel totalGrossAmount">
+                            <td colspan="2" class="totalLabel totalGrossAmount">
                                 <div>Total HT</div>
                             </td>
                             <td class="currency totalAmount">{{invoice.grossAmount}}</td>
@@ -489,7 +497,7 @@
                             {{#invoice.vatsAmount}}
                                 <tr>
                                     <td></td>
-                                    <td class="totalLabel">
+                                    <td colspan="2" class="totalLabel">
                                         <div>TVA - {{vat}}</div>
                                     </td>
                                     <td class="currency totalAmount">{{amount}}</td>
@@ -497,7 +505,7 @@
                             {{/invoice.vatsAmount}}
                             <tr>
                                 <td></td>
-                                <td class="totalLabel">
+                                <td colspan="2" class="totalLabel">
                                     <div style="font-weight: bold">Total TTC</div>
                                 </td>
                                 <td class="currency totalAmount" style="color: #FF0022; font-weight: bold;">{{invoice.netAmount}}</td>
