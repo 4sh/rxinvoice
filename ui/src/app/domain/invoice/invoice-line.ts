@@ -4,6 +4,7 @@ import {VatRate} from '../common/vat-rate';
 @Injectable()
 export class InvoiceLine {
     description: string;
+    comment: string;
     quantity?: number;
     unitCost?: number;
     grossAmount?: number;
@@ -17,6 +18,7 @@ export class InvoiceLine {
     constructor(line?: InvoiceLine) {
         if (line) {
             this.description = line.description;
+            this.comment = line.comment;
             this.quantity = line.quantity;
             this.unitCost = line.unitCost;
             this.grossAmount = line.grossAmount;

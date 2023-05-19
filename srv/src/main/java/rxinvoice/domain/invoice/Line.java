@@ -10,6 +10,7 @@ import java.math.RoundingMode;
 public class Line {
 
     private String description;
+    private String comment;
     private VATRate vatRate;
 
     @FixedPrecision(2)
@@ -57,6 +58,7 @@ public class Line {
     public String toString() {
         return "Line{" +
                 "description='" + description + '\'' +
+                ", comment='" + comment + '\'' +
                 ", quantity=" + quantity +
                 ", unitCost=" + unitCost +
                 ", grossAmount=" + grossAmount +
@@ -68,11 +70,20 @@ public class Line {
         return description;
     }
 
+
     public Line setDescription(String description) {
         this.description = description;
         return this;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public Line setComment(String comment) {
+        this.comment = comment;
+        return this;
+    }
     public VATRate getVatRate() {
         return vatRate;
     }

@@ -18,6 +18,18 @@
   }
 }
 
+.comments {
+  color: $app-grey;
+  p {
+    margin-left: rem-calc(10px);
+    font-size: rem-calc(12px);
+    white-space: pre-line;
+  }
+  textarea {
+    margin-top: rem-calc(5px);
+  }
+}
+
 .action-icon {
   padding: 0;
   width: rem-calc(25px);
