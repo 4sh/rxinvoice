@@ -9,6 +9,13 @@
                    name="description"
                    [(ngModel)]="line.description"
                    placeholder="{{'invoice.line.label'|translate}}">
+            <div class="comments">
+                <p *ngIf="!editable">{{line?.comment}}</p>
+                <textarea *ngIf="editable && line"
+                       name="comments"
+                       [(ngModel)]="line.comment"
+                       placeholder="{{'invoice.line.comment'|translate}}"></textarea>
+            </div>
         </div>
         <div class="cell phone-2 grid-x align-center">
             <span *ngIf="!editable">{{line?.quantity | number : '1.2'}}</span>

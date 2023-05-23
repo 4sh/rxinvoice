@@ -183,6 +183,14 @@
                 font-size: 34px;
             }
 
+            .invoice-line-comment {
+                font-size: 10pt;
+                color: #7d7d7d;
+                margin-top: 1mm;
+                margin-left: 10px;
+                white-space: pre-line;
+            }
+
             /* CONTENT */
 
             /* == Buyer */
@@ -471,7 +479,9 @@
                         <tbody>
                         {{#invoice.lines}}
                             <tr>
-                                <td >{{description}}</td>
+                                <td >
+                                    <div>{{description}}</div>
+                                    <div class="invoice-line-comment">{{comment}}</div></td>
                                 <td class="currency">{{quantity}}</td>
                                 <td class="currency">{{unitCost}}</td>
                                 <td class="currency">{{grossAmount}}</td>

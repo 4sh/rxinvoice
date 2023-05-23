@@ -7,6 +7,7 @@ import java.math.RoundingMode;
 
 public class InvoiceLinePrint {
     private String description;
+    private String comment;
     private VATRatePrint vat;
 
     private String quantity;
@@ -15,6 +16,7 @@ public class InvoiceLinePrint {
 
     public InvoiceLinePrint(Line line) {
         this.description = line.getDescription();
+        this.comment = line.getComment();
         this.vat = line.getVatRate() == null ? null : line.getVatRate().toVatView();
         this.quantity = (line.getQuantity() == null ? BigDecimal.ZERO : line.getQuantity())
                 .setScale(2, RoundingMode.HALF_EVEN).toString();
@@ -30,6 +32,7 @@ public class InvoiceLinePrint {
     public String toString() {
         return "LineView{" +
                 "description='" + description + '\'' +
+                "comment='" + comment + '\'' +
                 ", vat=" + vat +
                 ", quantity='" + quantity + '\'' +
                 ", unitCost='" + unitCost + '\'' +
@@ -43,6 +46,15 @@ public class InvoiceLinePrint {
 
     public InvoiceLinePrint setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public InvoiceLinePrint setComment(String comment) {
+        this.comment = comment;
         return this;
     }
 
