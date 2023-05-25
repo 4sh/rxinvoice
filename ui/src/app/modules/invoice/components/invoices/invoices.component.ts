@@ -25,8 +25,8 @@ export class InvoicesComponent implements OnInit {
                 private invoiceService: InvoiceService) {
         this.searchForm = fb.group({
             query: invoiceService.invoiceSearchFilter?.query || '',
-            startDate: invoiceService.invoiceSearchFilter?.startDate || moment().subtract(7, 'days').toDate(),
-            endDate: invoiceService.invoiceSearchFilter?.endDate || '',
+            startDate: invoiceService.invoiceSearchFilter?.startDate || moment().subtract(1,'months').date(1).toDate(),
+            endDate: invoiceService.invoiceSearchFilter?.endDate || moment().toDate(),
             buyerRef: invoiceService.invoiceSearchFilter?.buyerRef || null,
             statuses: invoiceService.invoiceSearchFilter?.statuses || null,
             kind: invoiceService.invoiceSearchFilter?.kind || '',
