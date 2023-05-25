@@ -3,7 +3,11 @@ import {Invoice} from '../../../../domain/invoice/invoice';
 import {Router} from '@angular/router';
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import {InvoiceService} from '../../services/invoice.service';
-import {InvoiceStatusEnum} from '../../../../domain/invoice/invoice-status.type';
+import {
+    InvoiceStatusEnum,
+    InvoiceStatusesWorkflow,
+    InvoiceStatusType
+} from '../../../../domain/invoice/invoice-status.type';
 import {AuthenticationService} from '../../../../common/services/authentication.service';
 
 const ASC = 'ASC';
@@ -22,6 +26,7 @@ export class InvoicesListComponent {
     @Input() isPending: false;
 
     public sortParam: string;
+    public invoicesStatus = [];
 
     constructor(private router: Router,
                 private invoiceService: InvoiceService,
@@ -75,5 +80,31 @@ export class InvoicesListComponent {
         } else if (this.sortParam.includes(DESC)) {
             return 'down';
         }
+    }
+
+    editStatus(invoice: Invoice) {
+        this.invoicesStatus[invoice._id] = true
+    }
+
+    checkInvoicesStatus(invoice: Invoice) {
+        return !!this.invoicesStatus[invoice._id];
+    }
+
+    public getInvoiceAvailableStatuses(invoice: Invoice) {
+        return InvoiceStatusesWorkflow[invoice.status].authorizedTargets;
+    }
+
+    updateInvoice(invoice: Invoice, status: InvoiceStatusType) {
+        const oldStatus = invoice.status;
+        this.invoiceService.updateInvoiceStatus(invoice, status).subscribe(
+            () => {
+                this.invoicesStatus[invoice._id] = false;
+            },
+            (error) => {
+                console.log(error)
+                alert(error.message)
+                invoice.status = oldStatus;
+                this.invoicesStatus[invoice._id] = false;
+            });
     }
 }
