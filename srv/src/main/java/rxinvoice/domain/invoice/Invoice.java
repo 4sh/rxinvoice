@@ -42,6 +42,7 @@ public class Invoice implements Auditable {
 
     private String reference;
     private String object;
+    private String period;
     private String comment;
     private String customerInvoiceRef;
     private ServiceKind kind;
@@ -105,6 +106,7 @@ public class Invoice implements Auditable {
                 ", status=" + status +
                 ", withVAT=" + withVAT +
                 ", object='" + object + '\'' +
+                ", period='" + period + '\'' +
                 ", comment='" + comment + '\'' +
                 ", customerInvoiceRef='" + customerInvoiceRef + '\'' +
                 ", kind=" + kind +
@@ -251,6 +253,15 @@ public class Invoice implements Auditable {
 
     public Invoice setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public Invoice setPeriod(String period) {
+        this.period = period;
         return this;
     }
 

@@ -214,6 +214,13 @@
                 margin-left: 24px;
             }
 
+            .invoice-period {
+                font-size: 12px;
+                line-height: 1.2;
+                white-space: pre-wrap;
+                color: #7d7d7d;
+            }
+
             .invoiceBuyer .bloc-container,
             .invoiceObject .bloc-container {
                 height: 100%;
@@ -444,6 +451,10 @@
                         <div class="bloc-container">
                             <h3 class="bloc-container-title">Objet</h3>
                             <div class="project-name">{{invoice.object}}</div>
+                            <br></br>
+                            {{#invoice.period}}
+                                <div class="invoice-period">Période: {{invoice.period}}</div>
+                            {{/invoice.period}}
                             <br></br>
                             {{#invoice.customerInvoiceRef}}
                                 <div class="label-buyer">Ref. commande client : {{invoice.customerInvoiceRef}}</div>
