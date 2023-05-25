@@ -102,4 +102,14 @@
     width: 140px;
 }
 
+.total-amount-cell {
+    div {
+        text-align: right;
+        color: $body-dark-font-color;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+    width: 140px;
+}
+
 
