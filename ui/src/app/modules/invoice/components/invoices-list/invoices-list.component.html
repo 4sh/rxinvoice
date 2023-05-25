@@ -64,7 +64,7 @@
             <div (click)="editStatus(invoice)" class=" cell status-cell clickable" >
                 <a-invoice-status *ngIf="!checkInvoicesStatus(invoice)" [statusLabel]="invoice.status"></a-invoice-status>
                 <select *ngIf="checkInvoicesStatus(invoice)" (ngModelChange)="updateInvoice(invoice, $event)" class="form-control" id="allocation-algorithm" [(ngModel)]="invoice.status">
-                    <option *ngFor="let status of getInvoiceAvailableStatuses(invoice)" [ngValue]="status">{{status}}</option>
+                    <option *ngFor="let status of getInvoiceAvailableStatuses(invoice)" [ngValue]="status">{{ 'invoice.status.' + status | translate}}</option>
                 </select>
             </div>
             <div class="grid-x align-right align-middle cell actions-cell">
