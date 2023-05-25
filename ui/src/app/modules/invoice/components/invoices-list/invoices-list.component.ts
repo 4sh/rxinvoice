@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {DownloadInvoiceService} from '../../services/download-invoice.service';
 import {InvoiceService} from '../../services/invoice.service';
 import {
+    INVOICE_STATUS_LIST,
     InvoiceStatusEnum,
     InvoiceStatusesWorkflow,
     InvoiceStatusType
@@ -91,7 +92,8 @@ export class InvoicesListComponent {
     }
 
     public getInvoiceAvailableStatuses(invoice: Invoice) {
-        return InvoiceStatusesWorkflow[invoice.status].authorizedTargets;
+        // return InvoiceStatusesWorkflow[invoice.status].authorizedTargets;
+        return INVOICE_STATUS_LIST;
     }
 
     updateInvoice(invoice: Invoice, status: InvoiceStatusType) {
