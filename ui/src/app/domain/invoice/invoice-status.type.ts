@@ -92,5 +92,11 @@ export const InvoiceStatusesWorkflow = {
         quickActionEnabled: false,
         authorizedTargets: [],
         authorizedSources: [InvoiceStatusEnum.LATE]
+    },
+    'CANCELLED': {
+        rank: 8,
+        quickActionEnabled: false,
+        authorizedTargets: [],
+        authorizedSources: [InvoiceStatusEnum.WAITING_VALIDATION, InvoiceStatusEnum.VALIDATED, InvoiceStatusEnum.SENT, InvoiceStatusEnum.PAID, InvoiceStatusEnum.LATE]
     }
 };
