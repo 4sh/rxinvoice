@@ -78,7 +78,29 @@
                 </a-button-icon>
             </div>
         </div>
-
+        <div class="grid-x grid-padding-x line-block align-middle" *ngIf="invoices">
+            <div class="cell phone-2 ref-cell">
+                <span>Total</span>
+            </div>
+            <div class="text-click cell phone-3 client-cell">
+                <span class="invoiceList-value">{{getAllBuyers(invoices)}}</span>
+            </div>
+            <div class="text-click cell phone-3 business-cell">
+            </div>
+            <div class="text-click cell auto object-cell grid-x align-middle">
+            </div>
+            <div class="text-click cell total-amount-cell">
+                <div class="invoiceList-value">Total: {{getTotalGrossAmount(invoices) | invoiceCurrency}} HT</div>
+                <div class="invoiceList-value">Total: {{getTotalNetAmount(invoices) | invoiceCurrency}} TTC</div>
+            </div>
+            <div class="text-click cell date-cell">
+                <span class="invoiceList-value"></span>
+            </div>
+            <div class=" cell status-cell">
+            </div>
+            <div class="grid-x align-right align-middle cell actions-cell">
+            </div>
+        </div>
     </div>
 </div>
 

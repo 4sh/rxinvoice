@@ -60,7 +60,7 @@ export class InvoicesListComponent {
             if (sortParam.includes(ASC)) {
                 this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_' + DESC;
             } else if (sortParam.includes(DESC)) {
-                this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_'+ ASC;
+                this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_' + ASC;
             }
         } else {
             this.invoiceService.invoiceSearchFilter.sortParam = attribute + '_' + ASC;
@@ -83,6 +83,18 @@ export class InvoicesListComponent {
         }
     }
 
+    getTotalGrossAmount(invoices: Array<Invoice>) {
+        return invoices.reduce((acc, invoice) => acc + invoice.grossAmount, 0);
+    }
+
+    getTotalNetAmount(invoices: Array<Invoice>) {
+        return invoices.reduce((acc, invoice) => acc + invoice.netAmount, 0);
+    }
+
+    getAllBuyers(invoices: Array<Invoice>) {
+        return invoices.map(invoice => invoice.buyer.name).filter((value, index, self) => self.indexOf(value) === index).join(', ');
+    }
+  
     editStatus(invoice: Invoice) {
         this.invoicesStatus[invoice._id] = true
     }
