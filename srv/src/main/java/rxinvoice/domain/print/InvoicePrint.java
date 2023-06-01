@@ -28,6 +28,7 @@ public class InvoicePrint {
     private String reference;
     private String customerInvoiceRef;
     private String object;
+    private String period;
     private String kind;
     private Business business;
 
@@ -55,6 +56,7 @@ public class InvoicePrint {
         this.reference = invoice.getReference();
         this.customerInvoiceRef = invoice.getCustomerInvoiceRef();
         this.object = invoice.getObject();
+        this.period = invoice.getPeriod();
         this.kind = messages.getMessage("invoice.kind." + invoice.getKind().name(), locale);
         this.business = invoice.getBusiness();
         this.seller = invoice.getSeller().toCompanyView();
@@ -79,6 +81,7 @@ public class InvoicePrint {
                 ", lines=" + lines +
                 ", reference='" + reference + '\'' +
                 ", object='" + object + '\'' +
+                ", period='" + period + '\'' +
                 ", kind=" + kind +
                 ", business=" + business +
                 ", seller=" + seller +
@@ -166,6 +169,15 @@ public class InvoicePrint {
 
     public InvoicePrint setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public InvoicePrint setPeriod(String period) {
+        this.period = period;
         return this;
     }
 

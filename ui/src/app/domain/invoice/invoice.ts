@@ -23,6 +23,7 @@ export class Invoice {
     status: InvoiceStatusType;
     withVAT: Boolean = true;
     object: string;
+    period: string;
     comment: string;
     customerInvoiceRef: string;
     kind: ServiceKind;

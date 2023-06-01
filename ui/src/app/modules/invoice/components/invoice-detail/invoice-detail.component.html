@@ -48,7 +48,13 @@
                     <div>
                         <label>{{'invoice.detail.object'|translate}}</label>
                         <textarea type="text" name="object" [(ngModel)]="invoice.object"
-                                  rows="3" cols="20">
+                                  rows="2" cols="20">
+                    </textarea>
+                    </div>
+                    <div>
+                        <label>{{'invoice.detail.period'|translate}}</label>
+                        <textarea type="text" name="period" [(ngModel)]="invoice.period"
+                                  rows="1" cols="20">
                     </textarea>
                     </div>
                 </div>
