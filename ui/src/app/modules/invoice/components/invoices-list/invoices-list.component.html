@@ -61,8 +61,11 @@
             <div (click)="goToDetail(invoice)" class="text-click cell date-cell">
                 <span class="invoiceList-value">{{invoice.date | date: 'dd MMM. yyyy'}}</span>
             </div>
-            <div class=" cell status-cell">
-                <a-invoice-status [statusLabel]="invoice.status"></a-invoice-status>
+            <div (click)="editStatus(invoice)" class=" cell status-cell clickable" >
+                <a-invoice-status *ngIf="!checkInvoicesStatus(invoice)" [statusLabel]="invoice.status"></a-invoice-status>
+                <select *ngIf="checkInvoicesStatus(invoice)" (ngModelChange)="updateInvoice(invoice, $event)" class="form-control" id="allocation-algorithm" [(ngModel)]="invoice.status">
+                    <option *ngFor="let status of getInvoiceAvailableStatuses(invoice)" [ngValue]="status">{{ 'invoice.status.' + status | translate}}</option>
+                </select>
             </div>
             <div class="grid-x align-right align-middle cell actions-cell">
                 <a-button-launch (click)="launchInvoice(invoice)"
