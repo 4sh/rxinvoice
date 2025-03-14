@@ -23,8 +23,8 @@ blocks:
             - artifact pull workflow ROOT.war
             - mkdir target
             - mv ROOT.war target/
-            - docker build -t eu.gcr.io/quatreapp/4sh-invoice-core:latest -t eu.gcr.io/quatreapp/4sh-invoice-core:$SEMAPHORE_GIT_SHA -f srv/Dockerfile .
-            - docker push eu.gcr.io/quatreapp/4sh-invoice-core
+            - docker build -t europe-docker.pkg.dev/quatreapp/qsh-invoice/4sh-invoice-core:latest -t europe-docker.pkg.dev/quatreapp/qsh-invoice/4sh-invoice-core:$SEMAPHORE_GIT_SHA -f srv/Dockerfile .
+            - docker push europe-docker.pkg.dev/quatreapp/qsh-invoice/4sh-invoice-core
   - name: "Deploy"
     dependencies: ["Build and Push Image"]
     task:

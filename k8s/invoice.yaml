@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: "invoice-app"
-          image: "eu.gcr.io/quatreapp/4sh-invoice-core"
+          image: "europe-docker.pkg.dev/quatreapp/qsh-invoice/4sh-invoice-core"
           livenessProbe:
             httpGet:
               path: /api/health-check
